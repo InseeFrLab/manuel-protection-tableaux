@@ -3,13 +3,18 @@ project:
 
 book:
   title: "manuel"
-  author: "Jane Doe"
+  author: "Julien Jamme, Nathanaël Rastout"
   date: "03/04/2023"
   chapters:
     - index.qmd
-    - intro.qmd
-    - summary.qmd
-    - references.qmd
+    - 01_introduction.qmd
+    - 02_regles.qmd
+    - 03_notions.qmd
+    - 04_analyser_une_demande.qmd
+    - 05_les_outils.qmd
+    - 06_fiches_pratiques.qmd
+    - 07_annexes.qmd
+    - 08_lexique.qmd
 
 bibliography: references.bib
 
