@@ -17,6 +17,7 @@ book:
     - 06_fiches_pratiques.qmd
     - 07_annexes.qmd
     - 08_lexique.qmd
+  page-navigation: true
 
 bibliography: references.bib
 
