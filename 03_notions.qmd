@@ -1,2 +1,179 @@
+---
+title: "Notions"
+format: pdf
+editor: visual
+header-includes:
+  - \usepackage{multirow}
+---
+
 # Notions principales à connaître
 
+## 1. Tableaux d'effectifs et tableaux de magnitude
+
+On distingue deux types de tableaux : les tableaux d'effectifs et ceux de magnitude.
+
+Un tableau d'effectifs est un tableau dans lequel la valeur d'une cellule correspond au nombre d'unités qui partagent les caractéristiques de la cellule.
+
+Voici un exemple de tableau d'effectifs :
+
+```{=tex}
+\begin{table}[h]
+\centering
+\begin{tabular}{|ll|lllll|}
+\hline
+\multicolumn{2}{|l|}{\multirow{2}{*}{}} & \multicolumn{5}{c|}{Région}                                                                                                \\ \cline{3-7} 
+\multicolumn{2}{|l|}{}                  & \multicolumn{1}{l|}{Nord} & \multicolumn{1}{l|}{Ouest} & \multicolumn{1}{l|}{Est} & \multicolumn{1}{l|}{Sud} & Total       \\ \hline
+\multicolumn{1}{|l|}{\multirow{3}{*}{Polluante}} &
+  Oui &
+  \multicolumn{1}{l|}{6} &
+  \multicolumn{1}{l|}{14} &
+  \multicolumn{1}{l|}{1} &
+  \multicolumn{1}{l|}{7} &
+  \textbf{28} \\ \cline{2-7} 
+\multicolumn{1}{|l|}{}       & Non      & \multicolumn{1}{l|}{3}    & \multicolumn{1}{l|}{2}     & \multicolumn{1}{l|}{1}   & \multicolumn{1}{l|}{13}  & \textbf{19} \\ \cline{2-7} 
+\multicolumn{1}{|l|}{} &
+  Total &
+  \multicolumn{1}{l|}{\textbf{9}} &
+  \multicolumn{1}{l|}{\textbf{16}} &
+  \multicolumn{1}{l|}{\textbf{2}} &
+  \multicolumn{1}{l|}{\textbf{20}} &
+  \textbf{47} \\ \hline
+\end{tabular}
+\\[10pt]
+\caption{Nombre d'entreprises polluantes par région}
+\end{table}
+```
+Un tableau de magnitude (ou de volume) est un tableau dans lequel la valeur de chaque cellule représente la somme des contributions des répondants qui partagent les caractéristiques de cette cellule.
+
+Voici un exemple de tableau de magnitude :
+
+```{=tex}
+\begin{table}[h]
+\centering
+\begin{tabular}{|ll|lllll|}
+\hline
+\multicolumn{2}{|l|}{\multirow{2}{*}{}} &
+  \multicolumn{5}{c|}{Produit vendu} \\ \cline{3-7} 
+\multicolumn{2}{|l|}{} &
+  \multicolumn{1}{l|}{Harpe} &
+  \multicolumn{1}{l|}{Piano} &
+  \multicolumn{1}{l|}{Orgue} &
+  \multicolumn{1}{l|}{Autre} &
+  Total \\ \hline
+\multicolumn{1}{|l|}{\multirow{4}{*}{Région}} &
+  Nord &
+  \multicolumn{1}{l|}{58 (5)} &
+  \multicolumn{1}{l|}{71 (17)} &
+  \multicolumn{1}{l|}{92 (5)} &
+  \multicolumn{1}{l|}{800 (12)} &
+  \textbf{1021 (39)} \\ \cline{2-7} 
+\multicolumn{1}{|l|}{} &
+  Centre &
+  \multicolumn{1}{l|}{11 (4)} &
+  \multicolumn{1}{l|}{124 (11)} &
+  \multicolumn{1}{l|}{157 (2)} &
+  \multicolumn{1}{l|}{934 (7)} &
+  \textbf{1226 (24)} \\ \cline{2-7} 
+\multicolumn{1}{|l|}{} &
+  Sud &
+  \multicolumn{1}{l|}{36 (3)} &
+  \multicolumn{1}{l|}{24 (6)} &
+  \multicolumn{1}{l|}{60 (1)} &
+  \multicolumn{1}{l|}{651 (4)} &
+  \textbf{771 (14)} \\ \cline{2-7} 
+\multicolumn{1}{|l|}{} &
+  Total &
+  \multicolumn{1}{l|}{\textbf{105 (12)}} &
+  \multicolumn{1}{l|}{\textbf{219 (34)}} &
+  \multicolumn{1}{l|}{\textbf{309 (8)}} &
+  \multicolumn{1}{l|}{\textbf{2385 (23)}} &
+  \textbf{3018 (77)} \\ \hline
+\end{tabular}
+\\[10pt]
+\caption{Ventes réalisées, en millions d'euros (nombre de contributeurs)}
+\end{table}
+```
+## 2. Secret primaire et secret secondaire
+
+Le **secret primaire** renvoie aux cellules qui doivent être secretisées dès le départ du processus de secrétisation car elles sont considérées comme sensibles. Elles peuvent être catégorisées comme sensibles du fait de la règle de fréquence (moins de 3 unités dans une celulle) ou de la règle de dominance (un répondant représente plus de 85% du total de la cellule). On ne peut pas diffuser les cellules qui constituent le secret primaire.
+
+Une solution pour ne pas diffuser ces cellules est de les supprimer (cacher). Cependant, uniquement supprimer les cellules touchées par le secret primaire n'est généralement pas suffisant. En effet, si les marges du tableau sont diffusées, alors les cellules sont liées entre elles par des équation. Aisni, il faut cacher d'autres cellules pour ne pas pouvoir déduire la valeur des cellules cachées : c'est le **secret secondaire**.
+
+## 3. Variable hiérarchique
+
+Une variable hiérarchique est une variable de ventilation (*définir variable de ventilation ou ne pas utiliser le terme ?*) comprenant plusieurs sous-totaux. Autrement dit, certaines modalités de cette variables se somment en une autre modalité de la variable.
+
+Par exemple, on pourait imaginer une variable hiérarchique géographique comme dans le tableau suivant :
+
+```{=tex}
+\begin{table}[h]
+\centering
+\begin{tabular}{|cccccccccccc|}
+\hline
+\multicolumn{12}{|c|}{\textbf{Pays}}                                                                                                              \\ \hline
+\multicolumn{12}{|c|}{400}                                                                                                                        \\ \hline
+\multicolumn{3}{|c|}{\textbf{Nord}} & \multicolumn{4}{c|}{\textbf{Ouest}} & \multicolumn{3}{c|}{\textbf{Est}} & \multicolumn{2}{c|}{\textbf{Sud}} \\ \hline
+\multicolumn{3}{|c|}{46}            & \multicolumn{4}{c|}{191}            & \multicolumn{3}{c|}{80}           & \multicolumn{2}{c|}{83}           \\ \hline
+\multicolumn{1}{|c|}{\textbf{N1}} &
+  \multicolumn{1}{c|}{\textbf{N2}} &
+  \multicolumn{1}{c|}{\textbf{N3}} &
+  \multicolumn{1}{c|}{\textbf{O1}} &
+  \multicolumn{1}{c|}{\textbf{O2}} &
+  \multicolumn{1}{c|}{\textbf{O3}} &
+  \multicolumn{1}{c|}{\textbf{O4}} &
+  \multicolumn{1}{c|}{\textbf{E1}} &
+  \multicolumn{1}{c|}{\textbf{E2}} &
+  \multicolumn{1}{c|}{\textbf{E3}} &
+  \multicolumn{1}{c|}{\textbf{S1}} &
+  \textbf{S2} \\ \hline
+\multicolumn{1}{|c|}{21} &
+  \multicolumn{1}{c|}{2} &
+  \multicolumn{1}{c|}{23} &
+  \multicolumn{1}{c|}{32} &
+  \multicolumn{1}{c|}{54} &
+  \multicolumn{1}{c|}{67} &
+  \multicolumn{1}{c|}{38} &
+  \multicolumn{1}{c|}{27} &
+  \multicolumn{1}{c|}{41} &
+  \multicolumn{1}{c|}{12} &
+  \multicolumn{1}{c|}{44} &
+  39 \\ \hline
+\end{tabular}
+\\[10pt]
+\caption{Nombre d'entreprises qui produisent des violons, par région}
+\end{table}
+```
+## 4. Hiérarchies non emboîtées
+
+Une hiérarchie non-emboîtée est le cas où dans un tableau diffusé, l'emboîtement des modalités d'une variable hiérarchique n'est pas parfait.
+
+Par exemple si on utilise une variable de la NAF A88 comme suit et que l'on veut aussi diffuser un sous-total regroupant les codes division 03, 05 et 06 alors on a une hiérarchie non-emboîtée.
+
+```{mermaid}
+flowchart LR
+  A[A] --> B[01]
+  A --> C[02]
+  A --> D[03]
+  E[B] --> F[05]
+  E --> G[06]
+  E --> H[07]
+  E --> I[08]
+  E --> J[09]
+```
+
+## 5. Liaisons entre tableaux
+
+On dit que des tableaux sont liés lorsqu'ils possèdent la même variable ventilée et partagent une ou plusieurs variables de ventilation (*définir ventilé et ventilation, se mettre au clair sur le vocabulaire, cible ? de croissement?*). Ces liens entre tableuax doivent être pris en compte pour traiter correctment le secret. Sinon, les cellules cachées peuvent se déduire les unes des autres.
+
+Les liens les plus courants sont :
+
+-   Les tableaux partageant des marges communes (i.e. partageant le même champ, la même variable de réponse, une ou plusieurs variables de croisement);
+-   Les tableaux additifs ou corrélés (i.e. partageant le même champ, les mêmes variables de croisements, es variables de réponse différentes mais liées entre elles - équation ou corrélation);
+-   Les hiérarchies non-emboîtées ;
+-   Les différences de millésime.
+
+En effet, pour des données périodiques, la temporalité peut êre perçue comme un ensemble de tableaux liés : il vaut mieux que le masque de secret change peu entre chaque millésime.
+
+## 6. Tableau à diffuser vs à protéger
+
+Les tableaux qui seront finalement diffusés ne sont pas les mêmes que les tableaux à protéger. En effet, les tableaux à protéger sont le résultat de l'analyse de la demande. Cette analyse consiste à identifier les tableaux liés entre eux et les hiérarchies (emboîtées ou non). Dès lors, l'identification de ces liens va nous pousser à regrouper différents tableaux ou au contraire les séparer. Une fois l'analyse terminée on se retrouver avec les tableaux à protéger, le secret sera appliqué sur ces tableaux et c'est seuelement une fois la procédure terminée que l'on pourra reporter le secret identifié sur les tableaux à protéger sur les tableaux à diffuser.
