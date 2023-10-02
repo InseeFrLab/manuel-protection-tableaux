@@ -75,6 +75,7 @@ Le message d'erreur "HiTaS: couldn't load JJ-routines" est spécifique à l'aglo
 
 -   La taille maximale pour un nombre à été dépassée (**faire référence**)
 -   Le problème paraît insoluble pour Modular (**faire référence**)
+-   N.B : parfois "couldn't load JJ-routines" (sans HiTaS devant) renvoie à un problème du type "code not in codelist" 
 
 Le message d'erreur "no optimal solution found JJ not loaded" est spécifique à l'aglorithme Optimal, en voici les différentes causes possibles :
 
