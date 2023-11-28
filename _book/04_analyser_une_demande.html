@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -158,7 +192,24 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#étapes-de-lanalyse-de-demande" id="toc-étapes-de-lanalyse-de-demande" class="nav-link active" data-scroll-target="#étapes-de-lanalyse-de-demande"><span class="header-section-number">4.1</span> Étapes de l’analyse de demande</a>
+  <ul class="collapse">
+  <li><a href="#prendre-connaissance-de-la-demande-et-sassurer-que-toutes-les-informations-nécessaires-à-la-gestion-de-la-confidentialité-ont-été-fournies." id="toc-prendre-connaissance-de-la-demande-et-sassurer-que-toutes-les-informations-nécessaires-à-la-gestion-de-la-confidentialité-ont-été-fournies." class="nav-link" data-scroll-target="#prendre-connaissance-de-la-demande-et-sassurer-que-toutes-les-informations-nécessaires-à-la-gestion-de-la-confidentialité-ont-été-fournies."><span class="header-section-number">4.1.1</span> Prendre connaissance de la demande et s’assurer que toutes les informations nécessaires à la gestion de la confidentialité ont été fournies.</a></li>
+  <li><a href="#la-demande-peut-elle-être-séparée-en-plusieurs-sous-demandes-indépendantes" id="toc-la-demande-peut-elle-être-séparée-en-plusieurs-sous-demandes-indépendantes" class="nav-link" data-scroll-target="#la-demande-peut-elle-être-séparée-en-plusieurs-sous-demandes-indépendantes"><span class="header-section-number">4.1.2</span> La demande peut-elle être séparée en plusieurs sous-demandes indépendantes ?</a></li>
+  <li><a href="#lister-les-tableaux-nécessaires-pour-la-pose-de-secret" id="toc-lister-les-tableaux-nécessaires-pour-la-pose-de-secret" class="nav-link" data-scroll-target="#lister-les-tableaux-nécessaires-pour-la-pose-de-secret"><span class="header-section-number">4.1.3</span> Lister les tableaux nécessaires pour la pose de secret</a></li>
+  <li><a href="#construire-les-hiérarchies-éventuellement-nécessaires" id="toc-construire-les-hiérarchies-éventuellement-nécessaires" class="nav-link" data-scroll-target="#construire-les-hiérarchies-éventuellement-nécessaires"><span class="header-section-number">4.1.4</span> Construire les hiérarchies éventuellement nécessaires</a></li>
+  <li><a href="#construire-les-tableaux-à-partir-des-tableaux-fournis-par-lutilisateur-si-besoin" id="toc-construire-les-tableaux-à-partir-des-tableaux-fournis-par-lutilisateur-si-besoin" class="nav-link" data-scroll-target="#construire-les-tableaux-à-partir-des-tableaux-fournis-par-lutilisateur-si-besoin"><span class="header-section-number">4.1.5</span> Construire les tableaux à partir des tableaux fournis par l’utilisateur (si besoin)</a></li>
+  <li><a href="#procéder-à-la-pose-du-masque-en-opérant-comme-indiqué-dans-le-chapitre-6-fiches-pratiques." id="toc-procéder-à-la-pose-du-masque-en-opérant-comme-indiqué-dans-le-chapitre-6-fiches-pratiques." class="nav-link" data-scroll-target="#procéder-à-la-pose-du-masque-en-opérant-comme-indiqué-dans-le-chapitre-6-fiches-pratiques."><span class="header-section-number">4.1.6</span> Procéder à la pose du masque en opérant comme indiqué dans le chapitre 6 <code>Fiches pratiques</code>.</a></li>
+  </ul></li>
+  <li><a href="#détecter-les-liens" id="toc-détecter-les-liens" class="nav-link" data-scroll-target="#détecter-les-liens"><span class="header-section-number">4.2</span> Détecter les liens</a></li>
+  <li><a href="#passer-de-la-liste-de-diffusion-à-la-liste-de-protection" id="toc-passer-de-la-liste-de-diffusion-à-la-liste-de-protection" class="nav-link" data-scroll-target="#passer-de-la-liste-de-diffusion-à-la-liste-de-protection"><span class="header-section-number">4.3</span> Passer de la liste de diffusion à la liste de protection</a></li>
+  <li><a href="#fiches-exemples-danalyse-de-demandes" id="toc-fiches-exemples-danalyse-de-demandes" class="nav-link" data-scroll-target="#fiches-exemples-danalyse-de-demandes"><span class="header-section-number">4.4</span> Fiches exemples d’analyse de demandes</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -180,8 +231,154 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
+<section id="étapes-de-lanalyse-de-demande" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="étapes-de-lanalyse-de-demande"><span class="header-section-number">4.1</span> Étapes de l’analyse de demande</h2>
+<section id="prendre-connaissance-de-la-demande-et-sassurer-que-toutes-les-informations-nécessaires-à-la-gestion-de-la-confidentialité-ont-été-fournies." class="level3" data-number="4.1.1">
+<h3 data-number="4.1.1" class="anchored" data-anchor-id="prendre-connaissance-de-la-demande-et-sassurer-que-toutes-les-informations-nécessaires-à-la-gestion-de-la-confidentialité-ont-été-fournies."><span class="header-section-number">4.1.1</span> Prendre connaissance de la demande et s’assurer que toutes les informations nécessaires à la gestion de la confidentialité ont été fournies.</h3>
+<p>Les informations nécessaires sont :</p>
+<ul>
+<li><p>une description précise des tableaux que votre interlocuteur souhaite diffuser :</p>
+<ul>
+<li>sur quel champ de la population les tableaux sont-ils construits ?</li>
+<li>quelles sont les variables descriptives (de croisement) ?</li>
+<li>quelle est la variable de réponse pour chacun des tableaux ?</li>
+<li>les tableaux sont-ils des tableaux de fréquence ou bien des tableaux de volume ?</li>
+<li>parmi l’ensemble des variables de croisement, certaines sont-elles hiérarchiques ? Les emboîtements ont-ils été fournis ?</li>
+</ul></li>
+<li><p>une description précise des liens éventuels entre les variables ou tableaux :</p>
+<ul>
+<li>certaines variables ou modalités sont-elles reliées par une équation ?</li>
+<li>des équations/liens ont-ils été fournis ?</li>
+<li>de fortes corrélations existent-elles entre certaines variables de réponse ?</li>
+</ul></li>
+</ul>
+</section>
+<section id="la-demande-peut-elle-être-séparée-en-plusieurs-sous-demandes-indépendantes" class="level3" data-number="4.1.2">
+<h3 data-number="4.1.2" class="anchored" data-anchor-id="la-demande-peut-elle-être-séparée-en-plusieurs-sous-demandes-indépendantes"><span class="header-section-number">4.1.2</span> La demande peut-elle être séparée en plusieurs sous-demandes indépendantes ?</h3>
+<ul>
+<li><p>Des tableaux portant sur des variable de réponse différentes, non liées par une équation ou par un lien de corrélation fort, peuvent être traités séparément.</p></li>
+<li><p>Des tableaux construits sur des champs différents et non complémentaires peuvent être traités séparément.</p></li>
+<li><p>Y a-t-il au contraire des tableaux qui doivent être traités dans dans le même temps ?</p>
+<ul>
+<li>rassembler les tableaux partageant la même variable de réponse et le même champ, car ils partagent a minima le même super-total (n.b.&nbsp;on ne les fusionne pas on les rassemblent juste pour les traiter ensemble)</li>
+<li>déterminer les tableaux liés entre eux par leurs marges</li>
+<li>déterminer les tableaux liés entre eux car “additifs”</li>
+<li>déterminer les tableaux liés entre eux par la présence potentielle de hiérarchies non-emboîtées</li>
+</ul></li>
+</ul>
+<p>Chaque sous-demande doit faire l’objet d’un traitement à part, en suivant les mêmes étapes.</p>
+</section>
+<section id="lister-les-tableaux-nécessaires-pour-la-pose-de-secret" class="level3" data-number="4.1.3">
+<h3 data-number="4.1.3" class="anchored" data-anchor-id="lister-les-tableaux-nécessaires-pour-la-pose-de-secret"><span class="header-section-number">4.1.3</span> Lister les tableaux nécessaires pour la pose de secret</h3>
+<p>Rassembler en un seul tableaux les tableaux liés car “additifs”.</p>
+<p>Séparer en plusieurs tableaux un tableau qui contiendrait des sous-totaux non-emboîtés.</p>
+</section>
+<section id="construire-les-hiérarchies-éventuellement-nécessaires" class="level3" data-number="4.1.4">
+<h3 data-number="4.1.4" class="anchored" data-anchor-id="construire-les-hiérarchies-éventuellement-nécessaires"><span class="header-section-number">4.1.4</span> Construire les hiérarchies éventuellement nécessaires</h3>
+</section>
+<section id="construire-les-tableaux-à-partir-des-tableaux-fournis-par-lutilisateur-si-besoin" class="level3" data-number="4.1.5">
+<h3 data-number="4.1.5" class="anchored" data-anchor-id="construire-les-tableaux-à-partir-des-tableaux-fournis-par-lutilisateur-si-besoin"><span class="header-section-number">4.1.5</span> Construire les tableaux à partir des tableaux fournis par l’utilisateur (si besoin)</h3>
+</section>
+<section id="procéder-à-la-pose-du-masque-en-opérant-comme-indiqué-dans-le-chapitre-6-fiches-pratiques." class="level3" data-number="4.1.6">
+<h3 data-number="4.1.6" class="anchored" data-anchor-id="procéder-à-la-pose-du-masque-en-opérant-comme-indiqué-dans-le-chapitre-6-fiches-pratiques."><span class="header-section-number">4.1.6</span> Procéder à la pose du masque en opérant comme indiqué dans le chapitre 6 <code>Fiches pratiques</code>.</h3>
+</section>
+</section>
+<section id="détecter-les-liens" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="détecter-les-liens"><span class="header-section-number">4.2</span> Détecter les liens</h2>
+<p>Il y a deux principaux types de liens sur les variables réponse :</p>
+<ul>
+<li><p>les hiérarchies</p>
+<ul>
+<li>emboîtées</li>
+<li>non-emboîtées</li>
+</ul></li>
+<li><p>les équations du type A = B + C</p>
+<ul>
+<li>entre les variables réponses</li>
+<li>au niveau des champs</li>
+</ul></li>
+</ul>
+</section>
+<section id="passer-de-la-liste-de-diffusion-à-la-liste-de-protection" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="passer-de-la-liste-de-diffusion-à-la-liste-de-protection"><span class="header-section-number">4.3</span> Passer de la liste de diffusion à la liste de protection</h2>
+<p>La liste de diffusion est la liste de tableaux qui sera effectivement publiée. Elle diffère de la liste de protection qui elle est à établir en fonction des liens entre les différents tableaux. En effet, pour poser le secret pertinemment il faut renseigner les différents liens pour que l’algorithme en tienne compte.</p>
+<p>De plus, si les données sont sous forme de micro-données il faut calculer les agrégats qui seront diffusés pour établir la liste de diffusion. En effet, nous ne posons pas le secret sur les micro-données mais sur les agrégats. Pour ce faire la fonction <code>tabul_fun_group</code> permet de facilement construire les tables agrégées sous le bon format pour les mettre en entrée de <code>rtauargus</code>.</p>
+</section>
+<section id="fiches-exemples-danalyse-de-demandes" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="fiches-exemples-danalyse-de-demandes"><span class="header-section-number">4.4</span> Fiches exemples d’analyse de demandes</h2>
+<p>Exemple 1 :</p>
+<p><em>Demande</em> - on souhaite diffuser 4 tableaux</p>
+<ul>
+<li>T1 : population par âge (5 classes), par sexe et par département</li>
+<li>T2 : population par sexe, par diplôme et par département</li>
+<li>T3 : population par catégorie catégorie socio-professionnelle, par statut d’activité et par département</li>
+<li>T4 : population par âge, par sexe et par statut d’activité</li>
+</ul>
+<p><em>Analyse</em> Les tableaux partagent le même champ (sous-entendu) et le même indicateur (population), ils sont donc liés a minima par le total, donc il n’y a pas de sous-demande indépendante.</p>
+<p>De plus, certains tableaux ont des variables de croisement communes, il y a un lien sur les marges, les liens ne n’en sont que renforcés.</p>
+<p>Les variables entre elles n’ont pas de lien hiérarchique (le seul niveau géographique est le département), donc les tableaux ne doivent pas être fusionnés.</p>
+<p>Finalement, la liste des tableaux à protéger est identique à la liste des tableaux à diffuser.</p>
+<p>Exemple 2 :</p>
+<p><em>Demande</em> - on souhaite diffuser 7 tableaux</p>
+<ul>
+<li>T1 : population par âge (5 classes), par sexe et par département</li>
+<li>T2 : population par sexe, par diplôme et par département</li>
+<li>T3 : population par catégorie catégorie socio-professionnelle, par statut d’activité et par département</li>
+<li>T4 : population par âge, par sexe et par statut d’activité</li>
+<li>T5 : population par âge (5 classes), par sexe et par région</li>
+<li>T6 : population par sexe, par diplôme et par région</li>
+<li>T7 : population par catégorie socio-professionnelle, par statut d’activité et par région</li>
+</ul>
+<p><em>Analyse</em></p>
+<p>Les tableaux partagent le même champ (sous-entendu) et le même indicateur (population), ils sont donc liés a minima par le total, donc il n’y a pas de sous-demande indépendante.</p>
+<p>De plus, certains tableaux ont des variables de croisement communes, il y a un lien sur les marges, les liens ne n’en sont que renforcés.</p>
+<p>Deux variables ont un lien hiérarchique (région &gt; département), on peut donc fusionner les tableaux partageant les mêmes variables de croisement.</p>
+<p>La liste des tableaux à protéger est donc la suivante :</p>
+<ul>
+<li>T1 : population par âge (5 classes), par sexe et par GEO</li>
+<li>T2 : population par sexe, par diplôme et par GEO</li>
+<li>T3 : population par catégorie socio-professionnelle, par statut d’activité et par GEO</li>
+<li>T4 : population par âge, par sexe et par statut d’activité où GEO est une variable hiérarchique emboîtant régions et départements</li>
+</ul>
+<p>Exemple 3 :</p>
+<p><em>Demande</em> - on souhaite diffuser 4 tableaux</p>
+<ul>
+<li>T1 : population par âge (3 classes : &lt;25, 25-55, +55) et par département</li>
+<li>T2 : population par âge (3 classes : &lt;15, 15-25, 25-45, 45-65, +65), par sexe et par département</li>
+<li>T3 : population par âge (3 classes : &lt;25, 25-55, +55) et par région</li>
+<li>T4 : population par âge (3 classes : &lt;15, 15-25, 25-45, 45-65, +65), par sexe et par région</li>
+</ul>
+<p><em>Analyse</em></p>
+<p>Les tableaux partagent le même champ (sous-entendu) et le même indicateur (population), ils sont donc liés a minima par le total, donc il n’y a pas de sous-demande indépendante.</p>
+<p>De plus, certains tableaux ont des variables de croisement communes, il y a un lien sur les marges, les liens ne n’en sont que renforcés.</p>
+<p>Deux variables ont un lien hiérarchique (région &gt; département) :</p>
+<ul>
+<li>les tableaux T1 et T3 partagent les mêmes variables de croisement et peuvent donc être fusionnés</li>
+<li>les tableaux T2 et T4 partagent les mêmes variables de croisement et peuvent donc être fusionnés</li>
+</ul>
+<p>La variable âge est ventilée différemment entre T1 et T2 (ainsi qu’entre T3 et T4).On doit donc se demander si les différentes modalités de l’âge sont emboîtées. On peut présenter la hiérarchie ainsi :</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="sc">&lt;</span><span class="dv">25</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="sc">@</span><span class="er">&lt;</span><span class="dv">15</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="sc">@</span><span class="dv">15-25</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="dv">25-55</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="sc">@</span><span class="dv">25-45</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="sc">@</span><span class="dv">45-55</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="sc">+</span><span class="dv">55</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="sc">@</span><span class="dv">55-65</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="sc">+</span><span class="dv">65</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Il n’est pas possible d’insérer la modalité 45-65 dans cette hiérarchie, il s’agit donc d’un cas de hiérarchie non-emboîtée. En effet, 45-65 = 45-55 + 55-65, l’agrégat devra être traité en construisant un tableau séparé.</p>
+<p>La liste des tableaux à protéger est la suivante :</p>
+<ul>
+<li>T1 : population par AGE (hiérarchie principale) et par GEO</li>
+<li>T1bis : population par AGE (agrégat spécial) et par GEO</li>
+<li>T2 : population par AGE (hiérarchie principale), par sexe et par GEO</li>
+<li>T2bis : population par AGE (agrégat spécial), par sexe et par GEO où GEO est une variable hiérarchique emboîtant régions et départements où AGE (hiérarchie principale) est une variable hiérarchique emboîtant l’ensemble des catégories d’âge hors 45-65 où AGE (agrégat spécial) a les modalités : 45-65 = 45-55 + 55-65</li>
+</ul>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

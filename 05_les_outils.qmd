@@ -4,43 +4,43 @@ format: html
 editor: visual
 ---
 
-## 1. Tau-argus
+## Tau-argus
 
-### i. Présentation générale
+### Présentation générale
 
 Tau-Argus est la logiciel de référence en Europe en termes de pose de secret. Il permet de calculer le secret primaire et secondaire ou de faire des arrondis contrôlés. Le développement, la maintenance et le support de Tau-Argus sont réalisés par un groupe d'experts européens et est coordonné par CBS (l'institut national de statistiques des Pays-Bas). C'est un logiciel libre et open source (https://github.com/sdcTools/tauargus) utilisable via une interface graphique. Le logiciel
 
-### ii. Les différentes algorithmes du secret secondaire
+### Les différentes algorithmes du secret secondaire
 
 Plusieurs algorithmes sont implémentes dans Tau-Argus pour gérer le secret secondaire. La **méthode Hypercube** permet un traitement séquentiel des cases sous secret primaire, en minimisant le coût. Dans le cas d'une hiérarchie alors elle traite les sous-tableaux indépendamment. Il s'agit d'une méthode heuristique et rapide. Elle a l'avantage de proposer un masque rapidement mais celui-ci n'est pas le plus optimal. La **méthode Optimal** met en place une minimisation globale du coût, respecte les règles des intervalles. C'est une méthode souvent très lente. Enfin, la **méthode Modular** éclate le problème en différents sous-tableaux sur lesquels elle applique la méthode Optimal. Les variables doivent être hiérarchiques (*pourquoi ?*). C'est une méthode assez rapide que l'on utilise dans la plupart des cas.
 
-### iii. Avantages et inconvénients
+### Avantages et inconvénients
 
-Tau-Argus comporte de nombreux avantages, il s'a&git d'un outil qui fait référence, performant sur la partie pose de secret et il est maintenu régulièrement. Cependant, il a des limites. En effet, l'interface est assez fouillie, il renvoie des bugs et des erreurs pas toujours facile à comprendre et corriger, enfin la reproductibilité des opérations est limitée.
+Tau-Argus comporte de nombreux avantages, il s'agit d'un outil qui fait référence, performant sur la partie pose de secret et il est maintenu régulièrement. Cependant, il a des limites. En effet, l'interface est assez fouillis, il renvoie des bugs et des erreurs pas toujours facile à comprendre et corriger, enfin la reproductibilité des opérations est limitée.
 
-## 2. Package rtauargus
+## Package rtauargus
 
-Bien que l'usage de standard de Tau-Argus se fasse par une interface graphique, la prise en main n'est pas aisée. Ainsi, un package R a été développé à l'Insee pour travailler avec Tau-Argus depuis R : rtauargus. Il permet de bénéficier des avantages de Tau-Argus tout en limitant les inconvénients.
+Bien que l'usage de standard de Tau-Argus se fasse par une interface graphique, la prise en main n'est pas aisée. Ainsi, un package R a été développé à l'Insee pour travailler avec Tau-Argus depuis R : `rtauargus`. Il permet de bénéficier des avantages de Tau-Argus tout en limitant les inconvénients.
 
-### i. Objectifs
+### Objectifs
 
 Le but de ce package est de faciliter la prise en main de Tau-Argus. Ainsi, il permet de poser le secret secondaire avec Tau-Argus sans l'ouvrir et gérer de grosses demandes.
 
-### ii. Principales fonctionnalités
+### Principales fonctionnalités
 
 Le package a deux fonctionnalités principales : il permet de poser le secret directement sur les tableaux ou à partir des microdonnées.Le fonctionnement général du package est le suivant : création de l'ensemble des fichiers dans les formats attendus par Tau-Argus, lance Tau-Argus, puis récupération des résultats dans R.
 
-La démarche utilisée à la DMRG consiste à poser le secret primaire "manuellement", c'est-à-dire sans faire appel à Tau-Argus et d'ensuite poser le secret secondaire à l'aide de la fonction tab_rtauargus() pour protéger un seul tableau et tab_multi_manager() pour protéger plusieurs tableaux.
+La démarche utilisée à la DMRG consiste à poser le secret primaire "manuellement", c'est-à-dire sans faire appel à Tau-Argus et d'ensuite poser le secret secondaire à l'aide de la fonction `tab_rtauargus()` pour protéger un seul tableau et `tab_multi_manager()` pour protéger plusieurs tableaux.
 
-### iii. Où trouver la documentation ?
+### Où trouver la documentation ?
 
 Le documentation est disponible en ligne : https://inseefrlab.github.io/rtauargus/
 
-## 3. Comment débugger ?
+## Comment débugger ?
 
-### i. Les principales erreurs
+### Les principales erreurs
 
-#### a. Les limites de Tau-Argus
+#### Les limites de Tau-Argus
 
 **Le nombre de variables de ventilation**
 
@@ -52,7 +52,7 @@ Le documentation est disponible en ligne : https://inseefrlab.github.io/rtauargu
 
 **Les algorithmes de secret secondaire**
 
-#### b. Les codes d'erreur dans Tau-Argus
+#### Les codes d'erreur dans Tau-Argus
 
 Cette partie n'est pas exhaustive mais recense les codes d'erreurs que nous avons rencontré en utilisant Tau-Argus.
 
@@ -75,7 +75,7 @@ Le message d'erreur "HiTaS: couldn't load JJ-routines" est spécifique à l'aglo
 
 -   La taille maximale pour un nombre à été dépassée (**faire référence**)
 -   Le problème paraît insoluble pour Modular (**faire référence**)
--   N.B : parfois "couldn't load JJ-routines" (sans HiTaS devant) renvoie à un problème du type "code not in codelist" 
+-   N.B : parfois "couldn't load JJ-routines" (sans HiTaS devant) renvoie à un problème du type "code not in codelist"
 
 Le message d'erreur "no optimal solution found JJ not loaded" est spécifique à l'aglorithme Optimal, en voici les différentes causes possibles :
 
@@ -92,16 +92,16 @@ Pour le message " error in modular suppression procedure" il faut bien faire att
 -   Généralement quand c'est l'unique message d'erreur, alors c'est que Modular a tourné pendant quelques minutes puis a atteint une limite de mémoire dans Tau-Argus
 -   **faire référence** et tester avec un autre algorithme
 
-### ii. Savoir lire les différents types de fichiers spécifiques à Tau-Argus
+### Savoir lire les différents types de fichiers spécifiques à Tau-Argus
 
 Fichiers rtauargus :
 
--   .rda : fichier de métadonnées pour Tau-Argus
--   .tab : fichier donné à Tau-Argus, il est décirt par .rda, les colonnes sont dans l'ordre des nom dans .rda
--   .hst : fichier de l'apriori, avec rtauargus on pose le secret primaire en amont, on ne demande pas à Tau-Argus de le faire. Dans ce fichier on a à la fois le secret de départ, le "protection level" et les coûts (c)
--   .arb : fichier executé dans la console windows, il est interprété par Tau-Argus. Autrment dit, ce sont une liste de commandes données à Tau-Argus
+-   `.rda` : fichier de métadonnées pour Tau-Argus
+-   `.tab` : fichier donné à Tau-Argus, il est décirt par .rda, les colonnes sont dans l'ordre des nom dans .rda
+-   `.hst` : fichier de l'apriori, avec rtauargus on pose le secret primaire en amont, on ne demande pas à Tau-Argus de le faire. Dans ce fichier on a à la fois le secret de départ, le "protection level" et les coûts (c)
+-   `.arb` : fichier executé dans la console windows, il est interprété par Tau-Argus. Autrment dit, ce sont une liste de commandes données à Tau-Argus
 
 Fichiers Tau-Argus :
 
--   .txt : journal d'exécution, il n'écrase pas les exécutions ainsi on peut voir toutes les exécutions jamais faites avec Tau-Argus
--   .csv : données d'entrée avec deux nouvelles colonnes. La colonne **status** à trois modalités : "B" = secret apriori (u), "D" = secret secondaire, "V" = cellules valides, diffusables. La colonne *dom* renvoie à la dominance dans les cas de secret de dominance où le pourcentage de dominance est nécessaire, néanmoins étant donné notre utilisation de Tau-Argus (pose du secret primaire "manuellement") cette colonne ne nous intéresse pas.
+-   `.txt` : journal d'exécution, il n'écrase pas les exécutions ainsi on peut voir toutes les exécutions jamais faites avec Tau-Argus
+-   `.csv` : données d'entrée avec deux nouvelles colonnes. La colonne **status** à trois modalités : "B" = secret apriori (u), "D" = secret secondaire, "V" = cellules valides, diffusables. La colonne *dom* renvoie à la dominance dans les cas de secret de dominance où le pourcentage de dominance est nécessaire, néanmoins étant donné notre utilisation de Tau-Argus (pose du secret primaire "manuellement") cette colonne ne nous intéresse pas.

@@ -60,6 +60,9 @@ ul.task-list li input[type="checkbox"] {
     "search-submit-button-title": "Submit"
   }
 }</script>
+<script src="site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
 
 </head>
@@ -158,7 +161,18 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#tableaux-deffectifs-et-tableaux-de-magnitude" id="toc-tableaux-deffectifs-et-tableaux-de-magnitude" class="nav-link active" data-scroll-target="#tableaux-deffectifs-et-tableaux-de-magnitude"><span class="header-section-number">3.1</span> Tableaux d’effectifs et tableaux de magnitude</a></li>
+  <li><a href="#secret-primaire-et-secret-secondaire" id="toc-secret-primaire-et-secret-secondaire" class="nav-link" data-scroll-target="#secret-primaire-et-secret-secondaire"><span class="header-section-number">3.2</span> Secret primaire et secret secondaire</a></li>
+  <li><a href="#variable-hiérarchique" id="toc-variable-hiérarchique" class="nav-link" data-scroll-target="#variable-hiérarchique"><span class="header-section-number">3.3</span> Variable hiérarchique</a></li>
+  <li><a href="#hiérarchies-non-emboîtées" id="toc-hiérarchies-non-emboîtées" class="nav-link" data-scroll-target="#hiérarchies-non-emboîtées"><span class="header-section-number">3.4</span> Hiérarchies non-emboîtées</a></li>
+  <li><a href="#liaisons-entre-tableaux" id="toc-liaisons-entre-tableaux" class="nav-link" data-scroll-target="#liaisons-entre-tableaux"><span class="header-section-number">3.5</span> Liaisons entre tableaux</a></li>
+  <li><a href="#tableau-à-diffuser-vs-à-protéger" id="toc-tableau-à-diffuser-vs-à-protéger" class="nav-link" data-scroll-target="#tableau-à-diffuser-vs-à-protéger"><span class="header-section-number">3.6</span> Tableau à diffuser vs à protéger</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -180,8 +194,65 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
+<section id="tableaux-deffectifs-et-tableaux-de-magnitude" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="tableaux-deffectifs-et-tableaux-de-magnitude"><span class="header-section-number">3.1</span> Tableaux d’effectifs et tableaux de magnitude</h2>
+<p>On distingue deux types de tableaux : les tableaux d’effectifs et ceux de magnitude.</p>
+<p>Un tableau d’effectifs est un tableau dans lequel la valeur d’une cellule correspond au nombre d’unités qui partagent les caractéristiques de la cellule.</p>
+<p>Voici un exemple de tableau d’effectifs :</p>
+<p>Un tableau de magnitude (ou de volume) est un tableau dans lequel la valeur de chaque cellule représente la somme des contributions des répondants qui partagent les caractéristiques de cette cellule.</p>
+<p>Voici un exemple de tableau de magnitude :</p>
+</section>
+<section id="secret-primaire-et-secret-secondaire" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="secret-primaire-et-secret-secondaire"><span class="header-section-number">3.2</span> Secret primaire et secret secondaire</h2>
+<p>Le <strong>secret primaire</strong> renvoie aux cellules qui doivent être secretisées dès le départ du processus de secrétisation car elles sont considérées comme sensibles. Elles peuvent être catégorisées comme sensibles du fait de la règle de fréquence (moins de 3 unités dans une cellule) ou de la règle de dominance (un répondant représente plus de 85% du total de la cellule). On ne peut pas diffuser les cellules qui constituent le secret primaire.</p>
+<p>Une solution pour ne pas diffuser ces cellules est de les supprimer (cacher). Cependant, uniquement supprimer les cellules touchées par le secret primaire n’est généralement pas suffisant. En effet, si les marges du tableau sont diffusées, alors les cellules sont liées entre elles par des équation. Ainsi, il faut cacher d’autres cellules pour ne pas pouvoir déduire la valeur des cellules cachées : c’est le <strong>secret secondaire</strong>.</p>
+</section>
+<section id="variable-hiérarchique" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="variable-hiérarchique"><span class="header-section-number">3.3</span> Variable hiérarchique</h2>
+<p>Une variable hiérarchique est une variable de ventilation (<em>définir variable de ventilation ou ne pas utiliser le terme ?</em>) comprenant plusieurs sous-totaux. Autrement dit, certaines modalités de cette variables se somment en une autre modalité de la variable.</p>
+<p>Par exemple, on pourrait imaginer une variable hiérarchique géographique comme dans le tableau suivant :</p>
+</section>
+<section id="hiérarchies-non-emboîtées" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="hiérarchies-non-emboîtées"><span class="header-section-number">3.4</span> Hiérarchies non-emboîtées</h2>
+<p>Une hiérarchie non-emboîtée est le cas où dans un tableau diffusé, l’emboîtement des modalités d’une variable hiérarchique n’est pas parfait.</p>
+<p>Par exemple si on utilise une variable de la NAF A88 comme suit et que l’on veut aussi diffuser un sous-total regroupant les codes division 03, 05 et 06 alors on a une hiérarchie non-emboîtée.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+  A[A] --&gt; B[01]
+  A --&gt; C[02]
+  A --&gt; D[03]
+  E[B] --&gt; F[05]
+  E --&gt; G[06]
+  E --&gt; H[07]
+  E --&gt; I[08]
+  E --&gt; J[09]
+</pre>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="liaisons-entre-tableaux" class="level2" data-number="3.5">
+<h2 data-number="3.5" class="anchored" data-anchor-id="liaisons-entre-tableaux"><span class="header-section-number">3.5</span> Liaisons entre tableaux</h2>
+<p>On dit que des tableaux sont liés lorsqu’ils possèdent la même variable ventilée et partagent une ou plusieurs variables de ventilation (<em>définir ventilé et ventilation, se mettre au clair sur le vocabulaire, cible ? de croisement?</em>). Ces liens entre tableaux doivent être pris en compte pour traiter correctement le secret. Sinon, les cellules cachées peuvent se déduire les unes des autres.</p>
+<p>Les liens les plus courants sont :</p>
+<ul>
+<li>Les tableaux partageant des marges communes (i.e.&nbsp;partageant le même champ, la même variable de réponse, une ou plusieurs variables de croisement);</li>
+<li>Les tableaux additifs ou corrélés (i.e.&nbsp;partageant le même champ, les mêmes variables de croisements, es variables de réponse différentes mais liées entre elles - équation ou corrélation);</li>
+<li>Les hiérarchies non-emboîtées ;</li>
+<li>Les différences de millésime.</li>
+</ul>
+<p>En effet, pour des données périodiques, la temporalité peut être perçue comme un ensemble de tableaux liés : il vaut mieux que le masque de secret change peu entre chaque millésime.</p>
+</section>
+<section id="tableau-à-diffuser-vs-à-protéger" class="level2" data-number="3.6">
+<h2 data-number="3.6" class="anchored" data-anchor-id="tableau-à-diffuser-vs-à-protéger"><span class="header-section-number">3.6</span> Tableau à diffuser vs à protéger</h2>
+<p>Les tableaux qui seront finalement diffusés ne sont pas les mêmes que les tableaux à protéger. En effet, les tableaux à protéger sont le résultat de l’analyse de la demande. Cette analyse consiste à identifier les tableaux liés entre eux et les hiérarchies (emboîtées ou non). Dès lors, l’identification de ces liens va nous pousser à regrouper différents tableaux ou au contraire les séparer. Une fois l’analyse terminée on se retrouver avec les tableaux à protéger, le secret sera appliqué sur ces tableaux et c’est seulement une fois la procédure terminée que l’on pourra reporter le secret identifié sur les tableaux à protéger sur les tableaux à diffuser.</p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

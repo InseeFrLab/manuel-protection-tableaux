@@ -1,1 +1,645 @@
-# Fiches pratiques  
+---
+editor: 
+  markdown: 
+    wrap: 72
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(eval = FALSE)
+```
+
+
+# Fiches pratiques
+
+## Poser le secret sur un tableau
+
+Poser un masque de secret sur un tableau comprend les étapes suivantes :
+
+1.  Poser le secret primaire en créant des variables indicatrices :
+
+-   Pour chacun des tableaux on ajoute une variable booléenne indiquant
+    si la cellule est problématique (`TRUE`) ou non (`FALSE`), au
+    regarde des règles pertinentes à appliquer comme : la règle de
+    fréquence `is_secret_freq` ou la règle de dominance `is_secret_dom`
+-   Ensuite, on crée une variable résumant le secret primaire
+    `is_secret_prim` :
+    -   `is_secret_prim = is_secret_freq` si seule la règle de fréquence
+        doit s'appliquer
+    -   `is_secret_prim = is_secret_freq | is_secret_dom` si les deux
+        règles doivent s'appliquer
+
+Voici un exemple de code pour les règles classiques en statistiques
+d'entreprises :
+
+```{r eval = FALSE}
+T0_detect <- T0 %>% 
+  mutate(
+      is_secret_freq = FREQ > 0 & FREQ < 3,
+      is_secret_dom = (VALUE != 0) & (MAX > 0.85*VALUE)
+    ) %>% 
+  mutate(
+    is_secret_prim = is_secret_freq | is_secret_dom
+  )
+```
+
+2.  Calculer le nombre de cellules détectées comme à risque
+
+3.  Poser le secret secondaire en utilisant le package `rtauargus` en
+    utilisant la fonction `tab_rtauargus()`.
+
+La fonction `tab_rtauargus()` requiert les arguments suivants :
+
+-   `tabular`: la table à protéger
+-   `dir_name`: le nom du répertoire où les fichiers seront sauvegardés
+-   `files_name`: le nom utilisé pour nommer les fichiers (chaque
+    fichier a une extension différente);
+-   `explanatory_vars`: le nom des variables de croisements présents
+    dans la table;
+-   `secret_var`: le nom de la variable indiquant si une cellule est à
+    risque ou non (secret primaire);
+-   `value` = nom de la variable de réponse;
+-   `freq` = nom de la variable d'effectifs;
+-   `totcode`: le code utilisé pour indiquer le total pour chacune des
+    variables de croisements (`explanatory_vars`).
+
+```{r eval = FALSE}
+T0_masq <- tab_rtauargus(
+  T0_detect,
+  dir_name = "tauargus_files/exo2",
+  files_name = "T0",
+  explanatory_vars = c("ACTIVITY","SIZE"),
+  secret_var = "is_secret_prim",
+  value = "VALUE",
+  freq = "FREQ",
+  totcode = c(ACTIVITY="Total",SIZE="Total"),
+  verbose = FALSE
+)
+```
+
+4.  Calculer le nombre de cellules selon leur statut final en suivant la
+    norme européenne :
+
+-   `A` les cellules en secret primaire à cause de la règle de fréquence
+-   `B` les cellules en secret primaire à cause de la règle de dominance
+    (dans le futur ces cellules pourraient être notées `O`)
+-   `D` les cellules concernées par le secret secondaire
+-   `V` les cellules non touchées par le secret, c'est-à-dire les
+    cellules qui pourront être diffusées.
+
+Pour faire le bilan du secret le mieux est de modifier la variable
+`Status` fournie par Tau-Argus. En effet, cette variable ne permet pas
+de faire la distinction entre l'origine du secret primaire (fréquence ou
+dominance).
+
+```{r}
+T0_masq <- T0_masq %>% 
+  mutate(
+    statut_final = case_when(
+      is_secret_freq ~ "A",
+      is_secret_dom ~ "B",
+      TRUE ~ Status,
+    )
+  )
+```
+
+Afin de bien appréhender l'impact du secret posé, on va non seulement
+compter le nombre de cellules masquées, mais aussi calculer la valeur
+des cellules masquées.
+
+```{r}
+T0_masq %>% 
+  group_by(statut_final) %>% 
+  summarise(
+    n_cell = n(),
+    val_cell = sum(VALUE)
+  ) %>%
+  mutate(
+    pc_n_cell = n_cell/sum(n_cell)*100,
+    pc_val_cell = val_cell/sum(val_cell)*100
+  )
+```
+
+Un bon indicateur de la qualité du secret secondaire posé consiste à
+rapporter le nombre de cellules supprimées lors de cette phase au nombre
+de cellules détectées comme à risque (secret primaire). Par exemple, si
+nous avons un ratio de $30/(46+7) = 0.57$. Alors, pour protéger une case
+en secret primaire, tau-argus a dû masquer 0.6 cellule(s). Ce qui est
+très peu. En effet, pour un tableau à deux dimensions, la présence d'un
+secret primaire engendre la suppression d'au moins 3 cellules
+supplémentaires. Ici, le ratio indique ici que nombre de cellules en
+secret primaire se protègent entre elles.
+
+## Prendre en compte une variable hiérarchique
+
+Reprenons ici l'exemple de la variable `geo` qui est une variable
+hiérarchique puisqu'il existent des emboîtements entre les différents
+niveaux.
+
+```{mermaid}
+flowchart LR
+  A[Pays] --> B[Nord]
+  A --> C[Ouest]
+  A --> D[Est]
+  A --> E[Sud]
+  B --> F[N1]
+  B --> G[N2]
+  B --> H[N3]
+  C --> I[O1]
+  C --> J[O2]
+  C --> K[O3]
+  C --> L[O4]
+  D --> M[E1]
+  D --> N[E2]
+  D --> O[E3]
+  E --> P[S1]
+  E --> Q[S2]
+```
+
+Pour prendre en compte cette hiérarchie il faut d'abord pouvoir la
+représenter de telle sorte que Tau-Argus sache comprendre les différents
+emboîtements présents.
+
+### Première option
+
+La première option consiste à créer le fichier nécessaire (extension
+`.hrc`) à la main. Ceci est tout à fait pertinent si la hiérarchie n'est
+pas trop étendue.
+
+Tau-Argus attend en effet un type de fichier bien particulier, dont
+l'extension est `.hrc`. Il s'agit d'un simple fichier texte où les
+différents emboîtements sont écrits les uns en-dessous des autres. Un
+symbole (le `@`) est utilisé pour préciser le niveau de chacun des
+emboîtements au sein de la hiérarchie.
+
+Dans notre exemple on écrirait le fichier de la façon suivante :
+
+```{tex}
+Nord
+@N1
+@N2
+@N3 
+Ouest 
+@O1 
+@O2 
+@O3 
+@O4 
+Est
+@E1 
+@E2 
+@E3 
+Sud 
+@S1 
+@S2
+```
+
+On remarque que le total `Pays` 'est pas inclus dans le fichier `.hrc`
+c'est parce qu'il ne faut **pas indiquer le super-total de la
+hiérarchie** à Tau-Argus.
+
+### Seconde option
+
+Quand la hiérarchie est très étendue, l'écriture manuelle du fichier de
+hiérarchie est pénible. Or, quand ce genre de cas se présente, il existe
+souvent une table de correspondance permettant d'associer les différents
+niveaux entre eux.
+
+Nous appelons table de correspondance une table qui précise l'ensemble
+des niveaux associés aux emboîtements les plus fins.
+
+La table de correspondance représentant la hiérarchie suivante :
+
+```{tex}
+Nord
+@N1
+@N2
+@N3 
+Ouest 
+@O1 
+@O2 
+@O3 
+@O4 
+Est
+@E1 
+@E2 
+@E3 
+Sud 
+@S1 
+@S2
+```
+
+est la suivante:
+
+```{r}
+pays_corr_table <- tibble(
+  niv0 = "Pays",
+  niv1 = c(rep("Nord",3),rep("Ouest",4),rep("Est",3), rep("Sud",2)),
+  niv2 = c(paste0("N",1:3),paste0("O",1:4),paste0("E",1:3), paste0("S",1:2))
+)
+pays_corr_table
+```
+
+Avec la fonction `write_hrc2()` du package `rtauargus`, on peut exporter
+la table de correspondance en un fichier `hrc`.
+
+```{r}
+write_hrc2(pays_corr_table %>% select(-niv0), file_name = "hrc/pays_TA_2.hrc")
+```
+
+Remarque: La fonction `rtauargus::write_hrc2()` qui permet de construire
+le fichier `.hrc` à partir d'une table de correspondance n'accepte pas
+de valeurs manquantes dans la table en entrée. Lorsque c'est le cas on
+répète la modalité sur les niveaux inférieurs.
+
+Exemple : avec cette hiérarchie on répète la modalité `C`
+
+```{tex}
+ALL
+@A
+@@A1
+@@A2
+@B
+@@B1
+@@B2
+@@@B21
+@@@B22
+@C
+```
+
+```{r}
+corr_tab <- tibble(
+  niv0 = "ALL",
+  niv1 = c(rep("A",2),rep("B",3), "C"),
+  niv2 = c("A1","A2","B1",rep("B2",2), "C"),
+  niv3 = c("A1","A2","B1", "B21", "B22", "C")
+)
+corr_tab
+```
+
+## Comment poser le secret sur plusieurs tableaux liés (par les marges) ?
+
+*Objectif* : savoir protéger un ensemble de tableaux liés en utilisant
+la fonction `tab_multi_manager()` du package `rtauargus`.
+
+Poser un masque de secret sur un ensemble de tableaux liés comprend les
+étapes suivantes :
+
+0.  Une étape préparatoire consiste à bien analyser les caractéristiques
+    des tableaux et détecter notamment la présence éventuelle de
+    variables hiérarchiques. A partir de cette analyse il est nécessaire
+    de construire deux listes :
+
+-   Une liste de tableaux
+-   Une liste renseignant les noms des variables de croisement de chacun
+    des tableaux
+
+1.  Poser le secret primaire sur chacun des tableaux indépendamment.
+
+2.  Calculer le nombre de cellules détectées comme à risque dans chacun
+    des tableaux (i.e. le nombres de variables touchées par le secret
+    primaire).
+
+3.  Poser le secret secondaire en utilisant la fonction
+    `tab_multi_manager()`
+
+4.  Faire une synthèse de la pose du secret dans chaque tableau en
+    calculant le nombre de cellules selon leur statut final. En
+    utilisant la norme européenne on note :
+
+    -   `A` les cellules en secret primaire à cause de la règle de
+        fréquence
+    -   `B` les cellules en secret primaire à cause de la règle de
+        dominance
+    -   `D` les cellules concernées par le secret secondaire
+    -   `V` les cellules non touchées par le secret, c'est-à-dire les
+        cellules qui pourront être diffusées
+
+Par exemple si l'on souhaite diffuser le nombre d'entreprises en France
+selon :
+
+-   `T0_1`: le sexe de son/sa dirigeant(e) et la région d'implantation
+-   `T0_2`: le sexe de son/sa dirigeant(e) et la caractère polluant ou
+    non de l'activité d'entreprise
+-   `T0_3`: le caractère polluant ou non de l'activité de l'entreprise
+    et la région d'implantation
+
+Nombre d'entreprises par région et par sexe du dirigeant (`T0_1`)
+
+|           | Femme  | Homme  | **Total** |
+|:---------:|:------:|:------:|:---------:|
+|   Nord    |   16   |   20   |  **36**   |
+|    Sud    |   19   |   12   |  **31**   |
+| **Total** | **35** | **32** |  **67**   |
+
+Nombre d'entreprises polluantes par sexe du dirigeant (`T0_2`)
+
+|           | Polluante | Non polluante | **Total** |
+|:---------:|:---------:|:-------------:|:---------:|
+|   Femme   |     8     |      27       |  **35**   |
+|   Homme   |    22     |      17       |  **32**   |
+| **Total** |  **30**   |    **37**     |  **67**   |
+
+Nombre d'entreprises polluantes par région (`T0_3`)
+
+|           | Polluante | Non polluante | **Total** |
+|:---------:|:---------:|:-------------:|:---------:|
+|   Nord    |    10     |      26       |  **36**   |
+|    Sud    |    20     |      11       |  **31**   |
+| **Total** |  **30**   |    **37**     |  **67**   |
+
+Ces trois tableaux sont liés puisqu'ils partagent des marges communes :
+
+-   `T0_1` et `T0_2` ont les mêmes marges sur la variable `SEXE`
+-   `T0_1` et `T0_3` ont les mêmes marges sur la variable `REGION`
+-   `T0_2` et `T0_3` ont les mêmes marges sur la variable `POLL`
+
+Suivons à présent les étapes présentées précédemment.
+
+0.  Analyse des caractéristiques des tableaux (étape préparatoire)
+
+    -   Vérifier les hiérarchies et les totaux Il est important de
+        détecter la présence éventuelles de variables hiérarchiques dans
+        un ou plusieurs tableaux. Dans ce cas-ci il n'y a pas de
+        variables hiérarchiques. Il est aussi intéressant de repérer les
+        codes servant au total et de s'assurer que ces codes sont
+        cohérents pour une même variable apparaissant dans plusieurs
+        tableaux. En effet, deux tableaux partageant la même variable
+        doivent utiliser la même modalité pour renseigner la total. On
+        le vérifie en regardant les données.
+
+    -   Construire une liste de tableaux et une liste de variables de
+        croisements. Pour ce faire on peut créer les listes
+        "manuellement" :
+
+```{r}
+liste_tabs_exemple <- list(
+  sex_reg = T0_1,
+  sex_pol = T0_2, 
+  pol_reg = T0_3
+)
+
+liste_vars_exemple <- list(
+  sex_reg = c("SEXE","REGION"),
+  sex_pol = c("SEXE","POLL"),
+  pol_reg = c("POLL","REGION")
+)
+```
+
+Ou bien cette étape peut être automatisée en fonction du contexte :
+
+```{r}
+liste_vars_exemple <- purrr::map(
+  liste_tabs_exemple,
+  function(tab) names(tab)[1:2]
+)
+```
+
+1.  Poser le secret primaire sur chacun des tableaux
+
+2.  Poser le secret secondaire avec `tab_multi_manager()`
+
+La fonction `tab_multi_manager()` requiert les arguments suivants :
+
+-   **list_tables** : liste de tables à protéger
+
+-   **list_explanatory_vars** : liste des noms des variables de
+    croisements présentes dans la liste des table à protéger dans la
+    table;
+
+-   **dir_name** : le nom du répertoire qui contiendra tous les fichiers
+    créés, s'il n'existe pas, il sera créé (ex :
+    `dir_name = "my_directory"`).
+
+-   **hrc** : un vecteur nommé spécifiant le chemin vers le fichier
+    `.hrc` pour chaque variable hiérarchique (ex :
+    `c(ACTIVITY = “chemin_vers_fichier/act.hrc”, NUTS = “chemin_vers_fichier/nuts.hrc” )`).
+
+-   **alt_hrc** : une liste nommée utile pour traiter les hiérarchies
+    non emboîtées. Les noms de la liste sont les noms des tableaux pour
+    lesquelles une autre hiérarchie (non emboîtée en général) doit être
+    utilisée (ex : si T1 et T2 ont une variable explicative, appelée
+    `ACTIVITY`, et la même variable de réponse, mais la variable
+    `ACTIVITY` n'a pas la même hiérarchie dans les les deux tables).
+    Supposons que les hiérarchies (`act1.hrc` et `act2.hrc`) ne sont pas
+    emboîtées. Dans ce cas, nous écrivons les deux arguments comme suit
+    :
+
+    -   `hrc = c(ACTIVITY = "path_to_file/act_1.hrc")` : par défaut,
+        cette hiérarchie sera utilisée pour la variable ACTIVITY.
+
+    -   `alt_hrc = list(T2 = c(ACTIVITY = "chemin_vers_fichier/act_2.hrc"))`
+        dans la table T2, la hiérarchie alternative sera utilisée.
+
+-   **totcode** : le code du total pour chaque variable explicative. Il
+    est recommandé d'utiliser le même code de total pour chaque
+    variable. Si par exemple le code est "Total" pour toutes les
+    variables. La syntaxe suivante est autorisée : `totcode = “Total”`.
+    Sinon, l'input attendu est une liste spécifiant le code total pour
+    chaque variable explicative (ex :
+    `totcode = list(ACTIVITY = “Total”, NUTS = “FR”, SIZE = “Ensemble”, CJ = “Total”)`)
+
+*Attention* : Si les totaux ne sont pas dans la table, ils seront
+calculés par Tau-Argus, mais ils ne seront pas éligibles pour la
+suppression primaire. Il est donc nécessaire de les fournir dans la
+table de départ.
+
+-   **alt_totcode** : une liste nommée pour les codes de totaux
+    alternatifs (voir `alt_hrc` pour l'utilisation).
+
+-   **value** : le nom de colonne de la variable de réponse dans les
+    tableau, il DOIT être identique pour chaque table (ex :
+    `valeur = “turnover”`). Valeur par défaut : `“value”`.
+
+-   **freq** : le nom de colonne de la variable de fréquence dans les
+    tableaux, il DOIT être le même nom pour chaque tableau (ex :
+    `freq = “frequency”`). Valeur par défaut : `“freq”`.
+
+-   **secret_var** : le nom de la variable booléenne spécifiant le
+    secret primaire dans les tables, il DOIT être le même nom pour
+    chaque table (ex : `secret_var = “is_secret_prim”`). Valeur par
+    défaut : `“is_secret_prim”`.
+
+-   **cost_var** : variable numeric qui permet de changer la coût de
+    suppression d'une cellule, pris en compte dans les algorithmes de
+    secret secondaire.Par défaut le coût correspond à la valeur de la
+    cellule. peut être spécifié pour chacune des cellules, peut contenir
+    des NA pour les coûts que l'on ne souhaite pas modifier.
+
+-   **suppress** : algorithme de gestion du secret secondaire (syntaxe
+    batch de Tau-Argus), ainsi que les potentiels paramètres associés.
+    Valeur par défaut : `MOD(1,5,1,0,0)`
+
+-   **ip_start** : les intervalles de protection pour la première
+    itération sur une table donnée (nombre entier). La valeur par défaut
+    est 10.
+
+-   **ip_end** : les intervalles de protection pour la deuxième
+    itération sur une table (nombre entier). Valeur par défaut : 0.
+
+-   **num_iter_max** : nombre d'itérations maximum sur un tableau, ce
+    paramètre est ici pour assurer le fait que la fonction va s'arrêter.
+    En pratique on n'atteint jamais la limite de 10. La valeur par
+    défaut est 10.
+
+3.  Analyser les résultats
+
+**Analyser le journal**
+
+La fonction `tab_multi_manager()` fournit un journal décrivant
+l'ensemble des itérations réalisées lors du processus de protection. Il
+s'agit du fichier `journal.txt` dans le répertoire mentionné dans
+`dir_name`.
+
+Pour chaque étape, sont indiqués :
+
+-   Le tableau sur lequel est posé sur le secret secondaire ;
+-   Le bilan du secret posé sur ce tableau ;
+-   Le nombre de cellules communes (c'est-à-dire appartenant à plusieurs
+    tableaux) touchées.
+
+L'ensemble des cellules communes est listé en fin de processus.
+
+**Bilan du secret**
+
+L'objet retourné par la fonction `tab_multi_manager()` est une liste
+contenant les mêmes tables que la liste placée en input auxquelles sont
+ajoutés les résultats des différentes étapes de la pose du secret
+secondaire. Ainsi, la dernière variable de chaque tableau permet de
+déterminer le statut final de chaque cellule.
+
+Ce code crée une variable `statut_final` renvoyant les codes de la norme
+européenne :
+
+```{r}
+exemple_masq <- exemple_masq %>% 
+  purrr::map(
+    function(tab){
+      tab %>% 
+        rename_with(~"is_secret_final", last_col()) %>% 
+        mutate(
+          statut_final = case_when(
+            is_secret_freq ~ "A",
+            is_secret_final ~"D",
+            TRUE ~ "V"
+          )
+        )
+    }
+  )
+```
+
+On peut ainsi dresser notre bilan par tableau :
+
+```{r}
+exemple_masq %>% 
+  purrr::imap_dfr(
+    function(tab, nom){
+      tab %>% 
+        count(statut_final) %>% 
+        mutate(
+          part = n/sum(n)*100,
+          table = nom
+        ) %>% 
+        relocate(table)
+    }
+  )
+```
+
+## Comment poser le secret en présence de hiérarchies non-emboîtées ?
+
+Lorsque l'on a la présence de hiérarchie non-emboîtée dans les tableaux
+traités alors il faut construire deux tableaux et deux hiérarchies pour
+chaque hiérarchie non-emboîtée.
+
+Par exemple, si on a un tableau T croisant NAF et GEO (deux variables
+hiérarchiques). Dans le cas où pour la NAF, en plus des activités
+classiques, il est décidé de publier un agrégat supplémentaire AGREG =
+B12 + C15 + G45. Ainsi, AGREG ne peut pas s'insérer dans la NAF. Il faut
+donc sortir cet agrégat pour construire un second tableau.
+
+-   T1, T2 croisent NAF et GEO
+-   T1 avec NAF classique (dont B12, C15, G45)
+-   T2 avec AGREG et ses composants B12, C15, G45
+
+Rappel des arguments de `tab_multi_manager()` utiles pour traiter les
+hiérarchies non-emboîtées :
+
+-   **alt_totcode** : une liste nommée pour les codes de totaux
+    alternatifs (voir `alt_hrc` pour l'utilisation).
+
+-   **alt_hrc** : une liste nommée utile pour traiter les hiérarchies
+    non emboîtées. Les noms de la liste sont les noms des tableaux pour
+    lesquelles une autre hiérarchie (non emboîtée en général) doit être
+    utilisée (ex : si T1 et T2 ont une variable explicative, appelée
+    `ACTIVITY`, et la même variable de réponse, mais la variable
+    `ACTIVITY` n'a pas la même hiérarchie dans les les deux tables).
+    Supposons que les hiérarchies (`act1.hrc` et `act2.hrc`) ne sont pas
+    emboîtées. Dans ce cas, nous écrivons les deux arguments comme suit
+    :
+
+    -   `hrc = c(ACTIVITY = "path_to_file/act_1.hrc")` : par défaut,
+        cette hiérarchie sera utilisée pour la variable ACTIVITY.
+
+    -   `alt_hrc = list(T2 = c(ACTIVITY = "chemin_vers_fichier/act_2.hrc"))`
+        dans la table T2, la hiérarchie alternative sera utilisée.
+
+## Comment utiliser les coûts ?
+
+*Objectif* : apprendre à utiliser l'option `cost` du package `rtauargus`
+afin de rediriger le secret secondaire.
+
+Tau-Argus utilise des algorithmes d'optimisation afin de minimiser la
+perte d'information qui résulte du secret secondaire. La question qui se
+pose est quelle valeur doit-être minimiser ? Plusieurs choix sont
+possibles, la valeur des cellules, le nombre de cellules, les effectifs
+des cellules. Il est également possible de personnaliser les coûts si
+l'on souhaite prioriser la pose de secret secondaire sur certains
+agrégats.
+
+### Minimiser la valeur secrétisée
+
+Tau-Argus minimise par défaut la valeur des cellules supprimées. C'est
+ce qui est le plus cohérent, lorsque l'on publie un tableau c'est bien
+la valeur des cellules qui nous intéresse.
+
+### Minimiser le nombre de cellules secrétisées
+
+Pour minimiser le nombre de cellules secrétisées il faut utiliser le
+paramètre `cost` et donc le définir dans notre table. si l'on souhaite
+minimiser le nombre de cellules masquées, il faut alors que le coût de
+suppression de chaque cellule soit identique, Tau-Argus considère alors
+qu'elles ont toutes la même importance. Pour cela il faut créer une
+colonne "cost" qui vaut 1 pour toutes les cellules de notre tableau.
+
+### Minimiser les effectifs secrétisés
+
+On peut aussi considérer que la valeur importante des cellules sont
+leurs effectifs. On peut penser qu'un nombre de répondants élevé pour
+une cellule lui confère une plus grande fiabilité statistique. Pour cela
+il suffit simplement de recopier la colonne "freq" dans notre colonne
+"cost".
+
+### Orienter le secret secondaire
+
+Dans certaines données on peut trouver des agrégats jugés non
+significatifs. Ces derniers ne seront pas publiés dans les tableaux mais
+notés "ns". On peut alors s'en servir pour la pose du secret secondaire.
+
+Attention, on pourrait penser que ces cellules devraient être placées en
+secret primaire, afin qu'elles soient considérées comme masquées quoi
+qu'il arrive. Cependant, cela peut entraîner plus de secret secondaire
+que nécessaire sachant qu'il n'est pas nécessaire de protéger ces
+cellules du risque de recoupement. L'utilisateur peut retrouver la
+valeur de ces cellules, mais il est averti qu'elles n'ont aucune
+importance statistique.
+
+Pour prioriser le secret secondaire on crée donc pour les agrégats
+non-significatifs la colonne "cost" qui vaut 1. C'est le coût minimal,
+ceci indiquera à Tau-Argus que ces agrégats sont donc prioritaires pour
+le secret secondaire. Ainsi, certains coûts ne seront pas définis. Ce n'est pas un problème,
+lorsque l'on ne spécifie pas de coût pour une cellule, Tau-Argus va considérer que
+son coût de suppression est égal la valeur de cette dernière.
+
+## Différenciation avec diff man
+
+Niveau expert pour traiter non emboîtement epci x communes, mais on
+pourrait envisager hiérarchies non emboîtées si intégration de la
+gestion de la différenciation directement dans `rtauargus`

@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -60,7 +94,12 @@ ul.task-list li input[type="checkbox"] {
     "search-submit-button-title": "Submit"
   }
 }</script>
+<script src="site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 </head>
 
@@ -158,7 +197,28 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#poser-le-secret-sur-un-tableau" id="toc-poser-le-secret-sur-un-tableau" class="nav-link active" data-scroll-target="#poser-le-secret-sur-un-tableau"><span class="header-section-number">6.1</span> Poser le secret sur un tableau</a></li>
+  <li><a href="#prendre-en-compte-une-variable-hiérarchique" id="toc-prendre-en-compte-une-variable-hiérarchique" class="nav-link" data-scroll-target="#prendre-en-compte-une-variable-hiérarchique"><span class="header-section-number">6.2</span> Prendre en compte une variable hiérarchique</a>
+  <ul class="collapse">
+  <li><a href="#première-option" id="toc-première-option" class="nav-link" data-scroll-target="#première-option"><span class="header-section-number">6.2.1</span> Première option</a></li>
+  <li><a href="#seconde-option" id="toc-seconde-option" class="nav-link" data-scroll-target="#seconde-option"><span class="header-section-number">6.2.2</span> Seconde option</a></li>
+  </ul></li>
+  <li><a href="#comment-poser-le-secret-sur-plusieurs-tableaux-liés-par-les-marges" id="toc-comment-poser-le-secret-sur-plusieurs-tableaux-liés-par-les-marges" class="nav-link" data-scroll-target="#comment-poser-le-secret-sur-plusieurs-tableaux-liés-par-les-marges"><span class="header-section-number">6.3</span> Comment poser le secret sur plusieurs tableaux liés (par les marges) ?</a></li>
+  <li><a href="#comment-poser-le-secret-en-présence-de-hiérarchies-non-emboîtées" id="toc-comment-poser-le-secret-en-présence-de-hiérarchies-non-emboîtées" class="nav-link" data-scroll-target="#comment-poser-le-secret-en-présence-de-hiérarchies-non-emboîtées"><span class="header-section-number">6.4</span> Comment poser le secret en présence de hiérarchies non-emboîtées ?</a></li>
+  <li><a href="#comment-utiliser-les-coûts" id="toc-comment-utiliser-les-coûts" class="nav-link" data-scroll-target="#comment-utiliser-les-coûts"><span class="header-section-number">6.5</span> Comment utiliser les coûts ?</a>
+  <ul class="collapse">
+  <li><a href="#minimiser-la-valeur-secrétisée" id="toc-minimiser-la-valeur-secrétisée" class="nav-link" data-scroll-target="#minimiser-la-valeur-secrétisée"><span class="header-section-number">6.5.1</span> Minimiser la valeur secrétisée</a></li>
+  <li><a href="#minimiser-le-nombre-de-cellules-secrétisées" id="toc-minimiser-le-nombre-de-cellules-secrétisées" class="nav-link" data-scroll-target="#minimiser-le-nombre-de-cellules-secrétisées"><span class="header-section-number">6.5.2</span> Minimiser le nombre de cellules secrétisées</a></li>
+  <li><a href="#minimiser-les-effectifs-secrétisés" id="toc-minimiser-les-effectifs-secrétisés" class="nav-link" data-scroll-target="#minimiser-les-effectifs-secrétisés"><span class="header-section-number">6.5.3</span> Minimiser les effectifs secrétisés</a></li>
+  <li><a href="#orienter-le-secret-secondaire" id="toc-orienter-le-secret-secondaire" class="nav-link" data-scroll-target="#orienter-le-secret-secondaire"><span class="header-section-number">6.5.4</span> Orienter le secret secondaire</a></li>
+  </ul></li>
+  <li><a href="#différenciation-avec-diff-man" id="toc-différenciation-avec-diff-man" class="nav-link" data-scroll-target="#différenciation-avec-diff-man"><span class="header-section-number">6.6</span> Différenciation avec diff man</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -180,8 +240,490 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
+<section id="poser-le-secret-sur-un-tableau" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="poser-le-secret-sur-un-tableau"><span class="header-section-number">6.1</span> Poser le secret sur un tableau</h2>
+<p>Poser un masque de secret sur un tableau comprend les étapes suivantes :</p>
+<ol type="1">
+<li>Poser le secret primaire en créant des variables indicatrices :</li>
+</ol>
+<ul>
+<li>Pour chacun des tableaux on ajoute une variable booléenne indiquant si la cellule est problématique (<code>TRUE</code>) ou non (<code>FALSE</code>), au regarde des règles pertinentes à appliquer comme : la règle de fréquence <code>is_secret_freq</code> ou la règle de dominance <code>is_secret_dom</code></li>
+<li>Ensuite, on crée une variable résumant le secret primaire <code>is_secret_prim</code> :
+<ul>
+<li><code>is_secret_prim = is_secret_freq</code> si seule la règle de fréquence doit s’appliquer</li>
+<li><code>is_secret_prim = is_secret_freq | is_secret_dom</code> si les deux règles doivent s’appliquer</li>
+</ul></li>
+</ul>
+<p>Voici un exemple de code pour les règles classiques en statistiques d’entreprises :</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>T0_detect <span class="ot">&lt;-</span> T0 <span class="sc">%&gt;%</span> </span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>      <span class="at">is_secret_freq =</span> FREQ <span class="sc">&gt;</span> <span class="dv">0</span> <span class="sc">&amp;</span> FREQ <span class="sc">&lt;</span> <span class="dv">3</span>,</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">is_secret_dom =</span> (VALUE <span class="sc">!=</span> <span class="dv">0</span>) <span class="sc">&amp;</span> (MAX <span class="sc">&gt;</span> <span class="fl">0.85</span><span class="sc">*</span>VALUE)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">is_secret_prim =</span> is_secret_freq <span class="sc">|</span> is_secret_dom</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="2" type="1">
+<li><p>Calculer le nombre de cellules détectées comme à risque</p></li>
+<li><p>Poser le secret secondaire en utilisant le package <code>rtauargus</code> en utilisant la fonction <code>tab_rtauargus()</code>.</p></li>
+</ol>
+<p>La fonction <code>tab_rtauargus()</code> requiert les arguments suivants :</p>
+<ul>
+<li><code>tabular</code>: la table à protéger</li>
+<li><code>dir_name</code>: le nom du répertoire où les fichiers seront sauvegardés</li>
+<li><code>files_name</code>: le nom utilisé pour nommer les fichiers (chaque fichier a une extension différente);</li>
+<li><code>explanatory_vars</code>: le nom des variables de croisements présents dans la table;</li>
+<li><code>secret_var</code>: le nom de la variable indiquant si une cellule est à risque ou non (secret primaire);</li>
+<li><code>value</code> = nom de la variable de réponse;</li>
+<li><code>freq</code> = nom de la variable d’effectifs;</li>
+<li><code>totcode</code>: le code utilisé pour indiquer le total pour chacune des variables de croisements (<code>explanatory_vars</code>).</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>T0_masq <span class="ot">&lt;-</span> <span class="fu">tab_rtauargus</span>(</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  T0_detect,</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">dir_name =</span> <span class="st">"tauargus_files/exo2"</span>,</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">files_name =</span> <span class="st">"T0"</span>,</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">explanatory_vars =</span> <span class="fu">c</span>(<span class="st">"ACTIVITY"</span>,<span class="st">"SIZE"</span>),</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">secret_var =</span> <span class="st">"is_secret_prim"</span>,</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">value =</span> <span class="st">"VALUE"</span>,</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">freq =</span> <span class="st">"FREQ"</span>,</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">totcode =</span> <span class="fu">c</span>(<span class="at">ACTIVITY=</span><span class="st">"Total"</span>,<span class="at">SIZE=</span><span class="st">"Total"</span>),</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">verbose =</span> <span class="cn">FALSE</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="4" type="1">
+<li>Calculer le nombre de cellules selon leur statut final en suivant la norme européenne :</li>
+</ol>
+<ul>
+<li><code>A</code> les cellules en secret primaire à cause de la règle de fréquence</li>
+<li><code>B</code> les cellules en secret primaire à cause de la règle de dominance (dans le futur ces cellules pourraient être notées <code>O</code>)</li>
+<li><code>D</code> les cellules concernées par le secret secondaire</li>
+<li><code>V</code> les cellules non touchées par le secret, c’est-à-dire les cellules qui pourront être diffusées.</li>
+</ul>
+<p>Pour faire le bilan du secret le mieux est de modifier la variable <code>Status</code> fournie par Tau-Argus. En effet, cette variable ne permet pas de faire la distinction entre l’origine du secret primaire (fréquence ou dominance).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>T0_masq <span class="ot">&lt;-</span> T0_masq <span class="sc">%&gt;%</span> </span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">statut_final =</span> <span class="fu">case_when</span>(</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>      is_secret_freq <span class="sc">~</span> <span class="st">"A"</span>,</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>      is_secret_dom <span class="sc">~</span> <span class="st">"B"</span>,</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>      <span class="cn">TRUE</span> <span class="sc">~</span> Status,</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Afin de bien appréhender l’impact du secret posé, on va non seulement compter le nombre de cellules masquées, mais aussi calculer la valeur des cellules masquées.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>T0_masq <span class="sc">%&gt;%</span> </span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(statut_final) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">n_cell =</span> <span class="fu">n</span>(),</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">val_cell =</span> <span class="fu">sum</span>(VALUE)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">pc_n_cell =</span> n_cell<span class="sc">/</span><span class="fu">sum</span>(n_cell)<span class="sc">*</span><span class="dv">100</span>,</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">pc_val_cell =</span> val_cell<span class="sc">/</span><span class="fu">sum</span>(val_cell)<span class="sc">*</span><span class="dv">100</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Un bon indicateur de la qualité du secret secondaire posé consiste à rapporter le nombre de cellules supprimées lors de cette phase au nombre de cellules détectées comme à risque (secret primaire). Par exemple, si nous avons un ratio de <span class="math inline">\(30/(46+7) = 0.57\)</span>. Alors, pour protéger une case en secret primaire, tau-argus a dû masquer 0.6 cellule(s). Ce qui est très peu. En effet, pour un tableau à deux dimensions, la présence d’un secret primaire engendre la suppression d’au moins 3 cellules supplémentaires. Ici, le ratio indique ici que nombre de cellules en secret primaire se protègent entre elles.</p>
+</section>
+<section id="prendre-en-compte-une-variable-hiérarchique" class="level2" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="prendre-en-compte-une-variable-hiérarchique"><span class="header-section-number">6.2</span> Prendre en compte une variable hiérarchique</h2>
+<p>Reprenons ici l’exemple de la variable <code>geo</code> qui est une variable hiérarchique puisqu’il existent des emboîtements entre les différents niveaux.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+  A[Pays] --&gt; B[Nord]
+  A --&gt; C[Ouest]
+  A --&gt; D[Est]
+  A --&gt; E[Sud]
+  B --&gt; F[N1]
+  B --&gt; G[N2]
+  B --&gt; H[N3]
+  C --&gt; I[O1]
+  C --&gt; J[O2]
+  C --&gt; K[O3]
+  C --&gt; L[O4]
+  D --&gt; M[E1]
+  D --&gt; N[E2]
+  D --&gt; O[E3]
+  E --&gt; P[S1]
+  E --&gt; Q[S2]
+</pre>
+</div>
+</div>
+</div>
+</div>
+<p>Pour prendre en compte cette hiérarchie il faut d’abord pouvoir la représenter de telle sorte que Tau-Argus sache comprendre les différents emboîtements présents.</p>
+<section id="première-option" class="level3" data-number="6.2.1">
+<h3 data-number="6.2.1" class="anchored" data-anchor-id="première-option"><span class="header-section-number">6.2.1</span> Première option</h3>
+<p>La première option consiste à créer le fichier nécessaire (extension <code>.hrc</code>) à la main. Ceci est tout à fait pertinent si la hiérarchie n’est pas trop étendue.</p>
+<p>Tau-Argus attend en effet un type de fichier bien particulier, dont l’extension est <code>.hrc</code>. Il s’agit d’un simple fichier texte où les différents emboîtements sont écrits les uns en-dessous des autres. Un symbole (le <code>@</code>) est utilisé pour préciser le niveau de chacun des emboîtements au sein de la hiérarchie.</p>
+<p>Dans notre exemple on écrirait le fichier de la façon suivante :</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode tex code-with-copy"><code class="sourceCode latex"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>Nord</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>@N1</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>@N2</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>@N3 </span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>Ouest </span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>@O1 </span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>@O2 </span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>@O3 </span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>@O4 </span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>Est</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>@E1 </span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>@E2 </span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>@E3 </span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>Sud </span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>@S1 </span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>@S2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>On remarque que le total <code>Pays</code> ’est pas inclus dans le fichier <code>.hrc</code> c’est parce qu’il ne faut <strong>pas indiquer le super-total de la hiérarchie</strong> à Tau-Argus.</p>
+</section>
+<section id="seconde-option" class="level3" data-number="6.2.2">
+<h3 data-number="6.2.2" class="anchored" data-anchor-id="seconde-option"><span class="header-section-number">6.2.2</span> Seconde option</h3>
+<p>Quand la hiérarchie est très étendue, l’écriture manuelle du fichier de hiérarchie est pénible. Or, quand ce genre de cas se présente, il existe souvent une table de correspondance permettant d’associer les différents niveaux entre eux.</p>
+<p>Nous appelons table de correspondance une table qui précise l’ensemble des niveaux associés aux emboîtements les plus fins.</p>
+<p>La table de correspondance représentant la hiérarchie suivante :</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode tex code-with-copy"><code class="sourceCode latex"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>Nord</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>@N1</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>@N2</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>@N3 </span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>Ouest </span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>@O1 </span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>@O2 </span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>@O3 </span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>@O4 </span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>Est</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>@E1 </span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>@E2 </span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>@E3 </span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>Sud </span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>@S1 </span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>@S2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>est la suivante:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>pays_corr_table <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">niv0 =</span> <span class="st">"Pays"</span>,</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">niv1 =</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">"Nord"</span>,<span class="dv">3</span>),<span class="fu">rep</span>(<span class="st">"Ouest"</span>,<span class="dv">4</span>),<span class="fu">rep</span>(<span class="st">"Est"</span>,<span class="dv">3</span>), <span class="fu">rep</span>(<span class="st">"Sud"</span>,<span class="dv">2</span>)),</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">niv2 =</span> <span class="fu">c</span>(<span class="fu">paste0</span>(<span class="st">"N"</span>,<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>),<span class="fu">paste0</span>(<span class="st">"O"</span>,<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>),<span class="fu">paste0</span>(<span class="st">"E"</span>,<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>), <span class="fu">paste0</span>(<span class="st">"S"</span>,<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>))</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>pays_corr_table</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Avec la fonction <code>write_hrc2()</code> du package <code>rtauargus</code>, on peut exporter la table de correspondance en un fichier <code>hrc</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write_hrc2</span>(pays_corr_table <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span>niv0), <span class="at">file_name =</span> <span class="st">"hrc/pays_TA_2.hrc"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Remarque: La fonction <code>rtauargus::write_hrc2()</code> qui permet de construire le fichier <code>.hrc</code> à partir d’une table de correspondance n’accepte pas de valeurs manquantes dans la table en entrée. Lorsque c’est le cas on répète la modalité sur les niveaux inférieurs.</p>
+<p>Exemple : avec cette hiérarchie on répète la modalité <code>C</code></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode tex code-with-copy"><code class="sourceCode latex"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>ALL</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>@A</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>@@A1</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>@@A2</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>@B</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>@@B1</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>@@B2</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>@@@B21</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>@@@B22</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>@C</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>corr_tab <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">niv0 =</span> <span class="st">"ALL"</span>,</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">niv1 =</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">"A"</span>,<span class="dv">2</span>),<span class="fu">rep</span>(<span class="st">"B"</span>,<span class="dv">3</span>), <span class="st">"C"</span>),</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">niv2 =</span> <span class="fu">c</span>(<span class="st">"A1"</span>,<span class="st">"A2"</span>,<span class="st">"B1"</span>,<span class="fu">rep</span>(<span class="st">"B2"</span>,<span class="dv">2</span>), <span class="st">"C"</span>),</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">niv3 =</span> <span class="fu">c</span>(<span class="st">"A1"</span>,<span class="st">"A2"</span>,<span class="st">"B1"</span>, <span class="st">"B21"</span>, <span class="st">"B22"</span>, <span class="st">"C"</span>)</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>corr_tab</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="comment-poser-le-secret-sur-plusieurs-tableaux-liés-par-les-marges" class="level2" data-number="6.3">
+<h2 data-number="6.3" class="anchored" data-anchor-id="comment-poser-le-secret-sur-plusieurs-tableaux-liés-par-les-marges"><span class="header-section-number">6.3</span> Comment poser le secret sur plusieurs tableaux liés (par les marges) ?</h2>
+<p><em>Objectif</em> : savoir protéger un ensemble de tableaux liés en utilisant la fonction <code>tab_multi_manager()</code> du package <code>rtauargus</code>.</p>
+<p>Poser un masque de secret sur un ensemble de tableaux liés comprend les étapes suivantes :</p>
+<ol start="0" type="1">
+<li>Une étape préparatoire consiste à bien analyser les caractéristiques des tableaux et détecter notamment la présence éventuelle de variables hiérarchiques. A partir de cette analyse il est nécessaire de construire deux listes :</li>
+</ol>
+<ul>
+<li>Une liste de tableaux</li>
+<li>Une liste renseignant les noms des variables de croisement de chacun des tableaux</li>
+</ul>
+<ol type="1">
+<li><p>Poser le secret primaire sur chacun des tableaux indépendamment.</p></li>
+<li><p>Calculer le nombre de cellules détectées comme à risque dans chacun des tableaux (i.e.&nbsp;le nombres de variables touchées par le secret primaire).</p></li>
+<li><p>Poser le secret secondaire en utilisant la fonction <code>tab_multi_manager()</code></p></li>
+<li><p>Faire une synthèse de la pose du secret dans chaque tableau en calculant le nombre de cellules selon leur statut final. En utilisant la norme européenne on note :</p>
+<ul>
+<li><code>A</code> les cellules en secret primaire à cause de la règle de fréquence</li>
+<li><code>B</code> les cellules en secret primaire à cause de la règle de dominance</li>
+<li><code>D</code> les cellules concernées par le secret secondaire</li>
+<li><code>V</code> les cellules non touchées par le secret, c’est-à-dire les cellules qui pourront être diffusées</li>
+</ul></li>
+</ol>
+<p>Par exemple si l’on souhaite diffuser le nombre d’entreprises en France selon :</p>
+<ul>
+<li><code>T0_1</code>: le sexe de son/sa dirigeant(e) et la région d’implantation</li>
+<li><code>T0_2</code>: le sexe de son/sa dirigeant(e) et la caractère polluant ou non de l’activité d’entreprise</li>
+<li><code>T0_3</code>: le caractère polluant ou non de l’activité de l’entreprise et la région d’implantation</li>
+</ul>
+<p>Nombre d’entreprises par région et par sexe du dirigeant (<code>T0_1</code>)</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th style="text-align: center;"></th>
+<th style="text-align: center;">Femme</th>
+<th style="text-align: center;">Homme</th>
+<th style="text-align: center;"><strong>Total</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">Nord</td>
+<td style="text-align: center;">16</td>
+<td style="text-align: center;">20</td>
+<td style="text-align: center;"><strong>36</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Sud</td>
+<td style="text-align: center;">19</td>
+<td style="text-align: center;">12</td>
+<td style="text-align: center;"><strong>31</strong></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>Total</strong></td>
+<td style="text-align: center;"><strong>35</strong></td>
+<td style="text-align: center;"><strong>32</strong></td>
+<td style="text-align: center;"><strong>67</strong></td>
+</tr>
+</tbody>
+</table>
+<p>Nombre d’entreprises polluantes par sexe du dirigeant (<code>T0_2</code>)</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th style="text-align: center;"></th>
+<th style="text-align: center;">Polluante</th>
+<th style="text-align: center;">Non polluante</th>
+<th style="text-align: center;"><strong>Total</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">Femme</td>
+<td style="text-align: center;">8</td>
+<td style="text-align: center;">27</td>
+<td style="text-align: center;"><strong>35</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Homme</td>
+<td style="text-align: center;">22</td>
+<td style="text-align: center;">17</td>
+<td style="text-align: center;"><strong>32</strong></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>Total</strong></td>
+<td style="text-align: center;"><strong>30</strong></td>
+<td style="text-align: center;"><strong>37</strong></td>
+<td style="text-align: center;"><strong>67</strong></td>
+</tr>
+</tbody>
+</table>
+<p>Nombre d’entreprises polluantes par région (<code>T0_3</code>)</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th style="text-align: center;"></th>
+<th style="text-align: center;">Polluante</th>
+<th style="text-align: center;">Non polluante</th>
+<th style="text-align: center;"><strong>Total</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">Nord</td>
+<td style="text-align: center;">10</td>
+<td style="text-align: center;">26</td>
+<td style="text-align: center;"><strong>36</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Sud</td>
+<td style="text-align: center;">20</td>
+<td style="text-align: center;">11</td>
+<td style="text-align: center;"><strong>31</strong></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>Total</strong></td>
+<td style="text-align: center;"><strong>30</strong></td>
+<td style="text-align: center;"><strong>37</strong></td>
+<td style="text-align: center;"><strong>67</strong></td>
+</tr>
+</tbody>
+</table>
+<p>Ces trois tableaux sont liés puisqu’ils partagent des marges communes :</p>
+<ul>
+<li><code>T0_1</code> et <code>T0_2</code> ont les mêmes marges sur la variable <code>SEXE</code></li>
+<li><code>T0_1</code> et <code>T0_3</code> ont les mêmes marges sur la variable <code>REGION</code></li>
+<li><code>T0_2</code> et <code>T0_3</code> ont les mêmes marges sur la variable <code>POLL</code></li>
+</ul>
+<p>Suivons à présent les étapes présentées précédemment.</p>
+<ol start="0" type="1">
+<li><p>Analyse des caractéristiques des tableaux (étape préparatoire)</p>
+<ul>
+<li><p>Vérifier les hiérarchies et les totaux Il est important de détecter la présence éventuelles de variables hiérarchiques dans un ou plusieurs tableaux. Dans ce cas-ci il n’y a pas de variables hiérarchiques. Il est aussi intéressant de repérer les codes servant au total et de s’assurer que ces codes sont cohérents pour une même variable apparaissant dans plusieurs tableaux. En effet, deux tableaux partageant la même variable doivent utiliser la même modalité pour renseigner la total. On le vérifie en regardant les données.</p></li>
+<li><p>Construire une liste de tableaux et une liste de variables de croisements. Pour ce faire on peut créer les listes “manuellement” :</p></li>
+</ul></li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>liste_tabs_exemple <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">sex_reg =</span> T0_1,</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">sex_pol =</span> T0_2, </span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">pol_reg =</span> T0_3</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>liste_vars_exemple <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">sex_reg =</span> <span class="fu">c</span>(<span class="st">"SEXE"</span>,<span class="st">"REGION"</span>),</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">sex_pol =</span> <span class="fu">c</span>(<span class="st">"SEXE"</span>,<span class="st">"POLL"</span>),</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">pol_reg =</span> <span class="fu">c</span>(<span class="st">"POLL"</span>,<span class="st">"REGION"</span>)</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Ou bien cette étape peut être automatisée en fonction du contexte :</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>liste_vars_exemple <span class="ot">&lt;-</span> purrr<span class="sc">::</span><span class="fu">map</span>(</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  liste_tabs_exemple,</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="cf">function</span>(tab) <span class="fu">names</span>(tab)[<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>]</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol type="1">
+<li><p>Poser le secret primaire sur chacun des tableaux</p></li>
+<li><p>Poser le secret secondaire avec <code>tab_multi_manager()</code></p></li>
+</ol>
+<p>La fonction <code>tab_multi_manager()</code> requiert les arguments suivants :</p>
+<ul>
+<li><p><strong>list_tables</strong> : liste de tables à protéger</p></li>
+<li><p><strong>list_explanatory_vars</strong> : liste des noms des variables de croisements présentes dans la liste des table à protéger dans la table;</p></li>
+<li><p><strong>dir_name</strong> : le nom du répertoire qui contiendra tous les fichiers créés, s’il n’existe pas, il sera créé (ex : <code>dir_name = "my_directory"</code>).</p></li>
+<li><p><strong>hrc</strong> : un vecteur nommé spécifiant le chemin vers le fichier <code>.hrc</code> pour chaque variable hiérarchique (ex : <code>c(ACTIVITY = “chemin_vers_fichier/act.hrc”, NUTS = “chemin_vers_fichier/nuts.hrc” )</code>).</p></li>
+<li><p><strong>alt_hrc</strong> : une liste nommée utile pour traiter les hiérarchies non emboîtées. Les noms de la liste sont les noms des tableaux pour lesquelles une autre hiérarchie (non emboîtée en général) doit être utilisée (ex : si T1 et T2 ont une variable explicative, appelée <code>ACTIVITY</code>, et la même variable de réponse, mais la variable <code>ACTIVITY</code> n’a pas la même hiérarchie dans les les deux tables). Supposons que les hiérarchies (<code>act1.hrc</code> et <code>act2.hrc</code>) ne sont pas emboîtées. Dans ce cas, nous écrivons les deux arguments comme suit :</p>
+<ul>
+<li><p><code>hrc = c(ACTIVITY = "path_to_file/act_1.hrc")</code> : par défaut, cette hiérarchie sera utilisée pour la variable ACTIVITY.</p></li>
+<li><p><code>alt_hrc = list(T2 = c(ACTIVITY = "chemin_vers_fichier/act_2.hrc"))</code> dans la table T2, la hiérarchie alternative sera utilisée.</p></li>
+</ul></li>
+<li><p><strong>totcode</strong> : le code du total pour chaque variable explicative. Il est recommandé d’utiliser le même code de total pour chaque variable. Si par exemple le code est “Total” pour toutes les variables. La syntaxe suivante est autorisée : <code>totcode = “Total”</code>. Sinon, l’input attendu est une liste spécifiant le code total pour chaque variable explicative (ex : <code>totcode = list(ACTIVITY = “Total”, NUTS = “FR”, SIZE = “Ensemble”, CJ = “Total”)</code>)</p></li>
+</ul>
+<p><em>Attention</em> : Si les totaux ne sont pas dans la table, ils seront calculés par Tau-Argus, mais ils ne seront pas éligibles pour la suppression primaire. Il est donc nécessaire de les fournir dans la table de départ.</p>
+<ul>
+<li><p><strong>alt_totcode</strong> : une liste nommée pour les codes de totaux alternatifs (voir <code>alt_hrc</code> pour l’utilisation).</p></li>
+<li><p><strong>value</strong> : le nom de colonne de la variable de réponse dans les tableau, il DOIT être identique pour chaque table (ex : <code>valeur = “turnover”</code>). Valeur par défaut : <code>“value”</code>.</p></li>
+<li><p><strong>freq</strong> : le nom de colonne de la variable de fréquence dans les tableaux, il DOIT être le même nom pour chaque tableau (ex : <code>freq = “frequency”</code>). Valeur par défaut : <code>“freq”</code>.</p></li>
+<li><p><strong>secret_var</strong> : le nom de la variable booléenne spécifiant le secret primaire dans les tables, il DOIT être le même nom pour chaque table (ex : <code>secret_var = “is_secret_prim”</code>). Valeur par défaut : <code>“is_secret_prim”</code>.</p></li>
+<li><p><strong>cost_var</strong> : variable numeric qui permet de changer la coût de suppression d’une cellule, pris en compte dans les algorithmes de secret secondaire.Par défaut le coût correspond à la valeur de la cellule. peut être spécifié pour chacune des cellules, peut contenir des NA pour les coûts que l’on ne souhaite pas modifier.</p></li>
+<li><p><strong>suppress</strong> : algorithme de gestion du secret secondaire (syntaxe batch de Tau-Argus), ainsi que les potentiels paramètres associés. Valeur par défaut : <code>MOD(1,5,1,0,0)</code></p></li>
+<li><p><strong>ip_start</strong> : les intervalles de protection pour la première itération sur une table donnée (nombre entier). La valeur par défaut est 10.</p></li>
+<li><p><strong>ip_end</strong> : les intervalles de protection pour la deuxième itération sur une table (nombre entier). Valeur par défaut : 0.</p></li>
+<li><p><strong>num_iter_max</strong> : nombre d’itérations maximum sur un tableau, ce paramètre est ici pour assurer le fait que la fonction va s’arrêter. En pratique on n’atteint jamais la limite de 10. La valeur par défaut est 10.</p></li>
+</ul>
+<ol start="3" type="1">
+<li>Analyser les résultats</li>
+</ol>
+<p><strong>Analyser le journal</strong></p>
+<p>La fonction <code>tab_multi_manager()</code> fournit un journal décrivant l’ensemble des itérations réalisées lors du processus de protection. Il s’agit du fichier <code>journal.txt</code> dans le répertoire mentionné dans <code>dir_name</code>.</p>
+<p>Pour chaque étape, sont indiqués :</p>
+<ul>
+<li>Le tableau sur lequel est posé sur le secret secondaire ;</li>
+<li>Le bilan du secret posé sur ce tableau ;</li>
+<li>Le nombre de cellules communes (c’est-à-dire appartenant à plusieurs tableaux) touchées.</li>
+</ul>
+<p>L’ensemble des cellules communes est listé en fin de processus.</p>
+<p><strong>Bilan du secret</strong></p>
+<p>L’objet retourné par la fonction <code>tab_multi_manager()</code> est une liste contenant les mêmes tables que la liste placée en input auxquelles sont ajoutés les résultats des différentes étapes de la pose du secret secondaire. Ainsi, la dernière variable de chaque tableau permet de déterminer le statut final de chaque cellule.</p>
+<p>Ce code crée une variable <code>statut_final</code> renvoyant les codes de la norme européenne :</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>exemple_masq <span class="ot">&lt;-</span> exemple_masq <span class="sc">%&gt;%</span> </span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  purrr<span class="sc">::</span><span class="fu">map</span>(</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">function</span>(tab){</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>      tab <span class="sc">%&gt;%</span> </span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>        <span class="fu">rename_with</span>(<span class="sc">~</span><span class="st">"is_secret_final"</span>, <span class="fu">last_col</span>()) <span class="sc">%&gt;%</span> </span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>        <span class="fu">mutate</span>(</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>          <span class="at">statut_final =</span> <span class="fu">case_when</span>(</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>            is_secret_freq <span class="sc">~</span> <span class="st">"A"</span>,</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>            is_secret_final <span class="sc">~</span><span class="st">"D"</span>,</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>            <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">"V"</span></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>          )</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>On peut ainsi dresser notre bilan par tableau :</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>exemple_masq <span class="sc">%&gt;%</span> </span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  purrr<span class="sc">::</span><span class="fu">imap_dfr</span>(</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    <span class="cf">function</span>(tab, nom){</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>      tab <span class="sc">%&gt;%</span> </span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>        <span class="fu">count</span>(statut_final) <span class="sc">%&gt;%</span> </span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>        <span class="fu">mutate</span>(</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>          <span class="at">part =</span> n<span class="sc">/</span><span class="fu">sum</span>(n)<span class="sc">*</span><span class="dv">100</span>,</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>          <span class="at">table =</span> nom</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>        ) <span class="sc">%&gt;%</span> </span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>        <span class="fu">relocate</span>(table)</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="comment-poser-le-secret-en-présence-de-hiérarchies-non-emboîtées" class="level2" data-number="6.4">
+<h2 data-number="6.4" class="anchored" data-anchor-id="comment-poser-le-secret-en-présence-de-hiérarchies-non-emboîtées"><span class="header-section-number">6.4</span> Comment poser le secret en présence de hiérarchies non-emboîtées ?</h2>
+<p>Lorsque l’on a la présence de hiérarchie non-emboîtée dans les tableaux traités alors il faut construire deux tableaux et deux hiérarchies pour chaque hiérarchie non-emboîtée.</p>
+<p>Par exemple, si on a un tableau T croisant NAF et GEO (deux variables hiérarchiques). Dans le cas où pour la NAF, en plus des activités classiques, il est décidé de publier un agrégat supplémentaire AGREG = B12 + C15 + G45. Ainsi, AGREG ne peut pas s’insérer dans la NAF. Il faut donc sortir cet agrégat pour construire un second tableau.</p>
+<ul>
+<li>T1, T2 croisent NAF et GEO</li>
+<li>T1 avec NAF classique (dont B12, C15, G45)</li>
+<li>T2 avec AGREG et ses composants B12, C15, G45</li>
+</ul>
+<p>Rappel des arguments de <code>tab_multi_manager()</code> utiles pour traiter les hiérarchies non-emboîtées :</p>
+<ul>
+<li><p><strong>alt_totcode</strong> : une liste nommée pour les codes de totaux alternatifs (voir <code>alt_hrc</code> pour l’utilisation).</p></li>
+<li><p><strong>alt_hrc</strong> : une liste nommée utile pour traiter les hiérarchies non emboîtées. Les noms de la liste sont les noms des tableaux pour lesquelles une autre hiérarchie (non emboîtée en général) doit être utilisée (ex : si T1 et T2 ont une variable explicative, appelée <code>ACTIVITY</code>, et la même variable de réponse, mais la variable <code>ACTIVITY</code> n’a pas la même hiérarchie dans les les deux tables). Supposons que les hiérarchies (<code>act1.hrc</code> et <code>act2.hrc</code>) ne sont pas emboîtées. Dans ce cas, nous écrivons les deux arguments comme suit :</p>
+<ul>
+<li><p><code>hrc = c(ACTIVITY = "path_to_file/act_1.hrc")</code> : par défaut, cette hiérarchie sera utilisée pour la variable ACTIVITY.</p></li>
+<li><p><code>alt_hrc = list(T2 = c(ACTIVITY = "chemin_vers_fichier/act_2.hrc"))</code> dans la table T2, la hiérarchie alternative sera utilisée.</p></li>
+</ul></li>
+</ul>
+</section>
+<section id="comment-utiliser-les-coûts" class="level2" data-number="6.5">
+<h2 data-number="6.5" class="anchored" data-anchor-id="comment-utiliser-les-coûts"><span class="header-section-number">6.5</span> Comment utiliser les coûts ?</h2>
+<p><em>Objectif</em> : apprendre à utiliser l’option <code>cost</code> du package <code>rtauargus</code> afin de rediriger le secret secondaire.</p>
+<p>Tau-Argus utilise des algorithmes d’optimisation afin de minimiser la perte d’information qui résulte du secret secondaire. La question qui se pose est quelle valeur doit-être minimiser ? Plusieurs choix sont possibles, la valeur des cellules, le nombre de cellules, les effectifs des cellules. Il est également possible de personnaliser les coûts si l’on souhaite prioriser la pose de secret secondaire sur certains agrégats.</p>
+<section id="minimiser-la-valeur-secrétisée" class="level3" data-number="6.5.1">
+<h3 data-number="6.5.1" class="anchored" data-anchor-id="minimiser-la-valeur-secrétisée"><span class="header-section-number">6.5.1</span> Minimiser la valeur secrétisée</h3>
+<p>Tau-Argus minimise par défaut la valeur des cellules supprimées. C’est ce qui est le plus cohérent, lorsque l’on publie un tableau c’est bien la valeur des cellules qui nous intéresse.</p>
+</section>
+<section id="minimiser-le-nombre-de-cellules-secrétisées" class="level3" data-number="6.5.2">
+<h3 data-number="6.5.2" class="anchored" data-anchor-id="minimiser-le-nombre-de-cellules-secrétisées"><span class="header-section-number">6.5.2</span> Minimiser le nombre de cellules secrétisées</h3>
+<p>Pour minimiser le nombre de cellules secrétisées il faut utiliser le paramètre <code>cost</code> et donc le définir dans notre table. si l’on souhaite minimiser le nombre de cellules masquées, il faut alors que le coût de suppression de chaque cellule soit identique, Tau-Argus considère alors qu’elles ont toutes la même importance. Pour cela il faut créer une colonne “cost” qui vaut 1 pour toutes les cellules de notre tableau.</p>
+</section>
+<section id="minimiser-les-effectifs-secrétisés" class="level3" data-number="6.5.3">
+<h3 data-number="6.5.3" class="anchored" data-anchor-id="minimiser-les-effectifs-secrétisés"><span class="header-section-number">6.5.3</span> Minimiser les effectifs secrétisés</h3>
+<p>On peut aussi considérer que la valeur importante des cellules sont leurs effectifs. On peut penser qu’un nombre de répondants élevé pour une cellule lui confère une plus grande fiabilité statistique. Pour cela il suffit simplement de recopier la colonne “freq” dans notre colonne “cost”.</p>
+</section>
+<section id="orienter-le-secret-secondaire" class="level3" data-number="6.5.4">
+<h3 data-number="6.5.4" class="anchored" data-anchor-id="orienter-le-secret-secondaire"><span class="header-section-number">6.5.4</span> Orienter le secret secondaire</h3>
+<p>Dans certaines données on peut trouver des agrégats jugés non significatifs. Ces derniers ne seront pas publiés dans les tableaux mais notés “ns”. On peut alors s’en servir pour la pose du secret secondaire.</p>
+<p>Attention, on pourrait penser que ces cellules devraient être placées en secret primaire, afin qu’elles soient considérées comme masquées quoi qu’il arrive. Cependant, cela peut entraîner plus de secret secondaire que nécessaire sachant qu’il n’est pas nécessaire de protéger ces cellules du risque de recoupement. L’utilisateur peut retrouver la valeur de ces cellules, mais il est averti qu’elles n’ont aucune importance statistique.</p>
+<p>Pour prioriser le secret secondaire on crée donc pour les agrégats non-significatifs la colonne “cost” qui vaut 1. C’est le coût minimal, ceci indiquera à Tau-Argus que ces agrégats sont donc prioritaires pour le secret secondaire. Ainsi, certains coûts ne seront pas définis. Ce n’est pas un problème, lorsque l’on ne spécifie pas de coût pour une cellule, Tau-Argus va considérer que son coût de suppression est égal la valeur de cette dernière.</p>
+</section>
+</section>
+<section id="différenciation-avec-diff-man" class="level2" data-number="6.6">
+<h2 data-number="6.6" class="anchored" data-anchor-id="différenciation-avec-diff-man"><span class="header-section-number">6.6</span> Différenciation avec diff man</h2>
+<p>Niveau expert pour traiter non emboîtement epci x communes, mais on pourrait envisager hiérarchies non emboîtées si intégration de la gestion de la différenciation directement dans <code>rtauargus</code></p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

@@ -1,3 +1,159 @@
-# Comment analyser une demande ?  
+# Comment analyser une demande ?
 
+## Étapes de l'analyse de demande
 
+### Prendre connaissance de la demande et s'assurer que toutes les informations nécessaires à la gestion de la confidentialité ont été fournies.
+
+Les informations nécessaires sont :
+
+-   une description précise des tableaux que votre interlocuteur souhaite diffuser :
+
+    -   sur quel champ de la population les tableaux sont-ils construits ?
+    -   quelles sont les variables descriptives (de croisement) ?
+    -   quelle est la variable de réponse pour chacun des tableaux ?
+    -   les tableaux sont-ils des tableaux de fréquence ou bien des tableaux de volume ?
+    -   parmi l'ensemble des variables de croisement, certaines sont-elles hiérarchiques ? Les emboîtements ont-ils été fournis ?
+
+-   une description précise des liens éventuels entre les variables ou tableaux :
+
+    -   certaines variables ou modalités sont-elles reliées par une équation ?
+    -   des équations/liens ont-ils été fournis ?
+    -   de fortes corrélations existent-elles entre certaines variables de réponse ?
+
+### La demande peut-elle être séparée en plusieurs sous-demandes indépendantes ?
+
+-   Des tableaux portant sur des variable de réponse différentes, non liées par une équation ou par un lien de corrélation fort, peuvent être traités séparément.
+
+-   Des tableaux construits sur des champs différents et non complémentaires peuvent être traités séparément.
+
+-   Y a-t-il au contraire des tableaux qui doivent être traités dans dans le même temps ?
+
+    -   rassembler les tableaux partageant la même variable de réponse et le même champ, car ils partagent a minima le même super-total (n.b. on ne les fusionne pas on les rassemblent juste pour les traiter ensemble)
+    -   déterminer les tableaux liés entre eux par leurs marges
+    -   déterminer les tableaux liés entre eux car "additifs"
+    -   déterminer les tableaux liés entre eux par la présence potentielle de hiérarchies non-emboîtées
+
+Chaque sous-demande doit faire l'objet d'un traitement à part, en suivant les mêmes étapes.
+
+### Lister les tableaux nécessaires pour la pose de secret
+
+Rassembler en un seul tableaux les tableaux liés car "additifs".
+
+Séparer en plusieurs tableaux un tableau qui contiendrait des sous-totaux non-emboîtés.
+
+### Construire les hiérarchies éventuellement nécessaires
+
+### Construire les tableaux à partir des tableaux fournis par l'utilisateur (si besoin)
+
+### Procéder à la pose du masque en opérant comme indiqué dans le chapitre 6 `Fiches pratiques`.
+
+## Détecter les liens
+
+Il y a deux principaux types de liens sur les variables réponse :
+
+-   les hiérarchies
+
+    -   emboîtées
+    -   non-emboîtées
+
+-   les équations du type A = B + C
+
+    -   entre les variables réponses
+    -   au niveau des champs
+
+## Passer de la liste de diffusion à la liste de protection
+
+La liste de diffusion est la liste de tableaux qui sera effectivement publiée. Elle diffère de la liste de protection qui elle est à établir en fonction des liens entre les différents tableaux. En effet, pour poser le secret pertinemment il faut renseigner les différents liens pour que l'algorithme en tienne compte.
+
+De plus, si les données sont sous forme de micro-données il faut calculer les agrégats qui seront diffusés pour établir la liste de diffusion. En effet, nous ne posons pas le secret sur les micro-données mais sur les agrégats. Pour ce faire la fonction `tabul_fun_group` permet de facilement construire les tables agrégées sous le bon format pour les mettre en entrée de `rtauargus`.
+
+## Fiches exemples d'analyse de demandes
+
+Exemple 1 :
+
+*Demande* - on souhaite diffuser 4 tableaux
+
+-   T1 : population par âge (5 classes), par sexe et par département
+-   T2 : population par sexe, par diplôme et par département
+-   T3 : population par catégorie catégorie socio-professionnelle, par statut d'activité et par département
+-   T4 : population par âge, par sexe et par statut d'activité
+
+*Analyse* 
+
+Les tableaux partagent le même champ (sous-entendu) et le même indicateur (population), ils sont donc liés a minima par le total, donc il n'y a pas de sous-demande indépendante.
+
+De plus, certains tableaux ont des variables de croisement communes, il y a un lien sur les marges, les liens ne n'en sont que renforcés.
+
+Les variables entre elles n'ont pas de lien hiérarchique (le seul niveau géographique est le département), donc les tableaux ne doivent pas être fusionnés.
+
+Finalement, la liste des tableaux à protéger est identique à la liste des tableaux à diffuser.
+
+Exemple 2 :
+
+*Demande* - on souhaite diffuser 7 tableaux
+
+-   T1 : population par âge (5 classes), par sexe et par département
+-   T2 : population par sexe, par diplôme et par département
+-   T3 : population par catégorie catégorie socio-professionnelle, par statut d'activité et par département
+-   T4 : population par âge, par sexe et par statut d'activité
+-   T5 : population par âge (5 classes), par sexe et par région
+-   T6 : population par sexe, par diplôme et par région
+-   T7 : population par catégorie socio-professionnelle, par statut d'activité et par région
+
+*Analyse*
+
+Les tableaux partagent le même champ (sous-entendu) et le même indicateur (population), ils sont donc liés a minima par le total, donc il n'y a pas de sous-demande indépendante.
+
+De plus, certains tableaux ont des variables de croisement communes, il y a un lien sur les marges, les liens ne n'en sont que renforcés.
+
+Deux variables ont un lien hiérarchique (région \> département), on peut donc fusionner les tableaux partageant les mêmes variables de croisement.
+
+La liste des tableaux à protéger est donc la suivante :
+
+-   T1 : population par âge (5 classes), par sexe et par GEO
+-   T2 : population par sexe, par diplôme et par GEO
+-   T3 : population par catégorie socio-professionnelle, par statut d'activité et par GEO
+-   T4 : population par âge, par sexe et par statut d'activité où GEO est une variable hiérarchique emboîtant régions et départements
+
+Exemple 3 :
+
+*Demande* - on souhaite diffuser 4 tableaux
+
+-   T1 : population par âge (3 classes : \<25, 25-55, +55) et par département
+-   T2 : population par âge (3 classes : \<15, 15-25, 25-45, 45-65, +65), par sexe et par département
+-   T3 : population par âge (3 classes : \<25, 25-55, +55) et par région
+-   T4 : population par âge (3 classes : \<15, 15-25, 25-45, 45-65, +65), par sexe et par région
+
+*Analyse*
+
+Les tableaux partagent le même champ (sous-entendu) et le même indicateur (population), ils sont donc liés a minima par le total, donc il n'y a pas de sous-demande indépendante.
+
+De plus, certains tableaux ont des variables de croisement communes, il y a un lien sur les marges, les liens ne n'en sont que renforcés.
+
+Deux variables ont un lien hiérarchique (région \> département) :
+
+-   les tableaux T1 et T3 partagent les mêmes variables de croisement et peuvent donc être fusionnés
+-   les tableaux T2 et T4 partagent les mêmes variables de croisement et peuvent donc être fusionnés
+
+La variable âge est ventilée différemment entre T1 et T2 (ainsi qu'entre T3 et T4).On doit donc se demander si les différentes modalités de l'âge sont emboîtées. On peut présenter la hiérarchie ainsi :
+
+```{r eval = FALSE}
+<25
+@<15
+@15-25
+25-55
+@25-45
+@45-55
++55
+@55-65
++65
+```
+
+Il n'est pas possible d'insérer la modalité 45-65 dans cette hiérarchie, il s'agit donc d'un cas de hiérarchie non-emboîtée. En effet, 45-65 = 45-55 + 55-65, l'agrégat devra être traité en construisant un tableau séparé.
+
+La liste des tableaux à protéger est la suivante :
+
+-   T1 : population par AGE (hiérarchie principale) et par GEO
+-   T1bis : population par AGE (agrégat spécial) et par GEO
+-   T2 : population par AGE (hiérarchie principale), par sexe et par GEO
+-   T2bis : population par AGE (agrégat spécial), par sexe et par GEO où GEO est une variable hiérarchique emboîtant régions et départements où AGE (hiérarchie principale) est une variable hiérarchique emboîtant l'ensemble des catégories d'âge hors 45-65 où AGE (agrégat spécial) a les modalités : 45-65 = 45-55 + 55-65
