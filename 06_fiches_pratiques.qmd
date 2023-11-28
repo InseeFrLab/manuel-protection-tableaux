@@ -8,7 +8,6 @@ editor:
 knitr::opts_chunk$set(eval = FALSE)
 ```
 
-
 # Fiches pratiques
 
 ## Poser le secret sur un tableau
@@ -86,7 +85,7 @@ T0_masq <- tab_rtauargus(
 -   `V` les cellules non touchées par le secret, c'est-à-dire les
     cellules qui pourront être diffusées.
 
-Pour faire le bilan du secret le mieux est de modifier la variable
+Pour faire le bilan du secret, le mieux est de modifier la variable
 `Status` fournie par Tau-Argus. En effet, cette variable ne permet pas
 de faire la distinction entre l'origine du secret primaire (fréquence ou
 dominance).
@@ -132,7 +131,7 @@ secret primaire se protègent entre elles.
 ## Prendre en compte une variable hiérarchique
 
 Reprenons ici l'exemple de la variable `geo` qui est une variable
-hiérarchique puisqu'il existent des emboîtements entre les différents
+hiérarchique puisqu'il existe des emboîtements entre les différents
 niveaux.
 
 ```{mermaid}
@@ -156,7 +155,7 @@ flowchart LR
 ```
 
 Pour prendre en compte cette hiérarchie il faut d'abord pouvoir la
-représenter de telle sorte que Tau-Argus sache comprendre les différents
+représenter de telle sorte que Tau-Argus comprenne les différents
 emboîtements présents.
 
 ### Première option
@@ -357,7 +356,7 @@ Suivons à présent les étapes présentées précédemment.
 0.  Analyse des caractéristiques des tableaux (étape préparatoire)
 
     -   Vérifier les hiérarchies et les totaux Il est important de
-        détecter la présence éventuelles de variables hiérarchiques dans
+        détecter la présence éventuelle de variables hiérarchiques dans
         un ou plusieurs tableaux. Dans ce cas-ci il n'y a pas de
         variables hiérarchiques. Il est aussi intéressant de repérer les
         codes servant au total et de s'assurer que ces codes sont
@@ -401,9 +400,9 @@ La fonction `tab_multi_manager()` requiert les arguments suivants :
 
 -   **list_tables** : liste de tables à protéger
 
--   **list_explanatory_vars** : liste des noms des variables de
-    croisements présentes dans la liste des table à protéger dans la
-    table;
+-   **list_explanatory_vars** : liste des noms des variables de 
+croisements présentes dans la liste des tables à protéger dans la 
+table;
 
 -   **dir_name** : le nom du répertoire qui contiendra tous les fichiers
     créés, s'il n'existe pas, il sera créé (ex :
@@ -446,7 +445,7 @@ table de départ.
     alternatifs (voir `alt_hrc` pour l'utilisation).
 
 -   **value** : le nom de colonne de la variable de réponse dans les
-    tableau, il DOIT être identique pour chaque table (ex :
+    tableaux, il DOIT être identique pour chaque table (ex :
     `valeur = “turnover”`). Valeur par défaut : `“value”`.
 
 -   **freq** : le nom de colonne de la variable de fréquence dans les
@@ -458,10 +457,10 @@ table de départ.
     chaque table (ex : `secret_var = “is_secret_prim”`). Valeur par
     défaut : `“is_secret_prim”`.
 
--   **cost_var** : variable numeric qui permet de changer la coût de
+-   **cost_var** : variable numeric qui permet de changer le coût de
     suppression d'une cellule, pris en compte dans les algorithmes de
-    secret secondaire.Par défaut le coût correspond à la valeur de la
-    cellule. peut être spécifié pour chacune des cellules, peut contenir
+    secret secondaire. Par défaut le coût correspond à la valeur de la
+    cellule. Peut être spécifié pour chacune des cellules. Peut contenir
     des NA pour les coûts que l'on ne souhaite pas modifier.
 
 -   **suppress** : algorithme de gestion du secret secondaire (syntaxe
@@ -635,8 +634,8 @@ Pour prioriser le secret secondaire on crée donc pour les agrégats
 non-significatifs la colonne "cost" qui vaut 1. C'est le coût minimal,
 ceci indiquera à Tau-Argus que ces agrégats sont donc prioritaires pour
 le secret secondaire. Ainsi, certains coûts ne seront pas définis. Ce n'est pas un problème,
-lorsque l'on ne spécifie pas de coût pour une cellule, Tau-Argus va considérer que
-son coût de suppression est égal la valeur de cette dernière.
+lorsque l'on ne spécifie pas de coût pour une cellule, Tau-Argus va considérer que 
+son coût de suppression est égal à la valeur de cette dernière.
 
 ## Différenciation avec diff man
 

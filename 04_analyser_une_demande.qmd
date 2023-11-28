@@ -37,7 +37,7 @@ Chaque sous-demande doit faire l'objet d'un traitement à part, en suivant les m
 
 ### Lister les tableaux nécessaires pour la pose de secret
 
-Rassembler en un seul tableaux les tableaux liés car "additifs".
+Rassembler en un seul tableau les tableaux liés car "additifs".
 
 Séparer en plusieurs tableaux un tableau qui contiendrait des sous-totaux non-emboîtés.
 
@@ -78,11 +78,11 @@ Exemple 1 :
 -   T3 : population par catégorie catégorie socio-professionnelle, par statut d'activité et par département
 -   T4 : population par âge, par sexe et par statut d'activité
 
-*Analyse* 
+*Analyse*
 
 Les tableaux partagent le même champ (sous-entendu) et le même indicateur (population), ils sont donc liés a minima par le total, donc il n'y a pas de sous-demande indépendante.
 
-De plus, certains tableaux ont des variables de croisement communes, il y a un lien sur les marges, les liens ne n'en sont que renforcés.
+De plus, certains tableaux ont des variables de croisement communes, il y a un lien sur les marges, les liens n'en sont que renforcés.
 
 Les variables entre elles n'ont pas de lien hiérarchique (le seul niveau géographique est le département), donc les tableaux ne doivent pas être fusionnés.
 
@@ -104,7 +104,7 @@ Exemple 2 :
 
 Les tableaux partagent le même champ (sous-entendu) et le même indicateur (population), ils sont donc liés a minima par le total, donc il n'y a pas de sous-demande indépendante.
 
-De plus, certains tableaux ont des variables de croisement communes, il y a un lien sur les marges, les liens ne n'en sont que renforcés.
+De plus, certains tableaux ont des variables de croisement communes, il y a un lien sur les marges, les liens n'en sont que renforcés.
 
 Deux variables ont un lien hiérarchique (région \> département), on peut donc fusionner les tableaux partageant les mêmes variables de croisement.
 
@@ -128,14 +128,14 @@ Exemple 3 :
 
 Les tableaux partagent le même champ (sous-entendu) et le même indicateur (population), ils sont donc liés a minima par le total, donc il n'y a pas de sous-demande indépendante.
 
-De plus, certains tableaux ont des variables de croisement communes, il y a un lien sur les marges, les liens ne n'en sont que renforcés.
+De plus, certains tableaux ont des variables de croisement communes, il y a un lien sur les marges, les liens n'en sont que renforcés.
 
 Deux variables ont un lien hiérarchique (région \> département) :
 
 -   les tableaux T1 et T3 partagent les mêmes variables de croisement et peuvent donc être fusionnés
 -   les tableaux T2 et T4 partagent les mêmes variables de croisement et peuvent donc être fusionnés
 
-La variable âge est ventilée différemment entre T1 et T2 (ainsi qu'entre T3 et T4).On doit donc se demander si les différentes modalités de l'âge sont emboîtées. On peut présenter la hiérarchie ainsi :
+La variable âge est ventilée différemment entre T1 et T2 (ainsi qu'entre T3 et T4). On doit donc se demander si les différentes modalités de l'âge sont emboîtées. On peut présenter la hiérarchie ainsi :
 
 ```{r eval = FALSE}
 <25

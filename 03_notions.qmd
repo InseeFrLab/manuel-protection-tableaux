@@ -99,7 +99,7 @@ Voici un exemple de tableau de magnitude :
 
 Le **secret primaire** renvoie aux cellules qui doivent être secretisées dès le départ du processus de secrétisation car elles sont considérées comme sensibles. Elles peuvent être catégorisées comme sensibles du fait de la règle de fréquence (moins de 3 unités dans une cellule) ou de la règle de dominance (un répondant représente plus de 85% du total de la cellule). On ne peut pas diffuser les cellules qui constituent le secret primaire.
 
-Une solution pour ne pas diffuser ces cellules est de les supprimer (cacher). Cependant, uniquement supprimer les cellules touchées par le secret primaire n'est généralement pas suffisant. En effet, si les marges du tableau sont diffusées, alors les cellules sont liées entre elles par des équation. Ainsi, il faut cacher d'autres cellules pour ne pas pouvoir déduire la valeur des cellules cachées : c'est le **secret secondaire**.
+Une solution pour ne pas diffuser ces cellules est de les supprimer (cacher). Cependant, uniquement supprimer les cellules touchées par le secret primaire n'est généralement pas suffisant. En effet, si les marges du tableau sont diffusées, alors les cellules sont liées entre elles par des équations. Ainsi, il faut cacher d'autres cellules pour ne pas pouvoir déduire la valeur des cellules cachées : c'est le **secret secondaire**.
 
 ## Variable hiérarchique
 
@@ -170,7 +170,7 @@ On dit que des tableaux sont liés lorsqu'ils possèdent la même variable venti
 Les liens les plus courants sont :
 
 -   Les tableaux partageant des marges communes (i.e. partageant le même champ, la même variable de réponse, une ou plusieurs variables de croisement);
--   Les tableaux additifs ou corrélés (i.e. partageant le même champ, les mêmes variables de croisements, es variables de réponse différentes mais liées entre elles - équation ou corrélation);
+-   Les tableaux additifs ou corrélés (i.e. partageant le même champ, les mêmes variables de croisements, les variables de réponse différentes mais liées entre elles - équation ou corrélation);
 -   Les hiérarchies non-emboîtées ;
 -   Les différences de millésime.
 
@@ -178,4 +178,4 @@ En effet, pour des données périodiques, la temporalité peut être perçue com
 
 ## Tableau à diffuser vs à protéger
 
-Les tableaux qui seront finalement diffusés ne sont pas les mêmes que les tableaux à protéger. En effet, les tableaux à protéger sont le résultat de l'analyse de la demande. Cette analyse consiste à identifier les tableaux liés entre eux et les hiérarchies (emboîtées ou non). Dès lors, l'identification de ces liens va nous pousser à regrouper différents tableaux ou au contraire les séparer. Une fois l'analyse terminée on se retrouver avec les tableaux à protéger, le secret sera appliqué sur ces tableaux et c'est seulement une fois la procédure terminée que l'on pourra reporter le secret identifié sur les tableaux à protéger sur les tableaux à diffuser.
+Les tableaux qui seront finalement diffusés ne sont pas les mêmes que les tableaux à protéger. En effet, les tableaux à protéger sont le résultat de l'analyse de la demande. Cette analyse consiste à identifier les tableaux liés entre eux et les hiérarchies (emboîtées ou non). Dès lors, l'identification de ces liens va nous pousser à regrouper différents tableaux ou au contraire les séparer. Une fois l'analyse terminée on se retrouve avec les tableaux à protéger, le secret sera appliqué sur ces tableaux et c'est seulement une fois la procédure terminée que l'on pourra reporter le secret identifié sur les tableaux à protéger sur les tableaux à diffuser.

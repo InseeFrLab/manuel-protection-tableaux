@@ -8,11 +8,11 @@ editor: visual
 
 ### Présentation générale
 
-Tau-Argus est la logiciel de référence en Europe en termes de pose de secret. Il permet de calculer le secret primaire et secondaire ou de faire des arrondis contrôlés. Le développement, la maintenance et le support de Tau-Argus sont réalisés par un groupe d'experts européens et est coordonné par CBS (l'institut national de statistiques des Pays-Bas). C'est un logiciel libre et open source (https://github.com/sdcTools/tauargus) utilisable via une interface graphique. Le logiciel
+Tau-Argus est la logiciel de référence en Europe en termes de pose de secret. Il permet de calculer le secret primaire et secondaire ou de faire des arrondis contrôlés. Le développement, la maintenance et le support de Tau-Argus sont réalisés par un groupe d'experts européens et est coordonné par CBS (l'institut national de statistiques des Pays-Bas). C'est un logiciel libre et open source (https://github.com/sdcTools/tauargus) utilisable via une interface graphique.
 
-### Les différentes algorithmes du secret secondaire
+### Les différents algorithmes du secret secondaire
 
-Plusieurs algorithmes sont implémentes dans Tau-Argus pour gérer le secret secondaire. La **méthode Hypercube** permet un traitement séquentiel des cases sous secret primaire, en minimisant le coût. Dans le cas d'une hiérarchie alors elle traite les sous-tableaux indépendamment. Il s'agit d'une méthode heuristique et rapide. Elle a l'avantage de proposer un masque rapidement mais celui-ci n'est pas le plus optimal. La **méthode Optimal** met en place une minimisation globale du coût, respecte les règles des intervalles. C'est une méthode souvent très lente. Enfin, la **méthode Modular** éclate le problème en différents sous-tableaux sur lesquels elle applique la méthode Optimal. Les variables doivent être hiérarchiques (*pourquoi ?*). C'est une méthode assez rapide que l'on utilise dans la plupart des cas.
+Plusieurs algorithmes sont implémentes dans Tau-Argus pour gérer le secret secondaire. La **méthode Hypercube** permet un traitement séquentiel des cases sous secret primaire, en minimisant le coût. Dans le cas d'une hiérarchie, elle traite les sous-tableaux indépendamment. Il s'agit d'une méthode heuristique et rapide. Elle a l'avantage de proposer un masque rapidement mais celui-ci n'est pas le plus optimal. La **méthode Optimal** met en place une minimisation globale du coût et respecte les intervalles de protection. C'est une méthode souvent très lente. Enfin, la **méthode Modular** éclate le problème en différents sous-tableaux sur lesquels elle applique la méthode Optimal. Les variables doivent être hiérarchiques (*pourquoi ?*). C'est une méthode assez rapide que l'on utilise dans la plupart des cas.
 
 ### Avantages et inconvénients
 
@@ -20,7 +20,7 @@ Tau-Argus comporte de nombreux avantages, il s'agit d'un outil qui fait référe
 
 ## Package rtauargus
 
-Bien que l'usage de standard de Tau-Argus se fasse par une interface graphique, la prise en main n'est pas aisée. Ainsi, un package R a été développé à l'Insee pour travailler avec Tau-Argus depuis R : `rtauargus`. Il permet de bénéficier des avantages de Tau-Argus tout en limitant les inconvénients.
+Bien que l'usage standard de Tau-Argus se fasse par une interface graphique, la prise en main n'est pas aisée. Ainsi, un package R a été développé à l'Insee pour travailler avec Tau-Argus depuis R : `rtauargus`. Il permet de bénéficier des avantages de Tau-Argus tout en limitant les inconvénients.
 
 ### Objectifs
 
@@ -28,7 +28,7 @@ Le but de ce package est de faciliter la prise en main de Tau-Argus. Ainsi, il p
 
 ### Principales fonctionnalités
 
-Le package a deux fonctionnalités principales : il permet de poser le secret directement sur les tableaux ou à partir des microdonnées.Le fonctionnement général du package est le suivant : création de l'ensemble des fichiers dans les formats attendus par Tau-Argus, lance Tau-Argus, puis récupération des résultats dans R.
+Le package a deux fonctionnalités principales : il permet de poser le secret directement sur les tableaux ou à partir des microdonnées. Le fonctionnement général du package est le suivant : création de l'ensemble des fichiers dans les formats attendus par Tau-Argus, lancement de Tau-Argus puis récupération des résultats dans R.
 
 La démarche utilisée à la DMRG consiste à poser le secret primaire "manuellement", c'est-à-dire sans faire appel à Tau-Argus et d'ensuite poser le secret secondaire à l'aide de la fonction `tab_rtauargus()` pour protéger un seul tableau et `tab_multi_manager()` pour protéger plusieurs tableaux.
 
@@ -61,10 +61,10 @@ Les différentes causes possibles du message "code not in codelist" sont les sui
 -   Une modalité d'une variable hiérarchique est présente dans la table mais pas dans le fichier hiérarchique associé
 -   Les noms de colonnes spécifiés pour le paramètre specify_tables de la fonction tab_arb() ne sont pas dans le même ordre que dans le tableau
 
-Le message d'erreur "illegal status in transition" est lié à l'apriori, voici les différentes causes possibles :
+Le message d'erreur "illegal status in transition" est lié à l'apriori. Voici les différentes causes possibles :
 
 -   Une cellule possède deux *status* contradictoires dans le fichier d'apriori (ex : A01,s et A01,u). La cellule ne pouvant pas avoir deux *status* à la fois, Tau-Argus ne peut pas comprendre le statut de la cellule
--   Une cellule avec une valeur nulle et un effecitf nul est renseignée comme unsafe (u)
+-   Une cellule avec une valeur nulle et un effectif nul est renseignée comme unsafe (u)
 
 Les différentes causes possibles du message d'erreur "error making totals" sont :
 
@@ -94,14 +94,14 @@ Pour le message " error in modular suppression procedure" il faut bien faire att
 
 ### Savoir lire les différents types de fichiers spécifiques à Tau-Argus
 
-Fichiers rtauargus :
+Fichiers en sortie de rtauargus :
 
 -   `.rda` : fichier de métadonnées pour Tau-Argus
--   `.tab` : fichier donné à Tau-Argus, il est décirt par .rda, les colonnes sont dans l'ordre des nom dans .rda
+-   `.tab` : fichier donné à Tau-Argus, il est décrit par .rda, les colonnes sont dans l'ordre des nom dans .rda
 -   `.hst` : fichier de l'apriori, avec rtauargus on pose le secret primaire en amont, on ne demande pas à Tau-Argus de le faire. Dans ce fichier on a à la fois le secret de départ, le "protection level" et les coûts (c)
--   `.arb` : fichier executé dans la console windows, il est interprété par Tau-Argus. Autrment dit, ce sont une liste de commandes données à Tau-Argus
+-   `.arb` : fichier executé dans la console windows, il est interprété par Tau-Argus. Autrement dit, ce sont une liste de commandes données à Tau-Argus
 
-Fichiers Tau-Argus :
+Fichiers en sortie de Tau-Argus :
 
 -   `.txt` : journal d'exécution, il n'écrase pas les exécutions ainsi on peut voir toutes les exécutions jamais faites avec Tau-Argus
 -   `.csv` : données d'entrée avec deux nouvelles colonnes. La colonne **status** à trois modalités : "B" = secret apriori (u), "D" = secret secondaire, "V" = cellules valides, diffusables. La colonne *dom* renvoie à la dominance dans les cas de secret de dominance où le pourcentage de dominance est nécessaire, néanmoins étant donné notre utilisation de Tau-Argus (pose du secret primaire "manuellement") cette colonne ne nous intéresse pas.
