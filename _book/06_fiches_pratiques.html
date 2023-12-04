@@ -302,7 +302,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><code>D</code> les cellules concernées par le secret secondaire</li>
 <li><code>V</code> les cellules non touchées par le secret, c’est-à-dire les cellules qui pourront être diffusées.</li>
 </ul>
-<p>Pour faire le bilan du secret le mieux est de modifier la variable <code>Status</code> fournie par Tau-Argus. En effet, cette variable ne permet pas de faire la distinction entre l’origine du secret primaire (fréquence ou dominance).</p>
+<p>Pour faire le bilan du secret, le mieux est de modifier la variable <code>Status</code> fournie par Tau-Argus. En effet, cette variable ne permet pas de faire la distinction entre l’origine du secret primaire (fréquence ou dominance).</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>T0_masq <span class="ot">&lt;-</span> T0_masq <span class="sc">%&gt;%</span> </span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
@@ -330,7 +330,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="prendre-en-compte-une-variable-hiérarchique" class="level2" data-number="6.2">
 <h2 data-number="6.2" class="anchored" data-anchor-id="prendre-en-compte-une-variable-hiérarchique"><span class="header-section-number">6.2</span> Prendre en compte une variable hiérarchique</h2>
-<p>Reprenons ici l’exemple de la variable <code>geo</code> qui est une variable hiérarchique puisqu’il existent des emboîtements entre les différents niveaux.</p>
+<p>Reprenons ici l’exemple de la variable <code>geo</code> qui est une variable hiérarchique puisqu’il existe des emboîtements entre les différents niveaux.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div>
@@ -357,7 +357,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 </div>
 </div>
-<p>Pour prendre en compte cette hiérarchie il faut d’abord pouvoir la représenter de telle sorte que Tau-Argus sache comprendre les différents emboîtements présents.</p>
+<p>Pour prendre en compte cette hiérarchie il faut d’abord pouvoir la représenter de telle sorte que Tau-Argus comprenne les différents emboîtements présents.</p>
 <section id="première-option" class="level3" data-number="6.2.1">
 <h3 data-number="6.2.1" class="anchored" data-anchor-id="première-option"><span class="header-section-number">6.2.1</span> Première option</h3>
 <p>La première option consiste à créer le fichier nécessaire (extension <code>.hrc</code>) à la main. Ceci est tout à fait pertinent si la hiérarchie n’est pas trop étendue.</p>
@@ -576,7 +576,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ol start="0" type="1">
 <li><p>Analyse des caractéristiques des tableaux (étape préparatoire)</p>
 <ul>
-<li><p>Vérifier les hiérarchies et les totaux Il est important de détecter la présence éventuelles de variables hiérarchiques dans un ou plusieurs tableaux. Dans ce cas-ci il n’y a pas de variables hiérarchiques. Il est aussi intéressant de repérer les codes servant au total et de s’assurer que ces codes sont cohérents pour une même variable apparaissant dans plusieurs tableaux. En effet, deux tableaux partageant la même variable doivent utiliser la même modalité pour renseigner la total. On le vérifie en regardant les données.</p></li>
+<li><p>Vérifier les hiérarchies et les totaux Il est important de détecter la présence éventuelle de variables hiérarchiques dans un ou plusieurs tableaux. Dans ce cas-ci il n’y a pas de variables hiérarchiques. Il est aussi intéressant de repérer les codes servant au total et de s’assurer que ces codes sont cohérents pour une même variable apparaissant dans plusieurs tableaux. En effet, deux tableaux partageant la même variable doivent utiliser la même modalité pour renseigner la total. On le vérifie en regardant les données.</p></li>
 <li><p>Construire une liste de tableaux et une liste de variables de croisements. Pour ce faire on peut créer les listes “manuellement” :</p></li>
 </ul></li>
 </ol>
@@ -607,7 +607,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>La fonction <code>tab_multi_manager()</code> requiert les arguments suivants :</p>
 <ul>
 <li><p><strong>list_tables</strong> : liste de tables à protéger</p></li>
-<li><p><strong>list_explanatory_vars</strong> : liste des noms des variables de croisements présentes dans la liste des table à protéger dans la table;</p></li>
+<li><p><strong>list_explanatory_vars</strong> : liste des noms des variables de croisements présentes dans la liste des tables à protéger dans la table;</p></li>
 <li><p><strong>dir_name</strong> : le nom du répertoire qui contiendra tous les fichiers créés, s’il n’existe pas, il sera créé (ex : <code>dir_name = "my_directory"</code>).</p></li>
 <li><p><strong>hrc</strong> : un vecteur nommé spécifiant le chemin vers le fichier <code>.hrc</code> pour chaque variable hiérarchique (ex : <code>c(ACTIVITY = “chemin_vers_fichier/act.hrc”, NUTS = “chemin_vers_fichier/nuts.hrc” )</code>).</p></li>
 <li><p><strong>alt_hrc</strong> : une liste nommée utile pour traiter les hiérarchies non emboîtées. Les noms de la liste sont les noms des tableaux pour lesquelles une autre hiérarchie (non emboîtée en général) doit être utilisée (ex : si T1 et T2 ont une variable explicative, appelée <code>ACTIVITY</code>, et la même variable de réponse, mais la variable <code>ACTIVITY</code> n’a pas la même hiérarchie dans les les deux tables). Supposons que les hiérarchies (<code>act1.hrc</code> et <code>act2.hrc</code>) ne sont pas emboîtées. Dans ce cas, nous écrivons les deux arguments comme suit :</p>
@@ -620,10 +620,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p><em>Attention</em> : Si les totaux ne sont pas dans la table, ils seront calculés par Tau-Argus, mais ils ne seront pas éligibles pour la suppression primaire. Il est donc nécessaire de les fournir dans la table de départ.</p>
 <ul>
 <li><p><strong>alt_totcode</strong> : une liste nommée pour les codes de totaux alternatifs (voir <code>alt_hrc</code> pour l’utilisation).</p></li>
-<li><p><strong>value</strong> : le nom de colonne de la variable de réponse dans les tableau, il DOIT être identique pour chaque table (ex : <code>valeur = “turnover”</code>). Valeur par défaut : <code>“value”</code>.</p></li>
+<li><p><strong>value</strong> : le nom de colonne de la variable de réponse dans les tableaux, il DOIT être identique pour chaque table (ex : <code>valeur = “turnover”</code>). Valeur par défaut : <code>“value”</code>.</p></li>
 <li><p><strong>freq</strong> : le nom de colonne de la variable de fréquence dans les tableaux, il DOIT être le même nom pour chaque tableau (ex : <code>freq = “frequency”</code>). Valeur par défaut : <code>“freq”</code>.</p></li>
 <li><p><strong>secret_var</strong> : le nom de la variable booléenne spécifiant le secret primaire dans les tables, il DOIT être le même nom pour chaque table (ex : <code>secret_var = “is_secret_prim”</code>). Valeur par défaut : <code>“is_secret_prim”</code>.</p></li>
-<li><p><strong>cost_var</strong> : variable numeric qui permet de changer la coût de suppression d’une cellule, pris en compte dans les algorithmes de secret secondaire.Par défaut le coût correspond à la valeur de la cellule. peut être spécifié pour chacune des cellules, peut contenir des NA pour les coûts que l’on ne souhaite pas modifier.</p></li>
+<li><p><strong>cost_var</strong> : variable numeric qui permet de changer le coût de suppression d’une cellule, pris en compte dans les algorithmes de secret secondaire. Par défaut le coût correspond à la valeur de la cellule. Peut être spécifié pour chacune des cellules. Peut contenir des NA pour les coûts que l’on ne souhaite pas modifier.</p></li>
 <li><p><strong>suppress</strong> : algorithme de gestion du secret secondaire (syntaxe batch de Tau-Argus), ainsi que les potentiels paramètres associés. Valeur par défaut : <code>MOD(1,5,1,0,0)</code></p></li>
 <li><p><strong>ip_start</strong> : les intervalles de protection pour la première itération sur une table donnée (nombre entier). La valeur par défaut est 10.</p></li>
 <li><p><strong>ip_end</strong> : les intervalles de protection pour la deuxième itération sur une table (nombre entier). Valeur par défaut : 0.</p></li>
@@ -715,7 +715,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h3 data-number="6.5.4" class="anchored" data-anchor-id="orienter-le-secret-secondaire"><span class="header-section-number">6.5.4</span> Orienter le secret secondaire</h3>
 <p>Dans certaines données on peut trouver des agrégats jugés non significatifs. Ces derniers ne seront pas publiés dans les tableaux mais notés “ns”. On peut alors s’en servir pour la pose du secret secondaire.</p>
 <p>Attention, on pourrait penser que ces cellules devraient être placées en secret primaire, afin qu’elles soient considérées comme masquées quoi qu’il arrive. Cependant, cela peut entraîner plus de secret secondaire que nécessaire sachant qu’il n’est pas nécessaire de protéger ces cellules du risque de recoupement. L’utilisateur peut retrouver la valeur de ces cellules, mais il est averti qu’elles n’ont aucune importance statistique.</p>
-<p>Pour prioriser le secret secondaire on crée donc pour les agrégats non-significatifs la colonne “cost” qui vaut 1. C’est le coût minimal, ceci indiquera à Tau-Argus que ces agrégats sont donc prioritaires pour le secret secondaire. Ainsi, certains coûts ne seront pas définis. Ce n’est pas un problème, lorsque l’on ne spécifie pas de coût pour une cellule, Tau-Argus va considérer que son coût de suppression est égal la valeur de cette dernière.</p>
+<p>Pour prioriser le secret secondaire on crée donc pour les agrégats non-significatifs la colonne “cost” qui vaut 1. C’est le coût minimal, ceci indiquera à Tau-Argus que ces agrégats sont donc prioritaires pour le secret secondaire. Ainsi, certains coûts ne seront pas définis. Ce n’est pas un problème, lorsque l’on ne spécifie pas de coût pour une cellule, Tau-Argus va considérer que son coût de suppression est égal à la valeur de cette dernière.</p>
 </section>
 </section>
 <section id="différenciation-avec-diff-man" class="level2" data-number="6.6">

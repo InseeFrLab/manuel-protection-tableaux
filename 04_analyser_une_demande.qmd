@@ -78,6 +78,13 @@ Exemple 1 :
 -   T3 : population par catégorie catégorie socio-professionnelle, par statut d'activité et par département
 -   T4 : population par âge, par sexe et par statut d'activité
 
+En formalisant :
+
+-   T1 : pop x {age x sexe x dep}
+-   T2 : pop x {sexe x dip x dep}
+-   T3 : pop x {socpro x act x dep}
+-   T4 : pop x {age x sexe x act}
+
 *Analyse*
 
 Les tableaux partagent le même champ (sous-entendu) et le même indicateur (population), ils sont donc liés a minima par le total, donc il n'y a pas de sous-demande indépendante.
@@ -100,29 +107,47 @@ Exemple 2 :
 -   T6 : population par sexe, par diplôme et par région
 -   T7 : population par catégorie socio-professionnelle, par statut d'activité et par région
 
+En formalisant :
+
+-   T1 : pop x {age x sexe x dep}
+-   T2 : pop x {age x dip x dep}
+-   T3 : pop x {socpro x act x dep}
+-   T4 : pop x {age x sexe x act}
+-   T5 : pop x {age x sexe x reg}
+-   T6 : pop x {sexe x dip x reg}
+-   T7 : pop x {socpro x act x reg}
+
 *Analyse*
 
 Les tableaux partagent le même champ (sous-entendu) et le même indicateur (population), ils sont donc liés a minima par le total, donc il n'y a pas de sous-demande indépendante.
 
 De plus, certains tableaux ont des variables de croisement communes, il y a un lien sur les marges, les liens n'en sont que renforcés.
 
-Deux variables ont un lien hiérarchique (région \> département), on peut donc fusionner les tableaux partageant les mêmes variables de croisement.
+Deux variables ont un lien hiérarchique (région \> département), lorsque l'information est hiérarchisée (et emboîtée) il faut la traiter dans un même tableau en créant une variable hiérarchique qu'on peut appeler par exemple `GEO`. De plus, on peut fusionner les tableaux partageant les mêmes variables de croisement.
 
 La liste des tableaux à protéger est donc la suivante :
 
--   T1 : population par âge (5 classes), par sexe et par GEO
--   T2 : population par sexe, par diplôme et par GEO
--   T3 : population par catégorie socio-professionnelle, par statut d'activité et par GEO
--   T4 : population par âge, par sexe et par statut d'activité où GEO est une variable hiérarchique emboîtant régions et départements
+-   T1 : pop x {age x sexe x GEO}
+-   T2 : pop x {sexe x dip x GEO}
+-   T3 : pop x {socpro x act x GEO}
+-   T4 : pop x {age x sexe x act}
+-   où GEO est une variable hiérarchique emboîtant régions et départements
 
 Exemple 3 :
 
 *Demande* - on souhaite diffuser 4 tableaux
 
 -   T1 : population par âge (3 classes : \<25, 25-55, +55) et par département
--   T2 : population par âge (3 classes : \<15, 15-25, 25-45, 45-65, +65), par sexe et par département
+-   T2 : population par âge (5 classes : \<15, 15-25, 25-45, 45-65, +65), par sexe et par département
 -   T3 : population par âge (3 classes : \<25, 25-55, +55) et par région
--   T4 : population par âge (3 classes : \<15, 15-25, 25-45, 45-65, +65), par sexe et par région
+-   T4 : population par âge (5 classes : \<15, 15-25, 25-45, 45-65, +65), par sexe et par région
+
+En formalisant :
+
+-   T1 : pop x {age_3 x dep}
+-   T2 : pop x {age_5 x sexe x dep}
+-   T3 : pop x {age_3 x reg}
+-   T4 : pop x {age_5 x sexe x reg}
 
 *Analyse*
 
@@ -149,11 +174,22 @@ La variable âge est ventilée différemment entre T1 et T2 (ainsi qu'entre T3 e
 +65
 ```
 
-Il n'est pas possible d'insérer la modalité 45-65 dans cette hiérarchie, il s'agit donc d'un cas de hiérarchie non-emboîtée. En effet, 45-65 = 45-55 + 55-65, l'agrégat devra être traité en construisant un tableau séparé.
+Il n'est pas possible d'insérer la modalité 45-65 dans cette hiérarchie, il s'agit donc d'un cas de hiérarchie non-emboîtée. En effet, 45-65 = 45-55 + 55-65 est un agrégat non-emboîté qui devra être traité en construisant un tableau séparé.
 
-La liste des tableaux à protéger est la suivante :
+Une première étape d'analyse mène à la liste des tableaux à protéger suivante :
 
--   T1 : population par AGE (hiérarchie principale) et par GEO
--   T1bis : population par AGE (agrégat spécial) et par GEO
--   T2 : population par AGE (hiérarchie principale), par sexe et par GEO
--   T2bis : population par AGE (agrégat spécial), par sexe et par GEO où GEO est une variable hiérarchique emboîtant régions et départements où AGE (hiérarchie principale) est une variable hiérarchique emboîtant l'ensemble des catégories d'âge hors 45-65 où AGE (agrégat spécial) a les modalités : 45-65 = 45-55 + 55-65
+-   T1 : pop x {AGE_hrc_princ x GEO}
+-   T1bis : pop x {AGE_hrc_spe x GEO}
+-   T2 : pop x {AGE_hrc_princ x sexe x GEO}
+-   T2bis : pop x {AGE_hrc_spe x sexe x GEO}
+-   où GEO est une variable hiérarchique emboîtant régions et départements
+-   où AGE_hrc_princ (hiérarchie principale) est une variable hiérarchique emboîtant l'ensemble des catégories d'âge hors 45-65
+-   où AGE_hrc_spe (agrégat spécial) a les modalités : 45-65 = 45-55 + 55-65
+
+On remarque que T1 est en réalité déjà "contenu" dans T2. Puisque le croisement AGE_hrc_princ x GEO est présente dans T2. De même T1bis est contenu dans T2bis. On peut donc regrouper ces tableau. Finalement, on se retrouve avec cette liste de tableaux à protéger :
+
+-   T1 : pop x {AGE_hrc_princ x sexe x GEO}
+-   T2 : pop x {AGE_hrc_spe x sexe x GEO}
+-   où GEO est une variable hiérarchique emboîtant régions et départements
+-   où AGE_hrc_princ (hiérarchie principale) est une variable hiérarchique emboîtant l'ensemble des catégories d'âge hors 45-65
+-   où AGE_hrc_spe (agrégat spécial) a les modalités : 45-65 = 45-55 + 55-65

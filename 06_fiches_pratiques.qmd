@@ -400,9 +400,9 @@ La fonction `tab_multi_manager()` requiert les arguments suivants :
 
 -   **list_tables** : liste de tables à protéger
 
--   **list_explanatory_vars** : liste des noms des variables de 
-croisements présentes dans la liste des tables à protéger dans la 
-table;
+-   **list_explanatory_vars** : liste des noms des variables de
+    croisements présentes dans la liste des tables à protéger dans la
+    table;
 
 -   **dir_name** : le nom du répertoire qui contiendra tous les fichiers
     créés, s'il n'existe pas, il sera créé (ex :
@@ -633,9 +633,10 @@ importance statistique.
 Pour prioriser le secret secondaire on crée donc pour les agrégats
 non-significatifs la colonne "cost" qui vaut 1. C'est le coût minimal,
 ceci indiquera à Tau-Argus que ces agrégats sont donc prioritaires pour
-le secret secondaire. Ainsi, certains coûts ne seront pas définis. Ce n'est pas un problème,
-lorsque l'on ne spécifie pas de coût pour une cellule, Tau-Argus va considérer que 
-son coût de suppression est égal à la valeur de cette dernière.
+le secret secondaire. Ainsi, certains coûts ne seront pas définis. Ce
+n'est pas un problème, lorsque l'on ne spécifie pas de coût pour une
+cellule, Tau-Argus va considérer que son coût de suppression est égal à
+la valeur de cette dernière.
 
 ## Différenciation avec diff man
 
