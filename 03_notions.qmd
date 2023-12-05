@@ -181,11 +181,10 @@ A88](images/ex_hrc_nonemb.png)
 ## Liaisons entre tableaux
 
 On dit que des tableaux sont liés lorsqu'ils possèdent la même variable
-ventilée et partagent une ou plusieurs variables de ventilation
-(*définir ventilé et ventilation, se mettre au clair sur le vocabulaire,
-cible ? de croisement?*). Ces liens entre tableaux doivent être pris en
-compte pour traiter correctement le secret. Sinon, les cellules cachées
-peuvent se déduire les unes des autres.
+ventilée et partagent une ou plusieurs variables de ventilation. Ces
+liens entre tableaux doivent être pris en compte pour traiter
+correctement le secret. Sinon, les cellules cachées peuvent se déduire
+les unes des autres.
 
 Les liens les plus courants sont :
 

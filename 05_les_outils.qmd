@@ -8,7 +8,7 @@ editor: visual
 
 ### Présentation générale
 
-Tau-Argus est la logiciel de référence en Europe en termes de pose de secret. Il permet de calculer le secret primaire et secondaire ou de faire des arrondis contrôlés. Le développement, la maintenance et le support de Tau-Argus sont réalisés par un groupe d'experts européens et est coordonné par CBS (l'institut national de statistiques des Pays-Bas). C'est un logiciel libre et open source (https://github.com/sdcTools/tauargus) utilisable via une interface graphique.
+Tau-Argus est la logiciel de référence en Europe en termes de pose de secret. Il permet de calculer le secret primaire et secondaire ou de faire des arrondis contrôlés. Le développement, la maintenance et le support de Tau-Argus sont réalisés par un groupe d'experts européens et est coordonné par CBS (l'institut national de statistiques des Pays-Bas). C'est un logiciel libre et open source (<https://github.com/sdcTools/tauargus>) utilisable via une interface graphique.
 
 ### Les différents algorithmes du secret secondaire
 
@@ -34,7 +34,7 @@ La démarche utilisée à la DMRG consiste à poser le secret primaire "manuelle
 
 ### Où trouver la documentation ?
 
-Le documentation est disponible en ligne : https://inseefrlab.github.io/rtauargus/
+Le documentation est disponible en ligne : <https://inseefrlab.github.io/rtauargus/>
 
 ## Comment débugger ?
 
@@ -44,13 +44,89 @@ Le documentation est disponible en ligne : https://inseefrlab.github.io/rtauargu
 
 **Le nombre de variables de ventilation**
 
-**La taille des nombres**
+Actuellement $\tau$-Argus tolère 4 variables de ventilation maximum par tableau. Cependant, pour 4 variables de ventilation un warning apparaît, $\tau$-Argus ne garantit pas une protection totale de la table. Effectuer un contrôle de cohérence sur le secret pour un tableau avec 4 dimensions est très complexe. C'est pourquoi nous recommandons de ne traiter que des tableaux à 3 dimensions maximum, dans la mesure du possible.
+
+**Les valeurs trop élevées**
+
+$\tau$-Argus ne parvient pas à traiter un tableau s'il rencontre une cellule d'une valeur trop élevée.Dans le cas où une celulle du tableau viendrait à dépasser $10^{12}$, un message d'erreur apparaîtra lors de la pose du secret secondaire. Afin d'éviter ce genre de problème, il est conseillé de regarder si le plus gros total du tableau dépasse $10^{12}$, le cas échéant nous recommandons de diviser la valeur de votre tableau par une puissance de 10 adéquate. Cependant cela implique de faire attention à plusieurs choses :
+
+-   Traiter le secret primaire dans le fichier d'apriori avant d'arrondir les valeurs.
+-   S'assurer qu'aucune valeur n'est arrondie à 0, elle ne serait alors plus prise en compte lors du traitement du secret secondaire, dans ce cas il faut forcer un arrondi à 1 minimum.
+-   Si la valeur du plus gros contributeur est encore présente dans la table, l'arrondir avec le même ordre de grandeur que la variable de réponse.
+
+A ce jour, aucune limite n'a été constatée en terme de nombre de décimales, la piste reste à explorer. Mais nous recommandons tout de même d'arrondir les valeurs. Dans tous les cas les arrondis n'impacteront que très peu la pose du secret.
 
 **Les limites du fichier hiérarchique**
 
+LE NOMBRE DE CARACTÈRES DES FEUILLES
+
+Au sein d'un fichier `.hrc`, $\tau$-Argus a besoin qu'au niveau hiérarchique le plus fin les feuilles aient le même nombre de caractères. Par exemple la hiérarchie suivante renverra un message d'erreur :
+
+```{r eval = FALSE}
+A
+@A01
+@A02
+@A3
+```
+
+La fonction `write_hrc2()` permet d'ajouter des \* dans la hiérarchie et les modalités du tableau afin d'éviter ce genre d'erreurs. Afin que ce soit le plus robuste possible cette transformation est appliquée à tous les niveaux hiérarchiques. Pour l'exemple précédent on obtiendra alors la hiérarchie :
+
+```{r eval = FALSE}
+***A
+@A01
+@A02
+@*A3
+```
+
+LES FEUILLES UNIQUES
+
+Lors de la reconstitution des totaux de la table par $\tau$-Argus, on obtient une erreur si la hiérarchie contient ce qu'on va appeler une "feuille unique". Par exemple dans la hiérarchie :
+
+```{r eval = FALSE}
+A
+@A1
+@@A11
+@@A12
+```
+
+A1 sera ce qu'on appelle une feuille unique, c'est le seul sous-niveau de A. Ce problème n'est présent que lorsqu'on traite des données tabulées, la solution que nous utilisons actuellement est de créer une feuille fictive dans la hiérarchie. Nous n'avons pas de fonction qui automatise ce traitement actuellement mais nous allons probablement en développer une prochainement (*est-ce tjr le cas ou c'est fait automatiquement dans write_hrc2() maintenant ?*). La nouvelle hiérarchie sera la suivante :
+
+```{r eval = FALSE}
+A
+@AX
+@A1
+@@A11
+@@A12
+```
+
+Il n'y a pas besoin de modifier le tableau l'agrégat AX vaudra 0 et le traitement de la table s'effectuera correctement.
+
 **Le nombre de modalités**
 
+Dans $\tau$-Argus, le nombre de modalités au sein d'un même niveau hiérarchique est limité.
+
+VARIABLE NON HIÉRARCHIQUE
+
+Pour une variable non hiérarchique $\tau$-Argus ne peut pas traiter plus de 199 modalités (200 en comptabilisant le Total). Par exemple, un tableau au niveau communal avec donc 35 000 communes ne pourra pas être traité directement via $\tau$-Argus. Les solutions que nous conseillons actuellement sont :
+
+-   De découper le tableau en divers sous-tableau afin de respecter ce nombre de modalités maximum.
+-   D'insérer une variables hiérarchique qui permettra de respecter les critères décrits ci-dessous. Cela implique de traiter les nouveaux niveaux hiérarchiques comme des variables non diffusées.
+
+VARIABLE HIÉRARCHIQUE
+
+Pour une variable hiérarchique il faut qu'il y ait moins de 200 modalités par niveau de la hiérarchie. Considérons la hiérarchie Région \> Département \> Commune, pour que $\tau$-Argus puisse poser le secret secondaire :
+
+-   Il faut moins de 200 régions.
+-   Dans une région donnée, il faut moins de 200 départements.
+-   Dans un département donné, il faut moins de 200 communes.
+
+Cependant, les zonages géographiques français ne respectent pas ces limites.
+
+Dans notre exemple, dans chaque département il y a plus de 200 communes, le traitement hiérarchique tel quel est donc impossible. Une solution envisageable serait de rajouter un niveau hiérarchique en plus afin de réduire le nombre de commune sau même niveau. On peut penser ici par exemple aux cantons puisque qu'un département contient au maximum 43 cantons et un canton contient au maximum 135 communes. On pourrait alors traiter le hiérarchie Région \> Département \> Canton \> Commune. Les cellules concernant les cantons devront être traitées comme des cellules non diffusées et donc être prioritaires au niveau du secret secondaire. C'est-à-dire qu'à choisir on indiquera au programme de secrétiser plutôt un canton que tout autre zonage géographique
+
 **Les algorithmes de secret secondaire**
+
+Dans certains cas assez particuliers, il se peut qu'un algorithme de secret secondaire ne puisse pas trouver de solution au problème en entrée. Étant donné que nous recommandons d'utiliser Modular en priorité, si jamais l'algorithme ne parvient pas à trouver de solution il faut alors tester Optimal puis HyperCube. Si aucun de ces trois algorithmes ne parvient à trouver de solution, cela vient généralement d'une grande table qui contient énormément de secret primaire. Dans ce cas nous recommandons de reconsidérer le problème. Cela vaut-il vraiment la peine de diffuser une table à un niveau aussi fin avec autant de secret primaire ? Il est peut être préférable d'agréger les données afin d'avoir moins de secret primaire.
 
 #### Les codes d'erreur dans Tau-Argus
 
@@ -75,7 +151,7 @@ Le message d'erreur "HiTaS: couldn't load JJ-routines" est spécifique à l'aglo
 
 -   La taille maximale pour un nombre à été dépassée (**faire référence**)
 -   Le problème paraît insoluble pour Modular (**faire référence**)
--   N.B : parfois "couldn't load JJ-routines" (sans HiTaS devant) renvoie à un problème du type "code not in codelist"
+-   N.B : parfois "couldn't load JJ-routines" (sans HiTaS devant) renvoie à un problème lié à la hiérarchie (sans doute impossibilité de reconstituter la hiérarhcie à partir des données en entrée)
 
 Le message d'erreur "no optimal solution found JJ not loaded" est spécifique à l'aglorithme Optimal, en voici les différentes causes possibles :
 

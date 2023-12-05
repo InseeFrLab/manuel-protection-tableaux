@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -61,6 +95,8 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 </head>
 
@@ -149,7 +185,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./08_lexique.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">08_lexique.html</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Lexique</span></span></a>
   </div>
 </li>
     </ul>
@@ -206,7 +242,7 @@ ul.task-list li input[type="checkbox"] {
 <h2 data-number="5.1" class="anchored" data-anchor-id="tau-argus"><span class="header-section-number">5.1</span> Tau-argus</h2>
 <section id="présentation-générale" class="level3" data-number="5.1.1">
 <h3 data-number="5.1.1" class="anchored" data-anchor-id="présentation-générale"><span class="header-section-number">5.1.1</span> Présentation générale</h3>
-<p>Tau-Argus est la logiciel de référence en Europe en termes de pose de secret. Il permet de calculer le secret primaire et secondaire ou de faire des arrondis contrôlés. Le développement, la maintenance et le support de Tau-Argus sont réalisés par un groupe d’experts européens et est coordonné par CBS (l’institut national de statistiques des Pays-Bas). C’est un logiciel libre et open source (https://github.com/sdcTools/tauargus) utilisable via une interface graphique.</p>
+<p>Tau-Argus est la logiciel de référence en Europe en termes de pose de secret. Il permet de calculer le secret primaire et secondaire ou de faire des arrondis contrôlés. Le développement, la maintenance et le support de Tau-Argus sont réalisés par un groupe d’experts européens et est coordonné par CBS (l’institut national de statistiques des Pays-Bas). C’est un logiciel libre et open source (<a href="https://github.com/sdcTools/tauargus" class="uri">https://github.com/sdcTools/tauargus</a>) utilisable via une interface graphique.</p>
 </section>
 <section id="les-différents-algorithmes-du-secret-secondaire" class="level3" data-number="5.1.2">
 <h3 data-number="5.1.2" class="anchored" data-anchor-id="les-différents-algorithmes-du-secret-secondaire"><span class="header-section-number">5.1.2</span> Les différents algorithmes du secret secondaire</h3>
@@ -231,7 +267,7 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="où-trouver-la-documentation" class="level3" data-number="5.2.3">
 <h3 data-number="5.2.3" class="anchored" data-anchor-id="où-trouver-la-documentation"><span class="header-section-number">5.2.3</span> Où trouver la documentation ?</h3>
-<p>Le documentation est disponible en ligne : https://inseefrlab.github.io/rtauargus/</p>
+<p>Le documentation est disponible en ligne : <a href="https://inseefrlab.github.io/rtauargus/" class="uri">https://inseefrlab.github.io/rtauargus/</a></p>
 </section>
 </section>
 <section id="comment-débugger" class="level2" data-number="5.3">
@@ -241,10 +277,67 @@ ul.task-list li input[type="checkbox"] {
 <section id="les-limites-de-tau-argus" class="level4" data-number="5.3.1.1">
 <h4 data-number="5.3.1.1" class="anchored" data-anchor-id="les-limites-de-tau-argus"><span class="header-section-number">5.3.1.1</span> Les limites de Tau-Argus</h4>
 <p><strong>Le nombre de variables de ventilation</strong></p>
-<p><strong>La taille des nombres</strong></p>
+<p>Actuellement <span class="math inline">\(\tau\)</span>-Argus tolère 4 variables de ventilation maximum par tableau. Cependant, pour 4 variables de ventilation un warning apparaît, <span class="math inline">\(\tau\)</span>-Argus ne garantit pas une protection totale de la table. Effectuer un contrôle de cohérence sur le secret pour un tableau avec 4 dimensions est très complexe. C’est pourquoi nous recommandons de ne traiter que des tableaux à 3 dimensions maximum, dans la mesure du possible.</p>
+<p><strong>Les valeurs trop élevées</strong></p>
+<p><span class="math inline">\(\tau\)</span>-Argus ne parvient pas à traiter un tableau s’il rencontre une cellule d’une valeur trop élevée.Dans le cas où une celulle du tableau viendrait à dépasser <span class="math inline">\(10^{12}\)</span>, un message d’erreur apparaîtra lors de la pose du secret secondaire. Afin d’éviter ce genre de problème, il est conseillé de regarder si le plus gros total du tableau dépasse <span class="math inline">\(10^{12}\)</span>, le cas échéant nous recommandons de diviser la valeur de votre tableau par une puissance de 10 adéquate. Cependant cela implique de faire attention à plusieurs choses :</p>
+<ul>
+<li>Traiter le secret primaire dans le fichier d’apriori avant d’arrondir les valeurs.</li>
+<li>S’assurer qu’aucune valeur n’est arrondie à 0, elle ne serait alors plus prise en compte lors du traitement du secret secondaire, dans ce cas il faut forcer un arrondi à 1 minimum.</li>
+<li>Si la valeur du plus gros contributeur est encore présente dans la table, l’arrondir avec le même ordre de grandeur que la variable de réponse.</li>
+</ul>
+<p>A ce jour, aucune limite n’a été constatée en terme de nombre de décimales, la piste reste à explorer. Mais nous recommandons tout de même d’arrondir les valeurs. Dans tous les cas les arrondis n’impacteront que très peu la pose du secret.</p>
 <p><strong>Les limites du fichier hiérarchique</strong></p>
+<p>LE NOMBRE DE CARACTÈRES DES FEUILLES</p>
+<p>Au sein d’un fichier <code>.hrc</code>, <span class="math inline">\(\tau\)</span>-Argus a besoin qu’au niveau hiérarchique le plus fin les feuilles aient le même nombre de caractères. Par exemple la hiérarchie suivante renverra un message d’erreur :</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>A</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="sc">@</span>A01</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="sc">@</span>A02</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="sc">@</span>A3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>La fonction <code>write_hrc2()</code> permet d’ajouter des * dans la hiérarchie et les modalités du tableau afin d’éviter ce genre d’erreurs. Afin que ce soit le plus robuste possible cette transformation est appliquée à tous les niveaux hiérarchiques. Pour l’exemple précédent on obtiendra alors la hiérarchie :</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="sc">**</span><span class="er">*</span>A</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="sc">@</span>A01</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="sc">@</span>A02</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="sc">@</span><span class="er">*</span>A3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>LES FEUILLES UNIQUES</p>
+<p>Lors de la reconstitution des totaux de la table par <span class="math inline">\(\tau\)</span>-Argus, on obtient une erreur si la hiérarchie contient ce qu’on va appeler une “feuille unique”. Par exemple dans la hiérarchie :</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>A</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="sc">@</span>A1</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="sc">@</span><span class="er">@</span>A11</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="sc">@</span><span class="er">@</span>A12</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>A1 sera ce qu’on appelle une feuille unique, c’est le seul sous-niveau de A. Ce problème n’est présent que lorsqu’on traite des données tabulées, la solution que nous utilisons actuellement est de créer une feuille fictive dans la hiérarchie. Nous n’avons pas de fonction qui automatise ce traitement actuellement mais nous allons probablement en développer une prochainement (<em>est-ce tjr le cas ou c’est fait automatiquement dans write_hrc2() maintenant ?</em>). La nouvelle hiérarchie sera la suivante :</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>A</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="sc">@</span>AX</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="sc">@</span>A1</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="sc">@</span><span class="er">@</span>A11</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="sc">@</span><span class="er">@</span>A12</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Il n’y a pas besoin de modifier le tableau l’agrégat AX vaudra 0 et le traitement de la table s’effectuera correctement.</p>
 <p><strong>Le nombre de modalités</strong></p>
+<p>Dans <span class="math inline">\(\tau\)</span>-Argus, le nombre de modalités au sein d’un même niveau hiérarchique est limité.</p>
+<p>VARIABLE NON HIÉRARCHIQUE</p>
+<p>Pour une variable non hiérarchique <span class="math inline">\(\tau\)</span>-Argus ne peut pas traiter plus de 199 modalités (200 en comptabilisant le Total). Par exemple, un tableau au niveau communal avec donc 35 000 communes ne pourra pas être traité directement via <span class="math inline">\(\tau\)</span>-Argus. Les solutions que nous conseillons actuellement sont :</p>
+<ul>
+<li>De découper le tableau en divers sous-tableau afin de respecter ce nombre de modalités maximum.</li>
+<li>D’insérer une variables hiérarchique qui permettra de respecter les critères décrits ci-dessous. Cela implique de traiter les nouveaux niveaux hiérarchiques comme des variables non diffusées.</li>
+</ul>
+<p>VARIABLE HIÉRARCHIQUE</p>
+<p>Pour une variable hiérarchique il faut qu’il y ait moins de 200 modalités par niveau de la hiérarchie. Considérons la hiérarchie Région &gt; Département &gt; Commune, pour que <span class="math inline">\(\tau\)</span>-Argus puisse poser le secret secondaire :</p>
+<ul>
+<li>Il faut moins de 200 régions.</li>
+<li>Dans une région donnée, il faut moins de 200 départements.</li>
+<li>Dans un département donné, il faut moins de 200 communes.</li>
+</ul>
+<p>Cependant, les zonages géographiques français ne respectent pas ces limites.</p>
+<p>Dans notre exemple, dans chaque département il y a plus de 200 communes, le traitement hiérarchique tel quel est donc impossible. Une solution envisageable serait de rajouter un niveau hiérarchique en plus afin de réduire le nombre de commune sau même niveau. On peut penser ici par exemple aux cantons puisque qu’un département contient au maximum 43 cantons et un canton contient au maximum 135 communes. On pourrait alors traiter le hiérarchie Région &gt; Département &gt; Canton &gt; Commune. Les cellules concernant les cantons devront être traitées comme des cellules non diffusées et donc être prioritaires au niveau du secret secondaire. C’est-à-dire qu’à choisir on indiquera au programme de secrétiser plutôt un canton que tout autre zonage géographique</p>
 <p><strong>Les algorithmes de secret secondaire</strong></p>
+<p>Dans certains cas assez particuliers, il se peut qu’un algorithme de secret secondaire ne puisse pas trouver de solution au problème en entrée. Étant donné que nous recommandons d’utiliser Modular en priorité, si jamais l’algorithme ne parvient pas à trouver de solution il faut alors tester Optimal puis HyperCube. Si aucun de ces trois algorithmes ne parvient à trouver de solution, cela vient généralement d’une grande table qui contient énormément de secret primaire. Dans ce cas nous recommandons de reconsidérer le problème. Cela vaut-il vraiment la peine de diffuser une table à un niveau aussi fin avec autant de secret primaire ? Il est peut être préférable d’agréger les données afin d’avoir moins de secret primaire.</p>
 </section>
 <section id="les-codes-derreur-dans-tau-argus" class="level4" data-number="5.3.1.2">
 <h4 data-number="5.3.1.2" class="anchored" data-anchor-id="les-codes-derreur-dans-tau-argus"><span class="header-section-number">5.3.1.2</span> Les codes d’erreur dans Tau-Argus</h4>
@@ -268,7 +361,7 @@ ul.task-list li input[type="checkbox"] {
 <ul>
 <li>La taille maximale pour un nombre à été dépassée (<strong>faire référence</strong>)</li>
 <li>Le problème paraît insoluble pour Modular (<strong>faire référence</strong>)</li>
-<li>N.B : parfois “couldn’t load JJ-routines” (sans HiTaS devant) renvoie à un problème du type “code not in codelist”</li>
+<li>N.B : parfois “couldn’t load JJ-routines” (sans HiTaS devant) renvoie à un problème lié à la hiérarchie (sans doute impossibilité de reconstituter la hiérarhcie à partir des données en entrée)</li>
 </ul>
 <p>Le message d’erreur “no optimal solution found JJ not loaded” est spécifique à l’aglorithme Optimal, en voici les différentes causes possibles :</p>
 <ul>
