@@ -1,8 +1,4 @@
----
-title: "Présentation des outils"
-format: html
-editor: visual
----
+# Présentation des outils
 
 ## Tau-argus
 

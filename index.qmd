@@ -1,5 +1,7 @@
-# Preface {.unnumbered}
+# Introduction {.unnumbered}
 
-This is a Quarto book.
+La présente édition est la première version du manuel pour la gestion de la confidentialité à l’Insee. Ce manuel fournit un première réponse à la recommandation de la mission de l’inspection générale pour la diffusion sur mesure [retrouver la référence Gecodoc].
+Il s’inspire du manuel européen écrit par des auteurs de référence. Le "Handbook on Statistical Disclosure Control" https://research.cbs.nl/casc/SDC_Handbook.pdf.
+Il ajoute une dimension opérationnelle au travers de plusieurs cas pratiques.
 
-To learn more about Quarto books visit <https://quarto.org/docs/books>.
+Dans un premier temps un tour d'horizon des différentes règles appliquées pour le secret statistique à l'Insee est effectué. Puis, les notions principales utiles pour la pose du secret sont introduites. L'idée est de se baser sur un vocabulaire commun afin d'être sûrs de parler de la même chose. La partie 4 explique la marche à suivre pour appliquer le secret. En effet, la première étape consiste à analyser les tableaux que l'on souhaite publier, plus particulièrement les liens entre ces différents tableaux. La partie 5 regroupe plusieurs fiches pratiques pour poser le secret à l'aide de `rtauargus`. Elles sont de niveau croissant, allant de débutant à expert. La partie 6 est une partie plus "expert", elle décrit pus précisément les différents outils et donne des clefs pour débugger le logiciel le cas échéant.

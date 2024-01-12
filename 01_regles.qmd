@@ -1,4 +1,15 @@
-# Règles
+# Règles {#sec-regles}
+
+Eléments de la note au CD :
+
+Référence l'article de P. Redor dans le courrier stat : "Confidentialité des données statistiques : un enjeu majeur pour le service statistique public", P. Redor - Courrier des statistiques N9 - 2023.
+
+Loi de 1951 : loi sur l'obligation, la coordination et le secret en matière de statistiques (définit le secret statistique).
+Loi de 1978 : loi Informatique et libertés (définit la protection des données personnelles).
+
+On se fixe des règles pour simplifier l'application mais l'objectif est avant tout de protéger l'information individuelle (de n'importe quel individu).
+
+Les règles du secret statistique sont des seuils définis que l'Insee instaure pour minimiser les risques de ré-identification tout en gardant une utilité certaine des données. Cette partie présente les règles les plus connues du SSP. Le lecteur est invité à se renseigner sur les règles à appliquer sur les données qu'il souhaite publier avant de commencer à poser le secret.
 
 ## Règles pour la statistique d'entreprises
 

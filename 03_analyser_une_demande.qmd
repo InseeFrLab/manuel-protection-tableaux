@@ -1,10 +1,10 @@
-# Comment analyser une demande ?
+# Comment analyser une demande ? {#sec-analyserdemande}
 
 La liste de tableaux à diffuser n'est pas la même que la liste des tableaux à protéger. En effet, la liste de tableaux à protéger découle d'une analyse des liens entre les différents tableaux. Cette partie a pour but de présenter le cadre de réflexion et les étapes suivies par la DMRG pour définir la liste de tableaux sur lesquels le masque de secret sera posé.
 
 ## Étapes de l'analyse de demande
 
-### Prendre connaissance de la demande et s'assurer que toutes les informations nécessaires à la gestion de la confidentialité ont été fournies.
+### Vérifier que toutes les informations nécessaires à la gestion de la confidentialité sont disponibles
 
 Les informations nécessaires sont :
 

@@ -1,0 +1,15 @@
+   <SEPARATOR> ","
+   <SAFE> "s"
+   <UNSAFE> "u"
+   <PROTECT> "p"
+ACTIVITY
+  <RECODEABLE>
+  <TOTCODE> "Total"
+SIZE
+  <RECODEABLE>
+  <TOTCODE> "Total"
+VALUE
+  <NUMERIC>
+  <DECIMALS> 4
+FREQ
+  <FREQUENCY>

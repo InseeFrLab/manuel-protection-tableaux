@@ -4,19 +4,17 @@ execute:
   freeze: auto
 
 book:
-  title: "manuel"
+  title: "Manuel de protection des tableaux"
   author: "Julien Jamme, Nathanaël Rastout"
   date: "03/04/2023"
   chapters:
     - index.qmd
-    - 01_introduction.qmd
-    - 02_regles.qmd
-    - 03_notions.qmd
-    - 04_analyser_une_demande.qmd
+    - 01_regles.qmd
+    - 02_notions.qmd
+    - 03_analyser_une_demande.qmd
+    - 04_fiches_pratiques.qmd
     - 05_les_outils.qmd
-    - 06_fiches_pratiques.qmd
-    - 07_annexes.qmd
-    - 08_lexique.qmd
+    - 06_annexes.qmd
   page-navigation: true
 
 bibliography: references.bib

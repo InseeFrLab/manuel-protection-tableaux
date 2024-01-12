@@ -89,3 +89,14 @@ Proposition de la DMRG (Julien Jamme, Nathanaël Rastout) du 27 mars 2023
     - Fiches de niveaux experts
     - Partie introductive théorique sur les enjeux (risques)
     - Annexes
+    
+
+## Notes sur les fiches pratiques
+Afin de ne pas avoir à faire tourner TauArgus et reposer le secret à chaque fois que l'on "render" le document le secret est posé dans un programme R sur AUS, puis les masques sont récupérés et ajoutés au projet manuel-protection-tableaux dans le répertoire `tauargus_files`. Ainsi, il ne faut pas chercher à faire tourner les bouts de code faisant appel à TauArgus.
+
+Les programmes que l'on fait tourner sur AUS se trouvent dans le dossier `code_tauargus_aus`.
+
+
+
+
+
