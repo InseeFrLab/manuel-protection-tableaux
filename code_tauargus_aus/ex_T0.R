@@ -1,3 +1,5 @@
+# FAIRE TOURNER SUR AUS
+
 library(dplyr)
 library(rtauargus)
 
@@ -27,4 +29,11 @@ T0_masq <- tab_rtauargus(
   totcode = c(ACTIVITY="Total",SIZE="Total"),
   verbose = FALSE
 )
+
+saveRDS(T0_masq,"tauargus_files/ex_T0/T0_masq.rds")
+
+
+
+
+
 

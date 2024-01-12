@@ -8,7 +8,9 @@ La liste de tableaux à diffuser n'est pas la même que la liste des tableaux à
 
 Les informations nécessaires sont :
 
--   une description précise des tableaux que votre interlocuteur souhaite diffuser :
+-   Les règles de secret qui s'appliquent sur les données (voir [Partie @sec-regles])
+
+-   Une description précise des tableaux que votre interlocuteur souhaite diffuser :
 
     -   sur quel champ de la population les tableaux sont-ils construits ?
     -   quelles sont les variables descriptives (de croisement) ?
@@ -16,7 +18,7 @@ Les informations nécessaires sont :
     -   les tableaux sont-ils des tableaux de fréquence ou bien des tableaux de volume ?
     -   parmi l'ensemble des variables de croisement, certaines sont-elles hiérarchiques ? Les emboîtements ont-ils été fournis ?
 
--   une description précise des liens éventuels entre les variables ou tableaux :
+-   Une description précise des liens éventuels entre les variables ou tableaux :
 
     -   certaines variables ou modalités sont-elles reliées par une équation ?
     -   des équations/liens ont-ils été fournis ?

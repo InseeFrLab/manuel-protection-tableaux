@@ -8,19 +8,19 @@ individus.
 
 On appellera :
 
--   **indicateur** ou **variable réponse**, la variable numérique
+-   **Indicateur** ou **variable réponse**, la variable numérique
     agrégée. En général on précise également l'opération d'agrégation
     utilisée. Par exemple, le nombre d'entreprises (somme de
     pondérations dans le cas d'une enquête, sinon simple comptage), le
     chiffre d'affaire (sous-entendu le total ou la somme des chiffres
     d'affaire), la moyenne d'âge, la part de personnes vivant sous le
     seuil de pauvreté, etc.
--   **variable(s) de croisement** ou **variable(s) explicatives**, la ou
+-   **Variable(s) de croisement** ou **variable(s) explicatives**, la ou
     les variables de ventilation de l'indicateur. Ce sont des variables
     dites catégorielles (ex : diplôme, le secteur d'activité) et sont
     parfois des variables numériques découpées en tranches (ex : classes
     d'âge, tranches d'effectifs).
--   **champ**, la population ou sous-population sur laquelle
+-   **Champ**, la population ou sous-population sur laquelle
     l'agrégation est réalisée. Par exemple, un tableau restreint à la
     population des 15-25 ans ou aux entreprises du secteur de
     l'industrie.
@@ -136,7 +136,7 @@ région](images/ex_hrc_prod_violons.png)
 On peut aussi la représenter sous forme d'arbre :
 
 ```{mermaid}
-flowchart LR
+flowchart TD
   A[Pays] --> B[Nord]
   A[Pays] --> C[Ouest]
   A[Pays] --> D[Est]
@@ -191,6 +191,46 @@ En effet, pour des données périodiques, la temporalité peut être perçue
 comme un ensemble de tableaux liés : il vaut mieux que le masque de
 secret change peu entre chaque millésime.
 
+
+Par exemple si l'on souhaite diffuser le nombre d'entreprises en France
+selon :
+
+-   `T0_1`: le sexe de son/sa dirigeant(e) et la région d'implantation
+-   `T0_2`: le sexe de son/sa dirigeant(e) et la caractère polluant ou
+    non de l'activité d'entreprise
+-   `T0_3`: le caractère polluant ou non de l'activité de l'entreprise
+    et la région d'implantation
+
+Nombre d'entreprises par région et par sexe du dirigeant (`T0_1`)
+
+|           | Femme  | Homme  | **Total** |
+|:---------:|:------:|:------:|:---------:|
+|   Nord    |   16   |   20   |  **36**   |
+|    Sud    |   19   |   12   |  **31**   |
+| **Total** | **35** | **32** |  **67**   |
+
+Nombre d'entreprises polluantes par sexe du dirigeant (`T0_2`)
+
+|           | Polluante | Non polluante | **Total** |
+|:---------:|:---------:|:-------------:|:---------:|
+|   Femme   |     8     |      27       |  **35**   |
+|   Homme   |    22     |      17       |  **32**   |
+| **Total** |  **30**   |    **37**     |  **67**   |
+
+Nombre d'entreprises polluantes par région (`T0_3`)
+
+|           | Polluante | Non polluante | **Total** |
+|:---------:|:---------:|:-------------:|:---------:|
+|   Nord    |    10     |      26       |  **36**   |
+|    Sud    |    20     |      11       |  **31**   |
+| **Total** |  **30**   |    **37**     |  **67**   |
+
+Ces trois tableaux sont liés puisqu'ils partagent des marges communes :
+
+-   `T0_1` et `T0_2` ont les mêmes marges sur la variable `SEXE`
+-   `T0_1` et `T0_3` ont les mêmes marges sur la variable `REGION`
+-   `T0_2` et `T0_3` ont les mêmes marges sur la variable `POLL`
+
 ## Tableau à diffuser vs à protéger
 
 Les tableaux qui seront finalement diffusés ne sont pas les mêmes que
@@ -203,4 +243,4 @@ terminée on se retrouve avec les tableaux à protéger, le secret sera
 appliqué sur ces tableaux et c'est seulement une fois la procédure
 terminée que l'on pourra reporter le secret identifié sur les tableaux à
 protéger sur les tableaux à diffuser. Cette phase d'analyse est
-développé dans la partie @sec-analyserdemande
+développé dans la [Partie @sec-analyserdemande]

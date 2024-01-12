@@ -1,0 +1,19 @@
+12-janv.-2024 17:08:49 : Start of batch procedure; file: Z:\manuel-protection-tableaux\tauargus_files\4tabs\nuts_cj.arb
+12-janv.-2024 17:08:49 : <OPENTABLEDATA> "Z:\manuel-protection-tableaux\tauargus_files\4tabs\nuts_cj.tab"
+12-janv.-2024 17:08:49 : <OPENMETADATA> "Z:\manuel-protection-tableaux\tauargus_files\4tabs\nuts_cj.rda"
+12-janv.-2024 17:08:49 : <SPECIFYTABLE> "NUTS""CJ"|"TOT"||
+12-janv.-2024 17:08:49 : <SAFETYRULE> MAN(0)
+12-janv.-2024 17:08:49 : <READTABLE> 1
+12-janv.-2024 17:08:49 : Tables have been read
+12-janv.-2024 17:08:49 : <APRIORI> "Z:\manuel-protection-tableaux\tauargus_files\4tabs\nuts_cj.hst",1,",",0,0
+12-janv.-2024 17:08:49 : Apriory file: Z:\manuel-protection-tableaux\tauargus_files\4tabs\nuts_cj.hst has been applied
+                       to table: NUTS x CJ | TOT
+12-janv.-2024 17:08:49 : Apriori file Z:\manuel-protection-tableaux\tauargus_files\4tabs\nuts_cj.hst has been read
+12-janv.-2024 17:08:49 : <SUPPRESS> MOD(1,5,1,0,0)
+12-janv.-2024 17:08:50 : Start of the modular protection for table NUTS x CJ | TOT
+12-janv.-2024 17:08:50 : End of modular protection. Time used 0 seconds
+                       Number of suppressions: 96
+12-janv.-2024 17:08:50 : <WRITETABLE> (1,4,,"Z:\manuel-protection-tableaux\tauargus_files\4tabs\nuts_cj.csv")
+12-janv.-2024 17:08:50 : Table: NUTS x CJ | TOT has been written
+                       Output file name: Z:\manuel-protection-tableaux\tauargus_files\4tabs\nuts_cj.csv
+12-janv.-2024 17:08:50 : End of TauArgus run

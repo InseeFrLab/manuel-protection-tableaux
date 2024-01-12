@@ -190,9 +190,9 @@ ul.task-list li input[type="checkbox"] {
 <p>Un tableau présente le résultat de l’agrégation d’un indicateur connu au niveau individuel, ventilé selon une ou plusieurs catégories de ces individus.</p>
 <p>On appellera :</p>
 <ul>
-<li><strong>indicateur</strong> ou <strong>variable réponse</strong>, la variable numérique agrégée. En général on précise également l’opération d’agrégation utilisée. Par exemple, le nombre d’entreprises (somme de pondérations dans le cas d’une enquête, sinon simple comptage), le chiffre d’affaire (sous-entendu le total ou la somme des chiffres d’affaire), la moyenne d’âge, la part de personnes vivant sous le seuil de pauvreté, etc.</li>
-<li><strong>variable(s) de croisement</strong> ou <strong>variable(s) explicatives</strong>, la ou les variables de ventilation de l’indicateur. Ce sont des variables dites catégorielles (ex : diplôme, le secteur d’activité) et sont parfois des variables numériques découpées en tranches (ex : classes d’âge, tranches d’effectifs).</li>
-<li><strong>champ</strong>, la population ou sous-population sur laquelle l’agrégation est réalisée. Par exemple, un tableau restreint à la population des 15-25 ans ou aux entreprises du secteur de l’industrie.</li>
+<li><strong>Indicateur</strong> ou <strong>variable réponse</strong>, la variable numérique agrégée. En général on précise également l’opération d’agrégation utilisée. Par exemple, le nombre d’entreprises (somme de pondérations dans le cas d’une enquête, sinon simple comptage), le chiffre d’affaire (sous-entendu le total ou la somme des chiffres d’affaire), la moyenne d’âge, la part de personnes vivant sous le seuil de pauvreté, etc.</li>
+<li><strong>Variable(s) de croisement</strong> ou <strong>variable(s) explicatives</strong>, la ou les variables de ventilation de l’indicateur. Ce sont des variables dites catégorielles (ex : diplôme, le secteur d’activité) et sont parfois des variables numériques découpées en tranches (ex : classes d’âge, tranches d’effectifs).</li>
+<li><strong>Champ</strong>, la population ou sous-population sur laquelle l’agrégation est réalisée. Par exemple, un tableau restreint à la population des 15-25 ans ou aux entreprises du secteur de l’industrie.</li>
 </ul>
 <div id="ex_tab_croise" class="quarto-figure quarto-figure-center anchored">
 <figure class="figure">
@@ -279,7 +279,7 @@ ul.task-list li input[type="checkbox"] {
 <div class="cell-output-display">
 <div>
 <div>
-<pre class="mermaid mermaid-js">flowchart LR
+<pre class="mermaid mermaid-js">flowchart TD
   A[Pays] --&gt; B[Nord]
   A[Pays] --&gt; C[Ouest]
   A[Pays] --&gt; D[Est]
@@ -324,10 +324,115 @@ ul.task-list li input[type="checkbox"] {
 <li>Les différences de millésime.</li>
 </ul>
 <p>En effet, pour des données périodiques, la temporalité peut être perçue comme un ensemble de tableaux liés : il vaut mieux que le masque de secret change peu entre chaque millésime.</p>
+<p>Par exemple si l’on souhaite diffuser le nombre d’entreprises en France selon :</p>
+<ul>
+<li><code>T0_1</code>: le sexe de son/sa dirigeant(e) et la région d’implantation</li>
+<li><code>T0_2</code>: le sexe de son/sa dirigeant(e) et la caractère polluant ou non de l’activité d’entreprise</li>
+<li><code>T0_3</code>: le caractère polluant ou non de l’activité de l’entreprise et la région d’implantation</li>
+</ul>
+<p>Nombre d’entreprises par région et par sexe du dirigeant (<code>T0_1</code>)</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th style="text-align: center;"></th>
+<th style="text-align: center;">Femme</th>
+<th style="text-align: center;">Homme</th>
+<th style="text-align: center;"><strong>Total</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">Nord</td>
+<td style="text-align: center;">16</td>
+<td style="text-align: center;">20</td>
+<td style="text-align: center;"><strong>36</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Sud</td>
+<td style="text-align: center;">19</td>
+<td style="text-align: center;">12</td>
+<td style="text-align: center;"><strong>31</strong></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>Total</strong></td>
+<td style="text-align: center;"><strong>35</strong></td>
+<td style="text-align: center;"><strong>32</strong></td>
+<td style="text-align: center;"><strong>67</strong></td>
+</tr>
+</tbody>
+</table>
+<p>Nombre d’entreprises polluantes par sexe du dirigeant (<code>T0_2</code>)</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th style="text-align: center;"></th>
+<th style="text-align: center;">Polluante</th>
+<th style="text-align: center;">Non polluante</th>
+<th style="text-align: center;"><strong>Total</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">Femme</td>
+<td style="text-align: center;">8</td>
+<td style="text-align: center;">27</td>
+<td style="text-align: center;"><strong>35</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Homme</td>
+<td style="text-align: center;">22</td>
+<td style="text-align: center;">17</td>
+<td style="text-align: center;"><strong>32</strong></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>Total</strong></td>
+<td style="text-align: center;"><strong>30</strong></td>
+<td style="text-align: center;"><strong>37</strong></td>
+<td style="text-align: center;"><strong>67</strong></td>
+</tr>
+</tbody>
+</table>
+<p>Nombre d’entreprises polluantes par région (<code>T0_3</code>)</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th style="text-align: center;"></th>
+<th style="text-align: center;">Polluante</th>
+<th style="text-align: center;">Non polluante</th>
+<th style="text-align: center;"><strong>Total</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">Nord</td>
+<td style="text-align: center;">10</td>
+<td style="text-align: center;">26</td>
+<td style="text-align: center;"><strong>36</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Sud</td>
+<td style="text-align: center;">20</td>
+<td style="text-align: center;">11</td>
+<td style="text-align: center;"><strong>31</strong></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>Total</strong></td>
+<td style="text-align: center;"><strong>30</strong></td>
+<td style="text-align: center;"><strong>37</strong></td>
+<td style="text-align: center;"><strong>67</strong></td>
+</tr>
+</tbody>
+</table>
+<p>Ces trois tableaux sont liés puisqu’ils partagent des marges communes :</p>
+<ul>
+<li><code>T0_1</code> et <code>T0_2</code> ont les mêmes marges sur la variable <code>SEXE</code></li>
+<li><code>T0_1</code> et <code>T0_3</code> ont les mêmes marges sur la variable <code>REGION</code></li>
+<li><code>T0_2</code> et <code>T0_3</code> ont les mêmes marges sur la variable <code>POLL</code></li>
+</ul>
 </section>
 <section id="tableau-à-diffuser-vs-à-protéger" class="level2" data-number="2.7">
 <h2 data-number="2.7" class="anchored" data-anchor-id="tableau-à-diffuser-vs-à-protéger"><span class="header-section-number">2.7</span> Tableau à diffuser vs à protéger</h2>
-<p>Les tableaux qui seront finalement diffusés ne sont pas les mêmes que les tableaux à protéger. En effet, les tableaux à protéger sont le résultat de l’analyse de la demande. Cette analyse consiste à identifier les tableaux liés entre eux et les hiérarchies (emboîtées ou non). Dès lors, l’identification de ces liens va nous pousser à regrouper différents tableaux ou au contraire les séparer. Une fois l’analyse terminée on se retrouve avec les tableaux à protéger, le secret sera appliqué sur ces tableaux et c’est seulement une fois la procédure terminée que l’on pourra reporter le secret identifié sur les tableaux à protéger sur les tableaux à diffuser. Cette phase d’analyse est développé dans la partie <a href="03_analyser_une_demande.html"><span>Chapter&nbsp;3</span></a></p>
+<p>Les tableaux qui seront finalement diffusés ne sont pas les mêmes que les tableaux à protéger. En effet, les tableaux à protéger sont le résultat de l’analyse de la demande. Cette analyse consiste à identifier les tableaux liés entre eux et les hiérarchies (emboîtées ou non). Dès lors, l’identification de ces liens va nous pousser à regrouper différents tableaux ou au contraire les séparer. Une fois l’analyse terminée on se retrouve avec les tableaux à protéger, le secret sera appliqué sur ces tableaux et c’est seulement une fois la procédure terminée que l’on pourra reporter le secret identifié sur les tableaux à protéger sur les tableaux à diffuser. Cette phase d’analyse est développé dans la <a href="03_analyser_une_demande.html">Partie&nbsp;<span>3</span></a></p>
 
 
 </section>

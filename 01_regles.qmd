@@ -1,4 +1,4 @@
-# Règles {#sec-regles}
+# Règles {.sec #sec-regles}
 
 Eléments de la note au CD :
 
