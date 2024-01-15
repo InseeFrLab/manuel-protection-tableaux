@@ -8,16 +8,25 @@ editor:
 knitr::opts_chunk$set(eval = TRUE)
 ```
 
+```{r import librairies, warning=FALSE, message=FALSE}
+library(rtauargus)
+library(dplyr)
+```
+
 # Fiches pratiques
 
-Ces fiches pratiques ont été réalisées avec la version 1.2.0 de `rtauargus` et la version 4.2.3 de `TauArgus`.
+Ces fiches pratiques ont été réalisées avec la version 1.2.0 de
+`rtauargus` et la version 4.2.3 de `TauArgus`.
 
 ## Structure des données
 
-Tous les tableaux fournis en entrée de `rtauargus` ont une structure identique :
+Tous les tableaux fournis en entrée de `rtauargus` ont une structure
+identique :
 
--   Les variables décrivant les croisements (variables catégorielles) sont placées au début
--   `FREQ` la variable indiquant le nombre d'unités statistiques contribuant à la cellule;
+-   Les variables décrivant les croisements (variables catégorielles)
+    sont placées au début
+-   `FREQ` la variable indiquant le nombre d'unités statistiques
+    contribuant à la cellule;
 -   `VALUE` la variable indiquant la somme pondérée des valeurs de
     l'ensemble des contributeurs à la cellule (ex : un chiffre
     d'affaires, un nombre de personnes en emploi au 31/12, etc.);
@@ -25,17 +34,148 @@ Tous les tableaux fournis en entrée de `rtauargus` ont une structure identique 
 
 N.B : pour les tableaux de fréquence `FREQ` = `VALUE`.
 
-## Construire des tableaux agrégés à partir de microdonnées
+## Préparation des tableaux pour la pose du secret
+
+### **`tabulate_micro_data()`**
+
+#### Présentation
+Pour la pose du secret, outre la valeur des cellules (que l'on nommera
+**`VALUE`**), il est nécessaire d'avoir des informations supplémentaires
+par rapport au tableau publié :
+
+-   **`FREQ`** : Le nombre d'unités statistiques ayant contribué à la
+    cellule (pour déterminer le secret primaire de fréquence).
+-   **`MAX`** : La valeur du plus gros contributeur de la cellule (pour
+    déterminer le secret primaire de dominance)
+-   les sous-totaux pour toutes les combinaisons possibles entre les
+    variables. Par exemple, pour un tableau à 3 variables (A10 x SIZE x
+    CJ)
+
+|  A10  | SIZE  |  CJ   |
+|:-----:|:-----:|:-----:|
+| Total | Total | Total |
+| Total | Total |  \*   |
+| Total |  \*   | Total |
+|  \*   | Total | Total |
+| Total |  \*   |  \*   |
+|  \*   | Total |  \*   |
+|  \*   |  \*   | Total |
+
+Il est possible de générer ce tableau soi-même. Mais pour faciliter la
+préparation de ces informations, le package rtauargus contient la
+fonction **`tabulate_micro_data`** pour le générer.
+
+#### arguments
+
+-   **`df`** : jeu de données individuelles (data.frame ou data.table)
+-   **`cat_vars`** : Variables de croisements (catégorielles) non
+    hiérarchiques (vecteur)
+-   **`hrc_vars`** : Variables de croisements hiérarchiques sous la
+    forme d'une liste nommée
+-   **`pond_var`** : Variable de pondération
+-   **`resp_var`** : Indicateur(s), variable(s) de réponse
+-   **`marge_label`** : Label utilisé pour les marges (sous-totaux)
+
+#### résultat
+
+-   **`nb_obs`** : Comptage du nombre d'unités statistiques (**`FREQ`**)
+-   **`X_tot`** : Indicateur / variable de réponse (**`VALUE`**)
+-   **`X_max`** : Contribution maximale (**`MAX`**).
+
+### EXEMPLES
+
+#### Appel simple
+Trois variables de croisement ("A10", "SIZE", "CJ") et une variable de réponse ("PRODUCTION").
+```{r tabulerDonneesA}
+data(indiv_dt)
+dtDonneesMicro <- indiv_dt[, c("A10", "SIZE", "CJ", "PRODUCTION")]
+
+DT::datatable(dtDonneesMicro)
+
+dtDonneesTabulees <- tabulate_micro_data(dtDonneesMicro
+                                         , cat_vars = c("A10", "SIZE", "CJ")
+                                         , resp_var = "PRODUCTION"
+                                         , marge_label = "Total")
+DT::datatable(dtDonneesTabulees)
+```
+
+#### Variable de réponse pondérée
+Dans le cas d'enquêtes non exhaustives, les observations sont pondérées. Pour indiquer la colonne de pondération, utiliser l'argument **`pond_var`**.
+```{r tabulerDonneesB}
+data(indiv_dt)
+dtDonneesMicro <- indiv_dt[, c("A10", "SIZE", "CJ", "WEIGHT", "PRODUCTION")]
+
+DT::datatable(dtDonneesMicro)
+
+dtDonneesTabulees <- tabulate_micro_data(dtDonneesMicro
+                                         , cat_vars = c("A10", "SIZE", "CJ")
+                                         , resp_var = "PRODUCTION"
+                                         , pond_var = "WEIGHT"
+                                         , marge_label = "Total")
+DT::datatable(dtDonneesTabulees)
+```
+
+#### Variable hiérarchique
+Dans le cas de variables hiérarchiques (cf § 4.4), il faut utiliser l'argument **`hrc_vars`**.
+```{r tabulerDonneesC}
+data(indiv_dt)
+dtDonneesMicro <- indiv_dt[, c("A10","A21","A88", "SIZE", "PRODUCTION")]
+
+DT::datatable(dtDonneesMicro)
+
+dtDonneesTabulees <- tabulate_micro_data(dtDonneesMicro
+                                         , cat_vars = c("SIZE")
+                                         , resp_var = "PRODUCTION"
+                                         , hrc_vars = list(ACTIVITY = c("A10","A21","A88"))
+                                         , marge_label = "Total")
+DT::datatable(dtDonneesTabulees)
+```
+
+#### Deux indicateurs en même temps
+Si plusieurs tableaux, portant sur des variables d'intéret différentes mais ont les mêmes variables de croisement, il est possible de préparer les tableaux de secret en un seul appel à **`tabulate_micro_data`**, en fournissant un vecteur à l'argument **`resp_var`**.
+```{r tabulerDonneesD}
+data(indiv_dt)
+dtDonneesMicro <- indiv_dt[, c("SIZE", "CJ", "TURNOVER", "PRODUCTION")]
+
+DT::datatable(dtDonneesMicro)
+
+dtDonneesTabulees <- tabulate_micro_data(indiv_dt
+                                         , cat_vars = c("SIZE", "CJ")
+                                         , resp_var = c("TURNOVER", "PRODUCTION")
+                                         , marge_label = "Total")
+DT::datatable(dtDonneesTabulees)
+```
+
+#### Tableaux de fréquence
+
+Les tableaux publiés sont souvent des tableaux de comptage. Par exemple,
+combien *combien d'entreprises ont pour code NAF X*. Ces tableaux sont
+un cas particulier. Leur **`VALUE`** est identique à leur **`FREQ`** et
+leur **`MAX`** n'a pas de signification. Lors de l'appel à la fonction
+**`tabulate_micro_data`**, on ne fournit pas de variable de réponse et
+la fonction ne retourne que le comptage.
+
+```{r tabulerDonneesE}
+data(indiv_dt)
+dtDonneesMicro <- indiv_dt[, c("A10", "SIZE", "CJ")]
+
+DT::datatable(dtDonneesMicro)
+
+dtDonneesTabulees <- tabulate_micro_data(dtDonneesMicro
+                                         , cat_vars = c("A10", "SIZE", "CJ")
+                                         , marge_label = "Total")
+DT::datatable(dtDonneesTabulees)
+```
 
 ## Poser le secret sur un tableau
 
-::: {.callout-tip}
+::: callout-tip
 ## Etapes de la pose du secret sur un seul tableau
 
-1.    Poser le secret primaire
-2.    Calculer le nombre de cellules détectées comme à risque
-3.    Poser le secret secondaire à l'aide de la fonction `tab_rtauargus()`
-4.    Faire une synthèse du secret posé
+1.  Poser le secret primaire
+2.  Calculer le nombre de cellules détectées comme à risque
+3.  Poser le secret secondaire à l'aide de la fonction `tab_rtauargus()`
+4.  Faire une synthèse du secret posé
 :::
 
 Poser un masque de secret sur un tableau comprend les étapes suivantes :
@@ -56,17 +196,12 @@ Poser un masque de secret sur un tableau comprend les étapes suivantes :
 Voici un exemple de code pour les règles classiques en statistiques
 d'entreprises :
 
-```{r import librairies, warning=FALSE, message=FALSE}
-library(rtauargus)
-library(dplyr)
-```
-
 ```{r renomme data, echo = FALSE}
 T0 <- turnover_act_size %>% rename(FREQ = N_OBS, VALUE = TOT)
 ```
 
-Le tableau `T0` présente le chiffre d'affaires des entreprises ventilé par
-leur activité et leur taille.
+Le tableau `T0` présente le chiffre d'affaires des entreprises ventilé
+par leur activité et leur taille.
 
 ```{r secret primaire}
 str(T0)
@@ -116,7 +251,6 @@ loc_tauargus <- "C:/Users/tmm7an/Documents/SDC/TauArgus/TauArgus4.2.3/TauArgus.e
 options(rtauargus.tauargus_exe = loc_tauargus)
 ```
 
-
 ```{r pose secret, eval = FALSE}
 T0_masq <- tab_rtauargus(
   T0_detect,
@@ -135,7 +269,6 @@ T0_masq <- tab_rtauargus(
 T0_masq <- readRDS("tauargus_files/ex_T0/T0_masq.rds")
 ```
 
-
 4.  Calculer le nombre de cellules selon leur statut final en suivant la
     norme européenne :
 
@@ -148,8 +281,9 @@ T0_masq <- readRDS("tauargus_files/ex_T0/T0_masq.rds")
 
 Pour faire le bilan du secret, le mieux est de modifier la variable
 `Status` fournie par Tau-Argus. En effet, cette variable ne permet pas
-de faire la distinction entre les deux types de secret primaire (fréquence ou
-dominance), on modifie donc ces modalités pour faire apparaître cette distinction.
+de faire la distinction entre les deux types de secret primaire
+(fréquence ou dominance), on modifie donc ces modalités pour faire
+apparaître cette distinction.
 
 ```{r}
 T0_masq <- T0_masq %>% 
@@ -186,10 +320,10 @@ nous avons un ratio de $46/(52+25) = 0.6$. Ainsi, pour protéger une case
 en secret primaire, Tau-argus a dû masquer 0.6 cellule(s) ; ce qui est
 très peu.
 
-En effet, pour un tableau à deux dimensions, la présence d'un
-secret primaire engendre la suppression d'au moins 3 cellules
-supplémentaires. Donc, le ratio obtenu sur cet exemple indique qu'un certain 
-nombre de cellules en secret primaire se protègent entre elles.
+En effet, pour un tableau à deux dimensions, la présence d'un secret
+primaire engendre la suppression d'au moins 3 cellules supplémentaires.
+Donc, le ratio obtenu sur cet exemple indique qu'un certain nombre de
+cellules en secret primaire se protègent entre elles.
 
 ## Prendre en compte une variable hiérarchique
 
@@ -268,7 +402,8 @@ niveaux entre eux.
 Nous appelons table de correspondance une table qui précise l'ensemble
 des niveaux associés aux emboîtements les plus fins.
 
-La table de correspondance représentant la hiérarchie ci-dessus est la suivante:
+La table de correspondance représentant la hiérarchie ci-dessus est la
+suivante:
 
 ```{r}
 pays_corr_table <- tibble(
@@ -279,17 +414,21 @@ pays_corr_table <- tibble(
 pays_corr_table
 ```
 
-Avec la fonction `write_hrc2()` du package `rtauargus`, on peut transformer
-la table de correspondance en un fichier `hrc`.
+Avec la fonction `write_hrc2()` du package `rtauargus`, on peut
+transformer la table de correspondance en un fichier `hrc`.
 
 ```{r}
 write_hrc2(pays_corr_table %>% select(-niv0), file_name = "hrc/pays_TA_2.hrc")
 ```
 
-Remarque: La fonction `rtauargus::write_hrc2()` n'accepte pas
-de valeurs manquantes dans la table en entrée. Lorsqu'une hiérarchie n'a pas la même nombre de sous-niveaux selon les branches on répète la modalité du niveau supérieur sur les niveaux inférieurs pour ne pas avoir de cases vides.
+Remarque: La fonction `rtauargus::write_hrc2()` n'accepte pas de valeurs
+manquantes dans la table en entrée. Lorsqu'une hiérarchie n'a pas la
+même nombre de sous-niveaux selon les branches on répète la modalité du
+niveau supérieur sur les niveaux inférieurs pour ne pas avoir de cases
+vides.
 
-Exemple : pour la hiérarchie ci-dessous on répète la modalité `C` dans la table de correspondance.
+Exemple : pour la hiérarchie ci-dessous on répète la modalité `C` dans
+la table de correspondance.
 
 ```{mermaid}
 flowchart TD
@@ -319,10 +458,11 @@ corr_tab
 *Objectif* : savoir protéger un ensemble de tableaux liés en utilisant
 la fonction `tab_multi_manager()` du package `rtauargus`.
 
-::: {.callout-tip}
+::: callout-tip
 ## Etapes de la pause du secret sur tableaux liés
 
-1.  Analyser les tableaux pour construire une liste de tableaux et une liste de variables de croisement.
+1.  Analyser les tableaux pour construire une liste de tableaux et une
+    liste de variables de croisement.
 
 2.  Poser le secret primaire sur chacun des tableaux indépendamment.
 
@@ -335,9 +475,8 @@ la fonction `tab_multi_manager()` du package `rtauargus`.
 5.  Faire une synthèse de la pose du secret dans chaque tableau..
 :::
 
-
-
-Appliquons les étapes présentées ci-dessus sur quatre tableaux présents nativement dans le package `rtauargus`.
+Appliquons les étapes présentées ci-dessus sur quatre tableaux présents
+nativement dans le package `rtauargus`.
 
 ```{r import données}
 data("turnover_act_size")
@@ -349,32 +488,44 @@ data("turnover_nuts_cj")
 ### Analyser les caractéristiques des tableaux
 
 #### Détecter liens par les marges
+
 Les tableaux présentés ici ont la structure suivante :
 
-- `turnover_act_size`: chiffre d'affaires ventilé par activité et taille de l'entreprise
-- `turnover_act_cj`: chiffre d'affaires ventilé par activité et taille de l'entreprise
-- `turnover_nuts_size`: chiffre d'affaires ventilé par nuts et taille de l'entreprise
-- `turnover_nuts_cj`: chiffre d'affaires ventilé par nuts et catégorie juridique de l'entreprise
+-   `turnover_act_size`: chiffre d'affaires ventilé par activité et
+    taille de l'entreprise
+-   `turnover_act_cj`: chiffre d'affaires ventilé par activité et taille
+    de l'entreprise
+-   `turnover_nuts_size`: chiffre d'affaires ventilé par nuts et taille
+    de l'entreprise
+-   `turnover_nuts_cj`: chiffre d'affaires ventilé par nuts et catégorie
+    juridique de l'entreprise
 
 Ils sont liés par leurs marges:
 
-- `turnover_act_size` et `turnover_act_cj` partagent les marges d'activité
-- `turnover_nuts_size` et `turnover_nuts_cj` partagent les marges des nuts
-- `turnover_act_size` et `turnover_nuts_size` partagent les marges de taille
-- `turnover_act_cj` et `turnover_nuts_cj` partagent les marges de catégorie juridique
-
+-   `turnover_act_size` et `turnover_act_cj` partagent les marges
+    d'activité
+-   `turnover_nuts_size` et `turnover_nuts_cj` partagent les marges des
+    nuts
+-   `turnover_act_size` et `turnover_nuts_size` partagent les marges de
+    taille
+-   `turnover_act_cj` et `turnover_nuts_cj` partagent les marges de
+    catégorie juridique
 
 #### Réperer les variables hiérarchiques
-Les variables `ACTIVITY` et `NUTS` sont hiérarchiques. Il faut donc constituer les fichiers argus nécessaires.
 
-Les tables de correspondance associées à ces variables sont présents dans le package : `activity_corr_table` et `nuts23_fr_corr_table`.
+Les variables `ACTIVITY` et `NUTS` sont hiérarchiques. Il faut donc
+constituer les fichiers argus nécessaires.
+
+Les tables de correspondance associées à ces variables sont présents
+dans le package : `activity_corr_table` et `nuts23_fr_corr_table`.
 
 ```{r}
 data("activity_corr_table")
 data("nuts23_fr_corr_table")
 ```
-        
-On utilise ces tables de correspondance pour construire les fichiers hiérarchiques pour TauArgus.
+
+On utilise ces tables de correspondance pour construire les fichiers
+hiérarchiques pour TauArgus.
 
 ```{r}
 act_hrc_file <- write_hrc2(activity_corr_table, 
@@ -384,7 +535,9 @@ nuts_hrc_file <- write_hrc2(nuts23_fr_corr_table,
                            file_name = "tauargus_files/hrc/nuts23.hrc")
 ```
 
-Cette fonction crée les fichiers hiérarchiques `.hrc` dans le répertoire indiqué dans l'argument `file_name` et retourne le chemin de ce document.
+Cette fonction crée les fichiers hiérarchiques `.hrc` dans le répertoire
+indiqué dans l'argument `file_name` et retourne le chemin de ce
+document.
 
 ```{r}
 act_hrc_file
@@ -393,7 +546,8 @@ nuts_hrc_file
 
 #### Construire une liste de tableaux et une liste de variables de croisement
 
-Faire référence à la partie sur les listes (écrite plus tard par Julien).
+Faire référence à la partie sur les listes (écrite plus tard par
+Julien).
 
 ```{r}
 liste_4tabs <- list(
@@ -412,13 +566,13 @@ liste_vars_4tabs <- purrr::map(
 str(liste_vars_4tabs)
 ```
 
+------------------------------------------------------------------------
 
----
-
-Avertissement : il faut  repérer les codes servant au total et de s'assurer qu'ils sont
-cohérents pour une même variable apparaissant dans plusieurs tableaux. En effet, 
-deux tableaux partageant la même variable doivent utiliser la même 
-modalité pour renseigner le total. On le vérifie en regardant les données.
+Avertissement : il faut repérer les codes servant au total et de
+s'assurer qu'ils sont cohérents pour une même variable apparaissant dans
+plusieurs tableaux. En effet, deux tableaux partageant la même variable
+doivent utiliser la même modalité pour renseigner le total. On le
+vérifie en regardant les données.
 
 ```{r}
 any(turnover_act_cj$CJ == "Total")
@@ -427,9 +581,10 @@ any(turnover_nuts_cj$NUTS == "Total")
 any(turnover_nuts_cj$CJ == "Total")
 ```
 
-Ici il n'y a pas de problème puisque toutes les variables en commun ont une même modalité représentant les marges : "Total".
+Ici il n'y a pas de problème puisque toutes les variables en commun ont
+une même modalité représentant les marges : "Total".
 
----
+------------------------------------------------------------------------
 
 ### Poser le secret primaire sur chacun des tableaux
 
@@ -447,10 +602,14 @@ liste_4tabs <- liste_4tabs %>%
   )
 ```
 
-
 ### Calculer le nombre de cellules en secret primaire
-Avant de passer à l'étape suivante il est important de prendre connaissance de 
-la quantité de secret primaire présent dans les tableaux. En effet, s'il y a beaucoup de secret primaire alors il y aura sans doute beaucoup de secret secondaire et donc vraisemblablement trop de cellules en secret. Dans ce cas-là, il est intéressant de changer les tableaux en regroupant des variables ou des modalités.
+
+Avant de passer à l'étape suivante il est important de prendre
+connaissance de la quantité de secret primaire présent dans les
+tableaux. En effet, s'il y a beaucoup de secret primaire alors il y aura
+sans doute beaucoup de secret secondaire et donc vraisemblablement trop
+de cellules en secret. Dans ce cas-là, il est intéressant de changer les
+tableaux en regroupant des variables ou des modalités.
 
 ```{r}
 liste_4tabs %>% purrr::walk(function(tab) count(tab, is_secret_prim) %>% print())
@@ -541,7 +700,6 @@ table de départ.
     En pratique on n'atteint jamais la limite de 10. La valeur par
     défaut est 10.
 
-
 ```{r eval=FALSE}
 masq_4tabs <- tab_multi_manager(
     list_tables = liste_4tabs,
@@ -555,11 +713,9 @@ masq_4tabs <- tab_multi_manager(
 )
 ```
 
-
 ```{r import masque 4tabs, echo = FALSE}
 masq_4tabs <- readRDS("tauargus_files/4tabs/masq_4tabs.rds")
 ```
-
 
 ### Analyser les résultats
 
@@ -590,13 +746,15 @@ déterminer le statut final de chaque cellule.
 Ce code crée une variable `statut_final` renvoyant les codes de la norme
 européenne :
 
-    -   `A` les cellules en secret primaire à cause de la règle de
-        fréquence
-    -   `B` les cellules en secret primaire à cause de la règle de
-        dominance
-    -   `D` les cellules concernées par le secret secondaire
-    -   `V` les cellules non touchées par le secret, c'est-à-dire les
-        cellules qui pourront être diffusées
+```         
+-   `A` les cellules en secret primaire à cause de la règle de
+    fréquence
+-   `B` les cellules en secret primaire à cause de la règle de
+    dominance
+-   `D` les cellules concernées par le secret secondaire
+-   `V` les cellules non touchées par le secret, c'est-à-dire les
+    cellules qui pourront être diffusées
+```
 
 ```{r}
 masq_4tabs <- masq_4tabs %>% 
@@ -732,5 +890,7 @@ la valeur de cette dernière.
 <!-- ## Différenciation avec diff man -->
 
 <!-- Niveau expert pour traiter non emboîtement epci x communes, mais on -->
+
 <!-- pourrait envisager hiérarchies non emboîtées si intégration de la -->
+
 <!-- gestion de la différenciation directement dans `rtauargus` -->
