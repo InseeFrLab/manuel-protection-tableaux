@@ -53,12 +53,11 @@ Exemples de tableaux :
 Il existe 3 formats de tableaux :
 
 -   Les tableaux croisés, particulièrement adaptés à la diffusion d'une
-    information ventilée selon deux variables catégorielles (ex :
-    @ex_tab_croise, *!!!! ne fonctionne pas encore mais à terme mettre
-    en place les cross références*).
+    information ventilée selon deux variables catégorielles (cf. 
+    [Tableau croisé](#ex_tab_croise)).
 -   Les tableaux longs, particulièrement adaptés aux traitements des
     données, et résultats naturels des agrégations réalisées en R avec
-    dplyr (group_by + summarise) aussi bien qu'avec data.table (melt).
+    `dplyr` (`group_by()` + `summarise()`) aussi bien qu'avec data.table (`melt()`).
 -   Les tableaux larges, autre format parfois utile lors des
     traitements, sont tels que chaque croisement de modalités des
     variables catégorielles est une variable du tableau.

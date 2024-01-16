@@ -1,0 +1,95 @@
+16-janv.-2024 15:10:33 : Start of batch procedure; file: Z:\manuel-protection-tableaux\tauargus_files\hrc_nonemb\tab_alt.arb
+16-janv.-2024 15:10:33 : <OPENTABLEDATA> "Z:\manuel-protection-tableaux\tauargus_files\hrc_nonemb\tab_alt.tab"
+16-janv.-2024 15:10:33 : <OPENMETADATA> "Z:\manuel-protection-tableaux\tauargus_files\hrc_nonemb\tab_alt.rda"
+16-janv.-2024 15:10:33 : <SPECIFYTABLE> "ACTIVITY""SIZE"|"VALUE"||
+16-janv.-2024 15:10:33 : <SAFETYRULE> MAN(0)
+16-janv.-2024 15:10:33 : <READTABLE> 1
+16-janv.-2024 15:10:33 : Tables have been read
+16-janv.-2024 15:10:33 : <APRIORI> "Z:\manuel-protection-tableaux\tauargus_files\hrc_nonemb\tab_alt.hst",1,",",0,0
+16-janv.-2024 15:10:33 : Apriory file: Z:\manuel-protection-tableaux\tauargus_files\hrc_nonemb\tab_alt.hst has been applied
+                       to table: ACTIVITY x SIZE | VALUE
+16-janv.-2024 15:10:33 : Apriori file Z:\manuel-protection-tableaux\tauargus_files\hrc_nonemb\tab_alt.hst has been read
+16-janv.-2024 15:10:33 : <SUPPRESS> MOD(1,5,1,0,0)
+16-janv.-2024 15:10:33 : Start of the modular protection for table ACTIVITY x SIZE | VALUE
+16-janv.-2024 15:10:33 : End of modular protection. Time used 0 seconds
+                       Number of suppressions: 2
+16-janv.-2024 15:10:33 : <WRITETABLE> (1,4,,"Z:\manuel-protection-tableaux\tauargus_files\hrc_nonemb\tab_alt.csv")
+16-janv.-2024 15:10:33 : Table: ACTIVITY x SIZE | VALUE has been written
+                       Output file name: Z:\manuel-protection-tableaux\tauargus_files\hrc_nonemb\tab_alt.csv
+16-janv.-2024 15:10:33 : End of TauArgus run
+16-janv.-2024 15:11:16 : Start of batch procedure; file: Z:\manuel-protection-tableaux\tauargus_files\hrc_nonemb\tab_alt.arb
+16-janv.-2024 15:11:16 : <OPENTABLEDATA> "Z:\manuel-protection-tableaux\tauargus_files\hrc_nonemb\tab_alt.tab"
+16-janv.-2024 15:11:16 : <OPENMETADATA> "Z:\manuel-protection-tableaux\tauargus_files\hrc_nonemb\tab_alt.rda"
+16-janv.-2024 15:11:16 : <SPECIFYTABLE> "ACTIVITY""SIZE"|"VALUE"||
+16-janv.-2024 15:11:16 : <SAFETYRULE> MAN(0)
+16-janv.-2024 15:11:16 : <READTABLE> 1
+16-janv.-2024 15:11:16 : Tables have been read
+16-janv.-2024 15:11:16 : <APRIORI> "Z:\manuel-protection-tableaux\tauargus_files\hrc_nonemb\tab_alt.hst",1,",",0,0
+16-janv.-2024 15:11:16 : Apriory file: Z:\manuel-protection-tableaux\tauargus_files\hrc_nonemb\tab_alt.hst has been applied
+                       to table: ACTIVITY x SIZE | VALUE
+16-janv.-2024 15:11:16 : Apriori file Z:\manuel-protection-tableaux\tauargus_files\hrc_nonemb\tab_alt.hst has been read
+16-janv.-2024 15:11:16 : <SUPPRESS> MOD(1,5,1,0,0)
+16-janv.-2024 15:11:16 : Start of the modular protection for table ACTIVITY x SIZE | VALUE
+16-janv.-2024 15:11:16 : End of modular protection. Time used 0 seconds
+                       Number of suppressions: 2
+16-janv.-2024 15:11:16 : <WRITETABLE> (1,4,,"Z:\manuel-protection-tableaux\tauargus_files\hrc_nonemb\tab_alt.csv")
+16-janv.-2024 15:11:16 : Table: ACTIVITY x SIZE | VALUE has been written
+                       Output file name: Z:\manuel-protection-tableaux\tauargus_files\hrc_nonemb\tab_alt.csv
+16-janv.-2024 15:11:16 : End of TauArgus run
+16-janv.-2024 15:23:58 : Start of batch procedure; file: Z:\manuel-protection-tableaux\tauargus_files\hrc_nonemb\tab_alt.arb
+16-janv.-2024 15:23:58 : <OPENTABLEDATA> "Z:\manuel-protection-tableaux\tauargus_files\hrc_nonemb\tab_alt.tab"
+16-janv.-2024 15:23:58 : <OPENMETADATA> "Z:\manuel-protection-tableaux\tauargus_files\hrc_nonemb\tab_alt.rda"
+16-janv.-2024 15:23:58 : <SPECIFYTABLE> "ACTIVITY""SIZE"|"VALUE"||
+16-janv.-2024 15:23:58 : <SAFETYRULE> MAN(0)
+16-janv.-2024 15:23:58 : <READTABLE> 1
+16-janv.-2024 15:23:58 : Tables have been read
+16-janv.-2024 15:23:58 : <APRIORI> "Z:\manuel-protection-tableaux\tauargus_files\hrc_nonemb\tab_alt.hst",1,",",0,0
+16-janv.-2024 15:23:58 : Apriory file: Z:\manuel-protection-tableaux\tauargus_files\hrc_nonemb\tab_alt.hst has been applied
+                       to table: ACTIVITY x SIZE | VALUE
+16-janv.-2024 15:23:58 : Apriori file Z:\manuel-protection-tableaux\tauargus_files\hrc_nonemb\tab_alt.hst has been read
+16-janv.-2024 15:23:58 : <SUPPRESS> MOD(1,5,1,0,0)
+16-janv.-2024 15:23:58 : Start of the modular protection for table ACTIVITY x SIZE | VALUE
+16-janv.-2024 15:23:58 : End of modular protection. Time used 0 seconds
+                       Number of suppressions: 2
+16-janv.-2024 15:23:58 : <WRITETABLE> (1,4,,"Z:\manuel-protection-tableaux\tauargus_files\hrc_nonemb\tab_alt.csv")
+16-janv.-2024 15:23:58 : Table: ACTIVITY x SIZE | VALUE has been written
+                       Output file name: Z:\manuel-protection-tableaux\tauargus_files\hrc_nonemb\tab_alt.csv
+16-janv.-2024 15:23:58 : End of TauArgus run
+16-janv.-2024 17:42:31 : Start of batch procedure; file: Z:\manuel-protection-tableaux\tauargus_files\hrc_nonemb\tab_alt.arb
+16-janv.-2024 17:42:31 : <OPENTABLEDATA> "Z:\manuel-protection-tableaux\tauargus_files\hrc_nonemb\tab_alt.tab"
+16-janv.-2024 17:42:31 : <OPENMETADATA> "Z:\manuel-protection-tableaux\tauargus_files\hrc_nonemb\tab_alt.rda"
+16-janv.-2024 17:42:31 : <SPECIFYTABLE> "ACTIVITY""SIZE"|"VALUE"||
+16-janv.-2024 17:42:31 : <SAFETYRULE> MAN(0)
+16-janv.-2024 17:42:31 : <READTABLE> 1
+16-janv.-2024 17:42:31 : Tables have been read
+16-janv.-2024 17:42:31 : <APRIORI> "Z:\manuel-protection-tableaux\tauargus_files\hrc_nonemb\tab_alt.hst",1,",",0,0
+16-janv.-2024 17:42:31 : Apriory file: Z:\manuel-protection-tableaux\tauargus_files\hrc_nonemb\tab_alt.hst has been applied
+                       to table: ACTIVITY x SIZE | VALUE
+16-janv.-2024 17:42:31 : Apriori file Z:\manuel-protection-tableaux\tauargus_files\hrc_nonemb\tab_alt.hst has been read
+16-janv.-2024 17:42:31 : <SUPPRESS> MOD(1,5,1,0,0)
+16-janv.-2024 17:42:31 : Start of the modular protection for table ACTIVITY x SIZE | VALUE
+16-janv.-2024 17:42:32 : End of modular protection. Time used 0 seconds
+                       Number of suppressions: 2
+16-janv.-2024 17:42:32 : <WRITETABLE> (1,4,,"Z:\manuel-protection-tableaux\tauargus_files\hrc_nonemb\tab_alt.csv")
+16-janv.-2024 17:42:32 : Table: ACTIVITY x SIZE | VALUE has been written
+                       Output file name: Z:\manuel-protection-tableaux\tauargus_files\hrc_nonemb\tab_alt.csv
+16-janv.-2024 17:42:32 : End of TauArgus run
+16-janv.-2024 17:42:38 : Start of batch procedure; file: Z:\manuel-protection-tableaux\tauargus_files\hrc_nonemb\tab_alt.arb
+16-janv.-2024 17:42:38 : <OPENTABLEDATA> "Z:\manuel-protection-tableaux\tauargus_files\hrc_nonemb\tab_alt.tab"
+16-janv.-2024 17:42:38 : <OPENMETADATA> "Z:\manuel-protection-tableaux\tauargus_files\hrc_nonemb\tab_alt.rda"
+16-janv.-2024 17:42:38 : <SPECIFYTABLE> "ACTIVITY""SIZE"|"VALUE"||
+16-janv.-2024 17:42:38 : <SAFETYRULE> MAN(0)
+16-janv.-2024 17:42:38 : <READTABLE> 1
+16-janv.-2024 17:42:38 : Tables have been read
+16-janv.-2024 17:42:38 : <APRIORI> "Z:\manuel-protection-tableaux\tauargus_files\hrc_nonemb\tab_alt.hst",1,",",0,0
+16-janv.-2024 17:42:38 : Apriory file: Z:\manuel-protection-tableaux\tauargus_files\hrc_nonemb\tab_alt.hst has been applied
+                       to table: ACTIVITY x SIZE | VALUE
+16-janv.-2024 17:42:38 : Apriori file Z:\manuel-protection-tableaux\tauargus_files\hrc_nonemb\tab_alt.hst has been read
+16-janv.-2024 17:42:38 : <SUPPRESS> MOD(1,5,1,0,0)
+16-janv.-2024 17:42:38 : Start of the modular protection for table ACTIVITY x SIZE | VALUE
+16-janv.-2024 17:42:38 : End of modular protection. Time used 0 seconds
+                       Number of suppressions: 2
+16-janv.-2024 17:42:38 : <WRITETABLE> (1,4,,"Z:\manuel-protection-tableaux\tauargus_files\hrc_nonemb\tab_alt.csv")
+16-janv.-2024 17:42:38 : Table: ACTIVITY x SIZE | VALUE has been written
+                       Output file name: Z:\manuel-protection-tableaux\tauargus_files\hrc_nonemb\tab_alt.csv
+16-janv.-2024 17:42:38 : End of TauArgus run

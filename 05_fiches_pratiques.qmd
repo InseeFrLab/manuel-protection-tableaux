@@ -302,22 +302,63 @@ Lorsque l'on a la présence de hiérarchie non-emboîtée dans les tableaux
 traités alors il faut construire deux tableaux et deux hiérarchies pour
 chaque hiérarchie non-emboîtée.
 
-Par exemple, si on a un tableau T croisant NAF et GEO (deux variables
-hiérarchiques). Dans le cas où pour la NAF, en plus des activités
-classiques, il est décidé de publier un agrégat supplémentaire AGREG =
-B12 + C15 + G45. Ainsi, AGREG ne peut pas s'insérer dans la NAF. Il faut
-donc sortir cet agrégat pour construire un second tableau.
+Par exemple, le tableau `turnover_act_size` croise la NAF et les tranches d'effectifs
+des entreprises. Si l'on décide de publier, en plus des activités
+classiques de la NAF, un agrégat supplémentaire $AGREG = AZ + B$, 
+alors il faut construire un tableau supplémentaire avec cet agrégat. En effet,
+AGREG ne peut pas s'insérer dans la hiérarchie NAF, il faut donc construire deux hiérarchies :
 
--   T1, T2 croisent NAF et GEO
--   T1 avec NAF classique (dont B12, C15, G45)
--   T2 avec AGREG et ses composants B12, C15, G45
+-   la hiérarchie NAF (principale)
+-   la hiérarchie de l'agrégat supplémentaire (alternative)
 
-Rappel des arguments de `tab_multi_manager()` utiles pour traiter les
-hiérarchies non-emboîtées :
+On crée le fichier `.hrc` de la hiérarchie principale à partir de la table de correspondance incluse dans le package.
+
+```{r}
+str(activity_corr_table)
+```
+
+```{r}
+write_hrc2(activity_corr_table, file_name = "hrc/NAF_principale.hrc")
+```
+
+Puis on crée la hiérarchie alternative pour l'agrégat spécifique
+```{r}
+alt_corr_table <- tibble::tibble(
+  niv0 = "AGREG",
+  niv1 = c("B","AZ")
+)
+
+write_hrc2(alt_corr_table %>% select(-niv0), file_name = "hrc/AGREG_alt.hrc")
+```
+
+On construit les tableaux nécessaires à la pose du secret et on leur applique le secret primaire.
+A savoir le tableau sur lequel la hiérarchie principale sera appliquée.
+```{r}
+turnover_act_size_detect <-  turnover_act_size %>%
+  rename(FREQ = N_OBS, VALUE = TOT) %>% 
+  mutate(
+    is_secret_freq = FREQ > 0 & FREQ < 3,
+    is_secret_dom = (VALUE != 0) & (MAX > 0.85*VALUE)
+  ) %>% 
+  mutate(
+    is_secret_prim = is_secret_freq | is_secret_dom
+  )
+```
+
+
+Et le tableau sur lequel la hiérarchie alternative sera appliquée, i.e. tableau uniquement avec
+les modalités présentes dans la hiérarchie alternative et on pose le secret primaire.
+```{r}
+trunover_act_size_alt <- turnover_act_size_detect %>% 
+  filter(ACTIVITY %in% c("AZ","B"))
+```
+
+
+::: {.callout-note}
+## Arguments `tab_multi_manager()` pour traiter les hiérarchies non-emboîtées
 
 -   **alt_totcode** : une liste nommée pour les codes de totaux
     alternatifs (voir `alt_hrc` pour l'utilisation).
-
 -   **alt_hrc** : une liste nommée utile pour traiter les hiérarchies
     non emboîtées. Les noms de la liste sont les noms des tableaux pour
     lesquelles une autre hiérarchie (non emboîtée en général) doit être
@@ -328,13 +369,85 @@ hiérarchies non-emboîtées :
     emboîtées. Dans ce cas, nous écrivons les deux arguments comme suit
     :
 
-    -   `hrc = c(ACTIVITY = "path_to_file/act_1.hrc")` : par défaut,
+    -   `hrc = c(ACTIVITY = "chemin_vers_fichier/act_1.hrc")` : par défaut,
         cette hiérarchie sera utilisée pour la variable ACTIVITY.
-
     -   `alt_hrc = list(T2 = c(ACTIVITY = "chemin_vers_fichier/act_2.hrc"))`
         dans la table T2, la hiérarchie alternative sera utilisée.
+:::
+
+
+```{r eval = FALSE}
+masq_nonemb <- tab_multi_manager(
+  list_tables = list(
+    tab = turnover_act_size_detect,
+    tab_alt = trunover_act_size_alt
+    ),
+  list_explanatory_vars = list(
+    tab = c("ACTIVITY","SIZE"),
+    tab_alt = c("ACTIVITY","SIZE")
+    ),
+  dir_name = "tauargus_files/hrc_nonemb",
+  hrc = list(ACTIVITY = "hrc/NAF_principale.hrc"),
+  alt_hrc = list(
+    tab_alt = c(ACTIVITY = "hrc/AGREG_alt.hrc")
+    ),
+  totcode = "Total",
+  alt_totcode = list(
+    tab_alt = c(ACTIVITY = "AGREG")
+    ),
+  value = "VALUE",
+  freq = "FREQ",
+  secret_var = "is_secret_prim"
+)
+```
+
+
+```{r import masque hrc_nonemb, echo = FALSE}
+masq_nonemb <- readRDS("tauargus_files/hrc_nonemb/masq_nonemb.rds")
+```
+
+
+```{r}
+masq_nonemb <- masq_nonemb %>% 
+  purrr::map(
+    function(tab){
+      tab %>% 
+        rename_with(~"is_secret_final", last_col()) %>% 
+        mutate(
+          statut_final = case_when(
+            is_secret_freq ~ "A",
+            is_secret_dom ~ "B",
+            is_secret_final ~ "D",
+            TRUE ~ "V"
+          )
+        )
+    }
+  )
+str(masq_nonemb)
+```
+
+On peut dresser le bilan :
+```{r}
+masq_nonemb %>% 
+  purrr::imap_dfr(
+    function(tab, nom){
+      tab %>% 
+        count(statut_final) %>% 
+        mutate(
+          part = n/sum(n)*100,
+          table = nom
+        ) %>% 
+        relocate(table)
+    }
+  )
+```
+
 
 ## Utiliser les coûts
+
+::: {.callout-important}
+## Niveau expert
+:::
 
 *Objectif* : apprendre à utiliser l'option `cost` du package `rtauargus`
 afin de rediriger le secret secondaire.
@@ -392,10 +505,95 @@ n'est pas un problème, lorsque l'on ne spécifie pas de coût pour une
 cellule, Tau-Argus va considérer que son coût de suppression est égal à
 la valeur de cette dernière.
 
-<!-- ## Différenciation avec diff man -->
+**Exemple**
 
-<!-- Niveau expert pour traiter non emboîtement epci x communes, mais on -->
+Si par exemple, on souhaite prioriser le secret sur la tranche d'effectif 1 `tr1`
+dans `turnover_act_size`, tableau intégré à `rtauargus`.
 
-<!-- pourrait envisager hiérarchies non emboîtées si intégration de la -->
+Tout d'abord, on pose le secret primaire sur le tableau.
+```{r}
+data("turnover_act_size")
 
-<!-- gestion de la différenciation directement dans `rtauargus` -->
+turnover_act_size_detect <-  turnover_act_size %>%
+  rename(FREQ = N_OBS, VALUE = TOT) %>% 
+  mutate(
+    is_secret_freq = FREQ > 0 & FREQ < 3,
+    is_secret_dom = (VALUE != 0) & (MAX > 0.85*VALUE)
+  ) %>% 
+  mutate(
+    is_secret_prim = is_secret_freq | is_secret_dom
+  )
+```
+
+Puis, on assigne on assigne la valeur 1 pour le coût de tous les croisements avec
+`tr1`.
+```{r}
+turnover_act_size_ns <- turnover_act_size_detect %>%
+  mutate(cost = ifelse(SIZE == "tr1", 1, VALUE))
+str(turnover_act_size_ns)
+```
+
+On vérifie que les coûts à 1 ont bien été appliqués.
+```{r}
+str(turnover_act_size_ns %>% filter(cost == 1))
+```
+
+
+On pose le secret secondaire à l'aide de la fonction `tab_rtauargus()`.
+```{r eval = FALSE}
+res_ns <- tab_rtauargus(
+  turnover_act_size_ns,
+  files_name = "couts",
+  dir_name = "tauargus_files/couts",
+  explanatory_vars = c("ACTIVITY","SIZE"),
+  totcode = c("Total","Total"),
+  freq = "FREQ",
+  value = "VALUE",
+  secret_var = "is_secret_prim",
+  cost_var = "cost",
+  verbose = FALSE
+)
+```
+
+```{r import masque couts, echo = FALSE}
+res_ns <- readRDS("tauargus_files/couts/res_ns.rds")
+```
+
+
+On peut ensuite créer une synthèse du secret posé.
+```{r}
+synthese_ns <- res_ns %>% group_by(Status) %>%
+  mutate(
+    statut_final = case_when(
+      is_secret_freq ~ "A",
+      is_secret_dom ~ "B",
+      TRUE ~ Status,
+    )
+  ) %>% 
+  group_by(statut_final) %>% 
+  summarise(
+    nb_cellules = n(),
+    effectif = sum(FREQ),
+    valeur = sum(VALUE)
+  )
+
+synthese_ns
+```
+
+
+:::{.solutionbox}
+
+::::{.solutionbox-header}
+::::{.solutionbox-icon}
+::::
+This is my test code
+::::
+
+::::{.solutionbox-body}
+And some content inside of it
+::::
+
+:::
+
+
+

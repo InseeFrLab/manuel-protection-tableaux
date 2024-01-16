@@ -1,0 +1,18 @@
+   <SEPARATOR> ","
+   <SAFE> "s"
+   <UNSAFE> "u"
+   <PROTECT> "p"
+ACTIVITY
+  <RECODEABLE>
+  <TOTCODE> "AGREG"
+  <HIERARCHICAL>
+  <HIERCODELIST> "Z:\manuel-protection-tableaux\hrc\AGREG_alt_unif.hrc"
+  <HIERLEADSTRING> "@"
+SIZE
+  <RECODEABLE>
+  <TOTCODE> "Total"
+VALUE
+  <NUMERIC>
+  <DECIMALS> 4
+FREQ
+  <FREQUENCY>

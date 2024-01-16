@@ -1,0 +1,61 @@
+Start time: 2024-01-16  17:42:32
+-----------------------------------------
+Function called to protect the tables: tab_rtauargus2
+Interval Protection Level for primary secret cells: 10
+Interval Protection Level for other iterations: 0
+Nb of tables to treat:  2
+-----------------------------------------
+Tables to treat: tab tab_alt
+-----------------------------------------
+All explanatory variables: ACTIVITY SIZE
+-----------------------------------------
+Initialisation work completed
+-----------------------------------------
+-----------------------------------------
+1 -Treatment of table tab
+-----------------------------------------
+New cells status counts: 
+- apriori (primary) secret: 77 ( 18.6 %)
+- secondary secret: 78 ( 18.8 %)
+- valid cells: 259 ( 62.6 %)
+-----------------------------------------
+Nb of new common cells hit by the secret: 1
+-----------------------------------------
+-----------------------------------------
+2 -Treatment of table tab_alt
+-----------------------------------------
+New cells status counts: 
+- apriori (primary) secret: 2 ( 22.2 %)
+- secondary secret: 2 ( 22.2 %)
+- valid cells: 5 ( 55.6 %)
+-----------------------------------------
+Nb of new common cells hit by the secret: 1
+-----------------------------------------
+-----------------------------------------
+End of iterating after 1 iterations for tab
+End of iterating after 1 iterations for tab_alt
+-----------------------------------------
+Final Summary
+-----------------------------------------
+Secreted cells counts per table
+-----------------------------------------
+---TAB  tab  ---
+primary_secret    77
+secondary_secret  78
+total_secret     155
+valid_cells      259
+-----------------------------------------
+---TAB  tab_alt  ---
+primary_secret   1
+secondary_secret 1
+total_secret     2
+valid_cells      4
+-----------------------------------------
+-----------------------------------------
+Common cells hit by the secret:
+ACTIVITY SIZE iteration
+B tr2 1
+      2
+-----------------------------------------
+End time:  2024-01-16  17:42:39
+-----------------------------------------

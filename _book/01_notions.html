@@ -130,7 +130,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./04_secret_tableaux_lies.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Poser le secret sur plusieurs tableaux liés (par les marges)</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Poser le secret sur plusieurs tableaux liés</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -223,8 +223,8 @@ ul.task-list li input[type="checkbox"] {
 </ul>
 <p>Il existe 3 formats de tableaux :</p>
 <ul>
-<li>Les tableaux croisés, particulièrement adaptés à la diffusion d’une information ventilée selon deux variables catégorielles (ex : <span class="citation" data-cites="ex_tab_croise">(<a href="#ref-ex_tab_croise" role="doc-biblioref"><strong>ex_tab_croise?</strong></a>)</span>, <em>!!!! ne fonctionne pas encore mais à terme mettre en place les cross références</em>).</li>
-<li>Les tableaux longs, particulièrement adaptés aux traitements des données, et résultats naturels des agrégations réalisées en R avec dplyr (group_by + summarise) aussi bien qu’avec data.table (melt).</li>
+<li>Les tableaux croisés, particulièrement adaptés à la diffusion d’une information ventilée selon deux variables catégorielles (cf.&nbsp; <a href="#ex_tab_croise">Tableau croisé</a>).</li>
+<li>Les tableaux longs, particulièrement adaptés aux traitements des données, et résultats naturels des agrégations réalisées en R avec <code>dplyr</code> (<code>group_by()</code> + <code>summarise()</code>) aussi bien qu’avec data.table (<code>melt()</code>).</li>
 <li>Les tableaux larges, autre format parfois utile lors des traitements, sont tels que chaque croisement de modalités des variables catégorielles est une variable du tableau.</li>
 </ul>
 <div class="quarto-figure quarto-figure-center">
@@ -277,7 +277,7 @@ ul.task-list li input[type="checkbox"] {
 <li>On applique la règle de fréquence sur les pondérations. Si une cellule est construite par 2 répondants mais en représente davantage, alors elle est diffusable. Il faut veiller à ce que l’échantillon et la pondération restent confidentiels.</li>
 <li>D’après la règle de dominance, la cellule est sensible si le contributeur maximal (non pondérée) est supérieur à 85% du total de la cellule (pondéré).</li>
 </ul>
-<p>Selon le type de données les cellules considérées comme sensibles varient. Par exemple, pour les statistiques d’entreprises les cellules sont catégorisées comme sensibles du fait de la règle de fréquence (moins de 3 unités dans une cellule) ou de la règle de dominance (un répondant représente plus de 85% du total de la cellule). On ne peut pas diffuser les cellules qui constituent le secret primaire. Pour plus d’informations sur les règles du secret voir l’<a href="#sec-regles">Annexe</a>.</p>
+<p>Selon le type de données les cellules considérées comme sensibles varient. Par exemple, pour les statistiques d’entreprises les cellules sont catégorisées comme sensibles du fait de la règle de fréquence (moins de 3 unités dans une cellule) ou de la règle de dominance (un répondant représente plus de 85% du total de la cellule). On ne peut pas diffuser les cellules qui constituent le secret primaire. Pour plus d’informations sur les règles du secret voir l’<a href="07_annexes.html#sec-regles">Annexe</a>.</p>
 <p>Une solution pour ne pas diffuser ces cellules est de les supprimer (cacher). Cependant, uniquement supprimer les cellules touchées par le secret primaire n’est généralement pas suffisant. En effet, si les marges du tableau sont diffusées, alors les cellules sont liées entre elles par des équations. Ainsi, il faut cacher d’autres cellules pour ne pas pouvoir déduire la valeur des cellules cachées : c’est le <strong>secret secondaire</strong>.</p>
 </section>
 <section id="sec-hrc" class="level2" data-number="1.4">
@@ -448,7 +448,7 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="tableau-à-diffuser-vs-à-protéger" class="level2" data-number="1.7">
 <h2 data-number="1.7" class="anchored" data-anchor-id="tableau-à-diffuser-vs-à-protéger"><span class="header-section-number">1.7</span> Tableau à diffuser vs à protéger</h2>
-<p>Les tableaux qui seront finalement diffusés ne sont pas les mêmes que les tableaux à protéger. En effet, les tableaux à protéger sont le résultat de l’analyse de la demande. Cette analyse consiste à identifier les tableaux liés entre eux et les hiérarchies (emboîtées ou non). Dès lors, l’identification de ces liens va nous pousser à regrouper différents tableaux ou au contraire les séparer. Une fois l’analyse terminée on se retrouve avec les tableaux à protéger, le secret sera appliqué sur ces tableaux et c’est seulement une fois la procédure terminée que l’on pourra reporter le secret identifié sur les tableaux à protéger sur les tableaux à diffuser. Cette phase d’analyse est développé dans la <a href="#sec-analyserdemande">Partie&nbsp;<span class="quarto-unresolved-ref ref-noprefix">sec-analyserdemande</span></a></p>
+<p>Les tableaux qui seront finalement diffusés ne sont pas les mêmes que les tableaux à protéger. En effet, les tableaux à protéger sont le résultat de l’analyse de la demande. Cette analyse consiste à identifier les tableaux liés entre eux et les hiérarchies (emboîtées ou non). Dès lors, l’identification de ces liens va nous pousser à regrouper différents tableaux ou au contraire les séparer. Une fois l’analyse terminée on se retrouve avec les tableaux à protéger, le secret sera appliqué sur ces tableaux et c’est seulement une fois la procédure terminée que l’on pourra reporter le secret identifié sur les tableaux à protéger sur les tableaux à diffuser. Cette phase d’analyse est développé dans la <a href="03_analyser_une_demande.html">Partie&nbsp;<span>3</span></a></p>
 
 
 </section>
