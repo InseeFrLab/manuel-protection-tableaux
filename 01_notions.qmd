@@ -106,12 +106,28 @@ contributeurs)](images/tab_magnitude_ex.png)
 
 Le **secret primaire** renvoie aux cellules qui doivent être secretisées
 dès le départ du processus de secrétisation car elles sont considérées
-comme sensibles. Selon le type de données les cellules considérées comme
+comme sensibles d'après des règles définies à l'Insee. 
+
+-   *Règle de fréquence* : une cellule d’un tableau ne doit pas être construite 
+à partir de strictement moins de 3 unités. 
+-   *Règle de dominance* : une unité contributrice à une cellule ne peut contribuer 
+à plus de 85% de la valeur de celle-ci. Afin, de pouvoir appliquer cette règle 
+il faut donc déterminer pour chaque cellule du tableau le plus gros contributeur.
+
+N.B. pour les bases de données pondérées :
+
+  - On applique la règle de fréquence sur les pondérations. Si une cellule est
+  construite par 2 répondants mais en représente davantage, alors elle est diffusable.
+  Il faut veiller à ce que l’échantillon et la pondération restent confidentiels.
+  - D'après la règle de dominance, la cellule est sensible si le contributeur 
+  maximal (non pondérée) est supérieur à 85% du total de la cellule (pondéré).
+
+Selon le type de données les cellules considérées comme
 sensibles varient. Par exemple, pour les statistiques d'entreprises les
 cellules sont catégorisées comme sensibles du fait de la règle de
 fréquence (moins de 3 unités dans une cellule) ou de la règle de
 dominance (un répondant représente plus de 85% du total de la cellule).
-On ne peut pas diffuser les cellules qui constituent le secret primaire.
+On ne peut pas diffuser les cellules qui constituent le secret primaire. Pour plus d'informations sur les règles du secret voir l'[Annexe](#sec-regles).
 
 Une solution pour ne pas diffuser ces cellules est de les supprimer
 (cacher). Cependant, uniquement supprimer les cellules touchées par le
@@ -121,7 +137,7 @@ elles par des équations. Ainsi, il faut cacher d'autres cellules pour ne
 pas pouvoir déduire la valeur des cellules cachées : c'est le **secret
 secondaire**.
 
-## Variable hiérarchique
+## Variable hiérarchique {#sec-hrc}
 
 Une variable hiérarchique est une variable de ventilation comprenant
 plusieurs sous-totaux. Autrement dit, certaines modalités de cette
@@ -155,7 +171,7 @@ flowchart TD
   E --> Q[S2]
 ```
 
-## Hiérarchies non-emboîtées
+## Hiérarchies non-emboîtées {#sec-hrcnonemb}
 
 Une hiérarchie non-emboîtée est le cas où dans un tableau diffusé,
 l'emboîtement des modalités d'une variable hiérarchique n'est pas

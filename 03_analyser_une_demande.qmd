@@ -4,11 +4,21 @@ La liste de tableaux à diffuser n'est pas la même que la liste des tableaux à
 
 ## Étapes de l'analyse de demande
 
+::: callout-tip
+## Etapes de l'analyse de la demande
+
+1.  Réunir les informations nécessaires à la gestion de la confidentialité
+2.  Séparer la demande en sous-demande indépendantes si possible
+3.  Détecter les liens
+4.  Construire les hiérarchies éventuellement nécessaires
+5.  Lister les tableaux nécessaires pour la pose de secret (passage de la liste de diffusion à la liste de protection).
+:::
+
 ### Vérifier que toutes les informations nécessaires à la gestion de la confidentialité sont disponibles
 
 Les informations nécessaires sont :
 
--   Les règles de secret qui s'appliquent sur les données (voir [Partie @sec-regles])
+-   Les règles de secret qui s'appliquent sur les données (voir [Annexes](#sec-regles))
 
 -   Une description précise des tableaux que votre interlocuteur souhaite diffuser :
 
@@ -39,43 +49,39 @@ Les informations nécessaires sont :
 
 Chaque sous-demande doit faire l'objet d'un traitement à part, en suivant les mêmes étapes.
 
-### Lister les tableaux nécessaires pour la pose de secret
-
-Rassembler en un seul tableau les tableaux liés car "additifs".
-
-Séparer en plusieurs tableaux un tableau qui contiendrait des sous-totaux non-emboîtés.
-
-### Construire les hiérarchies éventuellement nécessaires
-
-### Construire les tableaux à partir des tableaux fournis par l'utilisateur (si besoin)
-
-### Procéder à la pose du masque en opérant comme indiqué dans le chapitre 6 `Fiches pratiques`.
-
-## Détecter les liens
+### Détecter les liens
 
 Il y a deux principaux types de liens sur les variables réponse :
 
 -   les hiérarchies
 
-    -   emboîtées
-    -   non-emboîtées
+    -   emboîtées (voir [Notions](#sec-hrc))
+    -   non-emboîtées (voir [Notions](#sec-hrcnonemb))
 
 -   les équations du type A = B + C
 
     -   entre les variables réponses
     -   au niveau des champs
+    
+En présence de tels liens il faut parfois regrouper des tableaux en un seul (hiérarchie emboîtée sur une variable de croisement), ou au contraire construire deux tableaux à partir d'un seul (hiérarchie non-emboîtée). Dans tous les cas lorsque des tableaux sont liés il faut les traiter ensemble afin que lorsqu'une cellule est touchée dans un tableau, elle 
+le soit aussi automatiquement dans tous les autres tableaux où elle apparaît.
 
-## Passer de la liste de diffusion à la liste de protection
+### Passer de la liste de diffusion à la liste de protection
 
 La liste de diffusion est la liste de tableaux qui sera effectivement publiée. Elle diffère de la liste de protection qui elle est à établir en fonction des liens entre les différents tableaux. En effet, pour poser le secret pertinemment il faut renseigner les différents liens pour que l'algorithme en tienne compte.
+
+Par exemple on peut être amené à :
+
+-   Rassembler en un seul tableau les tableaux liés car "additifs".
+-   Séparer en plusieurs tableaux un tableau qui contiendrait des sous-totaux non-emboîtés.
 
 De plus, si les données sont sous forme de micro-données il faut calculer les agrégats qui seront diffusés pour établir la liste de diffusion. En effet, nous ne posons pas le secret sur les micro-données mais sur les agrégats. Pour ce faire la fonction `tabul_fun_group` permet de facilement construire les tables agrégées sous le bon format pour les mettre en entrée de `rtauargus`.
 
 ## Fiches exemples d'analyse de demandes
 
-Exemple 1 :
+### Exemple 1 : niveau facile
 
-*Demande* - on souhaite diffuser 4 tableaux
+**Demande** - on souhaite diffuser 4 tableaux
 
 -   T1 : population par âge (5 classes), par sexe et par département
 -   T2 : population par sexe, par diplôme et par département
@@ -89,7 +95,7 @@ En formalisant :
 -   T3 : pop x {socpro x act x dep}
 -   T4 : pop x {age x sexe x act}
 
-*Analyse*
+**Analyse**
 
 Les tableaux partagent le même champ (sous-entendu) et le même indicateur (population), ils sont donc liés a minima par le total, donc il n'y a pas de sous-demande indépendante.
 
@@ -99,9 +105,9 @@ Les variables entre elles n'ont pas de lien hiérarchique (le seul niveau géogr
 
 Finalement, la liste des tableaux à protéger est identique à la liste des tableaux à diffuser.
 
-Exemple 2 :
+### Exemple 2 : niveau moyen
 
-*Demande* - on souhaite diffuser 7 tableaux
+**Demande** - on souhaite diffuser 7 tableaux
 
 -   T1 : population par âge (5 classes), par sexe et par département
 -   T2 : population par sexe, par diplôme et par département
@@ -121,7 +127,7 @@ En formalisant :
 -   T6 : pop x {sexe x dip x reg}
 -   T7 : pop x {socpro x act x reg}
 
-*Analyse*
+**Analyse**
 
 Les tableaux partagent le même champ (sous-entendu) et le même indicateur (population), ils sont donc liés a minima par le total, donc il n'y a pas de sous-demande indépendante.
 
@@ -137,9 +143,9 @@ La liste des tableaux à protéger est donc la suivante :
 -   T4 : pop x {age x sexe x act}
 -   où GEO est une variable hiérarchique emboîtant régions et départements
 
-Exemple 3 :
+### Exemple 3 : niveau expert
 
-*Demande* - on souhaite diffuser 4 tableaux
+**Demande** - on souhaite diffuser 4 tableaux
 
 -   T1 : population par âge (3 classes : \<25, 25-55, +55) et par département
 -   T2 : population par âge (5 classes : \<15, 15-25, 25-45, 45-65, +65), par sexe et par département
@@ -153,7 +159,7 @@ En formalisant :
 -   T3 : pop x {age_3 x reg}
 -   T4 : pop x {age_5 x sexe x reg}
 
-*Analyse*
+**Analyse**
 
 Les tableaux partagent le même champ (sous-entendu) et le même indicateur (population), ils sont donc liés a minima par le total, donc il n'y a pas de sous-demande indépendante.
 

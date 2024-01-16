@@ -64,8 +64,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./04_fiches_pratiques.html" rel="next">
-<link href="./02_notions.html" rel="prev">
+<link href="./04_secret_tableaux_lies.html" rel="next">
+<link href="./02_secret_un_tableau.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -142,14 +142,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./01_regles.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Règles</span></span></a>
+  <a href="./01_notions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Notions principales à connaître</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./02_notions.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Notions principales à connaître</span></span></a>
+  <a href="./02_secret_un_tableau.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Poser le secret sur un tableau</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -160,20 +160,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./04_fiches_pratiques.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Fiches pratiques</span></span></a>
+  <a href="./04_secret_tableaux_lies.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Poser le secret sur plusieurs tableaux liés (par les marges)</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./05_les_outils.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Présentation des outils</span></span></a>
+  <a href="./05_fiches_pratiques.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Fiches pratiques</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./06_annexes.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Annexes</span></span></a>
+  <a href="./06_les_outils.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Présentation des outils</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./07_annexes.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Annexes</span></span></a>
   </div>
 </li>
     </ul>
@@ -187,17 +193,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
    
   <ul>
   <li><a href="#étapes-de-lanalyse-de-demande" id="toc-étapes-de-lanalyse-de-demande" class="nav-link active" data-scroll-target="#étapes-de-lanalyse-de-demande"><span class="header-section-number">3.1</span> Étapes de l’analyse de demande</a>
-  <ul class="collapse">
+  <ul>
   <li><a href="#vérifier-que-toutes-les-informations-nécessaires-à-la-gestion-de-la-confidentialité-sont-disponibles" id="toc-vérifier-que-toutes-les-informations-nécessaires-à-la-gestion-de-la-confidentialité-sont-disponibles" class="nav-link" data-scroll-target="#vérifier-que-toutes-les-informations-nécessaires-à-la-gestion-de-la-confidentialité-sont-disponibles"><span class="header-section-number">3.1.1</span> Vérifier que toutes les informations nécessaires à la gestion de la confidentialité sont disponibles</a></li>
   <li><a href="#la-demande-peut-elle-être-séparée-en-plusieurs-sous-demandes-indépendantes" id="toc-la-demande-peut-elle-être-séparée-en-plusieurs-sous-demandes-indépendantes" class="nav-link" data-scroll-target="#la-demande-peut-elle-être-séparée-en-plusieurs-sous-demandes-indépendantes"><span class="header-section-number">3.1.2</span> La demande peut-elle être séparée en plusieurs sous-demandes indépendantes ?</a></li>
-  <li><a href="#lister-les-tableaux-nécessaires-pour-la-pose-de-secret" id="toc-lister-les-tableaux-nécessaires-pour-la-pose-de-secret" class="nav-link" data-scroll-target="#lister-les-tableaux-nécessaires-pour-la-pose-de-secret"><span class="header-section-number">3.1.3</span> Lister les tableaux nécessaires pour la pose de secret</a></li>
-  <li><a href="#construire-les-hiérarchies-éventuellement-nécessaires" id="toc-construire-les-hiérarchies-éventuellement-nécessaires" class="nav-link" data-scroll-target="#construire-les-hiérarchies-éventuellement-nécessaires"><span class="header-section-number">3.1.4</span> Construire les hiérarchies éventuellement nécessaires</a></li>
-  <li><a href="#construire-les-tableaux-à-partir-des-tableaux-fournis-par-lutilisateur-si-besoin" id="toc-construire-les-tableaux-à-partir-des-tableaux-fournis-par-lutilisateur-si-besoin" class="nav-link" data-scroll-target="#construire-les-tableaux-à-partir-des-tableaux-fournis-par-lutilisateur-si-besoin"><span class="header-section-number">3.1.5</span> Construire les tableaux à partir des tableaux fournis par l’utilisateur (si besoin)</a></li>
-  <li><a href="#procéder-à-la-pose-du-masque-en-opérant-comme-indiqué-dans-le-chapitre-6-fiches-pratiques." id="toc-procéder-à-la-pose-du-masque-en-opérant-comme-indiqué-dans-le-chapitre-6-fiches-pratiques." class="nav-link" data-scroll-target="#procéder-à-la-pose-du-masque-en-opérant-comme-indiqué-dans-le-chapitre-6-fiches-pratiques."><span class="header-section-number">3.1.6</span> Procéder à la pose du masque en opérant comme indiqué dans le chapitre 6 <code>Fiches pratiques</code>.</a></li>
+  <li><a href="#détecter-les-liens" id="toc-détecter-les-liens" class="nav-link" data-scroll-target="#détecter-les-liens"><span class="header-section-number">3.1.3</span> Détecter les liens</a></li>
+  <li><a href="#passer-de-la-liste-de-diffusion-à-la-liste-de-protection" id="toc-passer-de-la-liste-de-diffusion-à-la-liste-de-protection" class="nav-link" data-scroll-target="#passer-de-la-liste-de-diffusion-à-la-liste-de-protection"><span class="header-section-number">3.1.4</span> Passer de la liste de diffusion à la liste de protection</a></li>
   </ul></li>
-  <li><a href="#détecter-les-liens" id="toc-détecter-les-liens" class="nav-link" data-scroll-target="#détecter-les-liens"><span class="header-section-number">3.2</span> Détecter les liens</a></li>
-  <li><a href="#passer-de-la-liste-de-diffusion-à-la-liste-de-protection" id="toc-passer-de-la-liste-de-diffusion-à-la-liste-de-protection" class="nav-link" data-scroll-target="#passer-de-la-liste-de-diffusion-à-la-liste-de-protection"><span class="header-section-number">3.3</span> Passer de la liste de diffusion à la liste de protection</a></li>
-  <li><a href="#fiches-exemples-danalyse-de-demandes" id="toc-fiches-exemples-danalyse-de-demandes" class="nav-link" data-scroll-target="#fiches-exemples-danalyse-de-demandes"><span class="header-section-number">3.4</span> Fiches exemples d’analyse de demandes</a></li>
+  <li><a href="#fiches-exemples-danalyse-de-demandes" id="toc-fiches-exemples-danalyse-de-demandes" class="nav-link" data-scroll-target="#fiches-exemples-danalyse-de-demandes"><span class="header-section-number">3.2</span> Fiches exemples d’analyse de demandes</a>
+  <ul>
+  <li><a href="#exemple-1-niveau-facile" id="toc-exemple-1-niveau-facile" class="nav-link" data-scroll-target="#exemple-1-niveau-facile"><span class="header-section-number">3.2.1</span> Exemple 1 : niveau facile</a></li>
+  <li><a href="#exemple-2-niveau-moyen" id="toc-exemple-2-niveau-moyen" class="nav-link" data-scroll-target="#exemple-2-niveau-moyen"><span class="header-section-number">3.2.2</span> Exemple 2 : niveau moyen</a></li>
+  <li><a href="#exemple-3-niveau-expert" id="toc-exemple-3-niveau-expert" class="nav-link" data-scroll-target="#exemple-3-niveau-expert"><span class="header-section-number">3.2.3</span> Exemple 3 : niveau expert</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -224,11 +231,30 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>La liste de tableaux à diffuser n’est pas la même que la liste des tableaux à protéger. En effet, la liste de tableaux à protéger découle d’une analyse des liens entre les différents tableaux. Cette partie a pour but de présenter le cadre de réflexion et les étapes suivies par la DMRG pour définir la liste de tableaux sur lesquels le masque de secret sera posé.</p>
 <section id="étapes-de-lanalyse-de-demande" class="level2" data-number="3.1">
 <h2 data-number="3.1" class="anchored" data-anchor-id="étapes-de-lanalyse-de-demande"><span class="header-section-number">3.1</span> Étapes de l’analyse de demande</h2>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Etapes de l’analyse de la demande
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>Réunir les informations nécessaires à la gestion de la confidentialité</li>
+<li>Séparer la demande en sous-demande indépendantes si possible</li>
+<li>Détecter les liens</li>
+<li>Construire les hiérarchies éventuellement nécessaires</li>
+<li>Lister les tableaux nécessaires pour la pose de secret (passage de la liste de diffusion à la liste de protection).</li>
+</ol>
+</div>
+</div>
 <section id="vérifier-que-toutes-les-informations-nécessaires-à-la-gestion-de-la-confidentialité-sont-disponibles" class="level3" data-number="3.1.1">
 <h3 data-number="3.1.1" class="anchored" data-anchor-id="vérifier-que-toutes-les-informations-nécessaires-à-la-gestion-de-la-confidentialité-sont-disponibles"><span class="header-section-number">3.1.1</span> Vérifier que toutes les informations nécessaires à la gestion de la confidentialité sont disponibles</h3>
 <p>Les informations nécessaires sont :</p>
 <ul>
-<li><p>Les règles de secret qui s’appliquent sur les données (voir <a href="#sec-regles">Partie&nbsp;<span class="quarto-unresolved-ref ref-noprefix">sec-regles</span></a>)</p></li>
+<li><p>Les règles de secret qui s’appliquent sur les données (voir <a href="07_annexes.html#sec-regles">Annexes</a>)</p></li>
 <li><p>Une description précise des tableaux que votre interlocuteur souhaite diffuser :</p>
 <ul>
 <li>sur quel champ de la population les tableaux sont-ils construits ?</li>
@@ -260,29 +286,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 <p>Chaque sous-demande doit faire l’objet d’un traitement à part, en suivant les mêmes étapes.</p>
 </section>
-<section id="lister-les-tableaux-nécessaires-pour-la-pose-de-secret" class="level3" data-number="3.1.3">
-<h3 data-number="3.1.3" class="anchored" data-anchor-id="lister-les-tableaux-nécessaires-pour-la-pose-de-secret"><span class="header-section-number">3.1.3</span> Lister les tableaux nécessaires pour la pose de secret</h3>
-<p>Rassembler en un seul tableau les tableaux liés car “additifs”.</p>
-<p>Séparer en plusieurs tableaux un tableau qui contiendrait des sous-totaux non-emboîtés.</p>
-</section>
-<section id="construire-les-hiérarchies-éventuellement-nécessaires" class="level3" data-number="3.1.4">
-<h3 data-number="3.1.4" class="anchored" data-anchor-id="construire-les-hiérarchies-éventuellement-nécessaires"><span class="header-section-number">3.1.4</span> Construire les hiérarchies éventuellement nécessaires</h3>
-</section>
-<section id="construire-les-tableaux-à-partir-des-tableaux-fournis-par-lutilisateur-si-besoin" class="level3" data-number="3.1.5">
-<h3 data-number="3.1.5" class="anchored" data-anchor-id="construire-les-tableaux-à-partir-des-tableaux-fournis-par-lutilisateur-si-besoin"><span class="header-section-number">3.1.5</span> Construire les tableaux à partir des tableaux fournis par l’utilisateur (si besoin)</h3>
-</section>
-<section id="procéder-à-la-pose-du-masque-en-opérant-comme-indiqué-dans-le-chapitre-6-fiches-pratiques." class="level3" data-number="3.1.6">
-<h3 data-number="3.1.6" class="anchored" data-anchor-id="procéder-à-la-pose-du-masque-en-opérant-comme-indiqué-dans-le-chapitre-6-fiches-pratiques."><span class="header-section-number">3.1.6</span> Procéder à la pose du masque en opérant comme indiqué dans le chapitre 6 <code>Fiches pratiques</code>.</h3>
-</section>
-</section>
-<section id="détecter-les-liens" class="level2" data-number="3.2">
-<h2 data-number="3.2" class="anchored" data-anchor-id="détecter-les-liens"><span class="header-section-number">3.2</span> Détecter les liens</h2>
+<section id="détecter-les-liens" class="level3" data-number="3.1.3">
+<h3 data-number="3.1.3" class="anchored" data-anchor-id="détecter-les-liens"><span class="header-section-number">3.1.3</span> Détecter les liens</h3>
 <p>Il y a deux principaux types de liens sur les variables réponse :</p>
 <ul>
 <li><p>les hiérarchies</p>
 <ul>
-<li>emboîtées</li>
-<li>non-emboîtées</li>
+<li>emboîtées (voir <a href="01_notions.html#sec-hrc">Notions</a>)</li>
+<li>non-emboîtées (voir <a href="01_notions.html#sec-hrcnonemb">Notions</a>)</li>
 </ul></li>
 <li><p>les équations du type A = B + C</p>
 <ul>
@@ -290,16 +301,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>au niveau des champs</li>
 </ul></li>
 </ul>
+<p>En présence de tels liens il faut parfois regrouper des tableaux en un seul (hiérarchie emboîtée sur une variable de croisement), ou au contraire construire deux tableaux à partir d’un seul (hiérarchie non-emboîtée). Dans tous les cas lorsque des tableaux sont liés il faut les traiter ensemble afin que lorsqu’une cellule est touchée dans un tableau, elle le soit aussi automatiquement dans tous les autres tableaux où elle apparaît.</p>
 </section>
-<section id="passer-de-la-liste-de-diffusion-à-la-liste-de-protection" class="level2" data-number="3.3">
-<h2 data-number="3.3" class="anchored" data-anchor-id="passer-de-la-liste-de-diffusion-à-la-liste-de-protection"><span class="header-section-number">3.3</span> Passer de la liste de diffusion à la liste de protection</h2>
+<section id="passer-de-la-liste-de-diffusion-à-la-liste-de-protection" class="level3" data-number="3.1.4">
+<h3 data-number="3.1.4" class="anchored" data-anchor-id="passer-de-la-liste-de-diffusion-à-la-liste-de-protection"><span class="header-section-number">3.1.4</span> Passer de la liste de diffusion à la liste de protection</h3>
 <p>La liste de diffusion est la liste de tableaux qui sera effectivement publiée. Elle diffère de la liste de protection qui elle est à établir en fonction des liens entre les différents tableaux. En effet, pour poser le secret pertinemment il faut renseigner les différents liens pour que l’algorithme en tienne compte.</p>
+<p>Par exemple on peut être amené à :</p>
+<ul>
+<li>Rassembler en un seul tableau les tableaux liés car “additifs”.</li>
+<li>Séparer en plusieurs tableaux un tableau qui contiendrait des sous-totaux non-emboîtés.</li>
+</ul>
 <p>De plus, si les données sont sous forme de micro-données il faut calculer les agrégats qui seront diffusés pour établir la liste de diffusion. En effet, nous ne posons pas le secret sur les micro-données mais sur les agrégats. Pour ce faire la fonction <code>tabul_fun_group</code> permet de facilement construire les tables agrégées sous le bon format pour les mettre en entrée de <code>rtauargus</code>.</p>
 </section>
-<section id="fiches-exemples-danalyse-de-demandes" class="level2" data-number="3.4">
-<h2 data-number="3.4" class="anchored" data-anchor-id="fiches-exemples-danalyse-de-demandes"><span class="header-section-number">3.4</span> Fiches exemples d’analyse de demandes</h2>
-<p>Exemple 1 :</p>
-<p><em>Demande</em> - on souhaite diffuser 4 tableaux</p>
+</section>
+<section id="fiches-exemples-danalyse-de-demandes" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="fiches-exemples-danalyse-de-demandes"><span class="header-section-number">3.2</span> Fiches exemples d’analyse de demandes</h2>
+<section id="exemple-1-niveau-facile" class="level3" data-number="3.2.1">
+<h3 data-number="3.2.1" class="anchored" data-anchor-id="exemple-1-niveau-facile"><span class="header-section-number">3.2.1</span> Exemple 1 : niveau facile</h3>
+<p><strong>Demande</strong> - on souhaite diffuser 4 tableaux</p>
 <ul>
 <li>T1 : population par âge (5 classes), par sexe et par département</li>
 <li>T2 : population par sexe, par diplôme et par département</li>
@@ -313,13 +332,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>T3 : pop x {socpro x act x dep}</li>
 <li>T4 : pop x {age x sexe x act}</li>
 </ul>
-<p><em>Analyse</em></p>
+<p><strong>Analyse</strong></p>
 <p>Les tableaux partagent le même champ (sous-entendu) et le même indicateur (population), ils sont donc liés a minima par le total, donc il n’y a pas de sous-demande indépendante.</p>
 <p>De plus, certains tableaux ont des variables de croisement communes, il y a un lien sur les marges, les liens n’en sont que renforcés.</p>
 <p>Les variables entre elles n’ont pas de lien hiérarchique (le seul niveau géographique est le département), donc les tableaux ne doivent pas être fusionnés.</p>
 <p>Finalement, la liste des tableaux à protéger est identique à la liste des tableaux à diffuser.</p>
-<p>Exemple 2 :</p>
-<p><em>Demande</em> - on souhaite diffuser 7 tableaux</p>
+</section>
+<section id="exemple-2-niveau-moyen" class="level3" data-number="3.2.2">
+<h3 data-number="3.2.2" class="anchored" data-anchor-id="exemple-2-niveau-moyen"><span class="header-section-number">3.2.2</span> Exemple 2 : niveau moyen</h3>
+<p><strong>Demande</strong> - on souhaite diffuser 7 tableaux</p>
 <ul>
 <li>T1 : population par âge (5 classes), par sexe et par département</li>
 <li>T2 : population par sexe, par diplôme et par département</li>
@@ -339,7 +360,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>T6 : pop x {sexe x dip x reg}</li>
 <li>T7 : pop x {socpro x act x reg}</li>
 </ul>
-<p><em>Analyse</em></p>
+<p><strong>Analyse</strong></p>
 <p>Les tableaux partagent le même champ (sous-entendu) et le même indicateur (population), ils sont donc liés a minima par le total, donc il n’y a pas de sous-demande indépendante.</p>
 <p>De plus, certains tableaux ont des variables de croisement communes, il y a un lien sur les marges, les liens n’en sont que renforcés.</p>
 <p>Deux variables ont un lien hiérarchique (région &gt; département), lorsque l’information est hiérarchisée (et emboîtée) il faut la traiter dans un même tableau en créant une variable hiérarchique qu’on peut appeler par exemple <code>GEO</code>. De plus, on peut fusionner les tableaux partageant les mêmes variables de croisement.</p>
@@ -351,8 +372,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>T4 : pop x {age x sexe x act}</li>
 <li>où GEO est une variable hiérarchique emboîtant régions et départements</li>
 </ul>
-<p>Exemple 3 :</p>
-<p><em>Demande</em> - on souhaite diffuser 4 tableaux</p>
+</section>
+<section id="exemple-3-niveau-expert" class="level3" data-number="3.2.3">
+<h3 data-number="3.2.3" class="anchored" data-anchor-id="exemple-3-niveau-expert"><span class="header-section-number">3.2.3</span> Exemple 3 : niveau expert</h3>
+<p><strong>Demande</strong> - on souhaite diffuser 4 tableaux</p>
 <ul>
 <li>T1 : population par âge (3 classes : &lt;25, 25-55, +55) et par département</li>
 <li>T2 : population par âge (5 classes : &lt;15, 15-25, 25-45, 45-65, +65), par sexe et par département</li>
@@ -366,7 +389,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>T3 : pop x {age_3 x reg}</li>
 <li>T4 : pop x {age_5 x sexe x reg}</li>
 </ul>
-<p><em>Analyse</em></p>
+<p><strong>Analyse</strong></p>
 <p>Les tableaux partagent le même champ (sous-entendu) et le même indicateur (population), ils sont donc liés a minima par le total, donc il n’y a pas de sous-demande indépendante.</p>
 <p>De plus, certains tableaux ont des variables de croisement communes, il y a un lien sur les marges, les liens n’en sont que renforcés.</p>
 <p>Deux variables ont un lien hiérarchique (région &gt; département) :</p>
@@ -407,6 +430,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -643,15 +667,16 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script>
+
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./02_notions.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Notions principales à connaître</span></span>
+      <a href="./02_secret_un_tableau.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Poser le secret sur un tableau</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./04_fiches_pratiques.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Fiches pratiques</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./04_secret_tableaux_lies.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Poser le secret sur plusieurs tableaux liés (par les marges)</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

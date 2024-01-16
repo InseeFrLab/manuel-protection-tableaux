@@ -10,12 +10,13 @@ book:
   language: fr
   chapters:
     - index.qmd
-    - 01_regles.qmd
-    - 02_notions.qmd
+    - 01_notions.qmd
+    - 02_secret_un_tableau.qmd
     - 03_analyser_une_demande.qmd
-    - 04_fiches_pratiques.qmd
-    - 05_les_outils.qmd
-    - 06_annexes.qmd
+    - 04_secret_tableaux_lies.qmd
+    - 05_fiches_pratiques.qmd
+    - 06_les_outils.qmd
+    - 07_annexes.qmd
   page-navigation: true
 
 bibliography: references.bib
