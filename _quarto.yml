@@ -7,7 +7,6 @@ book:
   title: "Manuel de protection des tableaux"
   author: "Julien Jamme, Nathanaël Rastout"
   date: "03/04/2023"
-  lang: fr
   chapters:
     - index.qmd
     - 01_notions.qmd
@@ -15,7 +14,7 @@ book:
     - 03_analyser_une_demande.qmd
     - 04_secret_tableaux_lies.qmd
     - 05_fiches_pratiques.qmd
-    - 06_les_outils.qmd
+    - 06_expert.qmd
     - 07_annexes.qmd
   page-navigation: true
 
