@@ -7,7 +7,7 @@ book:
   title: "Manuel de protection des tableaux"
   author: "Julien Jamme, Nathanaël Rastout"
   date: "03/04/2023"
-  language: fr
+  lang: fr
   chapters:
     - index.qmd
     - 01_notions.qmd
@@ -23,7 +23,9 @@ bibliography: references.bib
 
 format:
   html:
-    theme: cosmo
+    theme:
+    - cosmo
+    - custom.scss
     toc-depth: 5
   pdf:
     documentclass: scrreprt

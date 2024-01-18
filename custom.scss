@@ -1,0 +1,94 @@
+/*-- scss:defaults --*/
+
+
+// high level overall container for the callout
+.solutionbox {
+  // margin-top: 1em;
+  // margin-bottom: 1em;  
+  border-radius: .25rem;
+  border-left: solid #acacac .3rem;
+  border-right: solid 1px #DEE2E6;
+  border-top: solid 1px #DEE2E6;
+  border-bottom: solid 1px #DEE2E6;
+  border-left-color: #f0ad4e !important;
+}
+
+// class for the icon
+.solutionbox-icon {
+  height: 0.9rem;
+  width: 1.1rem;
+  display: inline-block;
+  content: "";
+  background-repeat: no-repeat;
+  background-size: 0.9rem 0.9rem;
+  margin-top: .4rem;
+  padding-right: .5rem;
+  background-image: url('check-double-solid.svg');
+}
+
+// box for the title
+.solutionbox-header {
+  //margin-top: 0.1em;
+  //margin-bottom: 0.4em;
+  border-bottom: none;
+  font-weight: 600;
+  opacity: 85%;
+  font-size: 0.9rem;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+  display: flex;
+  background-color: #fdf4e8;
+  height: 1.8em;
+  overflow: hidden;
+}
+
+// box for the body, where all the content acutally goes
+.solutionbox-body {
+  font-size: 0.9rem;
+  font-weight: 400;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+}
+
+
+// callout block pour niveau facile
+// high level overall container for the callout
+.solutionbox-facile {
+  margin-top: 1em;
+  margin-bottom: 1em;  
+  border-radius: .25rem;
+  border-left: solid #acacac .3rem;
+  border-right: solid 1px #DEE2E6;
+  border-top: solid 1px #DEE2E6;
+  border-bottom: solid 1px #DEE2E6;
+  border-left-color: #02b875 !important;
+}
+
+// class for the icon
+.solutionbox-icon-facile {
+  height: 0.9rem;
+  width: 1.1rem;
+  display: inline-block;
+  content: "";
+  background-repeat: no-repeat;
+  background-size: 0.9rem 0.9rem;
+  margin-top: .4rem;
+  padding-right: .5rem;
+  background-image: url('check-solid.svg');
+}
+
+// box for the title
+.solutionbox-header-facile {
+  //margin-top: 0.1em;
+  //margin-bottom: 0.4em;
+  border-bottom: none;
+  font-weight: 600;
+  opacity: 85%;
+  font-size: 0.9rem;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+  display: flex;
+  background-color: #e6fff6;
+  height: 1.8em;
+  overflow: hidden;
+}

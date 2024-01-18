@@ -1,9 +1,3 @@
----
-editor: 
-  markdown: 
-    wrap: 72
----
-
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(eval = TRUE)
 ```
@@ -35,6 +29,16 @@ identique :
 N.B : pour les tableaux de fréquence `FREQ` = `VALUE`.
 
 ## Préparation des tableaux pour la pose du secret
+
+:::{.solutionbox-facile}
+
+::::{.solutionbox-header-facile}
+:::::{.solutionbox-icon-facile}
+:::::
+Niveau facile
+::::
+
+:::
 
 ### **`tabulate_micro_data()`**
 
@@ -82,7 +86,7 @@ fonction **`tabulate_micro_data`** pour le générer.
 -   **`X_tot`** : Indicateur / variable de réponse (**`VALUE`**)
 -   **`X_max`** : Contribution maximale (**`MAX`**).
 
-### EXEMPLES
+### Exemples
 
 #### Appel simple
 Trois variables de croisement ("A10", "SIZE", "CJ") et une variable de réponse ("PRODUCTION").
@@ -169,6 +173,16 @@ DT::datatable(dtDonneesTabulees)
 
 
 ## Prendre en compte une variable hiérarchique
+
+:::{.solutionbox-facile}
+
+::::{.solutionbox-header-facile}
+:::::{.solutionbox-icon-facile}
+:::::
+Niveau facile
+::::
+
+:::
 
 Reprenons ici l'exemple de la variable `geo` qui est une variable
 hiérarchique puisqu'il existe des emboîtements entre les différents
@@ -297,6 +311,16 @@ corr_tab
 ```
 
 ## Poser le secret en présence de hiérarchies non-emboîtées
+
+:::{.solutionbox}
+
+::::{.solutionbox-header}
+:::::{.solutionbox-icon}
+:::::
+Niveau moyen
+::::
+
+:::
 
 Lorsque l'on a la présence de hiérarchie non-emboîtée dans les tableaux
 traités alors il faut construire deux tableaux et deux hiérarchies pour
@@ -579,21 +603,4 @@ synthese_ns <- res_ns %>% group_by(Status) %>%
 
 synthese_ns
 ```
-
-
-:::{.solutionbox}
-
-::::{.solutionbox-header}
-::::{.solutionbox-icon}
-::::
-This is my test code
-::::
-
-::::{.solutionbox-body}
-And some content inside of it
-::::
-
-:::
-
-
 
