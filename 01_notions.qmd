@@ -258,4 +258,4 @@ terminée on se retrouve avec les tableaux à protéger, le secret sera
 appliqué sur ces tableaux et c'est seulement une fois la procédure
 terminée que l'on pourra reporter le secret identifié sur les tableaux à
 protéger sur les tableaux à diffuser. Cette phase d'analyse est
-développé dans la [Partie @sec-analyserdemande]
+développée au Chapitre -@sec-analyserdemande .

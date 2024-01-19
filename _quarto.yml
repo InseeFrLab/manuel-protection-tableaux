@@ -5,7 +5,7 @@ execute:
 
 book:
   title: "Manuel de protection des tableaux"
-  author: "Julien Jamme, Nathanaël Rastout"
+  author: "Clara Baudry, Arlindo Dos Santos, Julien Jamme, Nathanaël Rastout"
   date: "03/04/2023"
   chapters:
     - index.qmd
