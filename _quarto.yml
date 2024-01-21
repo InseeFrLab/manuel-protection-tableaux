@@ -1,5 +1,6 @@
 project:
   type: book
+    
 execute:
   freeze: auto
 
@@ -7,15 +8,26 @@ book:
   title: "Manuel de protection des tableaux"
   author: "Clara Baudry, Arlindo Dos Santos, Julien Jamme, Nathanaël Rastout"
   date: "03/04/2023"
+  
   chapters:
-    - index.qmd
-    - 01_notions.qmd
-    - 02_secret_un_tableau.qmd
-    - 03_analyser_une_demande.qmd
-    - 04_secret_tableaux_lies.qmd
-    - 05_fiches_pratiques.qmd
-    - 06_expert.qmd
-    - 07_annexes.qmd
+    - part: "Introduction"
+      chapters: 
+        - index.qmd
+        - 01_notions.qmd
+    - part: "La pose de secret"
+      chapters: 
+        - 02_secret_un_tableau.qmd
+        - 03_analyser_une_demande.qmd
+        - 04_secret_tableaux_lies.qmd
+    - part: "En pratique"
+      chapters: 
+        - 05_fiches_pratiques.qmd
+        - 06_expert.qmd
+    - part: "Annexes"
+      chapters:
+        - chapters/annexes/regles.qmd
+        - chapters/annexes/manipuler_les_listes.qmd
+  
   page-navigation: true
 
 bibliography: references.bib
@@ -26,8 +38,6 @@ format:
     - cosmo
     - custom.scss
     toc-depth: 5
-  pdf:
-    documentclass: scrreprt
 
 
 
