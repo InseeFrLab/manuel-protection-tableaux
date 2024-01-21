@@ -6,10 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Clara Baudry, Arlindo Dos Santos, Julien Jamme, Nathanaël Rastout">
-<meta name="dcterms.date" content="2023-03-04">
 
-<title>Manuel de protection des tableaux</title>
+<title>Manuel de protection des tableaux - 3&nbsp; Comment analyser une demande ?</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -22,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -32,7 +64,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./01_notions.html" rel="next">
+<link href="./04_secret_tableaux_lies.html" rel="next">
+<link href="./02_secret_un_tableau.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -82,7 +115,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Introduction</a></li><li class="breadcrumb-item"><a href="./index.html">Introduction</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./02_secret_un_tableau.html">La pose de secret</a></li><li class="breadcrumb-item"><a href="./03_analyser_une_demande.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Comment analyser une demande ?</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -118,7 +151,7 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Introduction</span></a>
   </div>
 </li>
@@ -147,7 +180,7 @@ ul.task-list li input[type="checkbox"] {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./03_analyser_une_demande.html" class="sidebar-item-text sidebar-link">
+  <a href="./03_analyser_une_demande.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Comment analyser une demande ?</span></span></a>
   </div>
 </li>
@@ -215,35 +248,35 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#étapes-de-lanalyse-de-demande" id="toc-étapes-de-lanalyse-de-demande" class="nav-link active" data-scroll-target="#étapes-de-lanalyse-de-demande"><span class="header-section-number">3.1</span> Étapes de l’analyse de demande</a>
+  <ul>
+  <li><a href="#vérifier-que-toutes-les-informations-nécessaires-à-la-gestion-de-la-confidentialité-sont-disponibles" id="toc-vérifier-que-toutes-les-informations-nécessaires-à-la-gestion-de-la-confidentialité-sont-disponibles" class="nav-link" data-scroll-target="#vérifier-que-toutes-les-informations-nécessaires-à-la-gestion-de-la-confidentialité-sont-disponibles"><span class="header-section-number">3.1.1</span> Vérifier que toutes les informations nécessaires à la gestion de la confidentialité sont disponibles</a></li>
+  <li><a href="#la-demande-peut-elle-être-séparée-en-plusieurs-sous-demandes-indépendantes" id="toc-la-demande-peut-elle-être-séparée-en-plusieurs-sous-demandes-indépendantes" class="nav-link" data-scroll-target="#la-demande-peut-elle-être-séparée-en-plusieurs-sous-demandes-indépendantes"><span class="header-section-number">3.1.2</span> La demande peut-elle être séparée en plusieurs sous-demandes indépendantes ?</a></li>
+  <li><a href="#détecter-les-liens" id="toc-détecter-les-liens" class="nav-link" data-scroll-target="#détecter-les-liens"><span class="header-section-number">3.1.3</span> Détecter les liens</a></li>
+  <li><a href="#passer-de-la-liste-de-diffusion-à-la-liste-de-protection" id="toc-passer-de-la-liste-de-diffusion-à-la-liste-de-protection" class="nav-link" data-scroll-target="#passer-de-la-liste-de-diffusion-à-la-liste-de-protection"><span class="header-section-number">3.1.4</span> Passer de la liste de diffusion à la liste de protection</a></li>
+  </ul></li>
+  <li><a href="#fiches-exemples-danalyse-de-demandes" id="toc-fiches-exemples-danalyse-de-demandes" class="nav-link" data-scroll-target="#fiches-exemples-danalyse-de-demandes"><span class="header-section-number">3.2</span> Fiches exemples d’analyse de demandes</a>
+  <ul>
+  <li><a href="#exemple-1-niveau-facile" id="toc-exemple-1-niveau-facile" class="nav-link" data-scroll-target="#exemple-1-niveau-facile"><span class="header-section-number">3.2.1</span> Exemple 1 : niveau facile</a></li>
+  <li><a href="#exemple-2-niveau-moyen" id="toc-exemple-2-niveau-moyen" class="nav-link" data-scroll-target="#exemple-2-niveau-moyen"><span class="header-section-number">3.2.2</span> Exemple 2 : niveau moyen</a></li>
+  <li><a href="#exemple-3-niveau-expert" id="toc-exemple-3-niveau-expert" class="nav-link" data-scroll-target="#exemple-3-niveau-expert"><span class="header-section-number">3.2.3</span> Exemple 3 : niveau expert</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Introduction</a></li><li class="breadcrumb-item"><a href="./index.html">Introduction</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./02_secret_un_tableau.html">La pose de secret</a></li><li class="breadcrumb-item"><a href="./03_analyser_une_demande.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Comment analyser une demande ?</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Manuel de protection des tableaux</h1>
+<h1 class="title"><span id="sec-analyserdemande" class="quarto-section-identifier"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Comment analyser une demande ?</span></span></h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Clara Baudry, Arlindo Dos Santos, Julien Jamme, Nathanaël Rastout </p>
-          </div>
-  </div>
     
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">March 4, 2023</p>
-    </div>
-  </div>
   
     
   </div>
@@ -253,12 +286,209 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="introduction" class="level1 unnumbered">
-<h1 class="unnumbered">Introduction</h1>
-<p>La présente édition est la première version du manuel pour la gestion de la confidentialité à l’Insee. Ce manuel fournit un première réponse à la recommandation de la mission de l’inspection générale pour la diffusion sur mesure [retrouver la référence Gecodoc]. Il s’inspire du manuel européen écrit par des auteurs de référence. Le “Handbook on Statistical Disclosure Control” https://research.cbs.nl/casc/SDC_Handbook.pdf. Il ajoute une dimension opérationnelle au travers de plusieurs cas pratiques.</p>
-<p>Dans un premier temps un tour d’horizon des différentes règles appliquées pour le secret statistique à l’Insee est effectué. Puis, les notions principales utiles pour la pose du secret sont introduites. L’idée est de se baser sur un vocabulaire commun afin d’être sûrs de parler de la même chose. La partie 4 explique la marche à suivre pour appliquer le secret. En effet, la première étape consiste à analyser les tableaux que l’on souhaite publier, plus particulièrement les liens entre ces différents tableaux. La partie 5 regroupe plusieurs fiches pratiques pour poser le secret à l’aide de <code>rtauargus</code>. Elles sont de niveau croissant, allant de débutant à expert. La partie 6 est une partie plus “expert”, elle décrit pus précisément les différents outils et donne des clefs pour débugger le logiciel le cas échéant.</p>
+<p>La liste de tableaux à diffuser n’est pas la même que la liste des tableaux à protéger. En effet, la liste de tableaux à protéger découle d’une analyse des liens entre les différents tableaux. Cette partie a pour but de présenter le cadre de réflexion et les étapes suivies par la DMRG pour définir la liste de tableaux sur lesquels le masque de secret sera posé.</p>
+<section id="étapes-de-lanalyse-de-demande" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="étapes-de-lanalyse-de-demande"><span class="header-section-number">3.1</span> Étapes de l’analyse de demande</h2>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Etapes de l’analyse de la demande
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="1">
+<li>Réunir les informations nécessaires à la gestion de la confidentialité</li>
+<li>Séparer la demande en sous-demande indépendantes si possible</li>
+<li>Détecter les liens</li>
+<li>Construire les hiérarchies éventuellement nécessaires</li>
+<li>Lister les tableaux nécessaires pour la pose de secret (passage de la liste de diffusion à la liste de protection).</li>
+</ol>
+</div>
+</div>
+<section id="vérifier-que-toutes-les-informations-nécessaires-à-la-gestion-de-la-confidentialité-sont-disponibles" class="level3" data-number="3.1.1">
+<h3 data-number="3.1.1" class="anchored" data-anchor-id="vérifier-que-toutes-les-informations-nécessaires-à-la-gestion-de-la-confidentialité-sont-disponibles"><span class="header-section-number">3.1.1</span> Vérifier que toutes les informations nécessaires à la gestion de la confidentialité sont disponibles</h3>
+<p>Les informations nécessaires sont :</p>
+<ul>
+<li><p>Les règles de secret qui s’appliquent sur les données (voir <a href="chapters/annexes/regles.html">Annexes</a>)</p></li>
+<li><p>Une description précise des tableaux que votre interlocuteur souhaite diffuser :</p>
+<ul>
+<li>sur quel champ de la population les tableaux sont-ils construits ?</li>
+<li>quelles sont les variables descriptives (de croisement) ?</li>
+<li>quelle est la variable de réponse pour chacun des tableaux ?</li>
+<li>les tableaux sont-ils des tableaux de fréquence ou bien des tableaux de volume ?</li>
+<li>parmi l’ensemble des variables de croisement, certaines sont-elles hiérarchiques ? Les emboîtements ont-ils été fournis ?</li>
+</ul></li>
+<li><p>Une description précise des liens éventuels entre les variables ou tableaux :</p>
+<ul>
+<li>certaines variables ou modalités sont-elles reliées par une équation ?</li>
+<li>des équations/liens ont-ils été fournis ?</li>
+<li>de fortes corrélations existent-elles entre certaines variables de réponse ?</li>
+</ul></li>
+</ul>
+</section>
+<section id="la-demande-peut-elle-être-séparée-en-plusieurs-sous-demandes-indépendantes" class="level3" data-number="3.1.2">
+<h3 data-number="3.1.2" class="anchored" data-anchor-id="la-demande-peut-elle-être-séparée-en-plusieurs-sous-demandes-indépendantes"><span class="header-section-number">3.1.2</span> La demande peut-elle être séparée en plusieurs sous-demandes indépendantes ?</h3>
+<ul>
+<li><p>Des tableaux portant sur des variable de réponse différentes, non liées par une équation ou par un lien de corrélation fort, peuvent être traités séparément.</p></li>
+<li><p>Des tableaux construits sur des champs différents et non complémentaires peuvent être traités séparément.</p></li>
+<li><p>Y a-t-il au contraire des tableaux qui doivent être traités dans dans le même temps ?</p>
+<ul>
+<li>rassembler les tableaux partageant la même variable de réponse et le même champ, car ils partagent a minima le même super-total (n.b.&nbsp;on ne les fusionne pas on les rassemblent juste pour les traiter ensemble)</li>
+<li>déterminer les tableaux liés entre eux par leurs marges</li>
+<li>déterminer les tableaux liés entre eux car “additifs”</li>
+<li>déterminer les tableaux liés entre eux par la présence potentielle de hiérarchies non-emboîtées</li>
+</ul></li>
+</ul>
+<p>Chaque sous-demande doit faire l’objet d’un traitement à part, en suivant les mêmes étapes.</p>
+</section>
+<section id="détecter-les-liens" class="level3" data-number="3.1.3">
+<h3 data-number="3.1.3" class="anchored" data-anchor-id="détecter-les-liens"><span class="header-section-number">3.1.3</span> Détecter les liens</h3>
+<p>Il y a deux principaux types de liens sur les variables réponse :</p>
+<ul>
+<li><p>les hiérarchies</p>
+<ul>
+<li>emboîtées (voir <a href="01_notions.html#sec-hrc">Notions</a>)</li>
+<li>non-emboîtées (voir <a href="01_notions.html#sec-hrcnonemb">Notions</a>)</li>
+</ul></li>
+<li><p>les équations du type A = B + C</p>
+<ul>
+<li>entre les variables réponses</li>
+<li>au niveau des champs</li>
+</ul></li>
+</ul>
+<p>En présence de tels liens il faut parfois regrouper des tableaux en un seul (hiérarchie emboîtée sur une variable de croisement), ou au contraire construire deux tableaux à partir d’un seul (hiérarchie non-emboîtée). Dans tous les cas lorsque des tableaux sont liés il faut les traiter ensemble afin que lorsqu’une cellule est touchée dans un tableau, elle le soit aussi automatiquement dans tous les autres tableaux où elle apparaît.</p>
+</section>
+<section id="passer-de-la-liste-de-diffusion-à-la-liste-de-protection" class="level3" data-number="3.1.4">
+<h3 data-number="3.1.4" class="anchored" data-anchor-id="passer-de-la-liste-de-diffusion-à-la-liste-de-protection"><span class="header-section-number">3.1.4</span> Passer de la liste de diffusion à la liste de protection</h3>
+<p>La liste de diffusion est la liste de tableaux qui sera effectivement publiée. Elle diffère de la liste de protection qui elle est à établir en fonction des liens entre les différents tableaux. En effet, pour poser le secret pertinemment il faut renseigner les différents liens pour que l’algorithme en tienne compte.</p>
+<p>Par exemple on peut être amené à :</p>
+<ul>
+<li>Rassembler en un seul tableau les tableaux liés car “additifs”.</li>
+<li>Séparer en plusieurs tableaux un tableau qui contiendrait des sous-totaux non-emboîtés.</li>
+</ul>
+<p>De plus, si les données sont sous forme de micro-données il faut calculer les agrégats qui seront diffusés pour établir la liste de diffusion. En effet, nous ne posons pas le secret sur les micro-données mais sur les agrégats. Pour ce faire la fonction <code>tabul_fun_group</code> permet de facilement construire les tables agrégées sous le bon format pour les mettre en entrée de <code>rtauargus</code>.</p>
+</section>
+</section>
+<section id="fiches-exemples-danalyse-de-demandes" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="fiches-exemples-danalyse-de-demandes"><span class="header-section-number">3.2</span> Fiches exemples d’analyse de demandes</h2>
+<section id="exemple-1-niveau-facile" class="level3" data-number="3.2.1">
+<h3 data-number="3.2.1" class="anchored" data-anchor-id="exemple-1-niveau-facile"><span class="header-section-number">3.2.1</span> Exemple 1 : niveau facile</h3>
+<p><strong>Demande</strong> - on souhaite diffuser 4 tableaux</p>
+<ul>
+<li>T1 : population par âge (5 classes), par sexe et par département</li>
+<li>T2 : population par sexe, par diplôme et par département</li>
+<li>T3 : population par catégorie catégorie socio-professionnelle, par statut d’activité et par département</li>
+<li>T4 : population par âge, par sexe et par statut d’activité</li>
+</ul>
+<p>En formalisant :</p>
+<ul>
+<li>T1 : pop x {age x sexe x dep}</li>
+<li>T2 : pop x {sexe x dip x dep}</li>
+<li>T3 : pop x {socpro x act x dep}</li>
+<li>T4 : pop x {age x sexe x act}</li>
+</ul>
+<p><strong>Analyse</strong></p>
+<p>Les tableaux partagent le même champ (sous-entendu) et le même indicateur (population), ils sont donc liés a minima par le total, donc il n’y a pas de sous-demande indépendante.</p>
+<p>De plus, certains tableaux ont des variables de croisement communes, il y a un lien sur les marges, les liens n’en sont que renforcés.</p>
+<p>Les variables entre elles n’ont pas de lien hiérarchique (le seul niveau géographique est le département), donc les tableaux ne doivent pas être fusionnés.</p>
+<p>Finalement, la liste des tableaux à protéger est identique à la liste des tableaux à diffuser.</p>
+</section>
+<section id="exemple-2-niveau-moyen" class="level3" data-number="3.2.2">
+<h3 data-number="3.2.2" class="anchored" data-anchor-id="exemple-2-niveau-moyen"><span class="header-section-number">3.2.2</span> Exemple 2 : niveau moyen</h3>
+<p><strong>Demande</strong> - on souhaite diffuser 7 tableaux</p>
+<ul>
+<li>T1 : population par âge (5 classes), par sexe et par département</li>
+<li>T2 : population par sexe, par diplôme et par département</li>
+<li>T3 : population par catégorie catégorie socio-professionnelle, par statut d’activité et par département</li>
+<li>T4 : population par âge, par sexe et par statut d’activité</li>
+<li>T5 : population par âge (5 classes), par sexe et par région</li>
+<li>T6 : population par sexe, par diplôme et par région</li>
+<li>T7 : population par catégorie socio-professionnelle, par statut d’activité et par région</li>
+</ul>
+<p>En formalisant :</p>
+<ul>
+<li>T1 : pop x {age x sexe x dep}</li>
+<li>T2 : pop x {age x dip x dep}</li>
+<li>T3 : pop x {socpro x act x dep}</li>
+<li>T4 : pop x {age x sexe x act}</li>
+<li>T5 : pop x {age x sexe x reg}</li>
+<li>T6 : pop x {sexe x dip x reg}</li>
+<li>T7 : pop x {socpro x act x reg}</li>
+</ul>
+<p><strong>Analyse</strong></p>
+<p>Les tableaux partagent le même champ (sous-entendu) et le même indicateur (population), ils sont donc liés a minima par le total, donc il n’y a pas de sous-demande indépendante.</p>
+<p>De plus, certains tableaux ont des variables de croisement communes, il y a un lien sur les marges, les liens n’en sont que renforcés.</p>
+<p>Deux variables ont un lien hiérarchique (région &gt; département), lorsque l’information est hiérarchisée (et emboîtée) il faut la traiter dans un même tableau en créant une variable hiérarchique qu’on peut appeler par exemple <code>GEO</code>. De plus, on peut fusionner les tableaux partageant les mêmes variables de croisement.</p>
+<p>La liste des tableaux à protéger est donc la suivante :</p>
+<ul>
+<li>T1 : pop x {age x sexe x GEO}</li>
+<li>T2 : pop x {sexe x dip x GEO}</li>
+<li>T3 : pop x {socpro x act x GEO}</li>
+<li>T4 : pop x {age x sexe x act}</li>
+<li>où GEO est une variable hiérarchique emboîtant régions et départements</li>
+</ul>
+</section>
+<section id="exemple-3-niveau-expert" class="level3" data-number="3.2.3">
+<h3 data-number="3.2.3" class="anchored" data-anchor-id="exemple-3-niveau-expert"><span class="header-section-number">3.2.3</span> Exemple 3 : niveau expert</h3>
+<p><strong>Demande</strong> - on souhaite diffuser 4 tableaux</p>
+<ul>
+<li>T1 : population par âge (3 classes : &lt;25, 25-55, +55) et par département</li>
+<li>T2 : population par âge (5 classes : &lt;15, 15-25, 25-45, 45-65, +65), par sexe et par département</li>
+<li>T3 : population par âge (3 classes : &lt;25, 25-55, +55) et par région</li>
+<li>T4 : population par âge (5 classes : &lt;15, 15-25, 25-45, 45-65, +65), par sexe et par région</li>
+</ul>
+<p>En formalisant :</p>
+<ul>
+<li>T1 : pop x {age_3 x dep}</li>
+<li>T2 : pop x {age_5 x sexe x dep}</li>
+<li>T3 : pop x {age_3 x reg}</li>
+<li>T4 : pop x {age_5 x sexe x reg}</li>
+</ul>
+<p><strong>Analyse</strong></p>
+<p>Les tableaux partagent le même champ (sous-entendu) et le même indicateur (population), ils sont donc liés a minima par le total, donc il n’y a pas de sous-demande indépendante.</p>
+<p>De plus, certains tableaux ont des variables de croisement communes, il y a un lien sur les marges, les liens n’en sont que renforcés.</p>
+<p>Deux variables ont un lien hiérarchique (région &gt; département) :</p>
+<ul>
+<li>les tableaux T1 et T3 partagent les mêmes variables de croisement et peuvent donc être fusionnés</li>
+<li>les tableaux T2 et T4 partagent les mêmes variables de croisement et peuvent donc être fusionnés</li>
+</ul>
+<p>La variable âge est ventilée différemment entre T1 et T2 (ainsi qu’entre T3 et T4). On doit donc se demander si les différentes modalités de l’âge sont emboîtées. On peut présenter la hiérarchie ainsi :</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="sc">&lt;</span><span class="dv">25</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="sc">@</span><span class="er">&lt;</span><span class="dv">15</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="sc">@</span><span class="dv">15-25</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="dv">25-55</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="sc">@</span><span class="dv">25-45</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="sc">@</span><span class="dv">45-55</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="sc">+</span><span class="dv">55</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="sc">@</span><span class="dv">55-65</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="sc">+</span><span class="dv">65</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Il n’est pas possible d’insérer la modalité 45-65 dans cette hiérarchie, il s’agit donc d’un cas de hiérarchie non-emboîtée. En effet, 45-65 = 45-55 + 55-65 est un agrégat non-emboîté qui devra être traité en construisant un tableau séparé.</p>
+<p>Une première étape d’analyse mène à la liste des tableaux à protéger suivante :</p>
+<ul>
+<li>T1 : pop x {AGE_hrc_princ x GEO}</li>
+<li>T1bis : pop x {AGE_hrc_spe x GEO}</li>
+<li>T2 : pop x {AGE_hrc_princ x sexe x GEO}</li>
+<li>T2bis : pop x {AGE_hrc_spe x sexe x GEO}</li>
+<li>où GEO est une variable hiérarchique emboîtant régions et départements</li>
+<li>où AGE_hrc_princ (hiérarchie principale) est une variable hiérarchique emboîtant l’ensemble des catégories d’âge hors 45-65</li>
+<li>où AGE_hrc_spe (agrégat spécial) a les modalités : 45-65 = 45-55 + 55-65</li>
+</ul>
+<p>On remarque que T1 est en réalité déjà “contenu” dans T2. Puisque le croisement AGE_hrc_princ x GEO est présente dans T2. De même T1bis est contenu dans T2bis. On peut donc regrouper ces tableau. Finalement, on se retrouve avec cette liste de tableaux à protéger :</p>
+<ul>
+<li>T1 : pop x {AGE_hrc_princ x sexe x GEO}</li>
+<li>T2 : pop x {AGE_hrc_spe x sexe x GEO}</li>
+<li>où GEO est une variable hiérarchique emboîtant régions et départements</li>
+<li>où AGE_hrc_princ (hiérarchie principale) est une variable hiérarchique emboîtant l’ensemble des catégories d’âge hors 45-65</li>
+<li>où AGE_hrc_spe (agrégat spécial) a les modalités : 45-65 = 45-55 + 55-65</li>
+</ul>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -651,10 +881,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
+      <a href="./02_secret_un_tableau.html" class="pagination-link  aria-label=" &lt;span="" le="" secret="" sur="" un="" tableau&lt;="" span&gt;"="">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Poser le secret sur un tableau</span></span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./01_notions.html" class="pagination-link" aria-label="<span class='chapter-number'>1</span>&nbsp; <span class='chapter-title'>Notions principales à connaître</span>">
-        <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Notions principales à connaître</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./04_secret_tableaux_lies.html" class="pagination-link" aria-label="<span class='chapter-number'>4</span>&nbsp; <span class='chapter-title'>Poser le secret sur plusieurs tableaux liés</span>">
+        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Poser le secret sur plusieurs tableaux liés</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

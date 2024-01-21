@@ -6,10 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Clara Baudry, Arlindo Dos Santos, Julien Jamme, Nathanaël Rastout">
-<meta name="dcterms.date" content="2023-03-04">
 
-<title>Manuel de protection des tableaux</title>
+<title>Manuel de protection des tableaux - 7&nbsp; Règles</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -25,23 +23,24 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<link href="./01_notions.html" rel="next">
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../chapters/annexes/manipuler_les_listes.html" rel="next">
+<link href="../../06_expert.html" rel="prev">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -70,6 +69,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -82,7 +110,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Introduction</a></li><li class="breadcrumb-item"><a href="./index.html">Introduction</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../chapters/annexes/regles.html">Annexes</a></li><li class="breadcrumb-item"><a href="../../chapters/annexes/regles.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Règles</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -97,7 +125,7 @@ ul.task-list li input[type="checkbox"] {
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="./">Manuel de protection des tableaux</a> 
+      <a href="../../">Manuel de protection des tableaux</a> 
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -118,13 +146,13 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Introduction</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./01_notions.html" class="sidebar-item-text sidebar-link">
+  <a href="../../01_notions.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Notions principales à connaître</span></span></a>
   </div>
 </li>
@@ -141,19 +169,19 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./02_secret_un_tableau.html" class="sidebar-item-text sidebar-link">
+  <a href="../../02_secret_un_tableau.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Poser le secret sur un tableau</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./03_analyser_une_demande.html" class="sidebar-item-text sidebar-link">
+  <a href="../../03_analyser_une_demande.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Comment analyser une demande ?</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./04_secret_tableaux_lies.html" class="sidebar-item-text sidebar-link">
+  <a href="../../04_secret_tableaux_lies.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Poser le secret sur plusieurs tableaux liés</span></span></a>
   </div>
 </li>
@@ -170,13 +198,13 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./05_fiches_pratiques.html" class="sidebar-item-text sidebar-link">
+  <a href="../../05_fiches_pratiques.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Fiches pratiques</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./06_expert.html" class="sidebar-item-text sidebar-link">
+  <a href="../../06_expert.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Présentation des outils</span></span></a>
   </div>
 </li>
@@ -193,13 +221,13 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./chapters/annexes/regles.html" class="sidebar-item-text sidebar-link">
+  <a href="../../chapters/annexes/regles.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Règles</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./chapters/annexes/manipuler_les_listes.html" class="sidebar-item-text sidebar-link">
+  <a href="../../chapters/annexes/manipuler_les_listes.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Manipuler les listes avec <code>R</code></span></span></a>
   </div>
 </li>
@@ -215,35 +243,24 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#règles-pour-la-statistique-dentreprises" id="toc-règles-pour-la-statistique-dentreprises" class="nav-link active" data-scroll-target="#règles-pour-la-statistique-dentreprises"><span class="header-section-number">7.1</span> Règles pour la statistique d’entreprises</a></li>
+  <li><a href="#règles-pour-les-données-fiscales-provenant-de-la-dgfip" id="toc-règles-pour-les-données-fiscales-provenant-de-la-dgfip" class="nav-link" data-scroll-target="#règles-pour-les-données-fiscales-provenant-de-la-dgfip"><span class="header-section-number">7.2</span> Règles pour les données fiscales (provenant de la DGFiP)</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Introduction</a></li><li class="breadcrumb-item"><a href="./index.html">Introduction</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../chapters/annexes/regles.html">Annexes</a></li><li class="breadcrumb-item"><a href="../../chapters/annexes/regles.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Règles</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Manuel de protection des tableaux</h1>
+<h1 class="title"><span id="sec-regles" class="quarto-section-identifier"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Règles</span></span></h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Clara Baudry, Arlindo Dos Santos, Julien Jamme, Nathanaël Rastout </p>
-          </div>
-  </div>
     
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">March 4, 2023</p>
-    </div>
-  </div>
   
     
   </div>
@@ -253,10 +270,30 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="introduction" class="level1 unnumbered">
-<h1 class="unnumbered">Introduction</h1>
-<p>La présente édition est la première version du manuel pour la gestion de la confidentialité à l’Insee. Ce manuel fournit un première réponse à la recommandation de la mission de l’inspection générale pour la diffusion sur mesure [retrouver la référence Gecodoc]. Il s’inspire du manuel européen écrit par des auteurs de référence. Le “Handbook on Statistical Disclosure Control” https://research.cbs.nl/casc/SDC_Handbook.pdf. Il ajoute une dimension opérationnelle au travers de plusieurs cas pratiques.</p>
-<p>Dans un premier temps un tour d’horizon des différentes règles appliquées pour le secret statistique à l’Insee est effectué. Puis, les notions principales utiles pour la pose du secret sont introduites. L’idée est de se baser sur un vocabulaire commun afin d’être sûrs de parler de la même chose. La partie 4 explique la marche à suivre pour appliquer le secret. En effet, la première étape consiste à analyser les tableaux que l’on souhaite publier, plus particulièrement les liens entre ces différents tableaux. La partie 5 regroupe plusieurs fiches pratiques pour poser le secret à l’aide de <code>rtauargus</code>. Elles sont de niveau croissant, allant de débutant à expert. La partie 6 est une partie plus “expert”, elle décrit pus précisément les différents outils et donne des clefs pour débugger le logiciel le cas échéant.</p>
+<p>Eléments de la note au CD :</p>
+<p>Référence l’article de P. Redor dans le courrier stat : “Confidentialité des données statistiques : un enjeu majeur pour le service statistique public”, P. Redor - Courrier des statistiques N9 - 2023.</p>
+<p>Loi de 1951 : loi sur l’obligation, la coordination et le secret en matière de statistiques (définit le secret statistique). Loi de 1978 : loi Informatique et libertés (définit la protection des données personnelles).</p>
+<p>On se fixe des règles pour simplifier l’application mais l’objectif est avant tout de protéger l’information individuelle (de n’importe quel individu).</p>
+<p>Les règles du secret statistique sont des seuils définis que l’Insee instaure pour minimiser les risques de ré-identification tout en gardant une utilité certaine des données. Cette partie présente les règles les plus connues du SSP. Le lecteur est invité à se renseigner sur les règles à appliquer sur les données qu’il souhaite publier avant de commencer à poser le secret. Il pourra, en particulier, retrouver des informations précieuses sur <a href="https://intranet.insee.fr/jcms/c_2113249/fr/produits-sur-mesure-liste-et-guide-des-sources">la page intranet dédiée à la présentation des sources des Produits sur Mesure</a>. En cliquant sur la source sur laquelle vous travaillez, les informations sur les règles du secret statistique sont précisées dans la sous-partie “secret statistique”.</p>
+<section id="règles-pour-la-statistique-dentreprises" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="règles-pour-la-statistique-dentreprises"><span class="header-section-number">7.1</span> Règles pour la statistique d’entreprises</h2>
+<p><strong>Règle de fréquence</strong> : une cellule d’un tableau ne doit pas être construite à partir de strictement moins de 3 unités. N.B. pour les bases de données pondérées on applique la règle de fréquence sur les pondérations. Si une cellule est construite par 2 répondants mais en représente davantage, alors elle est diffusable. Il faut veiller à ce que l’échantillon et la pondération restent confidentiels.</p>
+<p><strong>Règle de dominance</strong> : 1 unité contributrice à une cellule ne peut contribuer à plus de 85% de la valeur de celle-ci. Afin, de pouvoir appliquer cette règle il faut donc déterminer pour chaque cellule du tableau le plus gros contributeur. N.B. pour les bases de données pondérées la cellule est sensible si le contributeur maximal (non pondérée) est supérieur à 85% du total de la cellule (pondéré). <span class="math inline">\(MAX_{nonpond} &gt; 0.85*FREQ_{pond}\)</span></p>
+</section>
+<section id="règles-pour-les-données-fiscales-provenant-de-la-dgfip" class="level2" data-number="7.2">
+<h2 data-number="7.2" class="anchored" data-anchor-id="règles-pour-les-données-fiscales-provenant-de-la-dgfip"><span class="header-section-number">7.2</span> Règles pour les données fiscales (provenant de la DGFiP)</h2>
+<p><strong>Règle de fréquence</strong> : une cellule concernant une personne physique concernant moins de 11 unités ne doit pas être diffusée. Ce seuil est appliqué en particulier aux données se rapportant aux entreprises individuelles. Voici quelques exemples de données concernées par ce seuil :</p>
+<ul>
+<li>données relatives à l’impôt sur le revenu (IR)</li>
+<li>données relatives aux bénéfices industriels et commerciaux, aux bénéfices non commerciaux, aux bénéfices agricoles, à la taxe sur la valeur ajoutée, à la cotisation foncière des entreprises (CFE), à la cotisation sur la valeur ajoutée des entreprises (CVAE)</li>
+<li>données relatives à tout autre type d’imposition dès lors que ces données se rapportent à des personnes physiques</li>
+</ul>
+<p>En matière d’impôt de solidarité sur la fortune et d’impôt sur la fortune immobilière, les règles de communication sont les suivantes :</p>
+<ul>
+<li>le nombre de contribuables assujettis doit être supérieur ou égal à 50 ;</li>
+<li>en cas de ventilation par communes, celles-ci doivent comporter plus de 20 000 habitants</li>
+</ul>
+<p><strong>Règle de dominance</strong> : 1 unité contributrice à une cellule ne peut contribuer à plus de 85% de la valeur de celle-ci. Afin, de pouvoir appliquer cette règle il faut donc déterminer pour chaque cellule du tableau le plus gros contributeur. N.B. pour les bases de données pondérées la cellule est sensible sur le contributeur maximal (non pondérée) est supérieur à 85% du total de la cellule (pondéré). <span class="math inline">\(MAX_{nonpond} &gt; 0.85*FREQ_{pond}\)</span></p>
 
 
 </section>
@@ -651,10 +688,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
+      <a href="../../06_expert.html" class="pagination-link  aria-label=" &lt;span="" des="" outils&lt;="" span&gt;"="">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Présentation des outils</span></span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./01_notions.html" class="pagination-link" aria-label="<span class='chapter-number'>1</span>&nbsp; <span class='chapter-title'>Notions principales à connaître</span>">
-        <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Notions principales à connaître</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../chapters/annexes/manipuler_les_listes.html" class="pagination-link" aria-label="<span class='chapter-number'>8</span>&nbsp; <span class='chapter-title'>Manipuler les listes avec `R`</span>">
+        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Manipuler les listes avec <code>R</code></span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

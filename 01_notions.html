@@ -6,10 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Clara Baudry, Arlindo Dos Santos, Julien Jamme, Nathanaël Rastout">
-<meta name="dcterms.date" content="2023-03-04">
 
-<title>Manuel de protection des tableaux</title>
+<title>Manuel de protection des tableaux - 1&nbsp; Notions principales à connaître</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -32,7 +30,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./01_notions.html" rel="next">
+<link href="./02_secret_un_tableau.html" rel="next">
+<link href="./index.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -69,6 +68,9 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script src="site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
 
 </head>
@@ -82,7 +84,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Introduction</a></li><li class="breadcrumb-item"><a href="./index.html">Introduction</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Introduction</a></li><li class="breadcrumb-item"><a href="./01_notions.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Notions principales à connaître</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -118,13 +120,13 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Introduction</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./01_notions.html" class="sidebar-item-text sidebar-link">
+  <a href="./01_notions.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Notions principales à connaître</span></span></a>
   </div>
 </li>
@@ -215,35 +217,29 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#comment-décrire-un-tableau" id="toc-comment-décrire-un-tableau" class="nav-link active" data-scroll-target="#comment-décrire-un-tableau"><span class="header-section-number">1.1</span> Comment décrire un tableau ?</a></li>
+  <li><a href="#tableaux-deffectifs-et-tableaux-de-magnitude" id="toc-tableaux-deffectifs-et-tableaux-de-magnitude" class="nav-link" data-scroll-target="#tableaux-deffectifs-et-tableaux-de-magnitude"><span class="header-section-number">1.2</span> Tableaux d’effectifs et tableaux de magnitude</a></li>
+  <li><a href="#secret-primaire-et-secret-secondaire" id="toc-secret-primaire-et-secret-secondaire" class="nav-link" data-scroll-target="#secret-primaire-et-secret-secondaire"><span class="header-section-number">1.3</span> Secret primaire et secret secondaire</a></li>
+  <li><a href="#sec-hrc" id="toc-sec-hrc" class="nav-link" data-scroll-target="#sec-hrc"><span class="header-section-number">1.4</span> Variable hiérarchique</a></li>
+  <li><a href="#sec-hrcnonemb" id="toc-sec-hrcnonemb" class="nav-link" data-scroll-target="#sec-hrcnonemb"><span class="header-section-number">1.5</span> Hiérarchies non-emboîtées</a></li>
+  <li><a href="#liaisons-entre-tableaux" id="toc-liaisons-entre-tableaux" class="nav-link" data-scroll-target="#liaisons-entre-tableaux"><span class="header-section-number">1.6</span> Liaisons entre tableaux</a></li>
+  <li><a href="#tableau-à-diffuser-vs-à-protéger" id="toc-tableau-à-diffuser-vs-à-protéger" class="nav-link" data-scroll-target="#tableau-à-diffuser-vs-à-protéger"><span class="header-section-number">1.7</span> Tableau à diffuser vs à protéger</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Introduction</a></li><li class="breadcrumb-item"><a href="./index.html">Introduction</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Introduction</a></li><li class="breadcrumb-item"><a href="./01_notions.html"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Notions principales à connaître</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Manuel de protection des tableaux</h1>
+<h1 class="title"><span id="sec-notions" class="quarto-section-identifier"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Notions principales à connaître</span></span></h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Clara Baudry, Arlindo Dos Santos, Julien Jamme, Nathanaël Rastout </p>
-          </div>
-  </div>
     
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">March 4, 2023</p>
-    </div>
-  </div>
   
     
   </div>
@@ -253,10 +249,266 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="introduction" class="level1 unnumbered">
-<h1 class="unnumbered">Introduction</h1>
-<p>La présente édition est la première version du manuel pour la gestion de la confidentialité à l’Insee. Ce manuel fournit un première réponse à la recommandation de la mission de l’inspection générale pour la diffusion sur mesure [retrouver la référence Gecodoc]. Il s’inspire du manuel européen écrit par des auteurs de référence. Le “Handbook on Statistical Disclosure Control” https://research.cbs.nl/casc/SDC_Handbook.pdf. Il ajoute une dimension opérationnelle au travers de plusieurs cas pratiques.</p>
-<p>Dans un premier temps un tour d’horizon des différentes règles appliquées pour le secret statistique à l’Insee est effectué. Puis, les notions principales utiles pour la pose du secret sont introduites. L’idée est de se baser sur un vocabulaire commun afin d’être sûrs de parler de la même chose. La partie 4 explique la marche à suivre pour appliquer le secret. En effet, la première étape consiste à analyser les tableaux que l’on souhaite publier, plus particulièrement les liens entre ces différents tableaux. La partie 5 regroupe plusieurs fiches pratiques pour poser le secret à l’aide de <code>rtauargus</code>. Elles sont de niveau croissant, allant de débutant à expert. La partie 6 est une partie plus “expert”, elle décrit pus précisément les différents outils et donne des clefs pour débugger le logiciel le cas échéant.</p>
+<section id="comment-décrire-un-tableau" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="comment-décrire-un-tableau"><span class="header-section-number">1.1</span> Comment décrire un tableau ?</h2>
+<p>Un tableau présente le résultat de l’agrégation d’un indicateur connu au niveau individuel, ventilé selon une ou plusieurs catégories de ces individus.</p>
+<p>On appellera :</p>
+<ul>
+<li><strong>Indicateur</strong> ou <strong>variable réponse</strong>, la variable numérique agrégée. En général on précise également l’opération d’agrégation utilisée. Par exemple, le nombre d’entreprises (somme de pondérations dans le cas d’une enquête, sinon simple comptage), le chiffre d’affaire (sous-entendu le total ou la somme des chiffres d’affaire), la moyenne d’âge, la part de personnes vivant sous le seuil de pauvreté, etc.</li>
+<li><strong>Variable(s) de croisement</strong> ou <strong>variable(s) explicatives</strong>, la ou les variables de ventilation de l’indicateur. Ce sont des variables dites catégorielles (ex : diplôme, le secteur d’activité) et sont parfois des variables numériques découpées en tranches (ex : classes d’âge, tranches d’effectifs).</li>
+<li><strong>Champ</strong>, la population ou sous-population sur laquelle l’agrégation est réalisée. Par exemple, un tableau restreint à la population des 15-25 ans ou aux entreprises du secteur de l’industrie.</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/presentation_vocab_tab.png" class="img-fluid figure-img"></p>
+<figcaption>Le nombre d’entreprises selon leur région d’implantation et le caractère polluant de leurs activités, parmi les entreprises du secteur industriel</figcaption>
+</figure>
+</div>
+<p>Exemples de tableaux :</p>
+<ul>
+<li><p>On veut diffuser la moyenne d’âge des chefs d’entreprises par secteur d’activité :</p>
+<ul>
+<li><p>variable de croisement : secteur d’activité (ACT)</p></li>
+<li><p>indicateur : âge moyen (x_age)</p></li>
+<li><p>champ : toutes entreprises confondues</p></li>
+</ul></li>
+<li><p>On souhaite diffuser la note moyenne au brevet des élèves entrant en seconde selon la région, le secteur de l’établissement (public, privé), et la catégorie socio-professionnelle des parents :</p>
+<ul>
+<li><p>variable de croisement : région (REG), secteur (SEC)</p></li>
+<li><p>indicateur : note moyenne (x_note)</p></li>
+<li><p>champ : élèves de seconde de l’année N</p></li>
+</ul></li>
+</ul>
+<p>Il existe 3 formats de tableaux :</p>
+<ul>
+<li>Les tableaux croisés, particulièrement adaptés à la diffusion d’une information ventilée selon deux variables catégorielles (cf.&nbsp; <a href="#ex_tab_croise">Tableau croisé</a>).</li>
+<li>Les tableaux longs, particulièrement adaptés aux traitements des données, et résultats naturels des agrégations réalisées en R avec <code>dplyr</code> (<code>group_by()</code> + <code>summarise()</code>) aussi bien qu’avec data.table (<code>melt()</code>).</li>
+<li>Les tableaux larges, autre format parfois utile lors des traitements, sont tels que chaque croisement de modalités des variables catégorielles est une variable du tableau.</li>
+</ul>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/tab_long_ex.png" class="img-fluid figure-img"></p>
+<figcaption>Tableau long formé à partir du tableau croisé précédent</figcaption>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/tab_large_ex.png" class="img-fluid figure-img"></p>
+<figcaption>Tableau large formé à partir du tableau croisé précédent</figcaption>
+</figure>
+</div>
+<p>En général, un utilisateur final pense à un tableau croisé. Mais pour la pose du secret, on travaillera exclusivement avec la forme longue des tableaux. Un tableau long est donc composé de deux types de variables :</p>
+<ul>
+<li><p>Les variables de croisements (catégorielles) qui servent à décrire le contexte d’une cellule ;</p></li>
+<li><p>La variable réponse (ou indicateur) qui indique la valeur d’une cellule.</p></li>
+</ul>
+</section>
+<section id="tableaux-deffectifs-et-tableaux-de-magnitude" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="tableaux-deffectifs-et-tableaux-de-magnitude"><span class="header-section-number">1.2</span> Tableaux d’effectifs et tableaux de magnitude</h2>
+<p>On distingue deux types de tableaux : les tableaux d’effectifs et ceux de magnitude.</p>
+<p>Un tableau d’effectifs est un tableau dans lequel la valeur d’une cellule correspond au nombre d’unités qui partagent les caractéristiques de la cellule.</p>
+<p>Voici un exemple de tableau d’effectifs :</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/tab_effectif_ex.png" class="img-fluid figure-img"></p>
+<figcaption>Nombre d’entreprises polluantes par région</figcaption>
+</figure>
+</div>
+<p>Un tableau de magnitude (ou de volume) est un tableau dans lequel la valeur de chaque cellule représente la somme des contributions des répondants qui partagent les caractéristiques de cette cellule.</p>
+<p>Voici un exemple de tableau de magnitude :</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/tab_magnitude_ex.png" class="img-fluid figure-img"></p>
+<figcaption>Ventes réalisées, en millions d’euros (nombre de contributeurs)</figcaption>
+</figure>
+</div>
+</section>
+<section id="secret-primaire-et-secret-secondaire" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="secret-primaire-et-secret-secondaire"><span class="header-section-number">1.3</span> Secret primaire et secret secondaire</h2>
+<p>Le <strong>secret primaire</strong> renvoie aux cellules qui doivent être secretisées dès le départ du processus de secrétisation car elles sont considérées comme sensibles d’après des règles définies à l’Insee.</p>
+<ul>
+<li><em>Règle de fréquence</em> : une cellule d’un tableau ne doit pas être construite à partir de strictement moins de 3 unités.</li>
+<li><em>Règle de dominance</em> : une unité contributrice à une cellule ne peut contribuer à plus de 85% de la valeur de celle-ci. Afin, de pouvoir appliquer cette règle il faut donc déterminer pour chaque cellule du tableau le plus gros contributeur.</li>
+</ul>
+<p>N.B. pour les bases de données pondérées :</p>
+<ul>
+<li>On applique la règle de fréquence sur les pondérations. Si une cellule est construite par 2 répondants mais en représente davantage, alors elle est diffusable. Il faut veiller à ce que l’échantillon et la pondération restent confidentiels.</li>
+<li>D’après la règle de dominance, la cellule est sensible si le contributeur maximal (non pondérée) est supérieur à 85% du total de la cellule (pondéré).</li>
+</ul>
+<p>Selon le type de données les cellules considérées comme sensibles varient. Par exemple, pour les statistiques d’entreprises les cellules sont catégorisées comme sensibles du fait de la règle de fréquence (moins de 3 unités dans une cellule) ou de la règle de dominance (un répondant représente plus de 85% du total de la cellule). On ne peut pas diffuser les cellules qui constituent le secret primaire. Pour plus d’informations sur les règles du secret voir l’<a href="chapters/annexes/regles.html">Annexe</a>.</p>
+<p>Une solution pour ne pas diffuser ces cellules est de les supprimer (cacher). Cependant, uniquement supprimer les cellules touchées par le secret primaire n’est généralement pas suffisant. En effet, si les marges du tableau sont diffusées, alors les cellules sont liées entre elles par des équations. Ainsi, il faut cacher d’autres cellules pour ne pas pouvoir déduire la valeur des cellules cachées : c’est le <strong>secret secondaire</strong>.</p>
+</section>
+<section id="sec-hrc" class="level2" data-number="1.4">
+<h2 data-number="1.4" class="anchored" data-anchor-id="sec-hrc"><span class="header-section-number">1.4</span> Variable hiérarchique</h2>
+<p>Une variable hiérarchique est une variable de ventilation comprenant plusieurs sous-totaux. Autrement dit, certaines modalités de cette variables se somment en une autre modalité de la variable.</p>
+<p>Par exemple, on pourrait imaginer une variable hiérarchique géographique comme dans le tableau suivant :</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/ex_hrc_prod_violons.png" class="img-fluid figure-img"></p>
+<figcaption>Nombre d’entreprises qui produisent des violons, par région</figcaption>
+</figure>
+</div>
+<p>On peut aussi la représenter sous forme d’arbre :</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart TD
+  A[Pays] --&gt; B[Nord]
+  A[Pays] --&gt; C[Ouest]
+  A[Pays] --&gt; D[Est]
+  A[Pays] --&gt; E[Sud]
+  B --&gt; F[N1]
+  B --&gt; G[N2]
+  B --&gt; H[N3]
+  C --&gt; I[O1]
+  C --&gt; J[O2]
+  C --&gt; K[O3]
+  C --&gt; L[04]
+  D --&gt; M[E1]
+  D --&gt; N[E2]
+  D --&gt; O[E3]
+  E --&gt; P[S1]
+  E --&gt; Q[S2]
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+</section>
+<section id="sec-hrcnonemb" class="level2" data-number="1.5">
+<h2 data-number="1.5" class="anchored" data-anchor-id="sec-hrcnonemb"><span class="header-section-number">1.5</span> Hiérarchies non-emboîtées</h2>
+<p>Une hiérarchie non-emboîtée est le cas où dans un tableau diffusé, l’emboîtement des modalités d’une variable hiérarchique n’est pas parfait.</p>
+<p>Par exemple si on utilise une variable de la NAF A88 comme suit et que l’on veut aussi diffuser un sous-total regroupant les codes division 03, 05 et 06 alors on a une hiérarchie non-emboîtée.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/ex_hrc_nonemb.png" class="img-fluid figure-img"></p>
+<figcaption>Exemple hiérarchie non-emboîtée à partir de la NAF A88</figcaption>
+</figure>
+</div>
+</section>
+<section id="liaisons-entre-tableaux" class="level2" data-number="1.6">
+<h2 data-number="1.6" class="anchored" data-anchor-id="liaisons-entre-tableaux"><span class="header-section-number">1.6</span> Liaisons entre tableaux</h2>
+<p>On dit que des tableaux sont liés lorsqu’ils possèdent la même variable ventilée et partagent une ou plusieurs variables de ventilation. Ces liens entre tableaux doivent être pris en compte pour traiter correctement le secret. Sinon, les cellules cachées peuvent se déduire les unes des autres.</p>
+<p>Les liens les plus courants sont :</p>
+<ul>
+<li>Les tableaux partageant des marges communes (i.e.&nbsp;partageant le même champ, la même variable de réponse, une ou plusieurs variables de croisement);</li>
+<li>Les tableaux additifs ou corrélés (i.e.&nbsp;partageant le même champ, les mêmes variables de croisements, les variables de réponse différentes mais liées entre elles - équation ou corrélation);</li>
+<li>Les hiérarchies non-emboîtées ;</li>
+<li>Les différences de millésime.</li>
+</ul>
+<p>En effet, pour des données périodiques, la temporalité peut être perçue comme un ensemble de tableaux liés : il vaut mieux que le masque de secret change peu entre chaque millésime.</p>
+<p>Par exemple si l’on souhaite diffuser le nombre d’entreprises en France selon :</p>
+<ul>
+<li><code>T0_1</code>: le sexe de son/sa dirigeant(e) et la région d’implantation</li>
+<li><code>T0_2</code>: le sexe de son/sa dirigeant(e) et la caractère polluant ou non de l’activité d’entreprise</li>
+<li><code>T0_3</code>: le caractère polluant ou non de l’activité de l’entreprise et la région d’implantation</li>
+</ul>
+<p>Nombre d’entreprises par région et par sexe du dirigeant (<code>T0_1</code>)</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th style="text-align: center;"></th>
+<th style="text-align: center;">Femme</th>
+<th style="text-align: center;">Homme</th>
+<th style="text-align: center;"><strong>Total</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">Nord</td>
+<td style="text-align: center;">16</td>
+<td style="text-align: center;">20</td>
+<td style="text-align: center;"><strong>36</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Sud</td>
+<td style="text-align: center;">19</td>
+<td style="text-align: center;">12</td>
+<td style="text-align: center;"><strong>31</strong></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>Total</strong></td>
+<td style="text-align: center;"><strong>35</strong></td>
+<td style="text-align: center;"><strong>32</strong></td>
+<td style="text-align: center;"><strong>67</strong></td>
+</tr>
+</tbody>
+</table>
+<p>Nombre d’entreprises polluantes par sexe du dirigeant (<code>T0_2</code>)</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th style="text-align: center;"></th>
+<th style="text-align: center;">Polluante</th>
+<th style="text-align: center;">Non polluante</th>
+<th style="text-align: center;"><strong>Total</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">Femme</td>
+<td style="text-align: center;">8</td>
+<td style="text-align: center;">27</td>
+<td style="text-align: center;"><strong>35</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Homme</td>
+<td style="text-align: center;">22</td>
+<td style="text-align: center;">17</td>
+<td style="text-align: center;"><strong>32</strong></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>Total</strong></td>
+<td style="text-align: center;"><strong>30</strong></td>
+<td style="text-align: center;"><strong>37</strong></td>
+<td style="text-align: center;"><strong>67</strong></td>
+</tr>
+</tbody>
+</table>
+<p>Nombre d’entreprises polluantes par région (<code>T0_3</code>)</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th style="text-align: center;"></th>
+<th style="text-align: center;">Polluante</th>
+<th style="text-align: center;">Non polluante</th>
+<th style="text-align: center;"><strong>Total</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">Nord</td>
+<td style="text-align: center;">10</td>
+<td style="text-align: center;">26</td>
+<td style="text-align: center;"><strong>36</strong></td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">Sud</td>
+<td style="text-align: center;">20</td>
+<td style="text-align: center;">11</td>
+<td style="text-align: center;"><strong>31</strong></td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;"><strong>Total</strong></td>
+<td style="text-align: center;"><strong>30</strong></td>
+<td style="text-align: center;"><strong>37</strong></td>
+<td style="text-align: center;"><strong>67</strong></td>
+</tr>
+</tbody>
+</table>
+<p>Ces trois tableaux sont liés puisqu’ils partagent des marges communes :</p>
+<ul>
+<li><code>T0_1</code> et <code>T0_2</code> ont les mêmes marges sur la variable <code>SEXE</code></li>
+<li><code>T0_1</code> et <code>T0_3</code> ont les mêmes marges sur la variable <code>REGION</code></li>
+<li><code>T0_2</code> et <code>T0_3</code> ont les mêmes marges sur la variable <code>POLL</code></li>
+</ul>
+</section>
+<section id="tableau-à-diffuser-vs-à-protéger" class="level2" data-number="1.7">
+<h2 data-number="1.7" class="anchored" data-anchor-id="tableau-à-diffuser-vs-à-protéger"><span class="header-section-number">1.7</span> Tableau à diffuser vs à protéger</h2>
+<p>Les tableaux qui seront finalement diffusés ne sont pas les mêmes que les tableaux à protéger. En effet, les tableaux à protéger sont le résultat de l’analyse de la demande. Cette analyse consiste à identifier les tableaux liés entre eux et les hiérarchies (emboîtées ou non). Dès lors, l’identification de ces liens va nous pousser à regrouper différents tableaux ou au contraire les séparer. Une fois l’analyse terminée on se retrouve avec les tableaux à protéger, le secret sera appliqué sur ces tableaux et c’est seulement une fois la procédure terminée que l’on pourra reporter le secret identifié sur les tableaux à protéger sur les tableaux à diffuser. Cette phase d’analyse est développée au Chapitre <a href="03_analyser_une_demande.html" class="quarto-xref"><span>3</span></a>.</p>
 
 
 </section>
@@ -651,10 +903,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
+      <a href="./index.html" class="pagination-link  aria-label=" introduction"="">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Introduction</span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./01_notions.html" class="pagination-link" aria-label="<span class='chapter-number'>1</span>&nbsp; <span class='chapter-title'>Notions principales à connaître</span>">
-        <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Notions principales à connaître</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./02_secret_un_tableau.html" class="pagination-link" aria-label="<span class='chapter-number'>2</span>&nbsp; <span class='chapter-title'>Poser le secret sur un tableau</span>">
+        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Poser le secret sur un tableau</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
