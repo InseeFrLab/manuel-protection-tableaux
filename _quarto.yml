@@ -39,6 +39,8 @@ format:
     - cosmo
     - custom.scss
     toc-depth: 5
+    toc-title: Plan
+    link-external-newwindow: true
 
 
 

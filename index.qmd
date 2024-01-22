@@ -1,6 +1,6 @@
 # Introduction {.unnumbered}
 
-Le *Manuel de protection des tableaux* vise à accompagner les équipes en charge de la protection des données tabulées à l’Insee et au sein du SSP en général. Ce manuel fournit un première réponse à la recommandation de la mission de l’inspection générale sur la diffusion sur mesure, dont le rapport est consultable [https://intranet.insee.fr/jcms/22228814_DBFileDocument/fr/mi-2022-4-diffusion-sur-mesure-rapport-ig-16-12-2022](ici).
+Le *Manuel de protection des tableaux* vise à accompagner les équipes en charge de la protection des données tabulées à l’Insee et au sein du SSP en général. Ce manuel fournit un première réponse à la recommandation de la mission de l’inspection générale sur la diffusion sur mesure, dont le rapport est consultable [ici](https://intranet.insee.fr/jcms/22228814_DBFileDocument/fr/mi-2022-4-diffusion-sur-mesure-rapport-ig-16-12-2022).
 
 Ce manuel, rédigé par la section Méthodes statistiques spatiales et secret statistique au sein du DMS, a vocation à présenter les **principales notions** à connaître, à proposer une **démarche méthodologique** pour analyser tout type de demande et à illustrer avec de **nombreux exemples** comment, en pratique, il est possible de protéger un ensemeble de tableaux avant leur diffusion.  
 
