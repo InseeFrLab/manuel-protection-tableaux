@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Clara Baudry, Arlindo Dos Santos, Julien Jamme, Nathanaël Rastout">
-<meta name="dcterms.date" content="2023-03-04">
+<meta name="dcterms.date" content="2024-01-22">
 
 <title>Manuel de protection des tableaux</title>
 <style>
@@ -70,6 +70,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -241,7 +270,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">March 4, 2023</p>
+      <p class="date">2024-01-22</p>
     </div>
   </div>
   
@@ -255,8 +284,17 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="introduction" class="level1 unnumbered">
 <h1 class="unnumbered">Introduction</h1>
-<p>La présente édition est la première version du manuel pour la gestion de la confidentialité à l’Insee. Ce manuel fournit un première réponse à la recommandation de la mission de l’inspection générale pour la diffusion sur mesure [retrouver la référence Gecodoc]. Il s’inspire du manuel européen écrit par des auteurs de référence. Le “Handbook on Statistical Disclosure Control” https://research.cbs.nl/casc/SDC_Handbook.pdf. Il ajoute une dimension opérationnelle au travers de plusieurs cas pratiques.</p>
-<p>Dans un premier temps un tour d’horizon des différentes règles appliquées pour le secret statistique à l’Insee est effectué. Puis, les notions principales utiles pour la pose du secret sont introduites. L’idée est de se baser sur un vocabulaire commun afin d’être sûrs de parler de la même chose. La partie 4 explique la marche à suivre pour appliquer le secret. En effet, la première étape consiste à analyser les tableaux que l’on souhaite publier, plus particulièrement les liens entre ces différents tableaux. La partie 5 regroupe plusieurs fiches pratiques pour poser le secret à l’aide de <code>rtauargus</code>. Elles sont de niveau croissant, allant de débutant à expert. La partie 6 est une partie plus “expert”, elle décrit pus précisément les différents outils et donne des clefs pour débugger le logiciel le cas échéant.</p>
+<p>Le <em>Manuel de protection des tableaux</em> vise à accompagner les équipes en charge de la protection des données tabulées à l’Insee et au sein du SSP en général. Ce manuel fournit un première réponse à la recommandation de la mission de l’inspection générale sur la diffusion sur mesure, dont le rapport est consultable <a href="ici">https://intranet.insee.fr/jcms/22228814_DBFileDocument/fr/mi-2022-4-diffusion-sur-mesure-rapport-ig-16-12-2022</a>.</p>
+<p>Ce manuel, rédigé par la section Méthodes statistiques spatiales et secret statistique au sein du DMS, a vocation à présenter les <strong>principales notions</strong> à connaître, à proposer une <strong>démarche méthodologique</strong> pour analyser tout type de demande et à illustrer avec de <strong>nombreux exemples</strong> comment, en pratique, il est possible de protéger un ensemeble de tableaux avant leur diffusion.</p>
+<p>Ce manuel a pour principaux objectifs d’<strong>harmoniser les pratiques</strong> au sein de l’institut et du SSP et de <strong>proposer une documentation</strong> aussi complète et pratique pour les utilisateurs que possible.</p>
+<p>Ce manuel s’adresse à toute personne en charge de diffuser des données tabulées auprès du public, en particulier les chargés de réponse à la demande à la DG, dans les pôles ou en DR, ainsi que les producteurs désireux de publier leurs données sur insee.fr, dans un Insee Références, un Insee Résultats ou tout autre publication.</p>
+<p>Les notions principales utiles pour la pose du secret sont présentées au Chapitre <a href="01_notions.html" class="quarto-xref"><span>1&nbsp; Notions principales à connaître</span></a>. L’idée est de se baser sur un vocabulaire commun afin d’être sûrs de parler de la même chose.</p>
+<p>La démarche pour poser le secret sur un tableau est présentée au Chapitre <a href="02_secret_un_tableau.html" class="quarto-xref"><span>2&nbsp; Poser le secret sur un tableau</span></a>.</p>
+<p>Comme une diffusion concerne le plus souvent plusieurs tableaux, la démarche pour analyser de telles demandes est présentée au Chapitre <a href="03_analyser_une_demande.html" class="quarto-xref"><span>3&nbsp; Comment analyser une demande ?</span></a>. Cette étape consiste, à partir de la liste de tableaux à diffuser, à déterminer la liste de tableaux qu’il faut protéger, en étudiant, notamment, les liens existants entre ces tableaux.</p>
+<p>La pose du secret sur des tableaux liés est présentée au Chapitre <a href="04_secret_tableaux_lies.html" class="quarto-xref"><span>4&nbsp; Poser le secret sur plusieurs tableaux liés</span></a>.</p>
+<p>Le Chapitre <a href="05_fiches_pratiques.html" class="quarto-xref"><span>5&nbsp; Fiches pratiques</span></a> regroupe plusieurs fiches pratiques pour poser le secret à l’aide de <code>rtauargus</code>. Elles sont de niveau croissant, allant de débutant à expert, et devraient permettre, à terme, d’accompagner les utilisateurs dans la plupart des situations rencontrées en pratique.</p>
+<p>Enfin le Chapitre <a href="06_expert.html" class="quarto-xref"><span>6&nbsp; Présentation des outils</span></a> fournit des informations complémentaires sur <span class="math inline">\(\tau\)</span>-Argus et sur le package <code>rtauargus</code>. L’utilisateur y trouvera en particulier une description des différents types de fichiers créés par le package et utiles à <span class="math inline">\(\tau\)</span>-Argus, ainsi que des éléments pour comprendre et résoudre certaines erreurs provenant du logiciel.</p>
+<p>Les annexes contiennent un rappel de certaines règles du secret en vigueur (Chapitre <a href="chapters/annexes/regles.html" class="quarto-xref"><span>7&nbsp; Règles</span></a>) et un petit tutoriel sur la manipulation des listes pour celles et ceux qui ne seraient pas familiers avec ce type d’objets <code>R</code> très utiles (Chapitre <a href="chapters/annexes/manipuler_les_listes.html" class="quarto-xref"><span>8&nbsp; Manipuler les listes avec R</span></a>).</p>
 
 
 </section>
