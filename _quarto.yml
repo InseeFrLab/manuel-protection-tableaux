@@ -7,7 +7,8 @@ execute:
 book:
   title: "Manuel de protection des tableaux"
   author: "Clara Baudry, Arlindo Dos Santos, Julien Jamme, Nathanaël Rastout"
-  date: "03/04/2023"
+  date: last-modified
+  date-format: iso
   
   chapters:
     - part: "Introduction"

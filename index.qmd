@@ -1,7 +1,24 @@
 # Introduction {.unnumbered}
 
-La présente édition est la première version du manuel pour la gestion de la confidentialité à l’Insee. Ce manuel fournit un première réponse à la recommandation de la mission de l’inspection générale pour la diffusion sur mesure [retrouver la référence Gecodoc].
-Il s’inspire du manuel européen écrit par des auteurs de référence. Le "Handbook on Statistical Disclosure Control" https://research.cbs.nl/casc/SDC_Handbook.pdf.
-Il ajoute une dimension opérationnelle au travers de plusieurs cas pratiques.
+Le *Manuel de protection des tableaux* vise à accompagner les équipes en charge de la protection des données tabulées à l’Insee et au sein du SSP en général. Ce manuel fournit un première réponse à la recommandation de la mission de l’inspection générale sur la diffusion sur mesure, dont le rapport est consultable [https://intranet.insee.fr/jcms/22228814_DBFileDocument/fr/mi-2022-4-diffusion-sur-mesure-rapport-ig-16-12-2022](ici).
 
-Dans un premier temps un tour d'horizon des différentes règles appliquées pour le secret statistique à l'Insee est effectué. Puis, les notions principales utiles pour la pose du secret sont introduites. L'idée est de se baser sur un vocabulaire commun afin d'être sûrs de parler de la même chose. La partie 4 explique la marche à suivre pour appliquer le secret. En effet, la première étape consiste à analyser les tableaux que l'on souhaite publier, plus particulièrement les liens entre ces différents tableaux. La partie 5 regroupe plusieurs fiches pratiques pour poser le secret à l'aide de `rtauargus`. Elles sont de niveau croissant, allant de débutant à expert. La partie 6 est une partie plus "expert", elle décrit pus précisément les différents outils et donne des clefs pour débugger le logiciel le cas échéant.
+Ce manuel, rédigé par la section Méthodes statistiques spatiales et secret statistique au sein du DMS, a vocation à présenter les **principales notions** à connaître, à proposer une **démarche méthodologique** pour analyser tout type de demande et à illustrer avec de **nombreux exemples** comment, en pratique, il est possible de protéger un ensemeble de tableaux avant leur diffusion.  
+
+Ce manuel a pour principaux objectifs d'**harmoniser les pratiques** au sein de l'institut et du SSP et de **proposer une documentation** aussi complète et pratique pour les utilisateurs que possible.  
+
+Ce manuel s'adresse à toute personne en charge de diffuser des données tabulées auprès du public, en particulier les chargés de réponse à la demande à la DG, dans les pôles ou en DR, ainsi que les producteurs désireux de publier leurs données sur insee.fr, dans un Insee Références, un Insee Résultats ou tout autre publication.
+
+Les notions principales utiles pour la pose du secret sont présentées au Chapitre [-@sec-notions]. L'idée est de se baser sur un vocabulaire commun afin d'être sûrs de parler de la même chose.  
+
+La démarche pour poser le secret sur un tableau est présentée au Chapitre [-@sec-secretuntableau]. 
+
+Comme une diffusion concerne le plus souvent plusieurs tableaux, la démarche pour analyser de telles demandes est présentée au Chapitre [-@sec-analyserdemande]. Cette étape consiste, à partir de la liste de tableaux à diffuser, à déterminer la liste de tableaux qu'il faut protéger, en étudiant, notamment, les liens existants entre ces tableaux.  
+
+La pose du secret sur des tableaux liés est présentée au Chapitre [-@sec-secrettableauxlies].
+
+Le Chapitre [-@sec-fichespratiques] regroupe plusieurs fiches pratiques pour poser le secret à l'aide de `rtauargus`. Elles sont de niveau croissant, allant de débutant à expert, et devraient permettre, à terme, d'accompagner les utilisateurs dans la plupart des situations rencontrées en pratique.  
+
+Enfin le Chapitre [-@sec-presentationoutils] fournit des informations complémentaires sur $\tau$-Argus et sur le package `rtauargus`. L'utilisateur y trouvera en particulier une description des différents types de fichiers créés par le package et utiles à $\tau$-Argus, ainsi que des éléments pour comprendre et résoudre certaines erreurs provenant du logiciel.  
+
+Les annexes contiennent un rappel de certaines règles du secret en vigueur (Chapitre [-@sec-regles]) et un petit tutoriel sur la manipulation des listes pour celles et ceux qui ne seraient pas familiers avec ce type d'objets `R` très utiles (Chapitre [-@sec-manipulerlistes]).
+

@@ -7,7 +7,7 @@ library(rtauargus)
 library(dplyr)
 ```
 
-# Fiches pratiques
+# Fiches pratiques {#sec-fichespratiques}
 
 Ces fiches pratiques ont été réalisées avec la version 1.2.0 de
 `rtauargus` et la version 4.2.3 de `TauArgus`.

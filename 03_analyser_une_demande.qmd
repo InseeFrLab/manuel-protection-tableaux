@@ -62,9 +62,8 @@ Il y a deux principaux types de liens sur les variables réponse :
 
     -   entre les variables réponses
     -   au niveau des champs
-    
-En présence de tels liens il faut parfois regrouper des tableaux en un seul (hiérarchie emboîtée sur une variable de croisement), ou au contraire construire deux tableaux à partir d'un seul (hiérarchie non-emboîtée). Dans tous les cas lorsque des tableaux sont liés il faut les traiter ensemble afin que lorsqu'une cellule est touchée dans un tableau, elle 
-le soit aussi automatiquement dans tous les autres tableaux où elle apparaît.
+
+En présence de tels liens il faut parfois regrouper des tableaux en un seul (hiérarchie emboîtée sur une variable de croisement), ou au contraire construire deux tableaux à partir d'un seul (hiérarchie non-emboîtée). Dans tous les cas lorsque des tableaux sont liés il faut les traiter ensemble afin que lorsqu'une cellule est touchée dans un tableau, elle le soit aussi automatiquement dans tous les autres tableaux où elle apparaît.
 
 ### Passer de la liste de diffusion à la liste de protection
 
@@ -90,10 +89,10 @@ De plus, si les données sont sous forme de micro-données il faut calculer les 
 
 En formalisant :
 
--   T1 : pop x {age x sexe x dep}
--   T2 : pop x {sexe x dip x dep}
--   T3 : pop x {socpro x act x dep}
--   T4 : pop x {age x sexe x act}
+-   T1 : pop $\bigotimes$ {age x sexe x dep}
+-   T2 : pop $\bigotimes$ {sexe x dip x dep}
+-   T3 : pop $\bigotimes$ {socpro x act x dep}
+-   T4 : pop $\bigotimes$ {age x sexe x act}
 
 **Analyse**
 
@@ -119,13 +118,13 @@ Finalement, la liste des tableaux à protéger est identique à la liste des tab
 
 En formalisant :
 
--   T1 : pop x {age x sexe x dep}
--   T2 : pop x {age x dip x dep}
--   T3 : pop x {socpro x act x dep}
--   T4 : pop x {age x sexe x act}
--   T5 : pop x {age x sexe x reg}
--   T6 : pop x {sexe x dip x reg}
--   T7 : pop x {socpro x act x reg}
+-   T1 : pop $\bigotimes$ {age x sexe x dep}
+-   T2 : pop $\bigotimes$ {age x dip x dep}
+-   T3 : pop $\bigotimes$ {socpro x act x dep}
+-   T4 : pop $\bigotimes$ {age x sexe x act}
+-   T5 : pop $\bigotimes$ {age x sexe x reg}
+-   T6 : pop $\bigotimes$ {sexe x dip x reg}
+-   T7 : pop $\bigotimes$ {socpro x act x reg}
 
 **Analyse**
 
@@ -137,10 +136,10 @@ Deux variables ont un lien hiérarchique (région \> département), lorsque l'in
 
 La liste des tableaux à protéger est donc la suivante :
 
--   T1 : pop x {age x sexe x GEO}
--   T2 : pop x {sexe x dip x GEO}
--   T3 : pop x {socpro x act x GEO}
--   T4 : pop x {age x sexe x act}
+-   T1 : pop $\bigotimes$ {age x sexe x GEO}
+-   T2 : pop $\bigotimes$ {sexe x dip x GEO}
+-   T3 : pop $\bigotimes$ {socpro x act x GEO}
+-   T4 : pop $\bigotimes$ {age x sexe x act}
 -   où GEO est une variable hiérarchique emboîtant régions et départements
 
 ### Exemple 3 : niveau expert
@@ -154,10 +153,10 @@ La liste des tableaux à protéger est donc la suivante :
 
 En formalisant :
 
--   T1 : pop x {age_3 x dep}
--   T2 : pop x {age_5 x sexe x dep}
--   T3 : pop x {age_3 x reg}
--   T4 : pop x {age_5 x sexe x reg}
+-   T1 : pop $\bigotimes$ {age_3 x dep}
+-   T2 : pop $\bigotimes$ {age_5 x sexe x dep}
+-   T3 : pop $\bigotimes$ {age_3 x reg}
+-   T4 : pop $\bigotimes$ {age_5 x sexe x reg}
 
 **Analyse**
 
@@ -188,18 +187,18 @@ Il n'est pas possible d'insérer la modalité 45-65 dans cette hiérarchie, il s
 
 Une première étape d'analyse mène à la liste des tableaux à protéger suivante :
 
--   T1 : pop x {AGE_hrc_princ x GEO}
--   T1bis : pop x {AGE_hrc_spe x GEO}
--   T2 : pop x {AGE_hrc_princ x sexe x GEO}
--   T2bis : pop x {AGE_hrc_spe x sexe x GEO}
+-   T1 : pop $\bigotimes$ {AGE_hrc_princ x GEO}
+-   T1bis : pop $\bigotimes$ {AGE_hrc_spe x GEO}
+-   T2 : pop $\bigotimes$ {AGE_hrc_princ x sexe x GEO}
+-   T2bis : pop $\bigotimes$ {AGE_hrc_spe x sexe x GEO}
 -   où GEO est une variable hiérarchique emboîtant régions et départements
 -   où AGE_hrc_princ (hiérarchie principale) est une variable hiérarchique emboîtant l'ensemble des catégories d'âge hors 45-65
 -   où AGE_hrc_spe (agrégat spécial) a les modalités : 45-65 = 45-55 + 55-65
 
 On remarque que T1 est en réalité déjà "contenu" dans T2. Puisque le croisement AGE_hrc_princ x GEO est présente dans T2. De même T1bis est contenu dans T2bis. On peut donc regrouper ces tableau. Finalement, on se retrouve avec cette liste de tableaux à protéger :
 
--   T1 : pop x {AGE_hrc_princ x sexe x GEO}
--   T2 : pop x {AGE_hrc_spe x sexe x GEO}
+-   T1 : pop $\bigotimes$ {AGE_hrc_princ x sexe x GEO}
+-   T2 : pop $\bigotimes$ {AGE_hrc_spe x sexe x GEO}
 -   où GEO est une variable hiérarchique emboîtant régions et départements
 -   où AGE_hrc_princ (hiérarchie principale) est une variable hiérarchique emboîtant l'ensemble des catégories d'âge hors 45-65
 -   où AGE_hrc_spe (agrégat spécial) a les modalités : 45-65 = 45-55 + 55-65

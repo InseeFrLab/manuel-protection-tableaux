@@ -103,6 +103,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   }
 }</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -385,10 +414,10 @@ Etapes de l’analyse de la demande
 </ul>
 <p>En formalisant :</p>
 <ul>
-<li>T1 : pop x {age x sexe x dep}</li>
-<li>T2 : pop x {sexe x dip x dep}</li>
-<li>T3 : pop x {socpro x act x dep}</li>
-<li>T4 : pop x {age x sexe x act}</li>
+<li>T1 : pop <span class="math inline">\(\bigotimes\)</span> {age x sexe x dep}</li>
+<li>T2 : pop <span class="math inline">\(\bigotimes\)</span> {sexe x dip x dep}</li>
+<li>T3 : pop <span class="math inline">\(\bigotimes\)</span> {socpro x act x dep}</li>
+<li>T4 : pop <span class="math inline">\(\bigotimes\)</span> {age x sexe x act}</li>
 </ul>
 <p><strong>Analyse</strong></p>
 <p>Les tableaux partagent le même champ (sous-entendu) et le même indicateur (population), ils sont donc liés a minima par le total, donc il n’y a pas de sous-demande indépendante.</p>
@@ -410,13 +439,13 @@ Etapes de l’analyse de la demande
 </ul>
 <p>En formalisant :</p>
 <ul>
-<li>T1 : pop x {age x sexe x dep}</li>
-<li>T2 : pop x {age x dip x dep}</li>
-<li>T3 : pop x {socpro x act x dep}</li>
-<li>T4 : pop x {age x sexe x act}</li>
-<li>T5 : pop x {age x sexe x reg}</li>
-<li>T6 : pop x {sexe x dip x reg}</li>
-<li>T7 : pop x {socpro x act x reg}</li>
+<li>T1 : pop <span class="math inline">\(\bigotimes\)</span> {age x sexe x dep}</li>
+<li>T2 : pop <span class="math inline">\(\bigotimes\)</span> {age x dip x dep}</li>
+<li>T3 : pop <span class="math inline">\(\bigotimes\)</span> {socpro x act x dep}</li>
+<li>T4 : pop <span class="math inline">\(\bigotimes\)</span> {age x sexe x act}</li>
+<li>T5 : pop <span class="math inline">\(\bigotimes\)</span> {age x sexe x reg}</li>
+<li>T6 : pop <span class="math inline">\(\bigotimes\)</span> {sexe x dip x reg}</li>
+<li>T7 : pop <span class="math inline">\(\bigotimes\)</span> {socpro x act x reg}</li>
 </ul>
 <p><strong>Analyse</strong></p>
 <p>Les tableaux partagent le même champ (sous-entendu) et le même indicateur (population), ils sont donc liés a minima par le total, donc il n’y a pas de sous-demande indépendante.</p>
@@ -424,10 +453,10 @@ Etapes de l’analyse de la demande
 <p>Deux variables ont un lien hiérarchique (région &gt; département), lorsque l’information est hiérarchisée (et emboîtée) il faut la traiter dans un même tableau en créant une variable hiérarchique qu’on peut appeler par exemple <code>GEO</code>. De plus, on peut fusionner les tableaux partageant les mêmes variables de croisement.</p>
 <p>La liste des tableaux à protéger est donc la suivante :</p>
 <ul>
-<li>T1 : pop x {age x sexe x GEO}</li>
-<li>T2 : pop x {sexe x dip x GEO}</li>
-<li>T3 : pop x {socpro x act x GEO}</li>
-<li>T4 : pop x {age x sexe x act}</li>
+<li>T1 : pop <span class="math inline">\(\bigotimes\)</span> {age x sexe x GEO}</li>
+<li>T2 : pop <span class="math inline">\(\bigotimes\)</span> {sexe x dip x GEO}</li>
+<li>T3 : pop <span class="math inline">\(\bigotimes\)</span> {socpro x act x GEO}</li>
+<li>T4 : pop <span class="math inline">\(\bigotimes\)</span> {age x sexe x act}</li>
 <li>où GEO est une variable hiérarchique emboîtant régions et départements</li>
 </ul>
 </section>
@@ -442,10 +471,10 @@ Etapes de l’analyse de la demande
 </ul>
 <p>En formalisant :</p>
 <ul>
-<li>T1 : pop x {age_3 x dep}</li>
-<li>T2 : pop x {age_5 x sexe x dep}</li>
-<li>T3 : pop x {age_3 x reg}</li>
-<li>T4 : pop x {age_5 x sexe x reg}</li>
+<li>T1 : pop <span class="math inline">\(\bigotimes\)</span> {age_3 x dep}</li>
+<li>T2 : pop <span class="math inline">\(\bigotimes\)</span> {age_5 x sexe x dep}</li>
+<li>T3 : pop <span class="math inline">\(\bigotimes\)</span> {age_3 x reg}</li>
+<li>T4 : pop <span class="math inline">\(\bigotimes\)</span> {age_5 x sexe x reg}</li>
 </ul>
 <p><strong>Analyse</strong></p>
 <p>Les tableaux partagent le même champ (sous-entendu) et le même indicateur (population), ils sont donc liés a minima par le total, donc il n’y a pas de sous-demande indépendante.</p>
@@ -470,18 +499,18 @@ Etapes de l’analyse de la demande
 <p>Il n’est pas possible d’insérer la modalité 45-65 dans cette hiérarchie, il s’agit donc d’un cas de hiérarchie non-emboîtée. En effet, 45-65 = 45-55 + 55-65 est un agrégat non-emboîté qui devra être traité en construisant un tableau séparé.</p>
 <p>Une première étape d’analyse mène à la liste des tableaux à protéger suivante :</p>
 <ul>
-<li>T1 : pop x {AGE_hrc_princ x GEO}</li>
-<li>T1bis : pop x {AGE_hrc_spe x GEO}</li>
-<li>T2 : pop x {AGE_hrc_princ x sexe x GEO}</li>
-<li>T2bis : pop x {AGE_hrc_spe x sexe x GEO}</li>
+<li>T1 : pop <span class="math inline">\(\bigotimes\)</span> {AGE_hrc_princ x GEO}</li>
+<li>T1bis : pop <span class="math inline">\(\bigotimes\)</span> {AGE_hrc_spe x GEO}</li>
+<li>T2 : pop <span class="math inline">\(\bigotimes\)</span> {AGE_hrc_princ x sexe x GEO}</li>
+<li>T2bis : pop <span class="math inline">\(\bigotimes\)</span> {AGE_hrc_spe x sexe x GEO}</li>
 <li>où GEO est une variable hiérarchique emboîtant régions et départements</li>
 <li>où AGE_hrc_princ (hiérarchie principale) est une variable hiérarchique emboîtant l’ensemble des catégories d’âge hors 45-65</li>
 <li>où AGE_hrc_spe (agrégat spécial) a les modalités : 45-65 = 45-55 + 55-65</li>
 </ul>
 <p>On remarque que T1 est en réalité déjà “contenu” dans T2. Puisque le croisement AGE_hrc_princ x GEO est présente dans T2. De même T1bis est contenu dans T2bis. On peut donc regrouper ces tableau. Finalement, on se retrouve avec cette liste de tableaux à protéger :</p>
 <ul>
-<li>T1 : pop x {AGE_hrc_princ x sexe x GEO}</li>
-<li>T2 : pop x {AGE_hrc_spe x sexe x GEO}</li>
+<li>T1 : pop <span class="math inline">\(\bigotimes\)</span> {AGE_hrc_princ x sexe x GEO}</li>
+<li>T2 : pop <span class="math inline">\(\bigotimes\)</span> {AGE_hrc_spe x sexe x GEO}</li>
 <li>où GEO est une variable hiérarchique emboîtant régions et départements</li>
 <li>où AGE_hrc_princ (hiérarchie principale) est une variable hiérarchique emboîtant l’ensemble des catégories d’âge hors 45-65</li>
 <li>où AGE_hrc_spe (agrégat spécial) a les modalités : 45-65 = 45-55 + 55-65</li>
