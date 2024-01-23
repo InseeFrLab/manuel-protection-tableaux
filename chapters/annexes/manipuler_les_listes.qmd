@@ -1,0 +1,218 @@
+# Manipuler les listes avec `R` {#sec-manipulerlistes}
+
+```{r}
+library(dplyr)
+```
+
+
+Les listes sont des objets très utiles en `R` et en particulier pour produire 
+efficacement les tableaux de données et les informations nécessaires lorsque nous utilisons la fonction `tab_multi_manager()` du package `rtauargus`.
+
+Alors qu'un vecteur en `R` est une collection d'objets du même type, une liste est une collection d'objets qui peuvent être très différents entre eux. On peut ainsi créer, avec la fonction `list()`, une liste contenant un vecteur d'entiers, un vecteur de charactères et un `data.frame`:
+
+```{r liste_ex1}
+(liste_1 <- list(1:3, c("spam", "egg"), head(cars)))
+```
+
+## Manipulations de base: créer, ajouter, supprimer
+
+Pour accéder aux éléments d'une liste, il faut distinguer deux types d'indexation:
+
+- avec les crochets simples: `liste_1[1]` va permettre de récupérer la liste composée uniquement du premier objet. Cette indexation renvoie une liste. On utilisera ce type d'indexation pour extraire une sous-liste d'une liste: `liste_1[2:3]` permet, par exemple, d'extraire la sous-liste composée des éléments 2 et 3 de la liste.
+
+- avec les crochets doubles: `liste_1[[1]]` permet d'accéder au premier élément de la liste. Le type de l'objet renvoyé est le type de l'objet placé dans la liste à l'index renseigné (dans notre cas un vecteur d'entiers). On utilisera cette indexation pour extraire un objet particulier de la liste.
+
+```{r liste_index}
+liste_1[1]
+class(liste_1[1])
+liste_1[[1]]
+class(liste_1[[1]])
+```
+
+Pour ajouter un élément à une liste, plusieurs techniques sont possibles:
+
+- ajouter une liste à une autre liste avec la fonction `c()`:
+
+```{r}
+(liste_2 <- list(LETTERS, head(mtcars)))
+(liste_3 <- c(liste_1, liste_2))
+length(liste_3)
+```
+
+- ajouter un élément avec l'indexation simple:
+
+```{r}
+liste_3[6] <- pi
+length(liste_3)
+```
+
+Si on ajoute un élément à un index supérieur à la longueur de la liste + 1, `R` va créer automatiquement des éléments vides (de type `NULL`) sur les index "oubliés". Ici, notre `liste_3` contient 6 objets, si j'ajoute un élément à l'index `9`, la liste aura une longueur de `9` avec deux objets `NULL` en positions `7` et `8`:
+
+```{r}
+liste_3[9] <- pi^2
+length(liste_3)
+liste_3[7:8]
+```
+
+
+## Nommer les éléments d'une liste
+
+Il est souvent pratique de donner des noms à chaque élément de la liste. Cela permet de récupérer les objets sans avoir à connaître leur position dans la liste. La fonction `names()` permet d'accoler un nom à chaque élément de la liste. On fera bien attention à fournir un vecteur de noms qui soit de la même longueur que la liste.
+
+```{r}
+names(liste_1) <- c("vec_int", "vec_char", "cars_df")
+names(liste_1)
+liste_1
+```
+
+
+Pour récupérer un élément de la liste grçace à son nom, on pourra utiliser les deux types d'indexation vues ci-dessus en utilisant non pas les index de position dans la liste mais les noms des objets.
+
+Pour récupérer une sous-liste, on fera:  
+
+```{r}
+liste_1["vec_char"] # retourne une sous-liste d'un élément
+liste_1[c("vec_int", "vec_char")] # retourne une sous-liste de deux éléments
+```
+
+
+Pour retourner un objet de la liste, on fera: 
+
+```{r}
+liste_1[["vec_char"]] # retourne l'élément vec_char en tant que vecteur
+```
+
+L'accès à un objet d'une liste est aussi possible en utilisant le `$`. Ainsi, l'écriture suivante est identique à la précédente:
+
+```{r}
+liste_1$vec_char
+```
+
+On pourra nommer les éléments d'une liste au moment de la créer:
+
+```{r}
+liste_df <- list(
+  df1 = cars,
+  df2 = mtcars,
+  df3 = iris,
+  df4 = CO2
+)
+names(liste_df)
+```
+
+
+## Supprimer un élément d'une liste
+
+On utilisera le code suivant pour supprimer le troisième élément d'une liste:
+
+```{r}
+liste_1[-3]
+```
+
+Et le code suivant pour supprimer les éléments 7 et 8 de `liste_3`
+
+```{r}
+length(liste_3[c(-7,-8)])
+```
+
+
+## Appliquer une fonction à chaque élément une liste avec la fonction `lapply()`
+
+Pour cette section, nous utiliserons principalement des listes dont tous les éléments sont du même type, en particulier des `data.frames`.
+
+Pour appliquer une même fonction à tous les éléments d'une liste, il n'est pas besoin d'écrire une boucle `for` car la fonction `lapply()` s'en charge pour nous.
+
+Un premier exemple: Nous souhaitons connaître les dimensions de chaque `data.frame` qui compose la liste `liste_df`. Le premier argument de `lapply` est la liste sur laquelle nous travaillons et le second argument est la fonction que nous voulons appliquer sur chaque élément. Il s'agit, ici, de la fonction `dim()`.
+
+```{r}
+lapply(liste_df, dim)
+```
+
+La fonction `lapply()` retourne une liste de même longueur que la liste de départ et chaque élément de la liste contient le résultat de la fonction `dim()` soit un vecteur de deux éléments (nombre de lignes et nombre de colonnes d'un `data.frame`).
+
+Second exemple: Nous souhaitons afficher les deux premières lignes de chaque `data.frame`. Ici, nous allons utiliser la fonction `head()` qui affiche, par défaut les 6 premières lignes. Il nous faut donc changer un paramètre de la fonction. Nous pouvons:
+
+- soit créer une fonction anonyme (lambda):
+
+```{r}
+lapply(liste_df, function(df) head(df, n = 2))
+lapply(liste_df, \(df) head(df, n = 2)) # écriture de fonction apparue avec R 4.2
+```
+
+Dans cette écriture `df` prendra successivement comme valeur les objets de la liste, comme le `i` dans une boucle `for(i in ...)`.
+
+- soit contracter l'écriture (c'est possible ici car nous ne modifions pas l'objet `df`) de la manière suivante:
+
+```{r}
+lapply(liste_df, head, n = 2)
+```
+
+
+Troisième exemple: Nous souhaitons, dans chacun des tableaux, ajouter une variable servant d'identifiant.
+
+```{r}
+liste_df2 <- lapply(
+  liste_df, 
+  function(df){
+    df$index <- 1:nrow(df)
+    return(df)
+  }
+)
+lapply(liste_df2, head, n=2)
+```
+
+
+## Appliquer une fonction à chaque élément une liste avec la fonction `purrr::map()`
+
+La package `purrr` met à disposition des fonctions qui permettent de manipuler les listes. Une aide précieuse pour découvrir tous les trésors du package est fournie ici: [](https://raw.githubusercontent.com/rstudio/cheatsheets/master/purrr.pdf)
+
+```{r}
+library(purrr)
+```
+
+
+- La fonction `map()` est un équivalent de la fonction `lapply()`:
+
+```{r}
+map(liste_df, dim)
+```
+
+L'avantage du package est de fournir des variantes très utiles de la fonction `map()`, en particulier la fonction `imap()` qui permet d'accéder non pas seulement à tous les éléments de la liste mais aussi à leur index ou à leur nom. 
+
+Par exemple, imaginons que nous souhaitons ajouter à chaque `data.frame` de la liste `liste_df` une variable contenant le nom du tableau. Avec la fonction `imap()` cela s'écrit:
+
+```{r}
+liste_df <- imap(liste_df, \(df, nom) df %>% mutate(tableau = nom))
+map(liste_df, head, n = 2)
+```
+
+Avec `imap()`, la fonction anonyme n'a plus un mais deux arguments: l'un (que nous appelons `df` ici) représente chaque objet de la liste et l'autre (nommé `nom` ici) représente le nom de chaque élément. Ainsi, pour le premier élément, `df` prendra la valeur `liste_df[[1]]` et `nom` prendra la valeur `df1`.
+
+
+## Poser le secret primaire sur une liste de `data.frames`
+
+L'utilisation des listes est nécessaire pour utiliser la fonction `tab_muli_manager` de `rtauargus`. Mais, elle est aussi intéressante en amont, par exemple dans la pose du secret primaire comme dans l'exemple fourni à la section [-@sec-pose-secret-primaire].
+
+```{r map-secret-primaire, eval=FALSE}
+liste_4tabs <- liste_4tabs %>%
+  map(
+    function(df){
+      df %>%
+        mutate(
+          is_secret_freq = N_OBS > 0 & N_OBS < 3,
+          is_secret_dom = (MAX != 0) & (MAX > TOT*0.85),
+          is_secret_prim = is_secret_freq | is_secret_dom
+        )
+    }
+  )
+```
+
+Le code ci-dessus permet d'appliquer à chacun des 4 `data.frames` qui composent la liste `liste_4tabs` une fonction anonyme qui:
+
+- construit la variable `is_secret_freq`, permettant d'indiquer si une cellule respecte ou non la règle de fréquence (avec les règles des statistiques entreprises);
+- construit la variable `is_secret_dom`, permettant d'indiquer si une cellule respecte ou non la règle de dominance;
+- construit la variable `is_secret_prim`, permettant d'indiquer si une cellule respecte ou non les deux règles à la fois.
+
+En sortie, nous obtiendrons ainsi une liste composés des mêmes 4 `data.frames` qui auront chacun les trois variables de secret primaire construites ici en plus.
+
+
