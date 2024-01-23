@@ -1,0 +1,30 @@
+# Introduction {#sec-introfichespratiques}
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(eval = TRUE)
+```
+
+```{r import librairies, warning=FALSE, message=FALSE}
+library(rtauargus)
+library(dplyr)
+```
+
+Ces fiches pratiques ont été réalisées avec la version 1.2.0 de
+`rtauargus` et la version 4.2.3 de `TauArgus`.
+
+## Structure des données
+
+Tous les tableaux fournis en entrée de `rtauargus` ont une structure
+identique :
+
+-   Les variables décrivant les croisements (variables catégorielles)
+    sont placées au début
+-   `FREQ` la variable indiquant le nombre d'unités statistiques
+    contribuant à la cellule;
+-   `VALUE` la variable indiquant la somme pondérée des valeurs de
+    l'ensemble des contributeurs à la cellule (ex : un chiffre
+    d'affaires, un nombre de personnes en emploi au 31/12, etc.);
+-   `MAX` la valeur du plus gros contributeur à la cellule.
+
+N.B : pour les tableaux de fréquence `FREQ` = `VALUE`.
+

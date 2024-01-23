@@ -22,8 +22,12 @@ book:
         - 04_secret_tableaux_lies.qmd
     - part: "En pratique"
       chapters: 
-        - 05_fiches_pratiques.qmd
-        - 06_expert.qmd
+        - chapters/fiches_pratiques/introduction.qmd
+        - chapters/fiches_pratiques/tabulate_micro_data.qmd
+        - chapters/fiches_pratiques/var_hierarchique.qmd
+        - chapters/fiches_pratiques/var_hierarchique_nonemboitee.qmd
+        - chapters/fiches_pratiques/couts.qmd
+        - 06_outils.qmd
     - part: "Annexes"
       chapters:
         - chapters/annexes/regles.qmd

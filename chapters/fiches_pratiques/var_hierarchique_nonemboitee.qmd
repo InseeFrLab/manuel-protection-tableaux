@@ -1,0 +1,164 @@
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(eval = TRUE)
+```
+
+```{r import librairies, warning=FALSE, message=FALSE, echo=FALSE}
+library(rtauargus)
+library(dplyr)
+```
+
+# Poser le secret en présence de hiérarchies non-emboîtées {#sec-varhrcnonemb}
+
+:::{.solutionbox}
+
+::::{.solutionbox-header}
+:::::{.solutionbox-icon}
+:::::
+  Niveau moyen
+::::
+  
+:::
+  
+  Lorsque l'on a la présence de hiérarchie non-emboîtée dans les tableaux
+traités alors il faut construire deux tableaux et deux hiérarchies pour
+chaque hiérarchie non-emboîtée.
+
+Par exemple, le tableau `turnover_act_size` croise la NAF et les tranches d'effectifs
+des entreprises. Si l'on décide de publier, en plus des activités
+classiques de la NAF, un agrégat supplémentaire $AGREG = AZ + B$, 
+alors il faut construire un tableau supplémentaire avec cet agrégat. En effet,
+AGREG ne peut pas s'insérer dans la hiérarchie NAF, il faut donc construire deux hiérarchies :
+  
+  -   la hiérarchie NAF (principale)
+-   la hiérarchie de l'agrégat supplémentaire (alternative)
+
+On crée le fichier `.hrc` de la hiérarchie principale à partir de la table de correspondance incluse dans le package.
+
+```{r}
+str(activity_corr_table)
+```
+
+```{r}
+write_hrc2(activity_corr_table, file_name = "hrc/NAF_principale.hrc")
+```
+
+Puis on crée la hiérarchie alternative pour l'agrégat spécifique
+```{r}
+alt_corr_table <- tibble::tibble(
+  niv0 = "AGREG",
+  niv1 = c("B","AZ")
+)
+
+write_hrc2(alt_corr_table %>% select(-niv0), file_name = "hrc/AGREG_alt.hrc")
+```
+
+On construit les tableaux nécessaires à la pose du secret et on leur applique le secret primaire.
+A savoir le tableau sur lequel la hiérarchie principale sera appliquée.
+```{r}
+turnover_act_size_detect <-  turnover_act_size %>%
+  rename(FREQ = N_OBS, VALUE = TOT) %>% 
+  mutate(
+    is_secret_freq = FREQ > 0 & FREQ < 3,
+    is_secret_dom = (VALUE != 0) & (MAX > 0.85*VALUE)
+  ) %>% 
+  mutate(
+    is_secret_prim = is_secret_freq | is_secret_dom
+  )
+```
+
+
+Et le tableau sur lequel la hiérarchie alternative sera appliquée, i.e. tableau uniquement avec
+les modalités présentes dans la hiérarchie alternative et on pose le secret primaire.
+```{r}
+trunover_act_size_alt <- turnover_act_size_detect %>% 
+  filter(ACTIVITY %in% c("AZ","B"))
+```
+
+
+::: {.callout-note}
+## Arguments `tab_multi_manager()` pour traiter les hiérarchies non-emboîtées
+
+-   **alt_totcode** : une liste nommée pour les codes de totaux
+alternatifs (voir `alt_hrc` pour l'utilisation).
+-   **alt_hrc** : une liste nommée utile pour traiter les hiérarchies
+    non emboîtées. Les noms de la liste sont les noms des tableaux pour
+    lesquelles une autre hiérarchie (non emboîtée en général) doit être
+    utilisée (ex : si T1 et T2 ont une variable explicative, appelée
+    `ACTIVITY`, et la même variable de réponse, mais la variable
+    `ACTIVITY` n'a pas la même hiérarchie dans les les deux tables).
+Supposons que les hiérarchies (`act1.hrc` et `act2.hrc`) ne sont pas
+emboîtées. Dans ce cas, nous écrivons les deux arguments comme suit
+:
+  
+  -   `hrc = c(ACTIVITY = "chemin_vers_fichier/act_1.hrc")` : par défaut,
+cette hiérarchie sera utilisée pour la variable ACTIVITY.
+-   `alt_hrc = list(T2 = c(ACTIVITY = "chemin_vers_fichier/act_2.hrc"))`
+dans la table T2, la hiérarchie alternative sera utilisée.
+:::
+  
+  
+```{r eval = FALSE}
+masq_nonemb <- tab_multi_manager(
+  list_tables = list(
+    tab = turnover_act_size_detect,
+    tab_alt = trunover_act_size_alt
+  ),
+  list_explanatory_vars = list(
+    tab = c("ACTIVITY","SIZE"),
+    tab_alt = c("ACTIVITY","SIZE")
+  ),
+  dir_name = "tauargus_files/hrc_nonemb",
+  hrc = list(ACTIVITY = "hrc/NAF_principale.hrc"),
+  alt_hrc = list(
+    tab_alt = c(ACTIVITY = "hrc/AGREG_alt.hrc")
+  ),
+  totcode = "Total",
+  alt_totcode = list(
+    tab_alt = c(ACTIVITY = "AGREG")
+  ),
+  value = "VALUE",
+  freq = "FREQ",
+  secret_var = "is_secret_prim"
+)
+```
+
+
+```{r import masque hrc_nonemb, echo = FALSE}
+masq_nonemb <- readRDS("../../tauargus_files/hrc_nonemb/masq_nonemb.rds")
+```
+
+
+```{r}
+masq_nonemb <- masq_nonemb %>% 
+  purrr::map(
+    function(tab){
+      tab %>% 
+        rename_with(~"is_secret_final", last_col()) %>% 
+        mutate(
+          statut_final = case_when(
+            is_secret_freq ~ "A",
+            is_secret_dom ~ "B",
+            is_secret_final ~ "D",
+            TRUE ~ "V"
+          )
+        )
+    }
+  )
+str(masq_nonemb)
+```
+
+On peut dresser le bilan :
+```{r}
+masq_nonemb %>% 
+  purrr::imap_dfr(
+    function(tab, nom){
+      tab %>% 
+        count(statut_final) %>% 
+        mutate(
+          part = n/sum(n)*100,
+          table = nom
+        ) %>% 
+        relocate(table)
+    }
+  )
+```

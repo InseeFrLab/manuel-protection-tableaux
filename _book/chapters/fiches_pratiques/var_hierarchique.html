@@ -6,10 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Clara Baudry, Arlindo Dos Santos, Julien Jamme, Nathanaël Rastout">
-<meta name="dcterms.date" content="2024-01-23">
 
-<title>Manuel de protection des tableaux</title>
+<title>Manuel de protection des tableaux - 7&nbsp; Prendre en compte une variable hiérarchique</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -22,26 +20,61 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<link href="./01_notions.html" rel="next">
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../chapters/fiches_pratiques/var_hierarchique_nonemboitee.html" rel="next">
+<link href="../../chapters/fiches_pratiques/tabulate_micro_data.html" rel="prev">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -62,9 +95,10 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script src="../../site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="../../site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="../../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 </head>
 
@@ -78,7 +112,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Introduction</a></li><li class="breadcrumb-item"><a href="./index.html">Introduction</a></li></ol></nav>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../chapters/fiches_pratiques/introduction.html">En pratique</a></li><li class="breadcrumb-item"><a href="../../chapters/fiches_pratiques/var_hierarchique.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Prendre en compte une variable hiérarchique</span></a></li></ol></nav>
       <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
       </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -93,7 +127,7 @@ ul.task-list li input[type="checkbox"] {
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="./">Manuel de protection des tableaux</a> 
+      <a href="../../">Manuel de protection des tableaux</a> 
     </div>
       </div>
         <div class="mt-2 flex-shrink-0 align-items-center">
@@ -114,13 +148,13 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Introduction</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./01_notions.html" class="sidebar-item-text sidebar-link">
+  <a href="../../01_notions.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Notions principales à connaître</span></span></a>
   </div>
 </li>
@@ -137,19 +171,19 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./02_secret_un_tableau.html" class="sidebar-item-text sidebar-link">
+  <a href="../../02_secret_un_tableau.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Poser le secret sur un tableau</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./03_analyser_une_demande.html" class="sidebar-item-text sidebar-link">
+  <a href="../../03_analyser_une_demande.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Comment analyser une demande ?</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./04_secret_tableaux_lies.html" class="sidebar-item-text sidebar-link">
+  <a href="../../04_secret_tableaux_lies.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Poser le secret sur plusieurs tableaux liés</span></span></a>
   </div>
 </li>
@@ -166,37 +200,37 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./chapters/fiches_pratiques/introduction.html" class="sidebar-item-text sidebar-link">
+  <a href="../../chapters/fiches_pratiques/introduction.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./chapters/fiches_pratiques/tabulate_micro_data.html" class="sidebar-item-text sidebar-link">
+  <a href="../../chapters/fiches_pratiques/tabulate_micro_data.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Préparation des tableaux pour la pose du secret</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./chapters/fiches_pratiques/var_hierarchique.html" class="sidebar-item-text sidebar-link">
+  <a href="../../chapters/fiches_pratiques/var_hierarchique.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Prendre en compte une variable hiérarchique</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./chapters/fiches_pratiques/var_hierarchique_nonemboitee.html" class="sidebar-item-text sidebar-link">
+  <a href="../../chapters/fiches_pratiques/var_hierarchique_nonemboitee.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Poser le secret en présence de hiérarchies non-emboîtées</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./chapters/fiches_pratiques/couts.html" class="sidebar-item-text sidebar-link">
+  <a href="../../chapters/fiches_pratiques/couts.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Utiliser les coûts</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./06_expert.html" class="sidebar-item-text sidebar-link">
+  <a href="../../06_expert.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Présentation des outils</span></span></a>
   </div>
 </li>
@@ -213,13 +247,13 @@ ul.task-list li input[type="checkbox"] {
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./chapters/annexes/regles.html" class="sidebar-item-text sidebar-link">
+  <a href="../../chapters/annexes/regles.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Règles</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./chapters/annexes/manipuler_les_listes.html" class="sidebar-item-text sidebar-link">
+  <a href="../../chapters/annexes/manipuler_les_listes.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Manipuler les listes avec <code>R</code></span></span></a>
   </div>
 </li>
@@ -235,7 +269,8 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Plan</h2>
    
   <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#première-option" id="toc-première-option" class="nav-link active" data-scroll-target="#première-option"><span class="header-section-number">7.1</span> Première option</a></li>
+  <li><a href="#seconde-option" id="toc-seconde-option" class="nav-link" data-scroll-target="#seconde-option"><span class="header-section-number">7.2</span> Seconde option</a></li>
   </ul>
 </nav>
     </div>
@@ -244,26 +279,14 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Manuel de protection des tableaux</h1>
+<h1 class="title"><span id="sec-varhrc" class="quarto-section-identifier"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Prendre en compte une variable hiérarchique</span></span></h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Author</div>
-    <div class="quarto-title-meta-contents">
-             <p>Clara Baudry, Arlindo Dos Santos, Julien Jamme, Nathanaël Rastout </p>
-          </div>
-  </div>
     
-    <div>
-    <div class="quarto-title-meta-heading">Published</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">2024-01-23</p>
-    </div>
-  </div>
   
     
   </div>
@@ -271,19 +294,142 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<section id="introduction" class="level1 unnumbered">
-<h1 class="unnumbered">Introduction</h1>
-<p>Le <em>Manuel de protection des tableaux</em> vise à accompagner les équipes en charge de la protection des données tabulées à l’Insee et au sein du SSP en général. Ce manuel fournit un première réponse à la recommandation de la mission de l’inspection générale sur la diffusion sur mesure, dont le rapport est consultable <a href="https://intranet.insee.fr/jcms/22228814_DBFileDocument/fr/mi-2022-4-diffusion-sur-mesure-rapport-ig-16-12-2022">ici</a>.</p>
-<p>Ce manuel, rédigé par la section Méthodes statistiques spatiales et secret statistique au sein du DMS, a vocation à présenter les <strong>principales notions</strong> à connaître, à proposer une <strong>démarche méthodologique</strong> pour analyser tout type de demande et à illustrer avec de <strong>nombreux exemples</strong> comment, en pratique, il est possible de protéger un ensemble de tableaux avant leur diffusion.</p>
-<p>Ce manuel a pour principaux objectifs d’<strong>harmoniser les pratiques</strong> au sein de l’institut et du SSP et de <strong>proposer une documentation</strong> aussi complète et pratique pour les utilisateurs que possible.</p>
-<p>Ce manuel s’adresse à toute personne en charge de diffuser des données tabulées auprès du public, en particulier les chargés de réponse à la demande à la DG, dans les pôles ou en DR, ainsi que les producteurs désireux de publier leurs données sur insee.fr, dans un Insee Références, un Insee Résultats ou toute autre publication.</p>
-<p>Les notions principales utiles pour la pose du secret sont présentées au Chapitre <a href="01_notions.html"><span>1</span></a>. L’idée est de se baser sur un vocabulaire commun afin d’être sûrs de parler de la même chose.</p>
-<p>La démarche pour poser le secret sur un tableau est présentée au Chapitre <span class="quarto-unresolved-ref">?sec-secretuntableau</span>.</p>
-<p>Comme une diffusion concerne le plus souvent plusieurs tableaux, la démarche pour analyser de telles demandes est présentée au Chapitre <a href="03_analyser_une_demande.html"><span>3</span></a>. Cette étape consiste, à partir de la liste de tableaux à diffuser, à déterminer la liste de tableaux qu’il faut protéger, en étudiant, notamment, les liens existants entre ces tableaux.</p>
-<p>Lorsque l’on traite plusieurs tableaux simultanément il faut bien prendre en compte l’existence de mêmes croisements entre les tableaux. C’est ce qui est fait dans le Chapitre <span class="quarto-unresolved-ref">?sec-secrettableauxlies</span> qui présente la pose du secret sur des tableaux liés.</p>
-<p>Le Chapitre <span class="quarto-unresolved-ref">?sec-fichespratiques</span> regroupe plusieurs cas particuliers pour poser le secret à l’aide de <code>rtauargus</code>. Les fiches sont de niveau croissant, allant de débutant à expert, et devraient permettre, à terme, d’accompagner les utilisateurs dans la plupart des situations rencontrées en pratique.</p>
-<p>Enfin le Chapitre <span class="quarto-unresolved-ref">?sec-presentationoutils</span> fournit des informations complémentaires sur <span class="math inline">\(\tau\)</span>-Argus et sur le package <code>rtauargus</code>. L’utilisateur y trouvera en particulier une description des différents types de fichiers créés par le package et utiles à <span class="math inline">\(\tau\)</span>-Argus, ainsi que des éléments pour comprendre et résoudre certaines erreurs provenant du logiciel.</p>
-<p>Les annexes contiennent un rappel de certaines règles du secret en vigueur (Chapitre <a href="chapters/annexes/regles.html"><span>11</span></a>) et un petit tutoriel sur la manipulation des listes pour celles et ceux qui ne seraient pas familiers avec ce type d’objets <code>R</code> très utiles (Chapitre <a href="chapters/annexes/manipuler_les_listes.html"><span>12</span></a>).</p>
+<p>:::{.solutionbox-facile}</p>
+<div class="solutionbox-header-facile">
+<div class="solutionbox-icon-facile">
+
+</div>
+<p>Niveau facile</p>
+</div>
+<p>:::</p>
+<p>Reprenons ici l’exemple de la variable <code>geo</code> qui est une variable hiérarchique puisqu’il existe des emboîtements entre les différents niveaux.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<div>
+<pre class="mermaid mermaid-js">flowchart TD
+A[Pays] --&gt; B[Nord]
+A --&gt; C[Ouest]
+A --&gt; D[Est]
+A --&gt; E[Sud]
+B --&gt; F[N1]
+B --&gt; G[N2]
+B --&gt; H[N3]
+C --&gt; I[O1]
+C --&gt; J[O2]
+C --&gt; K[O3]
+C --&gt; L[O4]
+D --&gt; M[E1]
+D --&gt; N[E2]
+D --&gt; O[E3]
+E --&gt; P[S1]
+E --&gt; Q[S2]
+</pre>
+</div>
+</div>
+</div>
+</div>
+<p>Pour prendre en compte cette hiérarchie il faut d’abord pouvoir la représenter de telle sorte que Tau-Argus comprenne les différents emboîtements présents.</p>
+<section id="première-option" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="première-option"><span class="header-section-number">7.1</span> Première option</h2>
+<p>La première option consiste à créer le fichier nécessaire (extension <code>.hrc</code>) à la main. Ceci est tout à fait pertinent si la hiérarchie n’est pas trop étendue.</p>
+<p>Tau-Argus attend en effet un type de fichier bien particulier, dont l’extension est <code>.hrc</code>. Il s’agit d’un simple fichier texte où les différents emboîtements sont écrits les uns en-dessous des autres. Un symbole (le <code>@</code>) est utilisé pour préciser le niveau de chacun des emboîtements au sein de la hiérarchie.</p>
+<p>Dans notre exemple on écrirait le fichier de la façon suivante :</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode tex code-with-copy"><code class="sourceCode latex"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>Nord</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>@N1</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>@N2</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>@N3 </span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>Ouest </span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>@O1 </span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>@O2 </span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>@O3 </span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>@O4 </span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>Est</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>@E1 </span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>@E2 </span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>@E3 </span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>Sud </span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>@S1 </span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>@S2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>On remarque que le total <code>Pays</code> n’est pas inclus dans le fichier <code>.hrc</code> c’est parce qu’il ne faut <strong>pas indiquer le super-total de la hiérarchie</strong> à Tau-Argus.</p>
+</section>
+<section id="seconde-option" class="level2" data-number="7.2">
+<h2 data-number="7.2" class="anchored" data-anchor-id="seconde-option"><span class="header-section-number">7.2</span> Seconde option</h2>
+<p>Quand la hiérarchie est très étendue, l’écriture manuelle du fichier de hiérarchie est pénible. Or, quand ce genre de cas se présente, il existe souvent une table de correspondance permettant d’associer les différents niveaux entre eux.</p>
+<p>Nous appelons table de correspondance une table qui précise l’ensemble des niveaux associés aux emboîtements les plus fins.</p>
+<p>La table de correspondance représentant la hiérarchie ci-dessus est la suivante:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>pays_corr_table <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">niv0 =</span> <span class="st">"Pays"</span>,</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">niv1 =</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">"Nord"</span>,<span class="dv">3</span>),<span class="fu">rep</span>(<span class="st">"Ouest"</span>,<span class="dv">4</span>),<span class="fu">rep</span>(<span class="st">"Est"</span>,<span class="dv">3</span>), <span class="fu">rep</span>(<span class="st">"Sud"</span>,<span class="dv">2</span>)),</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">niv2 =</span> <span class="fu">c</span>(<span class="fu">paste0</span>(<span class="st">"N"</span>,<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>),<span class="fu">paste0</span>(<span class="st">"O"</span>,<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>),<span class="fu">paste0</span>(<span class="st">"E"</span>,<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>), <span class="fu">paste0</span>(<span class="st">"S"</span>,<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>))</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>pays_corr_table</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 12 × 3
+   niv0  niv1  niv2 
+   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;
+ 1 Pays  Nord  N1   
+ 2 Pays  Nord  N2   
+ 3 Pays  Nord  N3   
+ 4 Pays  Ouest O1   
+ 5 Pays  Ouest O2   
+ 6 Pays  Ouest O3   
+ 7 Pays  Ouest O4   
+ 8 Pays  Est   E1   
+ 9 Pays  Est   E2   
+10 Pays  Est   E3   
+11 Pays  Sud   S1   
+12 Pays  Sud   S2   </code></pre>
+</div>
+</div>
+<p>Avec la fonction <code>write_hrc2()</code> du package <code>rtauargus</code>, on peut transformer la table de correspondance en un fichier <code>hrc</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write_hrc2</span>(pays_corr_table <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span>niv0), <span class="at">file_name =</span> <span class="st">"hrc/pays_TA_2.hrc"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Remarque: La fonction <code>rtauargus::write_hrc2()</code> n’accepte pas de valeurs manquantes dans la table en entrée. Lorsqu’une hiérarchie n’a pas la même nombre de sous-niveaux selon les branches on répète la modalité du niveau supérieur sur les niveaux inférieurs pour ne pas avoir de cases vides.</p>
+<p>Exemple : pour la hiérarchie ci-dessous on répète la modalité <code>C</code> dans la table de correspondance.</p>
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<div>
+<pre class="mermaid mermaid-js">flowchart TD
+A[Total] --&gt; B[A]
+A --&gt; C[B]
+A --&gt; D[C]
+B --&gt; E[A1]
+B --&gt; F[A2]
+C --&gt; G[B1]
+C --&gt; H[B2]
+H --&gt; I[B21]
+H --&gt; J[B22]
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>corr_tab <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">niv0 =</span> <span class="st">"ALL"</span>,</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">niv1 =</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">"A"</span>,<span class="dv">2</span>),<span class="fu">rep</span>(<span class="st">"B"</span>,<span class="dv">3</span>), <span class="st">"C"</span>),</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">niv2 =</span> <span class="fu">c</span>(<span class="st">"A1"</span>,<span class="st">"A2"</span>,<span class="st">"B1"</span>,<span class="fu">rep</span>(<span class="st">"B2"</span>,<span class="dv">2</span>), <span class="st">"C"</span>),</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">niv3 =</span> <span class="fu">c</span>(<span class="st">"A1"</span>,<span class="st">"A2"</span>,<span class="st">"B1"</span>, <span class="st">"B21"</span>, <span class="st">"B22"</span>, <span class="st">"C"</span>)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>corr_tab</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 4
+  niv0  niv1  niv2  niv3 
+  &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;
+1 ALL   A     A1    A1   
+2 ALL   A     A2    A2   
+3 ALL   B     B1    B1   
+4 ALL   B     B2    B21  
+5 ALL   B     B2    B22  
+6 ALL   C     C     C    </code></pre>
+</div>
+</div>
 
 
 </section>
@@ -536,12 +682,16 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
 });
 </script>
+
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
+      <a href="../../chapters/fiches_pratiques/tabulate_micro_data.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Préparation des tableaux pour la pose du secret</span></span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./01_notions.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Notions principales à connaître</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../chapters/fiches_pratiques/var_hierarchique_nonemboitee.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Poser le secret en présence de hiérarchies non-emboîtées</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

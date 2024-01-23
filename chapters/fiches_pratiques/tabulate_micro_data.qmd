@@ -1,0 +1,149 @@
+```{r import librairies, warning=FALSE, message=FALSE, echo=FALSE}
+library(rtauargus)
+library(dplyr)
+```
+
+# Préparation des tableaux pour la pose du secret {#sec-tabulatemicrodata}
+
+:::{.solutionbox-facile}
+
+::::{.solutionbox-header-facile}
+:::::{.solutionbox-icon-facile}
+:::::
+Niveau facile
+::::
+
+:::
+
+## **`tabulate_micro_data()`**
+
+### Présentation
+Pour la pose du secret, outre la valeur des cellules (que l'on nommera
+**`VALUE`**), il est nécessaire d'avoir des informations supplémentaires
+par rapport au tableau publié :
+
+-   **`FREQ`** : Le nombre d'unités statistiques ayant contribué à la
+    cellule (pour déterminer le secret primaire de fréquence).
+-   **`MAX`** : La valeur du plus gros contributeur de la cellule (pour
+    déterminer le secret primaire de dominance)
+-   les sous-totaux pour toutes les combinaisons possibles entre les
+    variables. Par exemple, pour un tableau à 3 variables (A10 x SIZE x
+    CJ)
+
+|  A10  | SIZE  |  CJ   |
+|:-----:|:-----:|:-----:|
+| Total | Total | Total |
+| Total | Total |  \*   |
+| Total |  \*   | Total |
+|  \*   | Total | Total |
+| Total |  \*   |  \*   |
+|  \*   | Total |  \*   |
+|  \*   |  \*   | Total |
+
+Il est possible de générer ce tableau soi-même. Mais pour faciliter la
+préparation de ces informations, le package rtauargus contient la
+fonction **`tabulate_micro_data`** pour le générer.
+
+### arguments
+
+-   **`df`** : jeu de données individuelles (data.frame ou data.table)
+-   **`cat_vars`** : Variables de croisements (catégorielles) non
+    hiérarchiques (vecteur)
+-   **`hrc_vars`** : Variables de croisements hiérarchiques sous la
+    forme d'une liste nommée
+-   **`pond_var`** : Variable de pondération
+-   **`resp_var`** : Indicateur(s), variable(s) de réponse
+-   **`marge_label`** : Label utilisé pour les marges (sous-totaux)
+
+### résultat
+
+-   **`nb_obs`** : Comptage du nombre d'unités statistiques (**`FREQ`**)
+-   **`X_tot`** : Indicateur / variable de réponse (**`VALUE`**)
+-   **`X_max`** : Contribution maximale (**`MAX`**).
+
+## Exemples
+
+### Appel simple
+Trois variables de croisement ("A10", "SIZE", "CJ") et une variable de réponse ("PRODUCTION").
+```{r tabulerDonneesA}
+data(indiv_dt)
+dtDonneesMicro <- indiv_dt[, c("A10", "SIZE", "CJ", "PRODUCTION")]
+
+DT::datatable(dtDonneesMicro)
+
+dtDonneesTabulees <- tabulate_micro_data(dtDonneesMicro
+                                         , cat_vars = c("A10", "SIZE", "CJ")
+                                         , resp_var = "PRODUCTION"
+                                         , marge_label = "Total")
+DT::datatable(dtDonneesTabulees)
+```
+
+### Variable de réponse pondérée
+Dans le cas d'enquêtes non exhaustives, les observations sont pondérées. Pour indiquer la colonne de pondération, utiliser l'argument **`pond_var`**.
+```{r tabulerDonneesB}
+data(indiv_dt)
+dtDonneesMicro <- indiv_dt[, c("A10", "SIZE", "CJ", "WEIGHT", "PRODUCTION")]
+
+DT::datatable(dtDonneesMicro)
+
+dtDonneesTabulees <- tabulate_micro_data(dtDonneesMicro
+                                         , cat_vars = c("A10", "SIZE", "CJ")
+                                         , resp_var = "PRODUCTION"
+                                         , pond_var = "WEIGHT"
+                                         , marge_label = "Total")
+DT::datatable(dtDonneesTabulees)
+```
+
+### Variable hiérarchique
+Dans le cas de variables hiérarchiques (cf § 4.4), il faut utiliser l'argument **`hrc_vars`**.
+```{r tabulerDonneesC}
+data(indiv_dt)
+dtDonneesMicro <- indiv_dt[, c("A10","A21","A88", "SIZE", "PRODUCTION")]
+
+DT::datatable(dtDonneesMicro)
+
+dtDonneesTabulees <- tabulate_micro_data(dtDonneesMicro
+                                         , cat_vars = c("SIZE")
+                                         , resp_var = "PRODUCTION"
+                                         , hrc_vars = list(ACTIVITY = c("A10","A21","A88"))
+                                         , marge_label = "Total")
+DT::datatable(dtDonneesTabulees)
+```
+
+### Deux indicateurs en même temps
+Si plusieurs tableaux, portant sur des variables d'intéret différentes mais ont les mêmes variables de croisement, il est possible de préparer les tableaux de secret en un seul appel à **`tabulate_micro_data`**, en fournissant un vecteur à l'argument **`resp_var`**.
+```{r tabulerDonneesD}
+data(indiv_dt)
+dtDonneesMicro <- indiv_dt[, c("SIZE", "CJ", "TURNOVER", "PRODUCTION")]
+
+DT::datatable(dtDonneesMicro)
+
+dtDonneesTabulees <- tabulate_micro_data(indiv_dt
+                                         , cat_vars = c("SIZE", "CJ")
+                                         , resp_var = c("TURNOVER", "PRODUCTION")
+                                         , marge_label = "Total")
+DT::datatable(dtDonneesTabulees)
+```
+
+### Tableaux de fréquence
+
+Les tableaux publiés sont souvent des tableaux de comptage. Par exemple,
+combien *combien d'entreprises ont pour code NAF X*. Ces tableaux sont
+un cas particulier. Leur **`VALUE`** est identique à leur **`FREQ`** et
+leur **`MAX`** n'a pas de signification. Lors de l'appel à la fonction
+**`tabulate_micro_data`**, on ne fournit pas de variable de réponse et
+la fonction ne retourne que le comptage.
+
+```{r tabulerDonneesE}
+data(indiv_dt)
+dtDonneesMicro <- indiv_dt[, c("A10", "SIZE", "CJ")]
+
+DT::datatable(dtDonneesMicro)
+
+dtDonneesTabulees <- tabulate_micro_data(dtDonneesMicro
+                                         , cat_vars = c("A10", "SIZE", "CJ")
+                                         , marge_label = "Total")
+DT::datatable(dtDonneesTabulees)
+```
+
+

@@ -1,0 +1,141 @@
+```{r import librairies, warning=FALSE, message=FALSE, echo=FALSE}
+library(rtauargus)
+library(dplyr)
+```
+
+# Utiliser les coûts {#sec-couts}
+
+::: {.callout-important}
+## Niveau expert
+:::
+  
+  *Objectif* : apprendre à utiliser l'option `cost` du package `rtauargus`
+afin de rediriger le secret secondaire.
+
+Tau-Argus utilise des algorithmes d'optimisation afin de minimiser la
+perte d'information qui résulte du secret secondaire. La question qui se
+pose est quelle valeur doit-être minimiser ? Plusieurs choix sont
+possibles, la valeur des cellules, le nombre de cellules, les effectifs
+des cellules. Il est également possible de personnaliser les coûts si
+l'on souhaite prioriser la pose de secret secondaire sur certains
+agrégats.
+
+### Minimiser la valeur secrétisée
+
+Tau-Argus minimise par défaut la valeur des cellules supprimées. C'est
+ce qui est le plus cohérent, lorsque l'on publie un tableau c'est bien
+la valeur des cellules qui nous intéresse.
+
+### Minimiser le nombre de cellules secrétisées
+
+Pour minimiser le nombre de cellules secrétisées il faut utiliser le
+paramètre `cost` et donc le définir dans notre table. si l'on souhaite
+minimiser le nombre de cellules masquées, il faut alors que le coût de
+suppression de chaque cellule soit identique, Tau-Argus considère alors
+qu'elles ont toutes la même importance. Pour cela il faut créer une
+colonne "cost" qui vaut 1 pour toutes les cellules de notre tableau.
+
+### Minimiser les effectifs secrétisés
+
+On peut aussi considérer que la valeur importante des cellules sont
+leurs effectifs. On peut penser qu'un nombre de répondants élevé pour
+une cellule lui confère une plus grande fiabilité statistique. Pour cela
+il suffit simplement de recopier la colonne "freq" dans notre colonne
+"cost".
+
+### Orienter le secret secondaire
+
+Dans certaines données on peut trouver des agrégats jugés non
+significatifs. Ces derniers ne seront pas publiés dans les tableaux mais
+notés "ns". On peut alors s'en servir pour la pose du secret secondaire.
+
+Attention, on pourrait penser que ces cellules devraient être placées en
+secret primaire, afin qu'elles soient considérées comme masquées quoi
+qu'il arrive. Cependant, cela peut entraîner plus de secret secondaire
+que nécessaire sachant qu'il n'est pas nécessaire de protéger ces
+cellules du risque de recoupement. L'utilisateur peut retrouver la
+valeur de ces cellules, mais il est averti qu'elles n'ont aucune
+importance statistique.
+
+Pour prioriser le secret secondaire on crée donc pour les agrégats
+non-significatifs la colonne "cost" qui vaut 1. C'est le coût minimal,
+ceci indiquera à Tau-Argus que ces agrégats sont donc prioritaires pour
+le secret secondaire. Ainsi, certains coûts ne seront pas définis. Ce
+n'est pas un problème, lorsque l'on ne spécifie pas de coût pour une
+cellule, Tau-Argus va considérer que son coût de suppression est égal à
+la valeur de cette dernière.
+
+**Exemple**
+
+Si par exemple, on souhaite prioriser le secret sur la tranche d'effectif 1 `tr1`
+dans `turnover_act_size`, tableau intégré à `rtauargus`.
+
+Tout d'abord, on pose le secret primaire sur le tableau.
+```{r}
+data("turnover_act_size")
+
+turnover_act_size_detect <-  turnover_act_size %>%
+  rename(FREQ = N_OBS, VALUE = TOT) %>% 
+  mutate(
+    is_secret_freq = FREQ > 0 & FREQ < 3,
+    is_secret_dom = (VALUE != 0) & (MAX > 0.85*VALUE)
+  ) %>% 
+  mutate(
+    is_secret_prim = is_secret_freq | is_secret_dom
+  )
+```
+
+Puis, on assigne on assigne la valeur 1 pour le coût de tous les croisements avec
+`tr1`.
+```{r}
+turnover_act_size_ns <- turnover_act_size_detect %>%
+  mutate(cost = ifelse(SIZE == "tr1", 1, VALUE))
+str(turnover_act_size_ns)
+```
+
+On vérifie que les coûts à 1 ont bien été appliqués.
+```{r}
+str(turnover_act_size_ns %>% filter(cost == 1))
+```
+
+
+On pose le secret secondaire à l'aide de la fonction `tab_rtauargus()`.
+```{r eval = FALSE}
+res_ns <- tab_rtauargus(
+  turnover_act_size_ns,
+  files_name = "couts",
+  dir_name = "tauargus_files/couts",
+  explanatory_vars = c("ACTIVITY","SIZE"),
+  totcode = c("Total","Total"),
+  freq = "FREQ",
+  value = "VALUE",
+  secret_var = "is_secret_prim",
+  cost_var = "cost",
+  verbose = FALSE
+)
+```
+
+```{r import masque couts, echo = FALSE}
+res_ns <- readRDS("../../tauargus_files/couts/res_ns.rds")
+```
+
+
+On peut ensuite créer une synthèse du secret posé.
+```{r}
+synthese_ns <- res_ns %>% group_by(Status) %>%
+  mutate(
+    statut_final = case_when(
+      is_secret_freq ~ "A",
+      is_secret_dom ~ "B",
+      TRUE ~ Status,
+    )
+  ) %>% 
+  group_by(statut_final) %>% 
+  summarise(
+    nb_cellules = n(),
+    effectif = sum(FREQ),
+    valeur = sum(VALUE)
+  )
+
+synthese_ns
+```

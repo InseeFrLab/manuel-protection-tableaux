@@ -2,11 +2,11 @@
 
 Le *Manuel de protection des tableaux* vise à accompagner les équipes en charge de la protection des données tabulées à l’Insee et au sein du SSP en général. Ce manuel fournit un première réponse à la recommandation de la mission de l’inspection générale sur la diffusion sur mesure, dont le rapport est consultable [ici](https://intranet.insee.fr/jcms/22228814_DBFileDocument/fr/mi-2022-4-diffusion-sur-mesure-rapport-ig-16-12-2022).
 
-Ce manuel, rédigé par la section Méthodes statistiques spatiales et secret statistique au sein du DMS, a vocation à présenter les **principales notions** à connaître, à proposer une **démarche méthodologique** pour analyser tout type de demande et à illustrer avec de **nombreux exemples** comment, en pratique, il est possible de protéger un ensemeble de tableaux avant leur diffusion.  
+Ce manuel, rédigé par la section Méthodes statistiques spatiales et secret statistique au sein du DMS, a vocation à présenter les **principales notions** à connaître, à proposer une **démarche méthodologique** pour analyser tout type de demande et à illustrer avec de **nombreux exemples** comment, en pratique, il est possible de protéger un ensemble de tableaux avant leur diffusion.  
 
 Ce manuel a pour principaux objectifs d'**harmoniser les pratiques** au sein de l'institut et du SSP et de **proposer une documentation** aussi complète et pratique pour les utilisateurs que possible.  
 
-Ce manuel s'adresse à toute personne en charge de diffuser des données tabulées auprès du public, en particulier les chargés de réponse à la demande à la DG, dans les pôles ou en DR, ainsi que les producteurs désireux de publier leurs données sur insee.fr, dans un Insee Références, un Insee Résultats ou tout autre publication.
+Ce manuel s'adresse à toute personne en charge de diffuser des données tabulées auprès du public, en particulier les chargés de réponse à la demande à la DG, dans les pôles ou en DR, ainsi que les producteurs désireux de publier leurs données sur insee.fr, dans un Insee Références, un Insee Résultats ou toute autre publication.
 
 Les notions principales utiles pour la pose du secret sont présentées au Chapitre [-@sec-notions]. L'idée est de se baser sur un vocabulaire commun afin d'être sûrs de parler de la même chose.  
 
@@ -14,9 +14,9 @@ La démarche pour poser le secret sur un tableau est présentée au Chapitre [-@
 
 Comme une diffusion concerne le plus souvent plusieurs tableaux, la démarche pour analyser de telles demandes est présentée au Chapitre [-@sec-analyserdemande]. Cette étape consiste, à partir de la liste de tableaux à diffuser, à déterminer la liste de tableaux qu'il faut protéger, en étudiant, notamment, les liens existants entre ces tableaux.  
 
-La pose du secret sur des tableaux liés est présentée au Chapitre [-@sec-secrettableauxlies].
+Lorsque l'on traite plusieurs tableaux simultanément il faut bien prendre en compte l'existence de mêmes croisements entre les tableaux. C'est ce qui est fait dans le Chapitre [-@sec-secrettableauxlies] qui présente la pose du secret sur des tableaux liés.
 
-Le Chapitre [-@sec-fichespratiques] regroupe plusieurs fiches pratiques pour poser le secret à l'aide de `rtauargus`. Elles sont de niveau croissant, allant de débutant à expert, et devraient permettre, à terme, d'accompagner les utilisateurs dans la plupart des situations rencontrées en pratique.  
+Le Chapitre [-@sec-fichespratiques] regroupe plusieurs cas particuliers pour poser le secret à l'aide de `rtauargus`. Les fiches sont de niveau croissant, allant de débutant à expert, et devraient permettre, à terme, d'accompagner les utilisateurs dans la plupart des situations rencontrées en pratique.  
 
 Enfin le Chapitre [-@sec-presentationoutils] fournit des informations complémentaires sur $\tau$-Argus et sur le package `rtauargus`. L'utilisateur y trouvera en particulier une description des différents types de fichiers créés par le package et utiles à $\tau$-Argus, ainsi que des éléments pour comprendre et résoudre certaines erreurs provenant du logiciel.  
 
