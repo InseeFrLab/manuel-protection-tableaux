@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Clara Baudry, Arlindo Dos Santos, Julien Jamme, Nathanaël Rastout">
-<meta name="dcterms.date" content="2024-01-22">
+<meta name="dcterms.date" content="2024-01-24">
 
 <title>Manuel de protection des tableaux</title>
 <style>
@@ -199,14 +199,38 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./05_fiches_pratiques.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Fiches pratiques</span></span></a>
+  <a href="./chapters/fiches_pratiques/introduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./06_expert.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Présentation des outils</span></span></a>
+  <a href="./chapters/fiches_pratiques/tabulate_micro_data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Préparation des tableaux pour la pose du secret</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapters/fiches_pratiques/var_hierarchique.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Prendre en compte une variable hiérarchique</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapters/fiches_pratiques/var_hierarchique_nonemboitee.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Poser le secret en présence de hiérarchies non-emboîtées</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapters/fiches_pratiques/couts.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Utiliser les coûts</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./06_outils.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Présentation des outils</span></span></a>
   </div>
 </li>
       </ul>
@@ -223,13 +247,13 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./chapters/annexes/regles.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Règles</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Règles</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./chapters/annexes/manipuler_les_listes.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Manipuler les listes avec <code>R</code></span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Manipuler les listes avec <code>R</code></span></span></a>
   </div>
 </li>
       </ul>
@@ -270,7 +294,7 @@ window.Quarto = {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">2024-01-22</p>
+      <p class="date">2024-01-24</p>
     </div>
   </div>
   
@@ -285,16 +309,16 @@ window.Quarto = {
 <section id="introduction" class="level1 unnumbered">
 <h1 class="unnumbered">Introduction</h1>
 <p>Le <em>Manuel de protection des tableaux</em> vise à accompagner les équipes en charge de la protection des données tabulées à l’Insee et au sein du SSP en général. Ce manuel fournit un première réponse à la recommandation de la mission de l’inspection générale sur la diffusion sur mesure, dont le rapport est consultable <a href="https://intranet.insee.fr/jcms/22228814_DBFileDocument/fr/mi-2022-4-diffusion-sur-mesure-rapport-ig-16-12-2022">ici</a>.</p>
-<p>Ce manuel, rédigé par la section Méthodes statistiques spatiales et secret statistique au sein du DMS, a vocation à présenter les <strong>principales notions</strong> à connaître, à proposer une <strong>démarche méthodologique</strong> pour analyser tout type de demande et à illustrer avec de <strong>nombreux exemples</strong> comment, en pratique, il est possible de protéger un ensemeble de tableaux avant leur diffusion.</p>
+<p>Ce manuel, rédigé par la section Méthodes statistiques spatiales et secret statistique au sein du DMS, a vocation à présenter les <strong>principales notions</strong> à connaître, à proposer une <strong>démarche méthodologique</strong> pour analyser tout type de demande et à illustrer avec de <strong>nombreux exemples</strong> comment, en pratique, il est possible de protéger un ensemble de tableaux avant leur diffusion.</p>
 <p>Ce manuel a pour principaux objectifs d’<strong>harmoniser les pratiques</strong> au sein de l’institut et du SSP et de <strong>proposer une documentation</strong> aussi complète et pratique pour les utilisateurs que possible.</p>
-<p>Ce manuel s’adresse à toute personne en charge de diffuser des données tabulées auprès du public, en particulier les chargés de réponse à la demande à la DG, dans les pôles ou en DR, ainsi que les producteurs désireux de publier leurs données sur insee.fr, dans un Insee Références, un Insee Résultats ou tout autre publication.</p>
+<p>Ce manuel s’adresse à toute personne en charge de diffuser des données tabulées auprès du public, en particulier les chargés de réponse à la demande à la DG, dans les pôles ou en DR, ainsi que les producteurs désireux de publier leurs données sur insee.fr, dans un Insee Références, un Insee Résultats ou toute autre publication.</p>
 <p>Les notions principales utiles pour la pose du secret sont présentées au Chapitre <a href="01_notions.html" class="quarto-xref"><span>1&nbsp; Notions principales à connaître</span></a>. L’idée est de se baser sur un vocabulaire commun afin d’être sûrs de parler de la même chose.</p>
 <p>La démarche pour poser le secret sur un tableau est présentée au Chapitre <a href="02_secret_un_tableau.html" class="quarto-xref"><span>2&nbsp; Poser le secret sur un tableau</span></a>.</p>
 <p>Comme une diffusion concerne le plus souvent plusieurs tableaux, la démarche pour analyser de telles demandes est présentée au Chapitre <a href="03_analyser_une_demande.html" class="quarto-xref"><span>3&nbsp; Comment analyser une demande ?</span></a>. Cette étape consiste, à partir de la liste de tableaux à diffuser, à déterminer la liste de tableaux qu’il faut protéger, en étudiant, notamment, les liens existants entre ces tableaux.</p>
-<p>La pose du secret sur des tableaux liés est présentée au Chapitre <a href="04_secret_tableaux_lies.html" class="quarto-xref"><span>4&nbsp; Poser le secret sur plusieurs tableaux liés</span></a>.</p>
-<p>Le Chapitre <a href="05_fiches_pratiques.html" class="quarto-xref"><span>5&nbsp; Fiches pratiques</span></a> regroupe plusieurs fiches pratiques pour poser le secret à l’aide de <code>rtauargus</code>. Elles sont de niveau croissant, allant de débutant à expert, et devraient permettre, à terme, d’accompagner les utilisateurs dans la plupart des situations rencontrées en pratique.</p>
-<p>Enfin le Chapitre <a href="06_expert.html" class="quarto-xref"><span>6&nbsp; Présentation des outils</span></a> fournit des informations complémentaires sur <span class="math inline">\(\tau\)</span>-Argus et sur le package <code>rtauargus</code>. L’utilisateur y trouvera en particulier une description des différents types de fichiers créés par le package et utiles à <span class="math inline">\(\tau\)</span>-Argus, ainsi que des éléments pour comprendre et résoudre certaines erreurs provenant du logiciel.</p>
-<p>Les annexes contiennent un rappel de certaines règles du secret en vigueur (Chapitre <a href="chapters/annexes/regles.html" class="quarto-xref"><span>7&nbsp; Règles</span></a>) et un petit tutoriel sur la manipulation des listes pour celles et ceux qui ne seraient pas familiers avec ce type d’objets <code>R</code> très utiles (Chapitre <a href="chapters/annexes/manipuler_les_listes.html" class="quarto-xref"><span>8&nbsp; Manipuler les listes avec R</span></a>).</p>
+<p>Lorsque l’on traite plusieurs tableaux simultanément il faut bien prendre en compte l’existence de mêmes croisements entre les tableaux. C’est ce qui est fait dans le Chapitre <a href="04_secret_tableaux_lies.html" class="quarto-xref"><span>4&nbsp; Poser le secret sur plusieurs tableaux liés</span></a> qui présente la pose du secret sur des tableaux liés.</p>
+<p>Le Chapitre <span class="quarto-unresolved-ref">?sec-fichespratiques</span> regroupe plusieurs cas particuliers pour poser le secret à l’aide de <code>rtauargus</code>. Les fiches sont de niveau croissant, allant de débutant à expert, et devraient permettre, à terme, d’accompagner les utilisateurs dans la plupart des situations rencontrées en pratique.</p>
+<p>Enfin le Chapitre <a href="06_outils.html" class="quarto-xref"><span>10&nbsp; Présentation des outils</span></a> fournit des informations complémentaires sur <span class="math inline">\(\tau\)</span>-Argus et sur le package <code>rtauargus</code>. L’utilisateur y trouvera en particulier une description des différents types de fichiers créés par le package et utiles à <span class="math inline">\(\tau\)</span>-Argus, ainsi que des éléments pour comprendre et résoudre certaines erreurs provenant du logiciel.</p>
+<p>Les annexes contiennent un rappel de certaines règles du secret en vigueur (Chapitre <a href="chapters/annexes/regles.html" class="quarto-xref"><span>11&nbsp; Règles</span></a>) et un petit tutoriel sur la manipulation des listes pour celles et ceux qui ne seraient pas familiers avec ce type d’objets <code>R</code> très utiles (Chapitre <a href="chapters/annexes/manipuler_les_listes.html" class="quarto-xref"><span>12&nbsp; Manipuler les listes avec R</span></a>).</p>
 
 
 </section>

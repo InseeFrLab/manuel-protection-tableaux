@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Manuel de protection des tableaux - 11&nbsp; Règles</title>
+<title>Manuel de protection des tableaux - 9&nbsp; Utiliser les coûts</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -30,8 +64,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
-<link href="../../chapters/annexes/manipuler_les_listes.html" rel="next">
-<link href="../../06_outils.html" rel="prev">
+<link href="../../06_outils.html" rel="next">
+<link href="../../chapters/fiches_pratiques/var_hierarchique_nonemboitee.html" rel="prev">
 <script src="../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -69,35 +103,6 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 </head>
 
@@ -110,7 +115,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../chapters/annexes/regles.html">Annexes</a></li><li class="breadcrumb-item"><a href="../../chapters/annexes/regles.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Règles</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../chapters/fiches_pratiques/introduction.html">En pratique</a></li><li class="breadcrumb-item"><a href="../../chapters/fiches_pratiques/couts.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Utiliser les coûts</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -222,7 +227,7 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../chapters/fiches_pratiques/couts.html" class="sidebar-item-text sidebar-link">
+  <a href="../../chapters/fiches_pratiques/couts.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Utiliser les coûts</span></span></a>
   </div>
 </li>
@@ -245,7 +250,7 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../chapters/annexes/regles.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../chapters/annexes/regles.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Règles</span></span></a>
   </div>
 </li>
@@ -267,17 +272,19 @@ window.Quarto = {
     <h2 id="toc-title">Plan</h2>
    
   <ul>
-  <li><a href="#règles-pour-la-statistique-dentreprises" id="toc-règles-pour-la-statistique-dentreprises" class="nav-link active" data-scroll-target="#règles-pour-la-statistique-dentreprises"><span class="header-section-number">11.1</span> Règles pour la statistique d’entreprises</a></li>
-  <li><a href="#règles-pour-les-données-fiscales-provenant-de-la-dgfip" id="toc-règles-pour-les-données-fiscales-provenant-de-la-dgfip" class="nav-link" data-scroll-target="#règles-pour-les-données-fiscales-provenant-de-la-dgfip"><span class="header-section-number">11.2</span> Règles pour les données fiscales (provenant de la DGFiP)</a></li>
+  <li><a href="#minimiser-la-valeur-secrétisée" id="toc-minimiser-la-valeur-secrétisée" class="nav-link active" data-scroll-target="#minimiser-la-valeur-secrétisée"><span class="header-section-number">9.0.1</span> Minimiser la valeur secrétisée</a></li>
+  <li><a href="#minimiser-le-nombre-de-cellules-secrétisées" id="toc-minimiser-le-nombre-de-cellules-secrétisées" class="nav-link" data-scroll-target="#minimiser-le-nombre-de-cellules-secrétisées"><span class="header-section-number">9.0.2</span> Minimiser le nombre de cellules secrétisées</a></li>
+  <li><a href="#minimiser-les-effectifs-secrétisés" id="toc-minimiser-les-effectifs-secrétisés" class="nav-link" data-scroll-target="#minimiser-les-effectifs-secrétisés"><span class="header-section-number">9.0.3</span> Minimiser les effectifs secrétisés</a></li>
+  <li><a href="#orienter-le-secret-secondaire" id="toc-orienter-le-secret-secondaire" class="nav-link" data-scroll-target="#orienter-le-secret-secondaire"><span class="header-section-number">9.0.4</span> Orienter le secret secondaire</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../chapters/annexes/regles.html">Annexes</a></li><li class="breadcrumb-item"><a href="../../chapters/annexes/regles.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Règles</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../chapters/fiches_pratiques/introduction.html">En pratique</a></li><li class="breadcrumb-item"><a href="../../chapters/fiches_pratiques/couts.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Utiliser les coûts</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span id="sec-regles" class="quarto-section-identifier"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Règles</span></span></h1>
+<h1 class="title"><span id="sec-couts" class="quarto-section-identifier"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Utiliser les coûts</span></span></h1>
 </div>
 
 
@@ -294,30 +301,131 @@ window.Quarto = {
 </header>
 
 
-<p>Eléments de la note au CD :</p>
-<p>Référence l’article de P. Redor dans le courrier stat : “Confidentialité des données statistiques : un enjeu majeur pour le service statistique public”, P. Redor - Courrier des statistiques N9 - 2023.</p>
-<p>Loi de 1951 : loi sur l’obligation, la coordination et le secret en matière de statistiques (définit le secret statistique). Loi de 1978 : loi Informatique et libertés (définit la protection des données personnelles).</p>
-<p>On se fixe des règles pour simplifier l’application mais l’objectif est avant tout de protéger l’information individuelle (de n’importe quel individu).</p>
-<p>Les règles du secret statistique sont des seuils définis que l’Insee instaure pour minimiser les risques de ré-identification tout en gardant une utilité certaine des données. Cette partie présente les règles les plus connues du SSP. Le lecteur est invité à se renseigner sur les règles à appliquer sur les données qu’il souhaite publier avant de commencer à poser le secret. Il pourra, en particulier, retrouver des informations précieuses sur <a href="https://intranet.insee.fr/jcms/c_2113249/fr/produits-sur-mesure-liste-et-guide-des-sources">la page intranet dédiée à la présentation des sources des Produits sur Mesure</a>. En cliquant sur la source sur laquelle vous travaillez, les informations sur les règles du secret statistique sont précisées dans la sous-partie “secret statistique”.</p>
-<section id="règles-pour-la-statistique-dentreprises" class="level2" data-number="11.1">
-<h2 data-number="11.1" class="anchored" data-anchor-id="règles-pour-la-statistique-dentreprises"><span class="header-section-number">11.1</span> Règles pour la statistique d’entreprises</h2>
-<p><strong>Règle de fréquence</strong> : une cellule d’un tableau ne doit pas être construite à partir de strictement moins de 3 unités. N.B. pour les bases de données pondérées on applique la règle de fréquence sur les pondérations. Si une cellule est construite par 2 répondants mais en représente davantage, alors elle est diffusable. Il faut veiller à ce que l’échantillon et la pondération restent confidentiels.</p>
-<p><strong>Règle de dominance</strong> : 1 unité contributrice à une cellule ne peut contribuer à plus de 85% de la valeur de celle-ci. Afin, de pouvoir appliquer cette règle il faut donc déterminer pour chaque cellule du tableau le plus gros contributeur. N.B. pour les bases de données pondérées la cellule est sensible si le contributeur maximal (non pondérée) est supérieur à 85% du total de la cellule (pondéré). <span class="math inline">\(MAX_{nonpond} &gt; 0.85*FREQ_{pond}\)</span></p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Niveau expert
+</div>
+</div>
+<div class="callout-body-container callout-body">
+
+</div>
+</div>
+<p><em>Objectif</em> : apprendre à utiliser l’option <code>cost</code> du package <code>rtauargus</code> afin de rediriger le secret secondaire.</p>
+<p>Tau-Argus utilise des algorithmes d’optimisation afin de minimiser la perte d’information qui résulte du secret secondaire. La question qui se pose est quelle valeur doit-être minimiser ? Plusieurs choix sont possibles, la valeur des cellules, le nombre de cellules, les effectifs des cellules. Il est également possible de personnaliser les coûts si l’on souhaite prioriser la pose de secret secondaire sur certains agrégats.</p>
+<section id="minimiser-la-valeur-secrétisée" class="level3" data-number="9.0.1">
+<h3 data-number="9.0.1" class="anchored" data-anchor-id="minimiser-la-valeur-secrétisée"><span class="header-section-number">9.0.1</span> Minimiser la valeur secrétisée</h3>
+<p>Tau-Argus minimise par défaut la valeur des cellules supprimées. C’est ce qui est le plus cohérent, lorsque l’on publie un tableau c’est bien la valeur des cellules qui nous intéresse.</p>
 </section>
-<section id="règles-pour-les-données-fiscales-provenant-de-la-dgfip" class="level2" data-number="11.2">
-<h2 data-number="11.2" class="anchored" data-anchor-id="règles-pour-les-données-fiscales-provenant-de-la-dgfip"><span class="header-section-number">11.2</span> Règles pour les données fiscales (provenant de la DGFiP)</h2>
-<p><strong>Règle de fréquence</strong> : une cellule concernant une personne physique concernant moins de 11 unités ne doit pas être diffusée. Ce seuil est appliqué en particulier aux données se rapportant aux entreprises individuelles. Voici quelques exemples de données concernées par ce seuil :</p>
-<ul>
-<li>données relatives à l’impôt sur le revenu (IR)</li>
-<li>données relatives aux bénéfices industriels et commerciaux, aux bénéfices non commerciaux, aux bénéfices agricoles, à la taxe sur la valeur ajoutée, à la cotisation foncière des entreprises (CFE), à la cotisation sur la valeur ajoutée des entreprises (CVAE)</li>
-<li>données relatives à tout autre type d’imposition dès lors que ces données se rapportent à des personnes physiques</li>
-</ul>
-<p>En matière d’impôt de solidarité sur la fortune et d’impôt sur la fortune immobilière, les règles de communication sont les suivantes :</p>
-<ul>
-<li>le nombre de contribuables assujettis doit être supérieur ou égal à 50 ;</li>
-<li>en cas de ventilation par communes, celles-ci doivent comporter plus de 20 000 habitants</li>
-</ul>
-<p><strong>Règle de dominance</strong> : 1 unité contributrice à une cellule ne peut contribuer à plus de 85% de la valeur de celle-ci. Afin, de pouvoir appliquer cette règle il faut donc déterminer pour chaque cellule du tableau le plus gros contributeur. N.B. pour les bases de données pondérées la cellule est sensible sur le contributeur maximal (non pondérée) est supérieur à 85% du total de la cellule (pondéré). <span class="math inline">\(MAX_{nonpond} &gt; 0.85*FREQ_{pond}\)</span></p>
+<section id="minimiser-le-nombre-de-cellules-secrétisées" class="level3" data-number="9.0.2">
+<h3 data-number="9.0.2" class="anchored" data-anchor-id="minimiser-le-nombre-de-cellules-secrétisées"><span class="header-section-number">9.0.2</span> Minimiser le nombre de cellules secrétisées</h3>
+<p>Pour minimiser le nombre de cellules secrétisées il faut utiliser le paramètre <code>cost</code> et donc le définir dans notre table. si l’on souhaite minimiser le nombre de cellules masquées, il faut alors que le coût de suppression de chaque cellule soit identique, Tau-Argus considère alors qu’elles ont toutes la même importance. Pour cela il faut créer une colonne “cost” qui vaut 1 pour toutes les cellules de notre tableau.</p>
+</section>
+<section id="minimiser-les-effectifs-secrétisés" class="level3" data-number="9.0.3">
+<h3 data-number="9.0.3" class="anchored" data-anchor-id="minimiser-les-effectifs-secrétisés"><span class="header-section-number">9.0.3</span> Minimiser les effectifs secrétisés</h3>
+<p>On peut aussi considérer que la valeur importante des cellules sont leurs effectifs. On peut penser qu’un nombre de répondants élevé pour une cellule lui confère une plus grande fiabilité statistique. Pour cela il suffit simplement de recopier la colonne “freq” dans notre colonne “cost”.</p>
+</section>
+<section id="orienter-le-secret-secondaire" class="level3" data-number="9.0.4">
+<h3 data-number="9.0.4" class="anchored" data-anchor-id="orienter-le-secret-secondaire"><span class="header-section-number">9.0.4</span> Orienter le secret secondaire</h3>
+<p>Dans certaines données on peut trouver des agrégats jugés non significatifs. Ces derniers ne seront pas publiés dans les tableaux mais notés “ns”. On peut alors s’en servir pour la pose du secret secondaire.</p>
+<p>Attention, on pourrait penser que ces cellules devraient être placées en secret primaire, afin qu’elles soient considérées comme masquées quoi qu’il arrive. Cependant, cela peut entraîner plus de secret secondaire que nécessaire sachant qu’il n’est pas nécessaire de protéger ces cellules du risque de recoupement. L’utilisateur peut retrouver la valeur de ces cellules, mais il est averti qu’elles n’ont aucune importance statistique.</p>
+<p>Pour prioriser le secret secondaire on crée donc pour les agrégats non-significatifs la colonne “cost” qui vaut 1. C’est le coût minimal, ceci indiquera à Tau-Argus que ces agrégats sont donc prioritaires pour le secret secondaire. Ainsi, certains coûts ne seront pas définis. Ce n’est pas un problème, lorsque l’on ne spécifie pas de coût pour une cellule, Tau-Argus va considérer que son coût de suppression est égal à la valeur de cette dernière.</p>
+<p><strong>Exemple</strong></p>
+<p>Si par exemple, on souhaite prioriser le secret sur la tranche d’effectif 1 <code>tr1</code> dans <code>turnover_act_size</code>, tableau intégré à <code>rtauargus</code>.</p>
+<p>Tout d’abord, on pose le secret primaire sur le tableau.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">"turnover_act_size"</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>turnover_act_size_detect <span class="ot">&lt;-</span>  turnover_act_size <span class="sc">%&gt;%</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">FREQ =</span> N_OBS, <span class="at">VALUE =</span> TOT) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">is_secret_freq =</span> FREQ <span class="sc">&gt;</span> <span class="dv">0</span> <span class="sc">&amp;</span> FREQ <span class="sc">&lt;</span> <span class="dv">3</span>,</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">is_secret_dom =</span> (VALUE <span class="sc">!=</span> <span class="dv">0</span>) <span class="sc">&amp;</span> (MAX <span class="sc">&gt;</span> <span class="fl">0.85</span><span class="sc">*</span>VALUE)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> </span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">is_secret_prim =</span> is_secret_freq <span class="sc">|</span> is_secret_dom</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Puis, on assigne on assigne la valeur 1 pour le coût de tous les croisements avec <code>tr1</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>turnover_act_size_ns <span class="ot">&lt;-</span> turnover_act_size_detect <span class="sc">%&gt;%</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">cost =</span> <span class="fu">ifelse</span>(SIZE <span class="sc">==</span> <span class="st">"tr1"</span>, <span class="dv">1</span>, VALUE))</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(turnover_act_size_ns)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>tibble [414 × 9] (S3: tbl_df/tbl/data.frame)
+ $ ACTIVITY      : chr [1:414] "AZ" "BE" "FZ" "GI" ...
+ $ SIZE          : chr [1:414] "Total" "Total" "Total" "Total" ...
+ $ FREQ          : int [1:414] 405 12878 28043 62053 8135 8140 11961 41359 26686 25108 ...
+ $ VALUE         : num [1:414] 44475 24827613 8907311 26962063 8584917 ...
+ $ MAX           : num [1:414] 6212 1442029 1065833 3084242 3957364 ...
+ $ is_secret_freq: logi [1:414] FALSE FALSE FALSE FALSE FALSE FALSE ...
+ $ is_secret_dom : logi [1:414] FALSE FALSE FALSE FALSE FALSE FALSE ...
+ $ is_secret_prim: logi [1:414] FALSE FALSE FALSE FALSE FALSE FALSE ...
+ $ cost          : num [1:414] 44475 24827613 8907311 26962063 8584917 ...</code></pre>
+</div>
+</div>
+<p>On vérifie que les coûts à 1 ont bien été appliqués.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(turnover_act_size_ns <span class="sc">%&gt;%</span> <span class="fu">filter</span>(cost <span class="sc">==</span> <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>tibble [113 × 9] (S3: tbl_df/tbl/data.frame)
+ $ ACTIVITY      : chr [1:113] "Total" "AZ" "BE" "FZ" ...
+ $ SIZE          : chr [1:113] "tr1" "tr1" "tr1" "tr1" ...
+ $ FREQ          : int [1:113] 217053 399 11485 26937 59426 7884 8026 11850 39819 26291 ...
+ $ VALUE         : num [1:113] 1.01e+08 3.64e+04 4.69e+06 4.55e+06 1.10e+07 ...
+ $ MAX           : num [1:113] 10018017 6212 990201 225864 765244 ...
+ $ is_secret_freq: logi [1:113] FALSE FALSE FALSE FALSE FALSE FALSE ...
+ $ is_secret_dom : logi [1:113] FALSE FALSE FALSE FALSE FALSE FALSE ...
+ $ is_secret_prim: logi [1:113] FALSE FALSE FALSE FALSE FALSE FALSE ...
+ $ cost          : num [1:113] 1 1 1 1 1 1 1 1 1 1 ...</code></pre>
+</div>
+</div>
+<p>On pose le secret secondaire à l’aide de la fonction <code>tab_rtauargus()</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>res_ns <span class="ot">&lt;-</span> <span class="fu">tab_rtauargus</span>(</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  turnover_act_size_ns,</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">files_name =</span> <span class="st">"couts"</span>,</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">dir_name =</span> <span class="st">"tauargus_files/couts"</span>,</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">explanatory_vars =</span> <span class="fu">c</span>(<span class="st">"ACTIVITY"</span>,<span class="st">"SIZE"</span>),</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">totcode =</span> <span class="fu">c</span>(<span class="st">"Total"</span>,<span class="st">"Total"</span>),</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">freq =</span> <span class="st">"FREQ"</span>,</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">value =</span> <span class="st">"VALUE"</span>,</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">secret_var =</span> <span class="st">"is_secret_prim"</span>,</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">cost_var =</span> <span class="st">"cost"</span>,</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">verbose =</span> <span class="cn">FALSE</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>On peut ensuite créer une synthèse du secret posé.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>synthese_ns <span class="ot">&lt;-</span> res_ns <span class="sc">%&gt;%</span> <span class="fu">group_by</span>(Status) <span class="sc">%&gt;%</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">statut_final =</span> <span class="fu">case_when</span>(</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>      is_secret_freq <span class="sc">~</span> <span class="st">"A"</span>,</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>      is_secret_dom <span class="sc">~</span> <span class="st">"B"</span>,</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>      <span class="cn">TRUE</span> <span class="sc">~</span> Status,</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> </span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(statut_final) <span class="sc">%&gt;%</span> </span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">nb_cellules =</span> <span class="fu">n</span>(),</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">effectif =</span> <span class="fu">sum</span>(FREQ),</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">valeur =</span> <span class="fu">sum</span>(VALUE)</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>synthese_ns</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 4
+  statut_final nb_cellules effectif      valeur
+  &lt;chr&gt;              &lt;int&gt;    &lt;int&gt;       &lt;dbl&gt;
+1 A                     52       76   22115262.
+2 B                     25    15219   37823909.
+3 D                     46   115266  142992327.
+4 V                    291  1667583 1259310983.</code></pre>
+</div>
+</div>
 
 
 </section>
@@ -730,13 +838,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../../06_outils.html" class="pagination-link  aria-label=" &lt;span="" des="" outils&lt;="" span&gt;"="">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Présentation des outils</span></span>
+      <a href="../../chapters/fiches_pratiques/var_hierarchique_nonemboitee.html" class="pagination-link  aria-label=" &lt;span="" le="" secret="" en="" présence="" de="" hiérarchies="" non-emboîtées&lt;="" span&gt;"="">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Poser le secret en présence de hiérarchies non-emboîtées</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../chapters/annexes/manipuler_les_listes.html" class="pagination-link" aria-label="<span class='chapter-number'>12</span>&nbsp; <span class='chapter-title'>Manipuler les listes avec `R`</span>">
-        <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Manipuler les listes avec <code>R</code></span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../06_outils.html" class="pagination-link" aria-label="<span class='chapter-number'>10</span>&nbsp; <span class='chapter-title'>Présentation des outils</span>">
+        <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Présentation des outils</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

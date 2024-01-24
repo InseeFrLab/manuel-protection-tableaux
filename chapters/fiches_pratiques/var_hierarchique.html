@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Manuel de protection des tableaux - 11&nbsp; Règles</title>
+<title>Manuel de protection des tableaux - 7&nbsp; Prendre en compte une variable hiérarchique</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -30,8 +64,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
-<link href="../../chapters/annexes/manipuler_les_listes.html" rel="next">
-<link href="../../06_outils.html" rel="prev">
+<link href="../../chapters/fiches_pratiques/var_hierarchique_nonemboitee.html" rel="next">
+<link href="../../chapters/fiches_pratiques/tabulate_micro_data.html" rel="prev">
 <script src="../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -68,36 +102,10 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
+<script src="../../site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="../../site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="../../site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
 
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
 
 </head>
 
@@ -110,7 +118,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../chapters/annexes/regles.html">Annexes</a></li><li class="breadcrumb-item"><a href="../../chapters/annexes/regles.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Règles</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../chapters/fiches_pratiques/introduction.html">En pratique</a></li><li class="breadcrumb-item"><a href="../../chapters/fiches_pratiques/var_hierarchique.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Prendre en compte une variable hiérarchique</span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -210,7 +218,7 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../chapters/fiches_pratiques/var_hierarchique.html" class="sidebar-item-text sidebar-link">
+  <a href="../../chapters/fiches_pratiques/var_hierarchique.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Prendre en compte une variable hiérarchique</span></span></a>
   </div>
 </li>
@@ -245,7 +253,7 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../chapters/annexes/regles.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../chapters/annexes/regles.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Règles</span></span></a>
   </div>
 </li>
@@ -267,17 +275,17 @@ window.Quarto = {
     <h2 id="toc-title">Plan</h2>
    
   <ul>
-  <li><a href="#règles-pour-la-statistique-dentreprises" id="toc-règles-pour-la-statistique-dentreprises" class="nav-link active" data-scroll-target="#règles-pour-la-statistique-dentreprises"><span class="header-section-number">11.1</span> Règles pour la statistique d’entreprises</a></li>
-  <li><a href="#règles-pour-les-données-fiscales-provenant-de-la-dgfip" id="toc-règles-pour-les-données-fiscales-provenant-de-la-dgfip" class="nav-link" data-scroll-target="#règles-pour-les-données-fiscales-provenant-de-la-dgfip"><span class="header-section-number">11.2</span> Règles pour les données fiscales (provenant de la DGFiP)</a></li>
+  <li><a href="#première-option" id="toc-première-option" class="nav-link active" data-scroll-target="#première-option"><span class="header-section-number">7.1</span> Première option</a></li>
+  <li><a href="#seconde-option" id="toc-seconde-option" class="nav-link" data-scroll-target="#seconde-option"><span class="header-section-number">7.2</span> Seconde option</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../chapters/annexes/regles.html">Annexes</a></li><li class="breadcrumb-item"><a href="../../chapters/annexes/regles.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Règles</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../chapters/fiches_pratiques/introduction.html">En pratique</a></li><li class="breadcrumb-item"><a href="../../chapters/fiches_pratiques/var_hierarchique.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Prendre en compte une variable hiérarchique</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span id="sec-regles" class="quarto-section-identifier"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Règles</span></span></h1>
+<h1 class="title"><span id="sec-varhrc" class="quarto-section-identifier"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Prendre en compte une variable hiérarchique</span></span></h1>
 </div>
 
 
@@ -294,30 +302,146 @@ window.Quarto = {
 </header>
 
 
-<p>Eléments de la note au CD :</p>
-<p>Référence l’article de P. Redor dans le courrier stat : “Confidentialité des données statistiques : un enjeu majeur pour le service statistique public”, P. Redor - Courrier des statistiques N9 - 2023.</p>
-<p>Loi de 1951 : loi sur l’obligation, la coordination et le secret en matière de statistiques (définit le secret statistique). Loi de 1978 : loi Informatique et libertés (définit la protection des données personnelles).</p>
-<p>On se fixe des règles pour simplifier l’application mais l’objectif est avant tout de protéger l’information individuelle (de n’importe quel individu).</p>
-<p>Les règles du secret statistique sont des seuils définis que l’Insee instaure pour minimiser les risques de ré-identification tout en gardant une utilité certaine des données. Cette partie présente les règles les plus connues du SSP. Le lecteur est invité à se renseigner sur les règles à appliquer sur les données qu’il souhaite publier avant de commencer à poser le secret. Il pourra, en particulier, retrouver des informations précieuses sur <a href="https://intranet.insee.fr/jcms/c_2113249/fr/produits-sur-mesure-liste-et-guide-des-sources">la page intranet dédiée à la présentation des sources des Produits sur Mesure</a>. En cliquant sur la source sur laquelle vous travaillez, les informations sur les règles du secret statistique sont précisées dans la sous-partie “secret statistique”.</p>
-<section id="règles-pour-la-statistique-dentreprises" class="level2" data-number="11.1">
-<h2 data-number="11.1" class="anchored" data-anchor-id="règles-pour-la-statistique-dentreprises"><span class="header-section-number">11.1</span> Règles pour la statistique d’entreprises</h2>
-<p><strong>Règle de fréquence</strong> : une cellule d’un tableau ne doit pas être construite à partir de strictement moins de 3 unités. N.B. pour les bases de données pondérées on applique la règle de fréquence sur les pondérations. Si une cellule est construite par 2 répondants mais en représente davantage, alors elle est diffusable. Il faut veiller à ce que l’échantillon et la pondération restent confidentiels.</p>
-<p><strong>Règle de dominance</strong> : 1 unité contributrice à une cellule ne peut contribuer à plus de 85% de la valeur de celle-ci. Afin, de pouvoir appliquer cette règle il faut donc déterminer pour chaque cellule du tableau le plus gros contributeur. N.B. pour les bases de données pondérées la cellule est sensible si le contributeur maximal (non pondérée) est supérieur à 85% du total de la cellule (pondéré). <span class="math inline">\(MAX_{nonpond} &gt; 0.85*FREQ_{pond}\)</span></p>
+<div class="solutionbox-facile">
+<div class="solutionbox-header-facile">
+<div class="solutionbox-icon-facile">
+
+</div>
+<p>Niveau facile</p>
+</div>
+</div>
+<p>Reprenons ici l’exemple de la variable <code>geo</code> qui est une variable hiérarchique puisqu’il existe des emboîtements entre les différents niveaux.</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart TD
+A[Pays] --&gt; B[Nord]
+A --&gt; C[Ouest]
+A --&gt; D[Est]
+A --&gt; E[Sud]
+B --&gt; F[N1]
+B --&gt; G[N2]
+B --&gt; H[N3]
+C --&gt; I[O1]
+C --&gt; J[O2]
+C --&gt; K[O3]
+C --&gt; L[O4]
+D --&gt; M[E1]
+D --&gt; N[E2]
+D --&gt; O[E3]
+E --&gt; P[S1]
+E --&gt; Q[S2]
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<p>Pour prendre en compte cette hiérarchie il faut d’abord pouvoir la représenter de telle sorte que Tau-Argus comprenne les différents emboîtements présents.</p>
+<section id="première-option" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="première-option"><span class="header-section-number">7.1</span> Première option</h2>
+<p>La première option consiste à créer le fichier nécessaire (extension <code>.hrc</code>) à la main. Ceci est tout à fait pertinent si la hiérarchie n’est pas trop étendue.</p>
+<p>Tau-Argus attend en effet un type de fichier bien particulier, dont l’extension est <code>.hrc</code>. Il s’agit d’un simple fichier texte où les différents emboîtements sont écrits les uns en-dessous des autres. Un symbole (le <code>@</code>) est utilisé pour préciser le niveau de chacun des emboîtements au sein de la hiérarchie.</p>
+<p>Dans notre exemple on écrirait le fichier de la façon suivante :</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode tex code-with-copy"><code class="sourceCode latex"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>Nord</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>@N1</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>@N2</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>@N3 </span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>Ouest </span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>@O1 </span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>@O2 </span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>@O3 </span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>@O4 </span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>Est</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>@E1 </span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>@E2 </span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>@E3 </span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>Sud </span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>@S1 </span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>@S2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>On remarque que le total <code>Pays</code> n’est pas inclus dans le fichier <code>.hrc</code> c’est parce qu’il ne faut <strong>pas indiquer le super-total de la hiérarchie</strong> à Tau-Argus.</p>
 </section>
-<section id="règles-pour-les-données-fiscales-provenant-de-la-dgfip" class="level2" data-number="11.2">
-<h2 data-number="11.2" class="anchored" data-anchor-id="règles-pour-les-données-fiscales-provenant-de-la-dgfip"><span class="header-section-number">11.2</span> Règles pour les données fiscales (provenant de la DGFiP)</h2>
-<p><strong>Règle de fréquence</strong> : une cellule concernant une personne physique concernant moins de 11 unités ne doit pas être diffusée. Ce seuil est appliqué en particulier aux données se rapportant aux entreprises individuelles. Voici quelques exemples de données concernées par ce seuil :</p>
-<ul>
-<li>données relatives à l’impôt sur le revenu (IR)</li>
-<li>données relatives aux bénéfices industriels et commerciaux, aux bénéfices non commerciaux, aux bénéfices agricoles, à la taxe sur la valeur ajoutée, à la cotisation foncière des entreprises (CFE), à la cotisation sur la valeur ajoutée des entreprises (CVAE)</li>
-<li>données relatives à tout autre type d’imposition dès lors que ces données se rapportent à des personnes physiques</li>
-</ul>
-<p>En matière d’impôt de solidarité sur la fortune et d’impôt sur la fortune immobilière, les règles de communication sont les suivantes :</p>
-<ul>
-<li>le nombre de contribuables assujettis doit être supérieur ou égal à 50 ;</li>
-<li>en cas de ventilation par communes, celles-ci doivent comporter plus de 20 000 habitants</li>
-</ul>
-<p><strong>Règle de dominance</strong> : 1 unité contributrice à une cellule ne peut contribuer à plus de 85% de la valeur de celle-ci. Afin, de pouvoir appliquer cette règle il faut donc déterminer pour chaque cellule du tableau le plus gros contributeur. N.B. pour les bases de données pondérées la cellule est sensible sur le contributeur maximal (non pondérée) est supérieur à 85% du total de la cellule (pondéré). <span class="math inline">\(MAX_{nonpond} &gt; 0.85*FREQ_{pond}\)</span></p>
+<section id="seconde-option" class="level2" data-number="7.2">
+<h2 data-number="7.2" class="anchored" data-anchor-id="seconde-option"><span class="header-section-number">7.2</span> Seconde option</h2>
+<p>Quand la hiérarchie est très étendue, l’écriture manuelle du fichier de hiérarchie est pénible. Or, quand ce genre de cas se présente, il existe souvent une table de correspondance permettant d’associer les différents niveaux entre eux.</p>
+<p>Nous appelons table de correspondance une table qui précise l’ensemble des niveaux associés aux emboîtements les plus fins.</p>
+<p>La table de correspondance représentant la hiérarchie ci-dessus est la suivante:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>pays_corr_table <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">niv0 =</span> <span class="st">"Pays"</span>,</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">niv1 =</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">"Nord"</span>,<span class="dv">3</span>),<span class="fu">rep</span>(<span class="st">"Ouest"</span>,<span class="dv">4</span>),<span class="fu">rep</span>(<span class="st">"Est"</span>,<span class="dv">3</span>), <span class="fu">rep</span>(<span class="st">"Sud"</span>,<span class="dv">2</span>)),</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">niv2 =</span> <span class="fu">c</span>(<span class="fu">paste0</span>(<span class="st">"N"</span>,<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>),<span class="fu">paste0</span>(<span class="st">"O"</span>,<span class="dv">1</span><span class="sc">:</span><span class="dv">4</span>),<span class="fu">paste0</span>(<span class="st">"E"</span>,<span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>), <span class="fu">paste0</span>(<span class="st">"S"</span>,<span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>))</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>pays_corr_table</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 12 × 3
+   niv0  niv1  niv2 
+   &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;
+ 1 Pays  Nord  N1   
+ 2 Pays  Nord  N2   
+ 3 Pays  Nord  N3   
+ 4 Pays  Ouest O1   
+ 5 Pays  Ouest O2   
+ 6 Pays  Ouest O3   
+ 7 Pays  Ouest O4   
+ 8 Pays  Est   E1   
+ 9 Pays  Est   E2   
+10 Pays  Est   E3   
+11 Pays  Sud   S1   
+12 Pays  Sud   S2   </code></pre>
+</div>
+</div>
+<p>Avec la fonction <code>write_hrc2()</code> du package <code>rtauargus</code>, on peut transformer la table de correspondance en un fichier <code>hrc</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">write_hrc2</span>(pays_corr_table <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="sc">-</span>niv0), <span class="at">file_name =</span> <span class="st">"hrc/pays_TA_2.hrc"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Remarque: La fonction <code>rtauargus::write_hrc2()</code> n’accepte pas de valeurs manquantes dans la table en entrée. Lorsqu’une hiérarchie n’a pas la même nombre de sous-niveaux selon les branches on répète la modalité du niveau supérieur sur les niveaux inférieurs pour ne pas avoir de cases vides.</p>
+<p>Exemple : pour la hiérarchie ci-dessous on répète la modalité <code>C</code> dans la table de correspondance.</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart TD
+A[Total] --&gt; B[A]
+A --&gt; C[B]
+A --&gt; D[C]
+B --&gt; E[A1]
+B --&gt; F[A2]
+C --&gt; G[B1]
+C --&gt; H[B2]
+H --&gt; I[B21]
+H --&gt; J[B22]
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>corr_tab <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">niv0 =</span> <span class="st">"ALL"</span>,</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">niv1 =</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">"A"</span>,<span class="dv">2</span>),<span class="fu">rep</span>(<span class="st">"B"</span>,<span class="dv">3</span>), <span class="st">"C"</span>),</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">niv2 =</span> <span class="fu">c</span>(<span class="st">"A1"</span>,<span class="st">"A2"</span>,<span class="st">"B1"</span>,<span class="fu">rep</span>(<span class="st">"B2"</span>,<span class="dv">2</span>), <span class="st">"C"</span>),</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">niv3 =</span> <span class="fu">c</span>(<span class="st">"A1"</span>,<span class="st">"A2"</span>,<span class="st">"B1"</span>, <span class="st">"B21"</span>, <span class="st">"B22"</span>, <span class="st">"C"</span>)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>corr_tab</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 4
+  niv0  niv1  niv2  niv3 
+  &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;
+1 ALL   A     A1    A1   
+2 ALL   A     A2    A2   
+3 ALL   B     B1    B1   
+4 ALL   B     B2    B21  
+5 ALL   B     B2    B22  
+6 ALL   C     C     C    </code></pre>
+</div>
+</div>
 
 
 </section>
@@ -730,13 +854,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../../06_outils.html" class="pagination-link  aria-label=" &lt;span="" des="" outils&lt;="" span&gt;"="">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Présentation des outils</span></span>
+      <a href="../../chapters/fiches_pratiques/tabulate_micro_data.html" class="pagination-link  aria-label=" &lt;span="" des="" tableaux="" pour="" la="" pose="" du="" secret&lt;="" span&gt;"="">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Préparation des tableaux pour la pose du secret</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../chapters/annexes/manipuler_les_listes.html" class="pagination-link" aria-label="<span class='chapter-number'>12</span>&nbsp; <span class='chapter-title'>Manipuler les listes avec `R`</span>">
-        <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Manipuler les listes avec <code>R</code></span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../chapters/fiches_pratiques/var_hierarchique_nonemboitee.html" class="pagination-link" aria-label="<span class='chapter-number'>8</span>&nbsp; <span class='chapter-title'>Poser le secret en présence de hiérarchies non-emboîtées</span>">
+        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Poser le secret en présence de hiérarchies non-emboîtées</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

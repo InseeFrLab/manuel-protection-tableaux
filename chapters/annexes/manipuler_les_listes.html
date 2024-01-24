@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Manuel de protection des tableaux - 8&nbsp; Manipuler les listes avec R</title>
+<title>Manuel de protection des tableaux - 12&nbsp; Manipuler les listes avec R</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -114,7 +114,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../chapters/annexes/regles.html">Annexes</a></li><li class="breadcrumb-item"><a href="../../chapters/annexes/manipuler_les_listes.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Manipuler les listes avec <code>R</code></span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../chapters/annexes/regles.html">Annexes</a></li><li class="breadcrumb-item"><a href="../../chapters/annexes/manipuler_les_listes.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Manipuler les listes avec <code>R</code></span></a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
@@ -202,14 +202,38 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../05_fiches_pratiques.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Fiches pratiques</span></span></a>
+  <a href="../../chapters/fiches_pratiques/introduction.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Introduction</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../06_expert.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Présentation des outils</span></span></a>
+  <a href="../../chapters/fiches_pratiques/tabulate_micro_data.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Préparation des tableaux pour la pose du secret</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../chapters/fiches_pratiques/var_hierarchique.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Prendre en compte une variable hiérarchique</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../chapters/fiches_pratiques/var_hierarchique_nonemboitee.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Poser le secret en présence de hiérarchies non-emboîtées</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../chapters/fiches_pratiques/couts.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Utiliser les coûts</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../06_outils.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Présentation des outils</span></span></a>
   </div>
 </li>
       </ul>
@@ -226,13 +250,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../chapters/annexes/regles.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Règles</span></span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Règles</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../chapters/annexes/manipuler_les_listes.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Manipuler les listes avec <code>R</code></span></span></a>
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Manipuler les listes avec <code>R</code></span></span></a>
   </div>
 </li>
       </ul>
@@ -247,21 +271,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Plan</h2>
    
   <ul>
-  <li><a href="#manipulations-de-base-créer-ajouter-supprimer" id="toc-manipulations-de-base-créer-ajouter-supprimer" class="nav-link active" data-scroll-target="#manipulations-de-base-créer-ajouter-supprimer"><span class="header-section-number">8.1</span> Manipulations de base: créer, ajouter, supprimer</a></li>
-  <li><a href="#nommer-les-éléments-dune-liste" id="toc-nommer-les-éléments-dune-liste" class="nav-link" data-scroll-target="#nommer-les-éléments-dune-liste"><span class="header-section-number">8.2</span> Nommer les éléments d’une liste</a></li>
-  <li><a href="#supprimer-un-élément-dune-liste" id="toc-supprimer-un-élément-dune-liste" class="nav-link" data-scroll-target="#supprimer-un-élément-dune-liste"><span class="header-section-number">8.3</span> Supprimer un élément d’une liste</a></li>
-  <li><a href="#appliquer-une-fonction-à-chaque-élément-une-liste-avec-la-fonction-lapply" id="toc-appliquer-une-fonction-à-chaque-élément-une-liste-avec-la-fonction-lapply" class="nav-link" data-scroll-target="#appliquer-une-fonction-à-chaque-élément-une-liste-avec-la-fonction-lapply"><span class="header-section-number">8.4</span> Appliquer une fonction à chaque élément une liste avec la fonction <code>lapply()</code></a></li>
-  <li><a href="#appliquer-une-fonction-à-chaque-élément-une-liste-avec-la-fonction-purrrmap" id="toc-appliquer-une-fonction-à-chaque-élément-une-liste-avec-la-fonction-purrrmap" class="nav-link" data-scroll-target="#appliquer-une-fonction-à-chaque-élément-une-liste-avec-la-fonction-purrrmap"><span class="header-section-number">8.5</span> Appliquer une fonction à chaque élément une liste avec la fonction <code>purrr::map()</code></a></li>
-  <li><a href="#poser-le-secret-primaire-sur-une-liste-de-data.frames" id="toc-poser-le-secret-primaire-sur-une-liste-de-data.frames" class="nav-link" data-scroll-target="#poser-le-secret-primaire-sur-une-liste-de-data.frames"><span class="header-section-number">8.6</span> Poser le secret primaire sur une liste de <code>data.frames</code></a></li>
+  <li><a href="#manipulations-de-base-créer-ajouter-supprimer" id="toc-manipulations-de-base-créer-ajouter-supprimer" class="nav-link active" data-scroll-target="#manipulations-de-base-créer-ajouter-supprimer"><span class="header-section-number">12.1</span> Manipulations de base: créer, ajouter, supprimer</a></li>
+  <li><a href="#nommer-les-éléments-dune-liste" id="toc-nommer-les-éléments-dune-liste" class="nav-link" data-scroll-target="#nommer-les-éléments-dune-liste"><span class="header-section-number">12.2</span> Nommer les éléments d’une liste</a></li>
+  <li><a href="#supprimer-un-élément-dune-liste" id="toc-supprimer-un-élément-dune-liste" class="nav-link" data-scroll-target="#supprimer-un-élément-dune-liste"><span class="header-section-number">12.3</span> Supprimer un élément d’une liste</a></li>
+  <li><a href="#appliquer-une-fonction-à-chaque-élément-une-liste-avec-la-fonction-lapply" id="toc-appliquer-une-fonction-à-chaque-élément-une-liste-avec-la-fonction-lapply" class="nav-link" data-scroll-target="#appliquer-une-fonction-à-chaque-élément-une-liste-avec-la-fonction-lapply"><span class="header-section-number">12.4</span> Appliquer une fonction à chaque élément une liste avec la fonction <code>lapply()</code></a></li>
+  <li><a href="#appliquer-une-fonction-à-chaque-élément-une-liste-avec-la-fonction-purrrmap" id="toc-appliquer-une-fonction-à-chaque-élément-une-liste-avec-la-fonction-purrrmap" class="nav-link" data-scroll-target="#appliquer-une-fonction-à-chaque-élément-une-liste-avec-la-fonction-purrrmap"><span class="header-section-number">12.5</span> Appliquer une fonction à chaque élément une liste avec la fonction <code>purrr::map()</code></a></li>
+  <li><a href="#poser-le-secret-primaire-sur-une-liste-de-data.frames" id="toc-poser-le-secret-primaire-sur-une-liste-de-data.frames" class="nav-link" data-scroll-target="#poser-le-secret-primaire-sur-une-liste-de-data.frames"><span class="header-section-number">12.6</span> Poser le secret primaire sur une liste de <code>data.frames</code></a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../chapters/annexes/regles.html">Annexes</a></li><li class="breadcrumb-item"><a href="../../chapters/annexes/manipuler_les_listes.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Manipuler les listes avec <code>R</code></span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../chapters/annexes/regles.html">Annexes</a></li><li class="breadcrumb-item"><a href="../../chapters/annexes/manipuler_les_listes.html"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Manipuler les listes avec <code>R</code></span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span id="sec-manipulerlistes" class="quarto-section-identifier"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Manipuler les listes avec <code>R</code></span></span></h1>
+<h1 class="title"><span id="sec-manipulerlistes" class="quarto-section-identifier"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Manipuler les listes avec <code>R</code></span></span></h1>
 </div>
 
 
@@ -316,8 +340,8 @@ Attachement du package : 'dplyr'</code></pre>
 6     9   10</code></pre>
 </div>
 </div>
-<section id="manipulations-de-base-créer-ajouter-supprimer" class="level2" data-number="8.1">
-<h2 data-number="8.1" class="anchored" data-anchor-id="manipulations-de-base-créer-ajouter-supprimer"><span class="header-section-number">8.1</span> Manipulations de base: créer, ajouter, supprimer</h2>
+<section id="manipulations-de-base-créer-ajouter-supprimer" class="level2" data-number="12.1">
+<h2 data-number="12.1" class="anchored" data-anchor-id="manipulations-de-base-créer-ajouter-supprimer"><span class="header-section-number">12.1</span> Manipulations de base: créer, ajouter, supprimer</h2>
 <p>Pour accéder aux éléments d’une liste, il faut distinguer deux types d’indexation:</p>
 <ul>
 <li><p>avec les crochets simples: <code>liste_1[1]</code> va permettre de récupérer la liste composée uniquement du premier objet. Cette indexation renvoie une liste. On utilisera ce type d’indexation pour extraire une sous-liste d’une liste: <code>liste_1[2:3]</code> permet, par exemple, d’extraire la sous-liste composée des éléments 2 et 3 de la liste.</p></li>
@@ -424,8 +448,8 @@ NULL</code></pre>
 </div>
 </div>
 </section>
-<section id="nommer-les-éléments-dune-liste" class="level2" data-number="8.2">
-<h2 data-number="8.2" class="anchored" data-anchor-id="nommer-les-éléments-dune-liste"><span class="header-section-number">8.2</span> Nommer les éléments d’une liste</h2>
+<section id="nommer-les-éléments-dune-liste" class="level2" data-number="12.2">
+<h2 data-number="12.2" class="anchored" data-anchor-id="nommer-les-éléments-dune-liste"><span class="header-section-number">12.2</span> Nommer les éléments d’une liste</h2>
 <p>Il est souvent pratique de donner des noms à chaque élément de la liste. Cela permet de récupérer les objets sans avoir à connaître leur position dans la liste. La fonction <code>names()</code> permet d’accoler un nom à chaque élément de la liste. On fera bien attention à fournir un vecteur de noms qui soit de la même longueur que la liste.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(liste_1) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"vec_int"</span>, <span class="st">"vec_char"</span>, <span class="st">"cars_df"</span>)</span>
@@ -496,8 +520,8 @@ $vec_char
 </div>
 </div>
 </section>
-<section id="supprimer-un-élément-dune-liste" class="level2" data-number="8.3">
-<h2 data-number="8.3" class="anchored" data-anchor-id="supprimer-un-élément-dune-liste"><span class="header-section-number">8.3</span> Supprimer un élément d’une liste</h2>
+<section id="supprimer-un-élément-dune-liste" class="level2" data-number="12.3">
+<h2 data-number="12.3" class="anchored" data-anchor-id="supprimer-un-élément-dune-liste"><span class="header-section-number">12.3</span> Supprimer un élément d’une liste</h2>
 <p>On utilisera le code suivant pour supprimer le troisième élément d’une liste:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>liste_1[<span class="sc">-</span><span class="dv">3</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -517,8 +541,8 @@ $vec_char
 </div>
 </div>
 </section>
-<section id="appliquer-une-fonction-à-chaque-élément-une-liste-avec-la-fonction-lapply" class="level2" data-number="8.4">
-<h2 data-number="8.4" class="anchored" data-anchor-id="appliquer-une-fonction-à-chaque-élément-une-liste-avec-la-fonction-lapply"><span class="header-section-number">8.4</span> Appliquer une fonction à chaque élément une liste avec la fonction <code>lapply()</code></h2>
+<section id="appliquer-une-fonction-à-chaque-élément-une-liste-avec-la-fonction-lapply" class="level2" data-number="12.4">
+<h2 data-number="12.4" class="anchored" data-anchor-id="appliquer-une-fonction-à-chaque-élément-une-liste-avec-la-fonction-lapply"><span class="header-section-number">12.4</span> Appliquer une fonction à chaque élément une liste avec la fonction <code>lapply()</code></h2>
 <p>Pour cette section, nous utiliserons principalement des listes dont tous les éléments sont du même type, en particulier des <code>data.frames</code>.</p>
 <p>Pour appliquer une même fonction à tous les éléments d’une liste, il n’est pas besoin d’écrire une boucle <code>for</code> car la fonction <code>lapply()</code> s’en charge pour nous.</p>
 <p>Un premier exemple: Nous souhaitons connaître les dimensions de chaque <code>data.frame</code> qui compose la liste <code>liste_df</code>. Le premier argument de <code>lapply</code> est la liste sur laquelle nous travaillons et le second argument est la fonction que nous voulons appliquer sur chaque élément. Il s’agit, ici, de la fonction <code>dim()</code>.</p>
@@ -650,8 +674,8 @@ $df4
 </div>
 </div>
 </section>
-<section id="appliquer-une-fonction-à-chaque-élément-une-liste-avec-la-fonction-purrrmap" class="level2" data-number="8.5">
-<h2 data-number="8.5" class="anchored" data-anchor-id="appliquer-une-fonction-à-chaque-élément-une-liste-avec-la-fonction-purrrmap"><span class="header-section-number">8.5</span> Appliquer une fonction à chaque élément une liste avec la fonction <code>purrr::map()</code></h2>
+<section id="appliquer-une-fonction-à-chaque-élément-une-liste-avec-la-fonction-purrrmap" class="level2" data-number="12.5">
+<h2 data-number="12.5" class="anchored" data-anchor-id="appliquer-une-fonction-à-chaque-élément-une-liste-avec-la-fonction-purrrmap"><span class="header-section-number">12.5</span> Appliquer une fonction à chaque élément une liste avec la fonction <code>purrr::map()</code></h2>
 <p>La package <code>purrr</code> met à disposition des fonctions qui permettent de manipuler les listes. Une aide précieuse pour découvrir tous les trésors du package est fournie ici: <a href="https://raw.githubusercontent.com/rstudio/cheatsheets/master/purrr.pdf"></a></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(purrr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -704,8 +728,8 @@ $df4
 </div>
 <p>Avec <code>imap()</code>, la fonction anonyme n’a plus un mais deux arguments: l’un (que nous appelons <code>df</code> ici) représente chaque objet de la liste et l’autre (nommé <code>nom</code> ici) représente le nom de chaque élément. Ainsi, pour le premier élément, <code>df</code> prendra la valeur <code>liste_df[[1]]</code> et <code>nom</code> prendra la valeur <code>df1</code>.</p>
 </section>
-<section id="poser-le-secret-primaire-sur-une-liste-de-data.frames" class="level2" data-number="8.6">
-<h2 data-number="8.6" class="anchored" data-anchor-id="poser-le-secret-primaire-sur-une-liste-de-data.frames"><span class="header-section-number">8.6</span> Poser le secret primaire sur une liste de <code>data.frames</code></h2>
+<section id="poser-le-secret-primaire-sur-une-liste-de-data.frames" class="level2" data-number="12.6">
+<h2 data-number="12.6" class="anchored" data-anchor-id="poser-le-secret-primaire-sur-une-liste-de-data.frames"><span class="header-section-number">12.6</span> Poser le secret primaire sur une liste de <code>data.frames</code></h2>
 <p>L’utilisation des listes est nécessaire pour utiliser la fonction <code>tab_muli_manager</code> de <code>rtauargus</code>. Mais, elle est aussi intéressante en amont, par exemple dans la pose du secret primaire comme dans l’exemple fourni à la section <a href="../../04_secret_tableaux_lies.html#sec-pose-secret-primaire" class="quarto-xref"><span>4.2</span></a>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>liste_4tabs <span class="ot">&lt;-</span> liste_4tabs <span class="sc">%&gt;%</span></span>
@@ -1140,7 +1164,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="../../chapters/annexes/regles.html" class="pagination-link  aria-label=" &lt;span="">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Règles</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Règles</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
